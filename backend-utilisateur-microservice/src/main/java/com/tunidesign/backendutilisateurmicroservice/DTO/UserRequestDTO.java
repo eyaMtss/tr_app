@@ -34,13 +34,6 @@ public class UserRequestDTO {
 	private String email;
 	private Long phoneNumber;
 
-	// Authentication
-	private String login;
-	@ValidPassword
-	private String password;
-	@PasswordMatches
-	private String confirmPassword;
-
 	// employee
 	private String matriculeFiscale;
 	private Integer status;

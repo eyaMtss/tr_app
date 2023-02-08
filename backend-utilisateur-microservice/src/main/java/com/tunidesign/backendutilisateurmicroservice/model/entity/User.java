@@ -54,13 +54,6 @@ public class User {
 	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
 
-	// Authentication
-	private String login;
-	@ValidPassword
-	private String password;
-	@PasswordMatches
-	private String confirmPassword;
-
 	// employee
 	private String matriculeFiscale;
 	private Integer status;
