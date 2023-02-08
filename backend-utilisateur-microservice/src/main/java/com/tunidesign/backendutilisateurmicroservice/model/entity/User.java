@@ -1,32 +1,27 @@
 package com.tunidesign.backendutilisateurmicroservice.model.entity;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.tunidesign.backendutilisateurmicroservice.model.annotations.passwordmatches.PasswordMatches;
 import com.tunidesign.backendutilisateurmicroservice.model.annotations.validpassword.ValidPassword;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -34,7 +29,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	private String firstname;
-	private String lasstname;
+	private String lastname;
 	private Integer gender;
 	private Date birthdate;
 
@@ -77,8 +72,4 @@ public class User {
 	// Agency
 	private Long agencyId;
 
-	// Shift
-	@OneToMany(mappedBy = "user")
-	//@JoinTable(name = "user_shift", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "shiftId"))
-	private Set<UserShift> userShifts = new HashSet<UserShift>();
 }
