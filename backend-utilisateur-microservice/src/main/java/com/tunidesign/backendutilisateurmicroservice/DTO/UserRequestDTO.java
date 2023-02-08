@@ -2,9 +2,6 @@ package com.tunidesign.backendutilisateurmicroservice.DTO;
 
 import java.util.Date;
 
-import com.tunidesign.backendutilisateurmicroservice.model.annotations.passwordmatches.PasswordMatches;
-import com.tunidesign.backendutilisateurmicroservice.model.annotations.validpassword.ValidPassword;
-
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,9 +2,6 @@ package com.tunidesign.backendutilisateurmicroservice.model.entity;
 
 import java.util.Date;
 
-import com.tunidesign.backendutilisateurmicroservice.model.annotations.passwordmatches.PasswordMatches;
-import com.tunidesign.backendutilisateurmicroservice.model.annotations.validpassword.ValidPassword;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
