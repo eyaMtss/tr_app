@@ -1,4 +1,4 @@
-package com.tunidesign.backendutilisateurmicroservice.model.annotations.validPassword;
+package com.tunidesign.backendutilisateurmicroservice.model.annotations.validpassword;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
