@@ -38,6 +38,8 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setHomeCode(user.getHomeCode());
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		userResponseDTO.setPictureName(user.getPictureName());
+		userResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		userResponseDTO.setAgencyId(user.getAgencyId());
 		userResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
 		userResponseDTO.setCompanyId(user.getCompanyId());
@@ -86,6 +88,8 @@ public class UserMapperImpl implements UserMapper {
 		clientResponseDTO.setHomeCode(user.getHomeCode());
 		clientResponseDTO.setEmail(user.getEmail());
 		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		clientResponseDTO.setPictureName(user.getPictureName());
+		clientResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return clientResponseDTO;
 	}
 
@@ -128,6 +132,8 @@ public class UserMapperImpl implements UserMapper {
 		companyUsersResponseDTO.setHomeCode(user.getHomeCode());
 		companyUsersResponseDTO.setEmail(user.getEmail());
 		companyUsersResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		companyUsersResponseDTO.setPictureName(user.getPictureName());
+		companyUsersResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		companyUsersResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		companyUsersResponseDTO.setStatus(user.getStatus());
 		companyUsersResponseDTO.setCompanyId(user.getCompanyId());
@@ -182,6 +188,8 @@ public class UserMapperImpl implements UserMapper {
 		agencyUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		agencyUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		agencyUserResponseDTO.setStatus(user.getStatus());
+		agencyUserResponseDTO.setPictureName(user.getPictureName());
+		agencyUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		agencyUserResponseDTO.setAgencyId(user.getAgencyId());
 		return agencyUserResponseDTO;
 	}
@@ -229,6 +237,8 @@ public class UserMapperImpl implements UserMapper {
 		insuranceUserResponseDTO.setHomeCode(user.getHomeCode());
 		insuranceUserResponseDTO.setEmail(user.getEmail());
 		insuranceUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		insuranceUserResponseDTO.setPictureName(user.getPictureName());
+		insuranceUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		insuranceUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		insuranceUserResponseDTO.setStatus(user.getStatus());
 		insuranceUserResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
