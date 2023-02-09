@@ -19,6 +19,7 @@ import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.mapper.UserMapperImpl;
 import com.tunidesign.backendutilisateurmicroservice.model.entity.User;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Role;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
 import com.tunidesign.backendutilisateurmicroservice.repository.UserRepository;
 
 @Service
@@ -100,13 +101,38 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserResponseDTO updateUser(UserRequestDTO userRequestDTO) {
-		// User existingUser =
-		// userRepository.findById(userRequestDTO.getUserId()).get();
 		User user = userMapper.userRequestDTOToUser(userRequestDTO);
 		User savedUser = userRepository.save(user);
 		return userMapper.userToUserResponseDTO(savedUser);
 	}
 
+	@Override
+	public User changeStatus(Long userId, Status status) {
+		User existingUser = userRepository.findById(userId).get();
+		existingUser.setStatus(status);
+		return existingUser;
+	}
+	
+	@Override
+	public AgencyUserResponseDTO updateAgencyStatus(Long userId, Status status) {
+		
+		return userMapper.userToAgencyUserResponseDTO(userRepository.save(changeStatus(userId, status)));
+	}
+
+	@Override
+	public CompanyUserResponseDTO updateCompanyStatus(Long userId, Status status) {
+		User existingUser = userRepository.findById(userId).get();
+		existingUser.setStatus(status);
+		return userMapper.userToCompanyUserResponseDTO(userRepository.save(changeStatus(userId, status)));
+	}
+
+	@Override
+	public InsuranceUserResponseDTO updateInsuranceStatus(Long userId, Status status) {
+		User existingUser = userRepository.findById(userId).get();
+		existingUser.setStatus(status);
+		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(changeStatus(userId, status)));
+	}
+	
 	@Override
 	public List<UserResponseDTO> getUsers() {
 		return userRepository.findAll().stream().map(user -> userMapper.userToUserResponseDTO(user)).toList();
@@ -186,5 +212,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByInsuranceCompanyId(insuranceId).stream()
 				.map(user -> userMapper.userToInsuranceUserResponseDTO(user)).toList();
 	}
+
 
 }
