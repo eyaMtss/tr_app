@@ -33,51 +33,33 @@ public class User {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
-	//@NotBlank(message = "Firstname may not be blank")
 	private String firstname;
-	//@NotBlank(message = "Lastname may not be blank")
 	private String lastname;
 	@Enumerated(EnumType.STRING)
-	private Gender gender; // F/M
-	//@NotBlank(message = "Birthdate may not be blank")
+	private Gender gender; 
 	private Date birthdate;
-
 	// Address
 	private String country;
 	private String governorate;
 	private String city;
 	private Integer zipCode;
 	private Integer homeCode;
-
 	// Contact
 	@Email
-	//@NotBlank(message = "Email may not be blank")
 	private String email;
-	//@NotEmpty(message = "Phone number may not be blank")
 	private Long phoneNumber;
-
 	// Picture
 	private String pictureName;
 	private String pictureType;
-	// image bytes can have large lengths so we specify a value
-	// which is more than the default length for picByte column
 	@Lob
 	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
-
-	// employee
-	private String matriculeFiscale;
+	private String matriculeFiscale; // employee
 	@Enumerated(EnumType.STRING)
-	private Status status;
-
-	// TA && DRIVER
-	private Long companyId;
-	// Insurance
-	private Long insuranceCompanyId;
-	// Agency
-	private Long agencyId;
-	
-	// Role
+	private Status status; // employee
+	private Long companyId;	// TA && DRIVER
+	private Long insuranceCompanyId; // Insurance
+	private Long agencyId; // Agency
 	@Enumerated(EnumType.STRING)
     private Role role;
 
