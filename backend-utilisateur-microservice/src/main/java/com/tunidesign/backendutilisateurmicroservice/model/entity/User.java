@@ -2,18 +2,28 @@ package com.tunidesign.backendutilisateurmicroservice.model.entity;
 
 import java.util.Date;
 
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Gender;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Role;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -21,13 +31,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
+	//@NotBlank(message = "Firstname may not be blank")
 	private String firstname;
+	//@NotBlank(message = "Lastname may not be blank")
 	private String lastname;
-	private Integer gender;
+	@Enumerated(EnumType.STRING)
+	private Gender gender; // F/M
+	//@NotBlank(message = "Birthdate may not be blank")
 	private Date birthdate;
 
 	// Address
@@ -39,7 +55,9 @@ public class User {
 
 	// Contact
 	@Email
+	//@NotBlank(message = "Email may not be blank")
 	private String email;
+	//@NotEmpty(message = "Phone number may not be blank")
 	private Long phoneNumber;
 
 	// Picture
@@ -53,7 +71,8 @@ public class User {
 
 	// employee
 	private String matriculeFiscale;
-	private Integer status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	// TA && DRIVER
 	private Long companyId;
@@ -61,5 +80,9 @@ public class User {
 	private Long insuranceCompanyId;
 	// Agency
 	private Long agencyId;
+	
+	// Role
+	@Enumerated(EnumType.STRING)
+    private Role role;
 
 }
