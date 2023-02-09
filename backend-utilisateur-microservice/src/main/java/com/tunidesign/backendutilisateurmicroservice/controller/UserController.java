@@ -34,6 +34,7 @@ import com.tunidesign.backendutilisateurmicroservice.DTO.PictureRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.exceptions.CustomException;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
 import com.tunidesign.backendutilisateurmicroservice.service.UserServiceImpl;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -49,20 +50,23 @@ public class UserController {
 
 	@PostMapping(path = "/AddClient")
 	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
-		//try {
-			return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
-		//} catch (Exception e) {
-		//	throw new CustomException(e.getMessage());
-		//}
+		// try {
+		return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
+		// } catch (Exception e) {
+		// throw new CustomException(e.getMessage());
+		// }
 	}
+
 	@PostMapping(path = "/AddDriver")
-	public ResponseEntity<CompanyUserResponseDTO> addDriver(@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
+	public ResponseEntity<CompanyUserResponseDTO> addDriver(
+			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addDriver(driverRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping(path = "/AddTA")
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
@@ -71,39 +75,47 @@ public class UserController {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping(path = "/AddCompanyAdmin")
-	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(@Valid @RequestBody CompanyUserRequestDTO adminRequestDTO) {
+	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
+			@Valid @RequestBody CompanyUserRequestDTO adminRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addCompanyAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping(path = "/AddExpert")
-	public ResponseEntity<InsuranceUserResponseDTO> addExpert(@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
+	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
+			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addExpert(expertRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
-	
+
 	@PostMapping(path = "/AddAgencyAdmin")
-	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(@Valid @RequestBody AgencyUserRequestDTO adminRequestDTO) {
+	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
+			@Valid @RequestBody AgencyUserRequestDTO adminRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addAgencyAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping(path = "/AddInsuranceAdmin")
-	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(@Valid @RequestBody InsuranceUserRequestDTO adminRequestDTO) {
+	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
+			@Valid @RequestBody InsuranceUserRequestDTO adminRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addInsuranceAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping(path = "/AddPrestataire")
 	public ResponseEntity<UserResponseDTO> addPrestataire(@Valid @RequestBody UserRequestDTO userRequestDTO) {
 		try {
@@ -112,6 +124,7 @@ public class UserController {
 			throw new CustomException(e.getMessage());
 		}
 	}
+
 	@PostMapping("/uploadImage/{userId}")
 	public ResponseEntity<UserResponseDTO> uplaodImage(@PathVariable Long userId,
 			@RequestParam("imageFile") MultipartFile file) throws IOException {
@@ -124,6 +137,35 @@ public class UserController {
 		return new ResponseEntity<>(userService.uploadPicture(pictureRequestDTO), HttpStatus.ACCEPTED);
 	}
 
+	/* *********************** update status ********************** */
+	@PutMapping("/UpdateCompanyStatus/{userId}/{status}")
+	public ResponseEntity<CompanyUserResponseDTO> updateCompanyStatus(@PathVariable Long userId,
+			@PathVariable Status status) {
+		if (userService.isExist(userId)) {
+			return ResponseEntity.accepted().body(userService.updateCompanyStatus(userId, status));
+		} else
+			throw new EntityNotFoundException("User doesn't exist");
+	}
+
+	@PutMapping("/UpdateAgencyStatus/{userId}/{status}")
+	public ResponseEntity<AgencyUserResponseDTO> updateAgencyStatus(@PathVariable Long userId,
+			@PathVariable Status status) {
+		if (userService.isExist(userId)) {
+			return ResponseEntity.accepted().body(userService.updateAgencyStatus(userId, status));
+		} else
+			throw new EntityNotFoundException("User doesn't exist");
+	}
+
+	@PutMapping("/UpdateInsuranceStatus/{userId}/{status}")
+	public ResponseEntity<InsuranceUserResponseDTO> updateInsuranceStatus(@PathVariable Long userId,
+			@PathVariable Status status) {
+		if (userService.isExist(userId)) {
+			return ResponseEntity.accepted().body(userService.updateInsuranceStatus(userId, status));
+		} else
+			throw new EntityNotFoundException("User doesn't exist");
+	}
+	
+	/* ******************* update user ******************* */
 	@PutMapping("")
 	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
 
@@ -147,17 +189,18 @@ public class UserController {
 //	            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 //	        }
 //	    }
+	/* *********************** get All ********************** */
 	@GetMapping("/Clients")
-	public ResponseEntity<List<UserResponseDTO>> getClients() {
-		return ResponseEntity.ok().body(userService.getUsers());
+	public ResponseEntity<List<ClientResponseDTO>> getClients() {
+		return ResponseEntity.ok().body(userService.getClients());
 	}
 
-	@GetMapping("/Drivers/{companyId}")
+	@GetMapping("/Company/Drivers/{companyId}")
 	public ResponseEntity<List<CompanyUserResponseDTO>> getDrivers(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getDrivers(companyId));
 	}
 
-	@GetMapping("/TA/{companyId}")
+	@GetMapping("/Company/TA/{companyId}")
 	public ResponseEntity<List<CompanyUserResponseDTO>> getTAs(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getTAs(companyId));
 	}
@@ -166,17 +209,17 @@ public class UserController {
 	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyAdminss(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyAdmins(companyId));
 	}
-	
+
 	@GetMapping("/CompanyEmployees/{companyId}")
 	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
 	}
-	
+
 	@GetMapping("/Agency/Admin/{agencyId}")
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyAdmins(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyAdmins(agencyId));
 	}
-	
+
 	@GetMapping("/AgencyEmployees/{agencyId}")
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyEmployees(agencyId));
@@ -186,22 +229,22 @@ public class UserController {
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancAdmins(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceAdmins(insuranceId));
 	}
-	
-	@GetMapping("/Expert/{insuranceId}")
+
+	@GetMapping("/Insurance/Expert/{insuranceId}")
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancExperts(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getExperts(insuranceId));
 	}
-	
+
 	@GetMapping("/InsuranceEmployees/{insuranceId}")
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceEmployees(insuranceId));
 	}
 
-	@GetMapping("")
-	public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-		return ResponseEntity.ok().body(userService.getUsers());
-	}
-
+//	@GetMapping("")
+//	public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+//		return ResponseEntity.ok().body(userService.getUsers());
+//	}
+	/* *********************** get By Id ********************** */
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long userId) {
 		try {
@@ -211,6 +254,7 @@ public class UserController {
 		}
 	}
 
+	/* ******************* delete user ****************** */
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
 		try {
