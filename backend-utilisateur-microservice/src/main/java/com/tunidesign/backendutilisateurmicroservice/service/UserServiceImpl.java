@@ -5,6 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.PictureRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
@@ -21,56 +29,64 @@ public class UserServiceImpl implements UserService {
 	private UserMapperImpl userMapper = new UserMapperImpl();
 
 	@Override
-	public UserResponseDTO addUser(UserRequestDTO userRequestDTO) {
-		return userMapper.userToUserResponseDTO(userRepository.save(userMapper.userRequestDTOToUser(userRequestDTO)));
+	public UserResponseDTO addUser(User user) {
+		return userMapper.userToUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addClient(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.CLEINT);
-		return addUser(userRequestDTO);
+	public ClientResponseDTO addClient(ClientRequestDTO clientRequestDTO) {
+		User user = userMapper.clientRequestDTOToUser(clientRequestDTO);
+		user.setRole(Role.CLEINT);
+		return userMapper.userToClientResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addTA(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.TA);
-		return addUser(userRequestDTO);
+	public CompanyUserResponseDTO addTA(CompanyUserRequestDTO taRequestDTO) {
+		User user = userMapper.companyUserRequestDTOToUser(taRequestDTO);
+		user.setRole(Role.TA);
+		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addDriver(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.DRIVER);
-		return addUser(userRequestDTO);
+	public CompanyUserResponseDTO addDriver(CompanyUserRequestDTO driverRequestDTO) {
+		User user = userMapper.companyUserRequestDTOToUser(driverRequestDTO);
+		user.setRole(Role.DRIVER);
+		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addExpert(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.EXPERT);
-		return addUser(userRequestDTO);
+	public CompanyUserResponseDTO addCompanyAdmin(CompanyUserRequestDTO adminRequestDTO) {
+		User user = userMapper.companyUserRequestDTOToUser(adminRequestDTO);
+		user.setRole(Role.COMPANY_ADMIN);
+		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
+	}
+	
+	@Override
+	public AgencyUserResponseDTO addExpert(AgencyUserRequestDTO expertRequestDTO) {
+		User user = userMapper.agencyUserRequestDTOToUser(expertRequestDTO);
+		user.setRole(Role.EXPERT);
+		return userMapper.userToAgencyUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addCompanyAdmin(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.COMPANY_ADMIN);
-		return addUser(userRequestDTO);
+	public AgencyUserResponseDTO addAgencyAdmin(AgencyUserRequestDTO adminRequestDTO) {
+		User user = userMapper.agencyUserRequestDTOToUser(adminRequestDTO);
+		user.setRole(Role.AGENCY_ADMIN);
+		return userMapper.userToAgencyUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
-	public UserResponseDTO addAgencyAdmin(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.AGENCY_ADMIN);
-		return addUser(userRequestDTO);
-	}
-
-	@Override
-	public UserResponseDTO addInsuranceAdmin(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.INSURANCE_ADMIN);
-		return addUser(userRequestDTO);
+	public InsuranceUserResponseDTO addInsuranceAdmin(InsuranceUserRequestDTO adminRequestDTO) {
+		User user = userMapper.insuranceUserRequestDTOToUser(adminRequestDTO);
+		user.setRole(Role.INSURANCE_ADMIN);
+		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
 	public UserResponseDTO addPrestataire(UserRequestDTO userRequestDTO) {
-		userRequestDTO.setRole(Role.PRESTATAIRE);
-		return addUser(userRequestDTO);
+		User user = userMapper.userRequestDTOToUser(userRequestDTO);
+		user.setRole(Role.PRESTATAIRE);
+		return addUser(user);
 	}
 
 	@Override
