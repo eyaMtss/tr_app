@@ -22,7 +22,7 @@ public interface UserService {
 	CompanyUserResponseDTO addDriver(CompanyUserRequestDTO driverRequestDTO);
 	CompanyUserResponseDTO addCompanyAdmin(CompanyUserRequestDTO adminRequestDTO);
 	AgencyUserResponseDTO addAgencyAdmin(AgencyUserRequestDTO adminUserRequestDTO);
-	AgencyUserResponseDTO addExpert(AgencyUserRequestDTO expertRequestDTO);
+	InsuranceUserResponseDTO addExpert(InsuranceUserRequestDTO expertRequestDTO);
 	InsuranceUserResponseDTO addInsuranceAdmin(InsuranceUserRequestDTO adminRequestDTO);
 	UserResponseDTO addPrestataire(UserRequestDTO userRequestDTO);
 	
@@ -30,13 +30,16 @@ public interface UserService {
 
 	UserResponseDTO updateUser(UserRequestDTO UserRequestDTO);
 
-	List<UserResponseDTO> getClients();
-	List<UserResponseDTO> getDrivers(Long companyId);
-	List<UserResponseDTO> getTAs(Long companyId);
-	List<UserResponseDTO> getExperts(Long companyId);
-	List<UserResponseDTO> getCompanyEmployees(Long companyId); 
-	List<UserResponseDTO> getAgencyEmployees(Long agencyId); 
-	List<UserResponseDTO> getInsuranceEmployees(Long insuranceId);
+	List<ClientResponseDTO> getClients();
+	List<CompanyUserResponseDTO> getDrivers(Long companyId);
+	List<CompanyUserResponseDTO> getTAs(Long companyId);
+	List<CompanyUserResponseDTO> getCompanyAdmins(Long companyId);
+	List<CompanyUserResponseDTO> getCompanyEmployees(Long companyId); 
+	List<AgencyUserResponseDTO> getAgencyAdmins(Long agencyId);
+	List<AgencyUserResponseDTO> getAgencyEmployees(Long agencyId); 
+	List<InsuranceUserResponseDTO> getExperts(Long insuranceId);
+	List<InsuranceUserResponseDTO> getInsuranceAdmins(Long insuranceId);
+	List<InsuranceUserResponseDTO> getInsuranceEmployees(Long insuranceId);
 	List<UserResponseDTO> getUsers();
 
 	UserResponseDTO getUser(Long userId);
