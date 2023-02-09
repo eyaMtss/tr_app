@@ -80,7 +80,7 @@ public class UserController {
 		}
 	}
 	@PostMapping(path = "/AddExpert")
-	public ResponseEntity<AgencyUserResponseDTO> addExpert(@Valid @RequestBody AgencyUserRequestDTO expertRequestDTO) {
+	public ResponseEntity<InsuranceUserResponseDTO> addExpert(@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
 			return new ResponseEntity<>(userService.addExpert(expertRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -153,27 +153,47 @@ public class UserController {
 	}
 
 	@GetMapping("/Drivers/{companyId}")
-	public ResponseEntity<List<UserResponseDTO>> getDrivers(@PathVariable Long companyId) {
+	public ResponseEntity<List<CompanyUserResponseDTO>> getDrivers(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getDrivers(companyId));
 	}
 
 	@GetMapping("/TA/{companyId}")
-	public ResponseEntity<List<UserResponseDTO>> getTAs(@PathVariable Long companyId) {
+	public ResponseEntity<List<CompanyUserResponseDTO>> getTAs(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getTAs(companyId));
 	}
 
+	@GetMapping("/Company/Admin/{companyId}")
+	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyAdminss(@PathVariable Long companyId) {
+		return ResponseEntity.ok().body(userService.getCompanyAdmins(companyId));
+	}
+	
 	@GetMapping("/CompanyEmployees/{companyId}")
-	public ResponseEntity<List<UserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
+	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
 	}
 	
+	@GetMapping("/Agency/Admin/{agencyId}")
+	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyAdmins(@PathVariable Long agencyId) {
+		return ResponseEntity.ok().body(userService.getAgencyAdmins(agencyId));
+	}
+	
 	@GetMapping("/AgencyEmployees/{agencyId}")
-	public ResponseEntity<List<UserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
+	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyEmployees(agencyId));
 	}
 
+	@GetMapping("/Insurance/Admin/{insuranceId}")
+	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancAdmins(@PathVariable Long insuranceId) {
+		return ResponseEntity.ok().body(userService.getInsuranceAdmins(insuranceId));
+	}
+	
+	@GetMapping("/Expert/{insuranceId}")
+	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancExperts(@PathVariable Long insuranceId) {
+		return ResponseEntity.ok().body(userService.getExperts(insuranceId));
+	}
+	
 	@GetMapping("/InsuranceEmployees/{insuranceId}")
-	public ResponseEntity<List<UserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
+	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceEmployees(insuranceId));
 	}
 
