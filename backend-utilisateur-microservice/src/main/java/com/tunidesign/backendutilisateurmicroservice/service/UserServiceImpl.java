@@ -62,10 +62,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public AgencyUserResponseDTO addExpert(AgencyUserRequestDTO expertRequestDTO) {
-		User user = userMapper.agencyUserRequestDTOToUser(expertRequestDTO);
+	public InsuranceUserResponseDTO addExpert(InsuranceUserRequestDTO expertRequestDTO) {
+		User user = userMapper.insuranceUserRequestDTOToUser(expertRequestDTO);
 		user.setRole(Role.EXPERT);
-		return userMapper.userToAgencyUserResponseDTO(userRepository.save(user));
+		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(user));
 	}
 
 	@Override
@@ -120,7 +120,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUser(Long userId) {
 		userRepository.deleteById(userId);
-
 	}
 
 	@Override
@@ -129,45 +128,63 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserResponseDTO> getClients() {
-		return userRepository.findByRole(Role.CLEINT).stream().map(user -> userMapper.userToUserResponseDTO(user))
-				.toList();
+	public List<ClientResponseDTO> getClients() {
+		return userRepository.findByRole(Role.CLEINT).stream()
+				.map(user -> userMapper.userToClientResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getDrivers(Long companyId) {
+	public List<CompanyUserResponseDTO> getDrivers(Long companyId) {
 		return userRepository.findCompanyEmployeesByRole(companyId, Role.DRIVER).stream()
-				.map(user -> userMapper.userToUserResponseDTO(user)).toList();
+				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getTAs(Long companyId) {
+	public List<CompanyUserResponseDTO> getTAs(Long companyId) {
 		return userRepository.findCompanyEmployeesByRole(companyId, Role.TA).stream()
-				.map(user -> userMapper.userToUserResponseDTO(user)).toList();
+				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getExperts(Long companyId) {
-		return userRepository.findCompanyEmployeesByRole(companyId, Role.EXPERT).stream()
-				.map(user -> userMapper.userToUserResponseDTO(user)).toList();
+	public List<CompanyUserResponseDTO> getCompanyAdmins(Long companyId){
+		return userRepository.findCompanyEmployeesByRole(companyId, Role.COMPANY_ADMIN).stream()
+				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getCompanyEmployees(Long companyId) {
-		return userRepository.findByCompanyId(companyId).stream().map(user -> userMapper.userToUserResponseDTO(user))
-				.toList();
+	public List<CompanyUserResponseDTO> getCompanyEmployees(Long companyId) {
+		return userRepository.findByCompanyId(companyId).stream()
+				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getAgencyEmployees(Long agencyId) {
-		return userRepository.findByAgencyId(agencyId).stream().map(user -> userMapper.userToUserResponseDTO(user))
-				.toList();
+	public List<AgencyUserResponseDTO> getAgencyAdmins(Long agencyId) {
+		return userRepository.findAgencyEmployeesByRole(agencyId, Role.AGENCY_ADMIN).stream()
+				.map(user -> userMapper.userToAgencyUserResponseDTO(user)).toList();
+	}
+	
+	@Override
+	public List<AgencyUserResponseDTO> getAgencyEmployees(Long agencyId) {
+		return userRepository.findByAgencyId(agencyId).stream()
+				.map(user -> userMapper.userToAgencyUserResponseDTO(user)).toList();
 	}
 
 	@Override
-	public List<UserResponseDTO> getInsuranceEmployees(Long insuranceId) {
+	public List<InsuranceUserResponseDTO> getExperts(Long insuranceId) {
+		return userRepository.findInsuranceEmployeesByRole(insuranceId, Role.EXPERT).stream()
+				.map(user -> userMapper.userToInsuranceUserResponseDTO(user)).toList();
+	}
+	
+	@Override
+	public List<InsuranceUserResponseDTO> getInsuranceAdmins(Long insuranceId) {
+		return userRepository.findInsuranceEmployeesByRole(insuranceId, Role.INSURANCE_ADMIN).stream()
+				.map(user -> userMapper.userToInsuranceUserResponseDTO(user)).toList();
+	}
+	
+	@Override
+	public List<InsuranceUserResponseDTO> getInsuranceEmployees(Long insuranceId) {
 		return userRepository.findByInsuranceCompanyId(insuranceId).stream()
-				.map(user -> userMapper.userToUserResponseDTO(user)).toList();
+				.map(user -> userMapper.userToInsuranceUserResponseDTO(user)).toList();
 	}
 
 }
