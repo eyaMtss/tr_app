@@ -2,6 +2,10 @@ package com.tunidesign.backendutilisateurmicroservice.DTO;
 
 import java.util.Date;
 
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Role;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,4 +45,6 @@ public class UserRequestDTO {
 	private Long insuranceCompanyId;
 	// Agency
 	private Long agencyId;
+	@Enumerated(EnumType.STRING)
+    private Role role;
 }
