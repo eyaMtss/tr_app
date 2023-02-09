@@ -2,7 +2,12 @@ package com.tunidesign.backendutilisateurmicroservice.DTO;
 
 import java.util.Date;
 
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Gender;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -22,7 +27,8 @@ public class UserResponseDTO {
 	private Long userId;
 	private String firstname;
 	private String lastname;
-	private Integer gender;
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 	private Date birthdate;
 
 	// Address
@@ -48,7 +54,8 @@ public class UserResponseDTO {
 
 	// employee
 	private String matriculeFiscale;
-	private Integer status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
 	// TA && DRIVER
 	private Long companyId;
