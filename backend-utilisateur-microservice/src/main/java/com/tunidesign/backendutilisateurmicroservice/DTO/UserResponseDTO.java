@@ -45,9 +45,6 @@ public class UserResponseDTO {
 
 	// Picture
 	private String pictureName;
-	private String pictureType;
-	// image bytes can have large lengths so we specify a value
-	// which is more than the default length for picByte column
 	@Lob
 	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;

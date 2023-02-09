@@ -5,8 +5,10 @@ import java.util.Date;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Gender;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,6 +43,11 @@ public class CompanyUserResponseDTO {
 	private String matriculeFiscale;
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	// Picture
+	private String pictureName;
+	@Lob
+	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
+	private byte[] pictureByte;
 
 	// TA && DRIVER && admin
 	private Long companyId;
