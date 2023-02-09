@@ -12,6 +12,7 @@ import com.tunidesign.backendutilisateurmicroservice.DTO.PictureRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.model.entity.User;
+import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
 
 import java.util.List;
 
@@ -29,7 +30,11 @@ public interface UserService {
 	UserResponseDTO uploadPicture(PictureRequestDTO pictureRequestDTO);
 
 	UserResponseDTO updateUser(UserRequestDTO UserRequestDTO);
-
+	User changeStatus(Long userId, Status status);
+	AgencyUserResponseDTO updateAgencyStatus(Long userId, Status status);
+	CompanyUserResponseDTO updateCompanyStatus(Long userId, Status status);
+	InsuranceUserResponseDTO updateInsuranceStatus(Long userId, Status status);
+	
 	List<ClientResponseDTO> getClients();
 	List<CompanyUserResponseDTO> getDrivers(Long companyId);
 	List<CompanyUserResponseDTO> getTAs(Long companyId);
