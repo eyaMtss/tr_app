@@ -18,22 +18,20 @@ public class UserMapperImpl implements UserMapper {
 			return null;
 		}
 		UserResponseDTO userResponseDTO = new UserResponseDTO();
-		UserResponseDTO.builder()
-				.firstname(user.getFirstname())
-				.lastname(user.getLastname())
-				.gender(user.getGender())
-				.birthdate(user.getBirthdate())
-				.country(user.getCountry())
-				.governorate(user.getGovernorate())
-				.city(user.getCity())
-				.zipCode(user.getZipCode())
-				.homeCode(user.getHomeCode()).email(user.getEmail())
-				.phoneNumber(user.getPhoneNumber())
-				.pictureName(user.getPictureName())
-				.pictureType(user.getPictureType())
-				.pictureByte(decompressBytes(user.getPictureByte()))
-				.agencyId(user.getAgencyId())
-				.insuranceCompanyId(user.getInsuranceCompanyId()).companyId(user.getCompanyId()).build();
+		userResponseDTO.setFirstname(user.getFirstname());
+		userResponseDTO.setLastname(user.getLastname());
+		userResponseDTO.setGender(user.getGender());
+		userResponseDTO.setBirthdate(user.getBirthdate());
+		userResponseDTO.setCountry(user.getCountry());
+		userResponseDTO.setGovernorate(user.getGovernorate());
+		userResponseDTO.setCity(user.getCity());
+		userResponseDTO.setZipCode(user.getZipCode());
+		userResponseDTO.setHomeCode(user.getHomeCode());
+		userResponseDTO.setEmail(user.getEmail());
+		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		userResponseDTO.setAgencyId(user.getAgencyId());
+		userResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
+		userResponseDTO.setCompanyId(user.getCompanyId());
 		return userResponseDTO;
 	}
 
@@ -43,22 +41,21 @@ public class UserMapperImpl implements UserMapper {
 			return null;
 		}
 		User user = new User();
-		User.builder()
-				.firstname(userRequestDTO.getFirstname())
-				.lastname(userRequestDTO.getLastname())
-				.gender(userRequestDTO.getGender())
-				.birthdate(userRequestDTO.getBirthdate())
-				.country(userRequestDTO.getCountry())
-				.governorate(userRequestDTO.getGovernorate())
-				.city(userRequestDTO.getCity())
-				.zipCode(userRequestDTO.getZipCode())
-				.homeCode(userRequestDTO.getHomeCode())
-				.email(userRequestDTO.getEmail())
-				.phoneNumber(userRequestDTO.getPhoneNumber())
-				.agencyId(userRequestDTO.getAgencyId())
-				.insuranceCompanyId(userRequestDTO.getInsuranceCompanyId())
-				.companyId(userRequestDTO.getCompanyId())
-				.build();
+		user.setFirstname(userRequestDTO.getFirstname());
+		user.setLastname(userRequestDTO.getLastname());
+		user.setGender(userRequestDTO.getGender());
+		user.setBirthdate(userRequestDTO.getBirthdate());
+		user.setCountry(userRequestDTO.getCountry());
+		user.setGovernorate(userRequestDTO.getGovernorate());
+		user.setCity(userRequestDTO.getCity());
+		user.setZipCode(userRequestDTO.getZipCode());
+		user.setHomeCode(userRequestDTO.getHomeCode());
+		user.setEmail(userRequestDTO.getEmail());
+		user.setPhoneNumber(userRequestDTO.getPhoneNumber());
+		user.setAgencyId(userRequestDTO.getAgencyId());
+		user.setInsuranceCompanyId(userRequestDTO.getInsuranceCompanyId());
+		user.setCompanyId(userRequestDTO.getCompanyId());
+		user.setRole(userRequestDTO.getRole());
 		return user;
 	}
 
