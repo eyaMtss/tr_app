@@ -5,6 +5,14 @@ import java.io.IOException;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.model.entity.User;
@@ -18,6 +26,7 @@ public class UserMapperImpl implements UserMapper {
 			return null;
 		}
 		UserResponseDTO userResponseDTO = new UserResponseDTO();
+		userResponseDTO.setUserId(user.getUserId());
 		userResponseDTO.setFirstname(user.getFirstname());
 		userResponseDTO.setLastname(user.getLastname());
 		userResponseDTO.setGender(user.getGender());
@@ -41,6 +50,7 @@ public class UserMapperImpl implements UserMapper {
 			return null;
 		}
 		User user = new User();
+		user.setUserId(userRequestDTO.getUserId());
 		user.setFirstname(userRequestDTO.getFirstname());
 		user.setLastname(userRequestDTO.getLastname());
 		user.setGender(userRequestDTO.getGender());
@@ -55,10 +65,200 @@ public class UserMapperImpl implements UserMapper {
 		user.setAgencyId(userRequestDTO.getAgencyId());
 		user.setInsuranceCompanyId(userRequestDTO.getInsuranceCompanyId());
 		user.setCompanyId(userRequestDTO.getCompanyId());
-		user.setRole(userRequestDTO.getRole());
 		return user;
 	}
 
+	@Override
+	public ClientResponseDTO userToClientResponseDTO(User user) {
+		if (user == null) {
+			return null;
+		}
+		ClientResponseDTO clientResponseDTO = new ClientResponseDTO();
+		clientResponseDTO.setUserId(user.getUserId());
+		clientResponseDTO.setFirstname(user.getFirstname());
+		clientResponseDTO.setLastname(user.getLastname());
+		clientResponseDTO.setGender(user.getGender());
+		clientResponseDTO.setBirthdate(user.getBirthdate());
+		clientResponseDTO.setCountry(user.getCountry());
+		clientResponseDTO.setGovernorate(user.getGovernorate());
+		clientResponseDTO.setCity(user.getCity());
+		clientResponseDTO.setZipCode(user.getZipCode());
+		clientResponseDTO.setHomeCode(user.getHomeCode());
+		clientResponseDTO.setEmail(user.getEmail());
+		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		return clientResponseDTO;
+	}
+
+	@Override
+	public User clientRequestDTOToUser(ClientRequestDTO clientRequestDTO) {
+		if (clientRequestDTO == null) {
+			return null;
+		}
+		User user = new User();
+		user.setUserId(clientRequestDTO.getUserId());
+		user.setFirstname(clientRequestDTO.getFirstname());
+		user.setLastname(clientRequestDTO.getLastname());
+		user.setGender(clientRequestDTO.getGender());
+		user.setBirthdate(clientRequestDTO.getBirthdate());
+		user.setCountry(clientRequestDTO.getCountry());
+		user.setGovernorate(clientRequestDTO.getGovernorate());
+		user.setCity(clientRequestDTO.getCity());
+		user.setZipCode(clientRequestDTO.getZipCode());
+		user.setHomeCode(clientRequestDTO.getHomeCode());
+		user.setEmail(clientRequestDTO.getEmail());
+		user.setPhoneNumber(clientRequestDTO.getPhoneNumber());
+		return user;
+	}
+
+	@Override
+	public CompanyUserResponseDTO userToCompanyUserResponseDTO(User user) {
+		if (user == null) {
+			return null;
+		}
+		CompanyUserResponseDTO companyUsersResponseDTO = new CompanyUserResponseDTO();
+		companyUsersResponseDTO.setUserId(user.getUserId());
+		companyUsersResponseDTO.setFirstname(user.getFirstname());
+		companyUsersResponseDTO.setLastname(user.getLastname());
+		companyUsersResponseDTO.setGender(user.getGender());
+		companyUsersResponseDTO.setBirthdate(user.getBirthdate());
+		companyUsersResponseDTO.setCountry(user.getCountry());
+		companyUsersResponseDTO.setGovernorate(user.getGovernorate());
+		companyUsersResponseDTO.setCity(user.getCity());
+		companyUsersResponseDTO.setZipCode(user.getZipCode());
+		companyUsersResponseDTO.setHomeCode(user.getHomeCode());
+		companyUsersResponseDTO.setEmail(user.getEmail());
+		companyUsersResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		companyUsersResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
+		companyUsersResponseDTO.setStatus(user.getStatus());
+		companyUsersResponseDTO.setCompanyId(user.getCompanyId());
+		return companyUsersResponseDTO;
+	}
+
+	@Override
+	public User companyUserRequestDTOToUser(CompanyUserRequestDTO companyUsersRequestDto) {
+		if (companyUsersRequestDto == null) {
+			return null;
+		}
+		User user = new User();
+		user.setUserId(companyUsersRequestDto.getUserId());
+		user.setFirstname(companyUsersRequestDto.getFirstname());
+		user.setLastname(companyUsersRequestDto.getLastname());
+		user.setGender(companyUsersRequestDto.getGender());
+		user.setBirthdate(companyUsersRequestDto.getBirthdate());
+		user.setCountry(companyUsersRequestDto.getCountry());
+		user.setGovernorate(companyUsersRequestDto.getGovernorate());
+		user.setCity(companyUsersRequestDto.getCity());
+		user.setZipCode(companyUsersRequestDto.getZipCode());
+		user.setHomeCode(companyUsersRequestDto.getHomeCode());
+		user.setEmail(companyUsersRequestDto.getEmail());
+		user.setPhoneNumber(companyUsersRequestDto.getPhoneNumber());
+		user.setMatriculeFiscale(companyUsersRequestDto.getMatriculeFiscale());
+		user.setStatus(companyUsersRequestDto.getStatus());
+		user.setCompanyId(companyUsersRequestDto.getCompanyId());
+		user.setMatriculeFiscale(null);
+		user.setStatus(null);
+		user.setInsuranceCompanyId(null);
+		user.setAgencyId(null);
+		return user;
+	}
+
+	@Override
+	public AgencyUserResponseDTO userToAgencyUserResponseDTO(User user) {
+		if (user == null) {
+			return null;
+		}
+		AgencyUserResponseDTO agencyUserResponseDTO = new AgencyUserResponseDTO();
+		agencyUserResponseDTO.setUserId(user.getUserId());
+		agencyUserResponseDTO.setFirstname(user.getFirstname());
+		agencyUserResponseDTO.setLastname(user.getLastname());
+		agencyUserResponseDTO.setGender(user.getGender());
+		agencyUserResponseDTO.setBirthdate(user.getBirthdate());
+		agencyUserResponseDTO.setCountry(user.getCountry());
+		agencyUserResponseDTO.setGovernorate(user.getGovernorate());
+		agencyUserResponseDTO.setCity(user.getCity());
+		agencyUserResponseDTO.setZipCode(user.getZipCode());
+		agencyUserResponseDTO.setHomeCode(user.getHomeCode());
+		agencyUserResponseDTO.setEmail(user.getEmail());
+		agencyUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		agencyUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
+		agencyUserResponseDTO.setStatus(user.getStatus());
+		agencyUserResponseDTO.setAgencyId(user.getAgencyId());
+		return agencyUserResponseDTO;
+	}
+
+	@Override
+	public User agencyUserRequestDTOToUser(AgencyUserRequestDTO agencyUserRequestDto) {
+		if (agencyUserRequestDto == null) {
+			return null;
+		}
+		User user = new User();
+		user.setUserId(agencyUserRequestDto.getUserId());
+		user.setFirstname(agencyUserRequestDto.getFirstname());
+		user.setLastname(agencyUserRequestDto.getLastname());
+		user.setGender(agencyUserRequestDto.getGender());
+		user.setBirthdate(agencyUserRequestDto.getBirthdate());
+		user.setCountry(agencyUserRequestDto.getCountry());
+		user.setGovernorate(agencyUserRequestDto.getGovernorate());
+		user.setCity(agencyUserRequestDto.getCity());
+		user.setZipCode(agencyUserRequestDto.getZipCode());
+		user.setHomeCode(agencyUserRequestDto.getHomeCode());
+		user.setEmail(agencyUserRequestDto.getEmail());
+		user.setPhoneNumber(agencyUserRequestDto.getPhoneNumber());
+		user.setMatriculeFiscale(agencyUserRequestDto.getMatriculeFiscale());
+		user.setStatus(agencyUserRequestDto.getStatus());
+		user.setCompanyId(agencyUserRequestDto.getAgencyId());
+		return user;
+	}
+
+
+	@Override
+	public InsuranceUserResponseDTO userToInsuranceUserResponseDTO(User user) {
+		if (user == null) {
+			return null;
+		}
+		InsuranceUserResponseDTO insuranceUserResponseDTO = new InsuranceUserResponseDTO();
+		insuranceUserResponseDTO.setUserId(user.getUserId());
+		insuranceUserResponseDTO.setFirstname(user.getFirstname());
+		insuranceUserResponseDTO.setLastname(user.getLastname());
+		insuranceUserResponseDTO.setGender(user.getGender());
+		insuranceUserResponseDTO.setBirthdate(user.getBirthdate());
+		insuranceUserResponseDTO.setCountry(user.getCountry());
+		insuranceUserResponseDTO.setGovernorate(user.getGovernorate());
+		insuranceUserResponseDTO.setCity(user.getCity());
+		insuranceUserResponseDTO.setZipCode(user.getZipCode());
+		insuranceUserResponseDTO.setHomeCode(user.getHomeCode());
+		insuranceUserResponseDTO.setEmail(user.getEmail());
+		insuranceUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		insuranceUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
+		insuranceUserResponseDTO.setStatus(user.getStatus());
+		insuranceUserResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
+		return insuranceUserResponseDTO;
+	}
+
+	@Override
+	public User insuranceUserRequestDTOToUser(InsuranceUserRequestDTO insuranceUserRequestDto) {
+		if (insuranceUserRequestDto == null) {
+			return null;
+		}
+		User user = new User();
+		user.setUserId(insuranceUserRequestDto.getUserId());
+		user.setFirstname(insuranceUserRequestDto.getFirstname());
+		user.setLastname(insuranceUserRequestDto.getLastname());
+		user.setGender(insuranceUserRequestDto.getGender());
+		user.setBirthdate(insuranceUserRequestDto.getBirthdate());
+		user.setCountry(insuranceUserRequestDto.getCountry());
+		user.setGovernorate(insuranceUserRequestDto.getGovernorate());
+		user.setCity(insuranceUserRequestDto.getCity());
+		user.setZipCode(insuranceUserRequestDto.getZipCode());
+		user.setHomeCode(insuranceUserRequestDto.getHomeCode());
+		user.setEmail(insuranceUserRequestDto.getEmail());
+		user.setPhoneNumber(insuranceUserRequestDto.getPhoneNumber());
+		user.setMatriculeFiscale(insuranceUserRequestDto.getMatriculeFiscale());
+		user.setStatus(insuranceUserRequestDto.getStatus());
+		user.setCompanyId(insuranceUserRequestDto.getInsuranceCompanyId());
+		return user;
+	}
+	
 	// uncompress the image bytes before returning it to the angular application
 	public static byte[] decompressBytes(byte[] data) {
 		Inflater inflater = new Inflater();
