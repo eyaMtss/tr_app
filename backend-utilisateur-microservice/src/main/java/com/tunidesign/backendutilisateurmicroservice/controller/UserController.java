@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,56 +34,147 @@ import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/Users")
 public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@PostMapping(path = "/Users")
-	public ResponseEntity<UserResponseDTO> save(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	@PostMapping(path = "/AddClient")
+	public ResponseEntity<UserResponseDTO> addClient(@Valid @RequestBody UserRequestDTO userRequestDTO, BindingResult result) {
 		try {
-			return new ResponseEntity<>(userService.addUser(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addClient(userRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
-
-	@PostMapping("/Users/uploadImage/{userId}")
+	@PostMapping(path = "/AddDriver")
+	public ResponseEntity<UserResponseDTO> addDriver(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addDriver(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddTA")
+	public ResponseEntity<UserResponseDTO> addTA(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addTA(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddExpert")
+	public ResponseEntity<UserResponseDTO> addExpert(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addExpert(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddCompanyAdmin")
+	public ResponseEntity<UserResponseDTO> addCompanyAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addCompanyAdmin(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddAgencyAdmin")
+	public ResponseEntity<UserResponseDTO> addAgencyAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addAgencyAdmin(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddInsuranceAdmin")
+	public ResponseEntity<UserResponseDTO> addInsuranceAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addInsuranceAdmin(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping(path = "/AddPrestataire")
+	public ResponseEntity<UserResponseDTO> addPrestataire(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addPrestataire(userRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	@PostMapping("/uploadImage/{userId}")
 	public ResponseEntity<UserResponseDTO> uplaodImage(@PathVariable Long userId,
 			@RequestParam("imageFile") MultipartFile file) throws IOException {
 
 		logger.info("Original Image Byte Size - " + file.getBytes().length);
 		// add image
 		PictureRequestDTO pictureRequestDTO = new PictureRequestDTO();
-		PictureRequestDTO.builder()
-			.userId(userId)
-			.pictureName(file.getOriginalFilename())
-			.pictureType(file.getContentType())
-			.pictureByte(compressBytes(file.getBytes()))
-			.build();
+		PictureRequestDTO.builder().userId(userId).pictureName(file.getOriginalFilename())
+				.pictureType(file.getContentType()).pictureByte(compressBytes(file.getBytes())).build();
 		return new ResponseEntity<>(userService.uploadPicture(pictureRequestDTO), HttpStatus.ACCEPTED);
 	}
 
-	@PutMapping("/Users")
+	@PutMapping("")
 	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-		
+
 		try {
-			if(userService.isExist(userRequestDTO.getUserId())) {
+			if (userService.isExist(userRequestDTO.getUserId())) {
 				return ResponseEntity.accepted().body(userService.updateUser(userRequestDTO));
-			}
-			else throw new EntityNotFoundException("User doesn't exist");
-			
+			} else
+				throw new EntityNotFoundException("User doesn't exist");
+
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
 
-	@GetMapping("/Users")
+//	  @GetMapping("/users")
+//	    public ResponseEntity<List<User>> getAllUsers(@AuthenticationPrincipal User user) {
+//	        if (user.getRole() == Role.ADMIN) {
+//	            List<User> users = userService.findAll();
+//	            return ResponseEntity.ok(users);
+//	        } else {
+//	            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//	        }
+//	    }
+	@GetMapping("/Clients")
+	public ResponseEntity<List<UserResponseDTO>> getClients() {
+		return ResponseEntity.ok().body(userService.getUsers());
+	}
+
+	@GetMapping("/Drivers/{companyId}")
+	public ResponseEntity<List<UserResponseDTO>> getDrivers(@PathVariable Long companyId) {
+		return ResponseEntity.ok().body(userService.getDrivers(companyId));
+	}
+
+	@GetMapping("/TA/{companyId}")
+	public ResponseEntity<List<UserResponseDTO>> getTAs(@PathVariable Long companyId) {
+		return ResponseEntity.ok().body(userService.getTAs(companyId));
+	}
+
+	@GetMapping("/CompanyEmployees/{companyId}")
+	public ResponseEntity<List<UserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
+		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
+	}
+	
+	@GetMapping("/AgencyEmployees/{agencyId}")
+	public ResponseEntity<List<UserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
+		return ResponseEntity.ok().body(userService.getAgencyEmployees(agencyId));
+	}
+
+	@GetMapping("/InsuranceEmployees/{insuranceId}")
+	public ResponseEntity<List<UserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
+		return ResponseEntity.ok().body(userService.getInsuranceEmployees(insuranceId));
+	}
+
+	@GetMapping("")
 	public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
 		return ResponseEntity.ok().body(userService.getUsers());
 	}
-	
-	@GetMapping("/Users/{userId}")
+
+	@GetMapping("/{userId}")
 	public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long userId) {
 		try {
 			return ResponseEntity.ok().body(userService.getUser(userId));
@@ -90,7 +183,7 @@ public class UserController {
 		}
 	}
 
-	@DeleteMapping("/Users/{userId}")
+	@DeleteMapping("/{userId}")
 	public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
 		try {
 			userService.deleteUser(userId);
@@ -121,5 +214,4 @@ public class UserController {
 		return outputStream.toByteArray();
 	}
 
-	
 }
