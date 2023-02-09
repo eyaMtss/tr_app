@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.InsuranceUserResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.PictureRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.UserResponseDTO;
@@ -41,57 +48,58 @@ public class UserController {
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@PostMapping(path = "/AddClient")
-	public ResponseEntity<UserResponseDTO> addClient(@Valid @RequestBody UserRequestDTO userRequestDTO, BindingResult result) {
-		try {
-			return new ResponseEntity<>(userService.addClient(userRequestDTO), HttpStatus.CREATED);
-		} catch (Exception e) {
-			throw new CustomException(e.getMessage());
-		}
+	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
+		//try {
+			return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
+		//} catch (Exception e) {
+		//	throw new CustomException(e.getMessage());
+		//}
 	}
 	@PostMapping(path = "/AddDriver")
-	public ResponseEntity<UserResponseDTO> addDriver(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	public ResponseEntity<CompanyUserResponseDTO> addDriver(@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addDriver(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addDriver(driverRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
 	@PostMapping(path = "/AddTA")
-	public ResponseEntity<UserResponseDTO> addTA(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addTA(userRequestDTO), HttpStatus.CREATED);
-		} catch (Exception e) {
-			throw new CustomException(e.getMessage());
-		}
-	}
-	@PostMapping(path = "/AddExpert")
-	public ResponseEntity<UserResponseDTO> addExpert(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-		try {
-			return new ResponseEntity<>(userService.addExpert(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addTA(taRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
 	@PostMapping(path = "/AddCompanyAdmin")
-	public ResponseEntity<UserResponseDTO> addCompanyAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(@Valid @RequestBody CompanyUserRequestDTO adminRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addCompanyAdmin(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addCompanyAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
-	@PostMapping(path = "/AddAgencyAdmin")
-	public ResponseEntity<UserResponseDTO> addAgencyAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	@PostMapping(path = "/AddExpert")
+	public ResponseEntity<AgencyUserResponseDTO> addExpert(@Valid @RequestBody AgencyUserRequestDTO expertRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addAgencyAdmin(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addExpert(expertRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
+	
+	@PostMapping(path = "/AddAgencyAdmin")
+	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(@Valid @RequestBody AgencyUserRequestDTO adminRequestDTO) {
+		try {
+			return new ResponseEntity<>(userService.addAgencyAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
 	}
 	@PostMapping(path = "/AddInsuranceAdmin")
-	public ResponseEntity<UserResponseDTO> addInsuranceAdmin(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(@Valid @RequestBody InsuranceUserRequestDTO adminRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addInsuranceAdmin(userRequestDTO), HttpStatus.CREATED);
+			return new ResponseEntity<>(userService.addInsuranceAdmin(adminRequestDTO), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
