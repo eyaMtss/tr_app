@@ -25,4 +25,10 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query(value = "SELECT u FROM Users u WHERE u.insuranceId = :insuranceId AND u.role = :role", nativeQuery = true)
 	List<User> findInsuranceEmployeesByRole(@Param("insuranceId") Long insuranceId, @Param("role") Role role);
+
+	//Authentication
+	User findByLogin(String login);
+	User findByEmail(String email);
+	
+	User findByLoginOrEmail(String login, String email);
 }
