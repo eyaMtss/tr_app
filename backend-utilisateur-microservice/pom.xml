@@ -8,10 +8,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tunidesign</groupId>
-	<artifactId>backend-utilisateur-microservice</artifactId>
+	<artifactId>utilisateur-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend-utilisateur-microservice</name>
-	<description>Demo project for Spring Boot</description>
+	<name>utilisateur-service</name>
+	<</descript>Utilisateur microservice</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.1</spring-cloud.version>
