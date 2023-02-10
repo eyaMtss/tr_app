@@ -47,7 +47,7 @@ public class InsuranceUserResponseDTO {
 	// Picture
 	private String pictureName;
 	@Lob
-	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
+	//@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
 	private Long insuranceCompanyId;
 }

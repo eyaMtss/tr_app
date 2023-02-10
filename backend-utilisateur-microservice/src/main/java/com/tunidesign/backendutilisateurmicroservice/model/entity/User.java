@@ -60,7 +60,7 @@ public class User {
 	private String pictureName;
 	private String pictureType;
 	@Lob
-	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
+	//@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
 	private String matriculeFiscale; // employee
 	@Enumerated(EnumType.STRING)

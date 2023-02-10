@@ -46,7 +46,7 @@ public class CompanyUserResponseDTO {
 	// Picture
 	private String pictureName;
 	@Lob
-	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
+	//@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
 
 	// TA && DRIVER && admin
