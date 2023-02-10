@@ -2,6 +2,8 @@ package com.tunidesign.backendutilisateurmicroservice.model.entity;
 
 import java.util.Date;
 
+import com.tunidesign.backendutilisateurmicroservice.model.annotations.passwordmatches.PasswordMatches;
+import com.tunidesign.backendutilisateurmicroservice.model.annotations.validpassword.ValidPassword;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Gender;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.backendutilisateurmicroservice.model.enumeration.Status;
@@ -48,6 +50,12 @@ public class User {
 	@Email
 	private String email;
 	private Long phoneNumber;
+	// Authentication
+	private String login;
+	//@ValidPassword
+	private String password;
+	//@PasswordMatches
+	private String confirmPassword;
 	// Picture
 	private String pictureName;
 	private String pictureType;
@@ -58,7 +66,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Status status; // employee
 	private Long companyId;	// TA && DRIVER
-	private Long insuranceCompanyId; // Insurance
+	private Long insuranceCompanyId; // Insurance && expert
 	private Long agencyId; // Agency
 	@Enumerated(EnumType.STRING)
     private Role role;
