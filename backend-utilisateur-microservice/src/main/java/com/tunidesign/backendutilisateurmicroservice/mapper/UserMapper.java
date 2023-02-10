@@ -2,6 +2,7 @@ package com.tunidesign.backendutilisateurmicroservice.mapper;
 
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
@@ -28,4 +29,5 @@ public interface UserMapper {
 	InsuranceUserResponseDTO userToInsuranceUserResponseDTO(User user);
 	User insuranceUserRequestDTOToUser(InsuranceUserRequestDTO insuranceUsersRequestDto);
 
+	AuthenticationResponseDTO userToAuthenticationResponseDTO(User user);
 }
