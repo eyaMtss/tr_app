@@ -5,7 +5,6 @@ import java.util.Date;
 import com.tunidesign.utilisateurservice.model.enumeration.Gender;
 import com.tunidesign.utilisateurservice.model.enumeration.Status;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Lob;
