@@ -54,6 +54,6 @@ public interface UserService {
 	
 	Boolean isExist(Long userId);
 	
-	AuthenticationResponseDTO getUserByLoginOrEmail(String login, String email, String password);
+	AuthenticationResponseDTO getUserByLoginOrEmail(String identifier, String password);
 
 }

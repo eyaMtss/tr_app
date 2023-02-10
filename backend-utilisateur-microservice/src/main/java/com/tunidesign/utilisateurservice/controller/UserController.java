@@ -52,7 +52,7 @@ public class UserController {
 
 	@PostMapping("/authenticate")
 	public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody AuthenticationRequestDTO user) {
-		return new ResponseEntity<>(userService.getUserByLoginOrEmail(user.getLogin(), user.getEmail(), user.getPassword())
+		return new ResponseEntity<>(userService.getUserByLoginOrEmail(user.getIdentifier(), user.getPassword())
 				, HttpStatus.OK);
 		
 	}

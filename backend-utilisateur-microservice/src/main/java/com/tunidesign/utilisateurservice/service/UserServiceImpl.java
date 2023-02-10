@@ -215,8 +215,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AuthenticationResponseDTO getUserByLoginOrEmail(String login, String email, String password) {
-		User existingUser = userRepository.findByLoginOrEmail(login, email);
+	public AuthenticationResponseDTO getUserByLoginOrEmail(String identifier, String password) {
+		User existingUser = userRepository.findByLoginOrEmail(identifier, identifier);
 		if (existingUser != null && existingUser.getPassword().equals(password)) {
 			return userMapper.userToAuthenticationResponseDTO(existingUser);
 		}
