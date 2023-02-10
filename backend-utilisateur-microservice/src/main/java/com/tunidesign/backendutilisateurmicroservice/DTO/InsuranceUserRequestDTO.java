@@ -43,4 +43,9 @@ public class InsuranceUserRequestDTO {
 	private Status status;
 
 	private Long insuranceCompanyId;
+
+	// Authentication
+	private String login;
+	private String password;
+	private String confirmPassword;
 }

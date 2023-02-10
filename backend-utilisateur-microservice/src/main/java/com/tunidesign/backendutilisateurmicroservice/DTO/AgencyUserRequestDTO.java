@@ -41,6 +41,11 @@ public class AgencyUserRequestDTO {
 	private String matriculeFiscale;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	
+
 	private Long agencyId;
+
+	// Authentication
+	private String login;
+	private String password;
+	private String confirmPassword;
 }

@@ -44,4 +44,9 @@ public class CompanyUserRequestDTO {
 
 	// TA && DRIVER && admin
 	private Long companyId;
+
+	// Authentication
+	private String login;
+	private String password;
+	private String confirmPassword;
 }

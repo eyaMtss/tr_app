@@ -35,5 +35,10 @@ public class ClientRequestDTO {
 	@Email
 	private String email;
 	private Long phoneNumber;
+	
+	// Authentication
+	private String login;
+	private String password;
+	private String confirmPassword;
 
 }

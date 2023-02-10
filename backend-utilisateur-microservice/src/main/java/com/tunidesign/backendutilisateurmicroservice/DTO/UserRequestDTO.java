@@ -48,4 +48,9 @@ public class UserRequestDTO {
 	private Long insuranceCompanyId;
 	// Agency
 	private Long agencyId;
+
+	// Authentication
+	private String login;
+	private String password;
+	private String confirmPassword;
 }
