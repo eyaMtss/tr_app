@@ -7,6 +7,7 @@ import java.util.zip.Inflater;
 
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
@@ -39,7 +40,7 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		userResponseDTO.setPictureName(user.getPictureName());
-		userResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
+		//userResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		userResponseDTO.setAgencyId(user.getAgencyId());
 		userResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
 		userResponseDTO.setCompanyId(user.getCompanyId());
@@ -67,6 +68,9 @@ public class UserMapperImpl implements UserMapper {
 		user.setAgencyId(userRequestDTO.getAgencyId());
 		user.setInsuranceCompanyId(userRequestDTO.getInsuranceCompanyId());
 		user.setCompanyId(userRequestDTO.getCompanyId());
+		user.setLogin(userRequestDTO.getLogin());
+		user.setPassword(userRequestDTO.getPassword());
+		user.setConfirmPassword(userRequestDTO.getConfirmPassword());
 		return user;
 	}
 
@@ -89,7 +93,7 @@ public class UserMapperImpl implements UserMapper {
 		clientResponseDTO.setEmail(user.getEmail());
 		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		clientResponseDTO.setPictureName(user.getPictureName());
-		clientResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
+		//clientResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return clientResponseDTO;
 	}
 
@@ -111,6 +115,9 @@ public class UserMapperImpl implements UserMapper {
 		user.setHomeCode(clientRequestDTO.getHomeCode());
 		user.setEmail(clientRequestDTO.getEmail());
 		user.setPhoneNumber(clientRequestDTO.getPhoneNumber());
+		user.setLogin(clientRequestDTO.getLogin());
+		user.setPassword(clientRequestDTO.getPassword());
+		user.setConfirmPassword(clientRequestDTO.getConfirmPassword());
 		return user;
 	}
 
@@ -133,38 +140,41 @@ public class UserMapperImpl implements UserMapper {
 		companyUsersResponseDTO.setEmail(user.getEmail());
 		companyUsersResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		companyUsersResponseDTO.setPictureName(user.getPictureName());
-		companyUsersResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		companyUsersResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		companyUsersResponseDTO.setStatus(user.getStatus());
 		companyUsersResponseDTO.setCompanyId(user.getCompanyId());
+		
+//		if (user.getPictureByte().equals(null)) companyUsersResponseDTO.setPictureByte(null);
+//		else companyUsersResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return companyUsersResponseDTO;
 	}
 
 	@Override
-	public User companyUserRequestDTOToUser(CompanyUserRequestDTO companyUsersRequestDto) {
-		if (companyUsersRequestDto == null) {
+	public User companyUserRequestDTOToUser(CompanyUserRequestDTO companyUserRequestDTO) {
+		if (companyUserRequestDTO == null) {
 			return null;
 		}
 		User user = new User();
-		user.setUserId(companyUsersRequestDto.getUserId());
-		user.setFirstname(companyUsersRequestDto.getFirstname());
-		user.setLastname(companyUsersRequestDto.getLastname());
-		user.setGender(companyUsersRequestDto.getGender());
-		user.setBirthdate(companyUsersRequestDto.getBirthdate());
-		user.setCountry(companyUsersRequestDto.getCountry());
-		user.setGovernorate(companyUsersRequestDto.getGovernorate());
-		user.setCity(companyUsersRequestDto.getCity());
-		user.setZipCode(companyUsersRequestDto.getZipCode());
-		user.setHomeCode(companyUsersRequestDto.getHomeCode());
-		user.setEmail(companyUsersRequestDto.getEmail());
-		user.setPhoneNumber(companyUsersRequestDto.getPhoneNumber());
-		user.setMatriculeFiscale(companyUsersRequestDto.getMatriculeFiscale());
-		user.setStatus(companyUsersRequestDto.getStatus());
-		user.setCompanyId(companyUsersRequestDto.getCompanyId());
-		user.setMatriculeFiscale(null);
-		user.setStatus(null);
+		user.setUserId(companyUserRequestDTO.getUserId());
+		user.setFirstname(companyUserRequestDTO.getFirstname());
+		user.setLastname(companyUserRequestDTO.getLastname());
+		user.setGender(companyUserRequestDTO.getGender());
+		user.setBirthdate(companyUserRequestDTO.getBirthdate());
+		user.setCountry(companyUserRequestDTO.getCountry());
+		user.setGovernorate(companyUserRequestDTO.getGovernorate());
+		user.setCity(companyUserRequestDTO.getCity());
+		user.setZipCode(companyUserRequestDTO.getZipCode());
+		user.setHomeCode(companyUserRequestDTO.getHomeCode());
+		user.setEmail(companyUserRequestDTO.getEmail());
+		user.setPhoneNumber(companyUserRequestDTO.getPhoneNumber());
+		user.setMatriculeFiscale(companyUserRequestDTO.getMatriculeFiscale());
+		user.setStatus(companyUserRequestDTO.getStatus());
+		user.setCompanyId(companyUserRequestDTO.getCompanyId());
 		user.setInsuranceCompanyId(null);
 		user.setAgencyId(null);
+		user.setLogin(companyUserRequestDTO.getLogin());
+		user.setPassword(companyUserRequestDTO.getPassword());
+		user.setConfirmPassword(companyUserRequestDTO.getConfirmPassword());
 		return user;
 	}
 
@@ -189,7 +199,7 @@ public class UserMapperImpl implements UserMapper {
 		agencyUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		agencyUserResponseDTO.setStatus(user.getStatus());
 		agencyUserResponseDTO.setPictureName(user.getPictureName());
-		agencyUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
+		//agencyUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		agencyUserResponseDTO.setAgencyId(user.getAgencyId());
 		return agencyUserResponseDTO;
 	}
@@ -215,6 +225,9 @@ public class UserMapperImpl implements UserMapper {
 		user.setMatriculeFiscale(agencyUserRequestDto.getMatriculeFiscale());
 		user.setStatus(agencyUserRequestDto.getStatus());
 		user.setCompanyId(agencyUserRequestDto.getAgencyId());
+		user.setLogin(agencyUserRequestDto.getLogin());
+		user.setPassword(agencyUserRequestDto.getPassword());
+		user.setConfirmPassword(agencyUserRequestDto.getConfirmPassword());
 		return user;
 	}
 
@@ -238,7 +251,7 @@ public class UserMapperImpl implements UserMapper {
 		insuranceUserResponseDTO.setEmail(user.getEmail());
 		insuranceUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		insuranceUserResponseDTO.setPictureName(user.getPictureName());
-		insuranceUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
+		//insuranceUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		insuranceUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		insuranceUserResponseDTO.setStatus(user.getStatus());
 		insuranceUserResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
@@ -266,7 +279,21 @@ public class UserMapperImpl implements UserMapper {
 		user.setMatriculeFiscale(insuranceUserRequestDto.getMatriculeFiscale());
 		user.setStatus(insuranceUserRequestDto.getStatus());
 		user.setCompanyId(insuranceUserRequestDto.getInsuranceCompanyId());
+		user.setLogin(insuranceUserRequestDto.getLogin());
+		user.setPassword(insuranceUserRequestDto.getPassword());
+		user.setConfirmPassword(insuranceUserRequestDto.getConfirmPassword());
 		return user;
+	}
+	
+	@Override
+	public AuthenticationResponseDTO userToAuthenticationResponseDTO(User user) {
+		if (user == null) {
+			return null;
+		}
+		AuthenticationResponseDTO authenticationResponseDTO = new AuthenticationResponseDTO();
+		authenticationResponseDTO.setLogin(user.getLogin());
+		authenticationResponseDTO.setRole(user.getRole());
+		return authenticationResponseDTO;
 	}
 	
 	// uncompress the image bytes before returning it to the angular application
