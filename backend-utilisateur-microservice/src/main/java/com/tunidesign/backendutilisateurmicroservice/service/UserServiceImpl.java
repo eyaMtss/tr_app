@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
@@ -211,6 +212,15 @@ public class UserServiceImpl implements UserService {
 	public List<InsuranceUserResponseDTO> getInsuranceEmployees(Long insuranceId) {
 		return userRepository.findByInsuranceCompanyId(insuranceId).stream()
 				.map(user -> userMapper.userToInsuranceUserResponseDTO(user)).toList();
+	}
+
+	@Override
+	public AuthenticationResponseDTO getUserByLoginOrEmail(String login, String email, String password) {
+		User existingUser = userRepository.findByLoginOrEmail(login, email);
+		if (existingUser != null && existingUser.getPassword().equals(password)) {
+			return userMapper.userToAuthenticationResponseDTO(existingUser);
+		}
+		return null;
 	}
 
 

@@ -2,6 +2,7 @@ package com.tunidesign.backendutilisateurmicroservice.service;
 
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
@@ -52,5 +53,7 @@ public interface UserService {
 	void deleteUser(Long userId);
 	
 	Boolean isExist(Long userId);
+	
+	AuthenticationResponseDTO getUserByLoginOrEmail(String login, String email, String password);
 
 }
