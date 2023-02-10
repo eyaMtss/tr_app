@@ -24,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationRequestDTO;
+import com.tunidesign.backendutilisateurmicroservice.DTO.AuthenticationResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.ClientResponseDTO;
 import com.tunidesign.backendutilisateurmicroservice.DTO.CompanyUserRequestDTO;
@@ -48,13 +50,20 @@ public class UserController {
 	private UserServiceImpl userService;
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
 
+	@PostMapping("/authenticate")
+	public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody AuthenticationRequestDTO user) {
+		return new ResponseEntity<>(userService.getUserByLoginOrEmail(user.getLogin(), user.getEmail(), user.getPassword())
+				, HttpStatus.OK);
+		
+	}
+
 	@PostMapping(path = "/AddClient")
 	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
-		// try {
-		return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
-		// } catch (Exception e) {
-		// throw new CustomException(e.getMessage());
-		// }
+		try {
+			return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
 	}
 
 	@PostMapping(path = "/AddDriver")
@@ -164,7 +173,7 @@ public class UserController {
 		} else
 			throw new EntityNotFoundException("User doesn't exist");
 	}
-	
+
 	/* ******************* update user ******************* */
 	@PutMapping("")
 	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
