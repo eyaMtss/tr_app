@@ -3,8 +3,8 @@ package com.tunidesign.utilisateurservice.model.annotations.validpassword;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 import lombok.SneakyThrows;
 
 import org.passay.CharacterRule;

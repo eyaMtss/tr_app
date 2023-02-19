@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurservice.exceptions;
+package com.tunidesign.utilisateurmicroservice.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

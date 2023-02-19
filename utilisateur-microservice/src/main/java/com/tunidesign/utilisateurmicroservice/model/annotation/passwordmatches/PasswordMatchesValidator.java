@@ -1,6 +1,6 @@
-package com.tunidesign.utilisateurservice.model.annotations.passwordmatches;
+package com.tunidesign.utilisateurmicroservice.model.annotation.passwordmatches;
 
-import com.tunidesign.utilisateurservice.model.entity.User;
+import com.tunidesign.utilisateurmicroservice.model.entity.User;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

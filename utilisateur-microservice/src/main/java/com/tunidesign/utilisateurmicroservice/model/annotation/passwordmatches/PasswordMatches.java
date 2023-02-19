@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurservice.model.annotations.passwordmatches;
+package com.tunidesign.utilisateurmicroservice.model.annotation.passwordmatches;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

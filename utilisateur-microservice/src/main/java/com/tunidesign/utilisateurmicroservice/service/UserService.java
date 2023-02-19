@@ -1,19 +1,19 @@
-package com.tunidesign.utilisateurservice.service;
+package com.tunidesign.utilisateurmicroservice.service;
 
-import com.tunidesign.utilisateurservice.DTO.AgencyUserRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.AgencyUserResponseDTO;
-import com.tunidesign.utilisateurservice.DTO.AuthenticationResponseDTO;
-import com.tunidesign.utilisateurservice.DTO.ClientRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.ClientResponseDTO;
-import com.tunidesign.utilisateurservice.DTO.CompanyUserRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.CompanyUserResponseDTO;
-import com.tunidesign.utilisateurservice.DTO.InsuranceUserRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.InsuranceUserResponseDTO;
-import com.tunidesign.utilisateurservice.DTO.PictureRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.UserRequestDTO;
-import com.tunidesign.utilisateurservice.DTO.UserResponseDTO;
-import com.tunidesign.utilisateurservice.model.entity.User;
-import com.tunidesign.utilisateurservice.model.enumeration.Status;
+import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.AuthenticationResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.ClientRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.ClientResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.PictureRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.UserRequestDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
+import com.tunidesign.utilisateurmicroservice.model.entity.User;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
 import java.util.List;
 

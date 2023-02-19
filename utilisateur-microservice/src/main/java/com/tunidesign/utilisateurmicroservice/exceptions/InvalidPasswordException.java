@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurservice.exceptions;
+package com.tunidesign.utilisateurmicroservice.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

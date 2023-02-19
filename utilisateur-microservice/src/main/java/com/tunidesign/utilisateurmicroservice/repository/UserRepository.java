@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurservice.repository;
+package com.tunidesign.utilisateurmicroservice.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.tunidesign.utilisateurservice.model.entity.User;
-import com.tunidesign.utilisateurservice.model.enumeration.Role;
+import com.tunidesign.utilisateurmicroservice.model.entity.User;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
