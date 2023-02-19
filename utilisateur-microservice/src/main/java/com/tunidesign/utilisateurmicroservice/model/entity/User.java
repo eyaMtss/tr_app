@@ -2,13 +2,10 @@ package com.tunidesign.utilisateurmicroservice.model.entity;
 
 import java.util.Date;
 
-//import com.tunidesign.utilisateurservice.model.annotations.passwordmatches.PasswordMatches;
-//import com.tunidesign.utilisateurservice.model.annotations.validpassword.ValidPassword;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Gender;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
