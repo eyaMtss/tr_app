@@ -1,6 +1,6 @@
-package com.tunidesign.utilisateurservice.DTO;
+package com.tunidesign.utilisateurmicroservice.DTO;
 
-import com.tunidesign.utilisateurservice.model.enumeration.Role;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

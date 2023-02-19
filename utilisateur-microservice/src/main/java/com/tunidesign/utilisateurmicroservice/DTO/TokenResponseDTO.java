@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurservice.DTO;
+package com.tunidesign.utilisateurmicroservice.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,14 +1,14 @@
-package com.tunidesign.utilisateurservice.DTO;
+package com.tunidesign.utilisateurmicroservice.DTO;
 
 import java.util.Date;
 
-import com.tunidesign.utilisateurservice.model.enumeration.Gender;
-import com.tunidesign.utilisateurservice.model.enumeration.Status;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Gender;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Lob;
-import javax.validation.constraints.Email;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

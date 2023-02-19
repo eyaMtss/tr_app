@@ -1,7 +1,7 @@
-package com.tunidesign.utilisateurservice.DTO;
+package com.tunidesign.utilisateurmicroservice.DTO;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
