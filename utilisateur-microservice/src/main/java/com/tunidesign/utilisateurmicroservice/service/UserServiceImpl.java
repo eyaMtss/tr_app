@@ -1,23 +1,23 @@
 package com.tunidesign.utilisateurmicroservice.service;
 
 import java.nio.CharBuffer;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.AuthenticationResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.ClientRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.ClientResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserResponseDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.PictureRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.utilisateurmicroservice.mapper.UserMapperImpl;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
@@ -25,96 +25,57 @@ import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 import com.tunidesign.utilisateurmicroservice.repository.UserRepository;
 
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 	private UserMapperImpl userMapper = new UserMapperImpl();
-	private final PasswordEncoder passwordEncoder = null;
-
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	private static final int keyLength = 256;
 	public boolean isPasswordsMatched(String givenPassword, String existedPassword) {
 		if (passwordEncoder.matches(CharBuffer.wrap(givenPassword), existedPassword)) 
 			return true;
 		return false;
 		
 	}
-
 	@Override
-	public UserResponseDTO addUser(User user) {
-		return userMapper.userToUserResponseDTO(userRepository.save(user));
+	public User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		//user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user = addUserCredentials(user);
+		return userRepository.save(user);
 	}
 
 	@Override
-	public ClientResponseDTO addClient(ClientRequestDTO clientRequestDTO) {
-		User user = userMapper.clientRequestDTOToUser(clientRequestDTO);
-		user.setRole(Role.CLEINT);
-		return userMapper.userToClientResponseDTO(userRepository.save(user));
+	public User updateRole(User user, Role role) {
+		User savedUser = getUser(user.getUserId());
+		savedUser.setRole(role);
+		return userRepository.save(savedUser);
 	}
 
 	@Override
-	public CompanyUserResponseDTO addTA(CompanyUserRequestDTO taRequestDTO) {
-		User user = userMapper.companyUserRequestDTOToUser(taRequestDTO);
-		user.setRole(Role.TA);
-		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
+	public User getUser(Long userId) {
+		return userRepository.findById(userId).get();
 	}
 
 	@Override
-	public CompanyUserResponseDTO addDriver(CompanyUserRequestDTO driverRequestDTO) {
-		User user = userMapper.companyUserRequestDTOToUser(driverRequestDTO);
-		user.setRole(Role.DRIVER);
-		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
-	}
-
-	@Override
-	public CompanyUserResponseDTO addCompanyAdmin(CompanyUserRequestDTO adminRequestDTO) {
-		User user = userMapper.companyUserRequestDTOToUser(adminRequestDTO);
-		user.setRole(Role.COMPANY_ADMIN);
-		return userMapper.userToCompanyUserResponseDTO(userRepository.save(user));
-	}
-
-	@Override
-	public InsuranceUserResponseDTO addExpert(InsuranceUserRequestDTO expertRequestDTO) {
-		User user = userMapper.insuranceUserRequestDTOToUser(expertRequestDTO);
-		user.setRole(Role.EXPERT);
-		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(user));
-	}
-
-	@Override
-	public AgencyUserResponseDTO addAgencyAdmin(AgencyUserRequestDTO adminRequestDTO) {
-		User user = userMapper.agencyUserRequestDTOToUser(adminRequestDTO);
-		user.setRole(Role.AGENCY_ADMIN);
-		return userMapper.userToAgencyUserResponseDTO(userRepository.save(user));
-	}
-
-	@Override
-	public InsuranceUserResponseDTO addInsuranceAdmin(InsuranceUserRequestDTO adminRequestDTO) {
-		User user = userMapper.insuranceUserRequestDTOToUser(adminRequestDTO);
-		user.setRole(Role.INSURANCE_ADMIN);
-		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(user));
-	}
-
-	@Override
-	public UserResponseDTO addPrestataire(UserRequestDTO userRequestDTO) {
-		User user = userMapper.userRequestDTOToUser(userRequestDTO);
-		user.setRole(Role.PRESTATAIRE);
-		return addUser(user);
-	}
-
-	@Override
-	public UserResponseDTO uploadPicture(PictureRequestDTO pictureRequestDTO) {
+	public User uploadPicture(PictureRequestDTO pictureRequestDTO) {
 		User existingUser = userRepository.findById(pictureRequestDTO.getUserId()).get();
 		existingUser.setPictureName(pictureRequestDTO.getPictureName());
 		existingUser.setPictureType(pictureRequestDTO.getPictureType());
 		existingUser.setPictureByte(pictureRequestDTO.getPictureByte());
-		return userMapper.userToUserResponseDTO(userRepository.save(existingUser));
+		return userRepository.save(existingUser);
 	}
 
 	@Override
-	public UserResponseDTO updateUser(UserRequestDTO userRequestDTO) {
-		User user = userMapper.userRequestDTOToUser(userRequestDTO);
+	public User updateUser(User user) {
 		User savedUser = userRepository.save(user);
-		return userMapper.userToUserResponseDTO(savedUser);
+		return savedUser;
 	}
 
 	@Override
@@ -124,35 +85,14 @@ public class UserServiceImpl implements UserService {
 		return existingUser;
 	}
 
-	@Override
-	public AgencyUserResponseDTO updateAgencyStatus(Long userId, Status status) {
 
-		return userMapper.userToAgencyUserResponseDTO(userRepository.save(changeStatus(userId, status)));
-	}
-
-	@Override
-	public CompanyUserResponseDTO updateCompanyStatus(Long userId, Status status) {
-		User existingUser = userRepository.findById(userId).get();
-		existingUser.setStatus(status);
-		return userMapper.userToCompanyUserResponseDTO(userRepository.save(changeStatus(userId, status)));
-	}
-
-	@Override
-	public InsuranceUserResponseDTO updateInsuranceStatus(Long userId, Status status) {
-		User existingUser = userRepository.findById(userId).get();
-		existingUser.setStatus(status);
-		return userMapper.userToInsuranceUserResponseDTO(userRepository.save(changeStatus(userId, status)));
-	}
 
 	@Override
 	public List<UserResponseDTO> getUsers() {
 		return userRepository.findAll().stream().map(user -> userMapper.userToUserResponseDTO(user)).toList();
 	}
 
-	@Override
-	public UserResponseDTO getUser(Long userId) {
-		return userMapper.userToUserResponseDTO(userRepository.findById(userId).get());
-	}
+
 
 	@Override
 	public void deleteUser(Long userId) {
@@ -225,12 +165,54 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AuthenticationResponseDTO getUserByLoginOrEmail(String identifier, String password) {
-		User existingUser = userRepository.findByLoginOrEmail(identifier, identifier);
-		if (existingUser != null && existingUser.getPassword().equals(password)) {
+	public User getUserByUsernameOrEmail(String identifier) {
+		User existingUser = userRepository.findByUsernameOrEmail(identifier, identifier);
+		/*if (existingUser != null && existingUser.getPassword().equals(password)) {
 			return userMapper.userToAuthenticationResponseDTO(existingUser);
-		}
-		return null;
+		}*/
+		return existingUser;
 	}
 
+	@Override
+	public Optional<User> getUserByEmail(String email) {
+		return Optional.ofNullable(userRepository.findByEmail(email));
+	}
+
+	@Override
+	public Optional<User> getUserByUsername(String login) {
+		return Optional.ofNullable(userRepository.findByUsername(login));
+	}
+
+	public User addUserCredentials(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		// Generate a salt for the password
+		byte[] salt = generateSalt();
+		String hashedPassword = hashPassword(user.getPassword(), salt);
+		// hash password
+		user.setPassword(String.valueOf(hashedPassword));
+		// code to store the salt and hashed password in the database
+		user.setConfirmPassword(String.valueOf(hashedPassword));
+		user.setSalt(salt);
+		return user;
+	}
+
+	private String hashPassword(String password, byte[] salt){
+
+
+		int iterations = 10000;
+		try {
+			SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+			PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
+			SecretKey key = skf.generateSecret(spec);
+			return Base64.getEncoder().encodeToString(key.getEncoded());
+		} catch (Exception e) {
+			return "";
+		}
+	}
+	private byte[] generateSalt() {
+		// Generate a random salt for the password
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextBytes(salt);
+		return salt;
+	}
 }
