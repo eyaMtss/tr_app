@@ -28,8 +28,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		UserResponseDTO userResponseDTO = new UserResponseDTO();
 		userResponseDTO.setUserId(user.getUserId());
-		userResponseDTO.setFirstname(user.getFirstname());
-		userResponseDTO.setLastname(user.getLastname());
+		userResponseDTO.setFirstName(user.getFirstName());
+		userResponseDTO.setLastName(user.getLastName());
 		userResponseDTO.setGender(user.getGender());
 		userResponseDTO.setBirthdate(user.getBirthdate());
 		userResponseDTO.setCountry(user.getCountry());
@@ -54,8 +54,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		User user = new User();
 		user.setUserId(userRequestDTO.getUserId());
-		user.setFirstname(userRequestDTO.getFirstname());
-		user.setLastname(userRequestDTO.getLastname());
+		user.setFirstName(userRequestDTO.getFirstName());
+		user.setLastName(userRequestDTO.getLastName());
 		user.setGender(userRequestDTO.getGender());
 		user.setBirthdate(userRequestDTO.getBirthdate());
 		user.setCountry(userRequestDTO.getCountry());
@@ -68,7 +68,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setAgencyId(userRequestDTO.getAgencyId());
 		user.setInsuranceCompanyId(userRequestDTO.getInsuranceCompanyId());
 		user.setCompanyId(userRequestDTO.getCompanyId());
-		user.setLogin(userRequestDTO.getLogin());
+		user.setUsername(userRequestDTO.getUsername());
 		user.setPassword(userRequestDTO.getPassword());
 		user.setConfirmPassword(userRequestDTO.getConfirmPassword());
 		return user;
@@ -81,8 +81,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		ClientResponseDTO clientResponseDTO = new ClientResponseDTO();
 		clientResponseDTO.setUserId(user.getUserId());
-		clientResponseDTO.setFirstname(user.getFirstname());
-		clientResponseDTO.setLastname(user.getLastname());
+		clientResponseDTO.setFirstName(user.getFirstName());
+		clientResponseDTO.setLastName(user.getLastName());
 		clientResponseDTO.setGender(user.getGender());
 		clientResponseDTO.setBirthdate(user.getBirthdate());
 		clientResponseDTO.setCountry(user.getCountry());
@@ -104,8 +104,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		User user = new User();
 		user.setUserId(clientRequestDTO.getUserId());
-		user.setFirstname(clientRequestDTO.getFirstname());
-		user.setLastname(clientRequestDTO.getLastname());
+		user.setFirstName(clientRequestDTO.getFirstName());
+		user.setLastName(clientRequestDTO.getLastName());
 		user.setGender(clientRequestDTO.getGender());
 		user.setBirthdate(clientRequestDTO.getBirthdate());
 		user.setCountry(clientRequestDTO.getCountry());
@@ -115,7 +115,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setHomeCode(clientRequestDTO.getHomeCode());
 		user.setEmail(clientRequestDTO.getEmail());
 		user.setPhoneNumber(clientRequestDTO.getPhoneNumber());
-		user.setLogin(clientRequestDTO.getLogin());
+		user.setUsername(clientRequestDTO.getUsername());
 		user.setPassword(clientRequestDTO.getPassword());
 		user.setConfirmPassword(clientRequestDTO.getConfirmPassword());
 		return user;
@@ -128,8 +128,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		CompanyUserResponseDTO companyUsersResponseDTO = new CompanyUserResponseDTO();
 		companyUsersResponseDTO.setUserId(user.getUserId());
-		companyUsersResponseDTO.setFirstname(user.getFirstname());
-		companyUsersResponseDTO.setLastname(user.getLastname());
+		companyUsersResponseDTO.setFirstName(user.getFirstName());
+		companyUsersResponseDTO.setLastName(user.getLastName());
 		companyUsersResponseDTO.setGender(user.getGender());
 		companyUsersResponseDTO.setBirthdate(user.getBirthdate());
 		companyUsersResponseDTO.setCountry(user.getCountry());
@@ -156,8 +156,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		User user = new User();
 		user.setUserId(companyUserRequestDTO.getUserId());
-		user.setFirstname(companyUserRequestDTO.getFirstname());
-		user.setLastname(companyUserRequestDTO.getLastname());
+		user.setFirstName(companyUserRequestDTO.getFirstName());
+		user.setLastName(companyUserRequestDTO.getLastName());
 		user.setGender(companyUserRequestDTO.getGender());
 		user.setBirthdate(companyUserRequestDTO.getBirthdate());
 		user.setCountry(companyUserRequestDTO.getCountry());
@@ -172,7 +172,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setCompanyId(companyUserRequestDTO.getCompanyId());
 		user.setInsuranceCompanyId(null);
 		user.setAgencyId(null);
-		user.setLogin(companyUserRequestDTO.getLogin());
+		user.setUsername(companyUserRequestDTO.getUsername());
 		user.setPassword(companyUserRequestDTO.getPassword());
 		user.setConfirmPassword(companyUserRequestDTO.getConfirmPassword());
 		return user;
@@ -185,8 +185,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		AgencyUserResponseDTO agencyUserResponseDTO = new AgencyUserResponseDTO();
 		agencyUserResponseDTO.setUserId(user.getUserId());
-		agencyUserResponseDTO.setFirstname(user.getFirstname());
-		agencyUserResponseDTO.setLastname(user.getLastname());
+		agencyUserResponseDTO.setFirstName(user.getFirstName());
+		agencyUserResponseDTO.setLastName(user.getLastName());
 		agencyUserResponseDTO.setGender(user.getGender());
 		agencyUserResponseDTO.setBirthdate(user.getBirthdate());
 		agencyUserResponseDTO.setCountry(user.getCountry());
@@ -211,8 +211,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		User user = new User();
 		user.setUserId(agencyUserRequestDto.getUserId());
-		user.setFirstname(agencyUserRequestDto.getFirstname());
-		user.setLastname(agencyUserRequestDto.getLastname());
+		user.setFirstName(agencyUserRequestDto.getFirstName());
+		user.setLastName(agencyUserRequestDto.getLastName());
 		user.setGender(agencyUserRequestDto.getGender());
 		user.setBirthdate(agencyUserRequestDto.getBirthdate());
 		user.setCountry(agencyUserRequestDto.getCountry());
@@ -225,7 +225,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setMatriculeFiscale(agencyUserRequestDto.getMatriculeFiscale());
 		user.setStatus(agencyUserRequestDto.getStatus());
 		user.setCompanyId(agencyUserRequestDto.getAgencyId());
-		user.setLogin(agencyUserRequestDto.getLogin());
+		user.setUsername(agencyUserRequestDto.getUsername());
 		user.setPassword(agencyUserRequestDto.getPassword());
 		user.setConfirmPassword(agencyUserRequestDto.getConfirmPassword());
 		return user;
@@ -239,8 +239,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		InsuranceUserResponseDTO insuranceUserResponseDTO = new InsuranceUserResponseDTO();
 		insuranceUserResponseDTO.setUserId(user.getUserId());
-		insuranceUserResponseDTO.setFirstname(user.getFirstname());
-		insuranceUserResponseDTO.setLastname(user.getLastname());
+		insuranceUserResponseDTO.setFirstName(user.getFirstName());
+		insuranceUserResponseDTO.setLastName(user.getLastName());
 		insuranceUserResponseDTO.setGender(user.getGender());
 		insuranceUserResponseDTO.setBirthdate(user.getBirthdate());
 		insuranceUserResponseDTO.setCountry(user.getCountry());
@@ -265,8 +265,8 @@ public class UserMapperImpl implements UserMapper {
 		}
 		User user = new User();
 		user.setUserId(insuranceUserRequestDto.getUserId());
-		user.setFirstname(insuranceUserRequestDto.getFirstname());
-		user.setLastname(insuranceUserRequestDto.getLastname());
+		user.setFirstName(insuranceUserRequestDto.getFirstName());
+		user.setLastName(insuranceUserRequestDto.getLastName());
 		user.setGender(insuranceUserRequestDto.getGender());
 		user.setBirthdate(insuranceUserRequestDto.getBirthdate());
 		user.setCountry(insuranceUserRequestDto.getCountry());
@@ -279,7 +279,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setMatriculeFiscale(insuranceUserRequestDto.getMatriculeFiscale());
 		user.setStatus(insuranceUserRequestDto.getStatus());
 		user.setCompanyId(insuranceUserRequestDto.getInsuranceCompanyId());
-		user.setLogin(insuranceUserRequestDto.getLogin());
+		user.setUsername(insuranceUserRequestDto.getUsername());
 		user.setPassword(insuranceUserRequestDto.getPassword());
 		user.setConfirmPassword(insuranceUserRequestDto.getConfirmPassword());
 		return user;
@@ -291,7 +291,7 @@ public class UserMapperImpl implements UserMapper {
 //			return null;
 //		}
 //		AuthenticationResponseDTO authenticationResponseDTO = new AuthenticationResponseDTO();
-//		authenticationResponseDTO.setLogin(user.getLogin());
+//		authenticationResponseDTO.setUsername(user.getUsername());
 //		authenticationResponseDTO.setRole(user.getRole());
 //		return authenticationResponseDTO;
 //	}

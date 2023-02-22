@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClientRequestDTO {
 	private Long userId;
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private Date birthdate;
@@ -37,7 +37,7 @@ public class ClientRequestDTO {
 	private Long phoneNumber;
 	
 	// Authentication
-	private String login;
+	private String username;
 	private String password;
 	private String confirmPassword;
 

@@ -13,28 +13,22 @@ import com.tunidesign.utilisateurmicroservice.DTO.PictureRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.UserRequestDTO;
 import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
-	UserResponseDTO addUser(User user);
-	ClientResponseDTO addClient(ClientRequestDTO clientRequestDTO);
-	CompanyUserResponseDTO addTA(CompanyUserRequestDTO taUserRequestDTO);
-	CompanyUserResponseDTO addDriver(CompanyUserRequestDTO driverRequestDTO);
-	CompanyUserResponseDTO addCompanyAdmin(CompanyUserRequestDTO adminRequestDTO);
-	AgencyUserResponseDTO addAgencyAdmin(AgencyUserRequestDTO adminUserRequestDTO);
-	InsuranceUserResponseDTO addExpert(InsuranceUserRequestDTO expertRequestDTO);
-	InsuranceUserResponseDTO addInsuranceAdmin(InsuranceUserRequestDTO adminRequestDTO);
-	UserResponseDTO addPrestataire(UserRequestDTO userRequestDTO);
+	User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	User updateRole(User user, Role role);
+	User getUser(Long userId);
 	
-	UserResponseDTO uploadPicture(PictureRequestDTO pictureRequestDTO);
-
-	UserResponseDTO updateUser(UserRequestDTO UserRequestDTO);
+	User uploadPicture(PictureRequestDTO pictureRequestDTO);
+	User updateUser(User user);
 	User changeStatus(Long userId, Status status);
-	AgencyUserResponseDTO updateAgencyStatus(Long userId, Status status);
-	CompanyUserResponseDTO updateCompanyStatus(Long userId, Status status);
-	InsuranceUserResponseDTO updateInsuranceStatus(Long userId, Status status);
 	
 	List<ClientResponseDTO> getClients();
 	List<CompanyUserResponseDTO> getDrivers(Long companyId);
@@ -48,12 +42,14 @@ public interface UserService {
 	List<InsuranceUserResponseDTO> getInsuranceEmployees(Long insuranceId);
 	List<UserResponseDTO> getUsers();
 
-	UserResponseDTO getUser(Long userId);
+
 
 	void deleteUser(Long userId);
 	
 	Boolean isExist(Long userId);
 	
-	AuthenticationResponseDTO getUserByLoginOrEmail(String identifier, String password);
+	User getUserByUsernameOrEmail(String identifier);
+	Optional<User> getUserByEmail(String email);
+	Optional<User> getUserByUsername(String login);
 
 }
