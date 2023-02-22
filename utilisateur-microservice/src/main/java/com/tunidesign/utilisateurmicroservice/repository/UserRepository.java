@@ -27,8 +27,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	List<User> findInsuranceEmployeesByRole(@Param("insuranceId") Long insuranceId, @Param("role") Role role);
 
 	//Authentication
-	User findByLogin(String login);
+	User findByUsername(String login);
 	User findByEmail(String email);
 	
-	User findByLoginOrEmail(String login, String email);
+	User findByUsernameOrEmail(String login, String email);
 }

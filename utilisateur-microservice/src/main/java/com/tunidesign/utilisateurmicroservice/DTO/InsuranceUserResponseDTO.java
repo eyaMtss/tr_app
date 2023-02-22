@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InsuranceUserResponseDTO {
 	private Long userId;
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private Date birthdate;

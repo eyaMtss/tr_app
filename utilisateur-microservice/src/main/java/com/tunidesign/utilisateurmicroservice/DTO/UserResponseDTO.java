@@ -24,8 +24,8 @@ import lombok.Setter;
 @Setter
 public class UserResponseDTO {
 	private Long userId;
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private Date birthdate;

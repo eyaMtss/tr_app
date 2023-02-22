@@ -6,12 +6,7 @@ import com.tunidesign.utilisateurmicroservice.model.enumeration.Gender;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table
+@Table(name = "users")
 @Data
 @Builder
 @AllArgsConstructor
@@ -32,8 +27,19 @@ public class User {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
-	private String firstname;
-	private String lastname;
+	// Authentication
+	@Column(unique = true)
+	private String username;
+	@Email
+	@Column(unique = true)
+	private String email;
+	//@ValidPassword
+	private byte[] salt;
+	private String password;
+	//@PasswordMatches
+	private String confirmPassword;
+	private String firstName;
+	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private Gender gender; 
 	private Date birthdate;
@@ -44,21 +50,16 @@ public class User {
 	private Integer zipCode;
 	private Integer homeCode;
 	// Contact
-	@Email
-	private String email;
+	@Column(unique = true)
 	private Long phoneNumber;
-	// Authentication
-	private String login;
-	//@ValidPassword
-	private String password;
-	//@PasswordMatches
-	private String confirmPassword;
+
 	// Picture
 	private String pictureName;
 	private String pictureType;
 	@Lob
 	//@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
+	@Column(unique = true)
 	private String matriculeFiscale; // employee
 	@Enumerated(EnumType.STRING)
 	private Status status; // employee

@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.zip.Deflater;
 
+import com.tunidesign.utilisateurmicroservice.mapper.UserMapper;
+import com.tunidesign.utilisateurmicroservice.mapper.UserMapperImpl;
+import com.tunidesign.utilisateurmicroservice.model.entity.User;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +53,7 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
-
+	private UserMapperImpl userMapper = new UserMapperImpl();
 //	@PostMapping("/authenticate")
 //	public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody CredentialsDTO user) {
 //		return new ResponseEntity<>(userService.getUserByLoginOrEmail(user.getIdentifier(), user.getPassword()),
@@ -80,7 +84,8 @@ public class UserController {
 	@PostMapping(path = "/AddClient")
 	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addClient(clientRequestDTO), HttpStatus.CREATED);
+			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.CLEINT);
+			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedClient), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -90,7 +95,8 @@ public class UserController {
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addDriver(driverRequestDTO), HttpStatus.CREATED);
+			User savedDriver = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(driverRequestDTO)), Role.DRIVER);
+			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedDriver), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -99,7 +105,8 @@ public class UserController {
 	@PostMapping(path = "/AddTA")
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addTA(taRequestDTO), HttpStatus.CREATED);
+			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)), Role.TA);
+			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedTa), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -107,9 +114,10 @@ public class UserController {
 
 	@PostMapping(path = "/AddCompanyAdmin")
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
-			@Valid @RequestBody CompanyUserRequestDTO adminRequestDTO) {
+			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addCompanyAdmin(adminRequestDTO), HttpStatus.CREATED);
+			User savedCompanyAdmin = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(companyAdminRequestDTO)), Role.COMPANY_ADMIN);
+			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedCompanyAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -119,7 +127,8 @@ public class UserController {
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addExpert(expertRequestDTO), HttpStatus.CREATED);
+			User savedExpert = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(expertRequestDTO)), Role.EXPERT);
+			return new ResponseEntity<>(userMapper.userToInsuranceUserResponseDTO(savedExpert), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -127,9 +136,10 @@ public class UserController {
 
 	@PostMapping(path = "/AddAgencyAdmin")
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
-			@Valid @RequestBody AgencyUserRequestDTO adminRequestDTO) {
+			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addAgencyAdmin(adminRequestDTO), HttpStatus.CREATED);
+			User savedAgencyAdmin = userService.updateRole(userService.addUser(userMapper.agencyUserRequestDTOToUser(agencyAdminRequestDTO)), Role.AGENCY_ADMIN);
+			return new ResponseEntity<>(userMapper.userToAgencyUserResponseDTO(savedAgencyAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -137,18 +147,10 @@ public class UserController {
 
 	@PostMapping(path = "/AddInsuranceAdmin")
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
-			@Valid @RequestBody InsuranceUserRequestDTO adminRequestDTO) {
+			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
-			return new ResponseEntity<>(userService.addInsuranceAdmin(adminRequestDTO), HttpStatus.CREATED);
-		} catch (Exception e) {
-			throw new CustomException(e.getMessage());
-		}
-	}
-
-	@PostMapping(path = "/AddPrestataire")
-	public ResponseEntity<UserResponseDTO> addPrestataire(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-		try {
-			return new ResponseEntity<>(userService.addPrestataire(userRequestDTO), HttpStatus.CREATED);
+			User savedInsuranceAdmin = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(insuranceAdminRequestDTO)), Role.INSURANCE_ADMIN);
+			return new ResponseEntity<>(userMapper.userToInsuranceUserResponseDTO(savedInsuranceAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
@@ -163,7 +165,7 @@ public class UserController {
 		PictureRequestDTO pictureRequestDTO = new PictureRequestDTO();
 		PictureRequestDTO.builder().userId(userId).pictureName(file.getOriginalFilename())
 				.pictureType(file.getContentType()).pictureByte(compressBytes(file.getBytes())).build();
-		return new ResponseEntity<>(userService.uploadPicture(pictureRequestDTO), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(userMapper.userToUserResponseDTO(userService.uploadPicture(pictureRequestDTO)), HttpStatus.ACCEPTED);
 	}
 
 	/* *********************** update status ********************** */
@@ -171,7 +173,7 @@ public class UserController {
 	public ResponseEntity<CompanyUserResponseDTO> updateCompanyStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
-			return ResponseEntity.accepted().body(userService.updateCompanyStatus(userId, status));
+			return ResponseEntity.accepted().body(userMapper.userToCompanyUserResponseDTO(userService.changeStatus(userId, status)));
 		} else
 			throw new EntityNotFoundException("User doesn't exist");
 	}
@@ -180,7 +182,7 @@ public class UserController {
 	public ResponseEntity<AgencyUserResponseDTO> updateAgencyStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
-			return ResponseEntity.accepted().body(userService.updateAgencyStatus(userId, status));
+			return ResponseEntity.accepted().body(userMapper.userToAgencyUserResponseDTO(userService.changeStatus(userId, status)));
 		} else
 			throw new EntityNotFoundException("User doesn't exist");
 	}
@@ -189,7 +191,7 @@ public class UserController {
 	public ResponseEntity<InsuranceUserResponseDTO> updateInsuranceStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
-			return ResponseEntity.accepted().body(userService.updateInsuranceStatus(userId, status));
+			return ResponseEntity.accepted().body(userMapper.userToInsuranceUserResponseDTO(userService.changeStatus(userId, status)));
 		} else
 			throw new EntityNotFoundException("User doesn't exist");
 	}
@@ -200,7 +202,8 @@ public class UserController {
 
 		try {
 			if (userService.isExist(userRequestDTO.getUserId())) {
-				return ResponseEntity.accepted().body(userService.updateUser(userRequestDTO));
+				User savedUser = userService.updateUser(userMapper.userRequestDTOToUser(userRequestDTO));
+				return ResponseEntity.accepted().body(userMapper.userToUserResponseDTO(savedUser));
 			} else
 				throw new EntityNotFoundException("User doesn't exist");
 
@@ -277,7 +280,7 @@ public class UserController {
 	@GetMapping("/{userId}")
 	public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long userId) {
 		try {
-			return ResponseEntity.ok().body(userService.getUser(userId));
+			return ResponseEntity.ok().body(userMapper.userToUserResponseDTO(userService.getUser(userId)));
 		} catch (Exception ex) {
 			throw new EntityNotFoundException("User doesn't exist");
 		}
