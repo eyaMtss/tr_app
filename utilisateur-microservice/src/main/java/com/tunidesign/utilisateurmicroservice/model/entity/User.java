@@ -25,6 +25,7 @@ import lombok.Setter;
 @Setter
 public class User {
 	@Id
+	@Column(name = "id")
 	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	// Authentication
@@ -38,7 +39,9 @@ public class User {
 	private String password;
 	//@PasswordMatches
 	private String confirmPassword;
+	@Column(name = "firstname")
 	private String firstName;
+	@Column(name = "lastname")
 	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private Gender gender; 
