@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		//user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user = addUserCredentials(user);
+		//user = addUserCredentials(user);
 		return userRepository.save(user);
 	}
 
