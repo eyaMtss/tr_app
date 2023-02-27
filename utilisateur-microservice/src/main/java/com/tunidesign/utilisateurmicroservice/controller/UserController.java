@@ -2,6 +2,7 @@ package com.tunidesign.utilisateurmicroservice.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.zip.Deflater;
 
@@ -9,6 +10,7 @@ import com.tunidesign.utilisateurmicroservice.mapper.UserMapper;
 import com.tunidesign.utilisateurmicroservice.mapper.UserMapperImpl;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
+import jakarta.annotation.security.RolesAllowed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +84,7 @@ public class UserController {
 //	    }
 
 	@PostMapping(path = "/AddClient")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
 			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.CLEINT);
@@ -92,6 +95,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddDriver")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
@@ -103,6 +107,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddTA")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
 			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)), Role.TA);
@@ -113,6 +118,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddCompanyAdmin")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
@@ -124,6 +130,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddExpert")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
@@ -135,6 +142,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddAgencyAdmin")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
 			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
 		try {
@@ -146,6 +154,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddInsuranceAdmin")
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
 			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
@@ -223,6 +232,7 @@ public class UserController {
 //	    }
 	/* *********************** get All ********************** */
 	@GetMapping("/Clients")
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<List<ClientResponseDTO>> getClients() {
 		return ResponseEntity.ok().body(userService.getClients());
 	}
@@ -246,7 +256,7 @@ public class UserController {
 	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
 	}
-
+	@RolesAllowed({"AGENCY_ADMIN"})
 	@GetMapping("/Agency/Admin/{agencyId}")
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyAdmins(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyAdmins(agencyId));
