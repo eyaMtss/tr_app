@@ -82,9 +82,18 @@ public class UserController {
 //	        log.info("Trying to validate token {}", token);
 //	        return ResponseEntity.ok(userService.validateToken(token));
 //	    }
-
+	@PostMapping(path = "/AddSuperAdmin")
+	@RolesAllowed({"AGENCY_ADMIN"})
+	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
+		try {
+			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.SUPER_ADMIN);
+			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedClient), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
+		}
+	}
 	@PostMapping(path = "/AddClient")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addClient(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
 			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.CLEINT);
@@ -95,7 +104,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddDriver")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
@@ -107,7 +116,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddTA")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
 			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)), Role.TA);
@@ -118,7 +127,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddCompanyAdmin")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
@@ -130,7 +139,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddExpert")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
@@ -142,7 +151,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddAgencyAdmin")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
 			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
 		try {
@@ -154,7 +163,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddInsuranceAdmin")
-	@RolesAllowed({"SUPER_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
 			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
