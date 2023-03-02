@@ -25,6 +25,6 @@ public class Parking {
     private String zipCode;
     private Double longitude;
     private Double latitude;
-    private Long idGarage;
+    private Long garageId;
 
 }

@@ -17,7 +17,7 @@ public class ParkingMapperImpl implements ParkingMapper{
                 .zipCode(parkingRequestDTO.getZipCode())
                 .latitude(parkingRequestDTO.getLatitude())
                 .longitude(parkingRequestDTO.getLongitude())
-                .idGarage(parkingRequestDTO.getIdGarage())
+                .garageId(parkingRequestDTO.getGarageId())
                 .build();
     }
 
@@ -34,7 +34,7 @@ public class ParkingMapperImpl implements ParkingMapper{
                 .zipCode(parking.getZipCode())
                 .latitude(parking.getLatitude())
                 .longitude(parking.getLongitude())
-                .idGarage(parking.getIdGarage())
+                .garageId(parking.getGarageId())
                 .build();
     }
 }
