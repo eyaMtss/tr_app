@@ -25,3 +25,7 @@ spring:
           uri: http://localhost:9090
           predicates:
             - Path=/Users/**
+        - id: PARKING-SERVICE
+          uri: http://localhost:9191
+          predicates:
+            - Path=/parking/**
