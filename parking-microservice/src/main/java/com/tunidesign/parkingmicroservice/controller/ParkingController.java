@@ -25,13 +25,11 @@ public class ParkingController {
     static Logger logger = LoggerFactory.getLogger(ParkingController.class);
 
     @PostMapping(path = "/addParking")
-    //@RolesAllowed({"GARAGISTE"})
     public ResponseEntity<ParkingResponseDTO> addParking(@Valid @RequestBody ParkingRequestDTO parkingRequestDTO) {
         return new ResponseEntity<>(parkingService.addParking(parkingRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/updateParking/{parkingId}")
-    //@RolesAllowed({"GARAGISTE"})
     public ResponseEntity<ParkingResponseDTO> updateParking(@PathVariable Long parkingId, @Valid @RequestBody ParkingRequestDTO parkingRequestDTO){
         try {
             return new ResponseEntity<>(parkingService.updateParking(parkingId, parkingRequestDTO), HttpStatus.CREATED);
@@ -39,13 +37,11 @@ public class ParkingController {
             throw new ParkingNotFoundException("Parking not found");
         }
     }
-    @GetMapping("/getAllByGarage/{garageId}")
-    //@RolesAllowed({"GARAGISTE"})
-    public ResponseEntity<List<ParkingResponseDTO>> getParkingsByGargage(@PathVariable Long garageId) {
-        return ResponseEntity.ok().body(parkingService.getParkingsByGarage(garageId));
+    @GetMapping("/getAllByOwner/{owner}")
+    public ResponseEntity<List<ParkingResponseDTO>> getParkingsByOwner(@PathVariable Long owner) {
+        return ResponseEntity.ok().body(parkingService.getParkingsByOwner(owner));
     }
     @GetMapping("/getById/{parkingId}")
-    //@RolesAllowed({"GARAGISTE"})
     public ResponseEntity<ParkingResponseDTO> getParkingsById(@PathVariable Long parkingId) {
         return ResponseEntity.ok().body(parkingService.getParkingById(parkingId));
     }
