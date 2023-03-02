@@ -11,6 +11,7 @@ import lombok.*;
 public class ParkingResponseDTO {
     private Long parkingId;
     private String name;
+    private Long parkingOwner;
     private Integer capacity;
     private Integer nbVehicle;
     private String country;
@@ -19,5 +20,4 @@ public class ParkingResponseDTO {
     private Integer zipCode;
     private Double longitude;
     private Double latitude;
-    private Long garageId;
 }
