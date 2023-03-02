@@ -9,7 +9,7 @@ public interface ParkingService {
     public ParkingResponseDTO addParking(ParkingRequestDTO parkingRequestDTO);
     public ParkingResponseDTO updateParking(Long parkingId, ParkingRequestDTO parkingRequestDTO);
     public List<ParkingResponseDTO> getParkings();
-    public List<ParkingResponseDTO> getParkingsByGarage(Long garageId);
+    public List<ParkingResponseDTO> getParkingsByOwner(Long owner);
     public ParkingResponseDTO getParkingById(Long parkingId);
     public void deleteParking(Long parkingId);
     public Boolean isExist(Long parkingId);

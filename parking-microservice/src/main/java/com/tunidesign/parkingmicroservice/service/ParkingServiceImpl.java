@@ -13,7 +13,8 @@ import java.util.List;
 public class ParkingServiceImpl implements ParkingService{
     @Autowired
     private ParkingRepository parkingRepository;
-    private ParkingMapperImpl parkingMapper;
+
+    private ParkingMapperImpl parkingMapper = new ParkingMapperImpl();;
     @Override
     public ParkingResponseDTO addParking(ParkingRequestDTO parkingRequestDTO) {
         return parkingMapper.parkingToParkingResponseDTO(parkingRepository.save(parkingMapper.parkingResquestDTOToParking(parkingRequestDTO)));
@@ -23,6 +24,7 @@ public class ParkingServiceImpl implements ParkingService{
     public ParkingResponseDTO updateParking(Long parkingId, ParkingRequestDTO parkingRequestDTO) {
         Parking existingParking = parkingRepository.findById(parkingId).get();
         existingParking.setName(parkingRequestDTO.getName());
+        existingParking.setParkingOwner(parkingRequestDTO.getParkingOwner());
         existingParking.setCapacity(parkingRequestDTO.getCapacity());
         existingParking.setNbVehicle(parkingRequestDTO.getNbVehicle());
         existingParking.setCountry(parkingRequestDTO.getCountry());
@@ -31,7 +33,6 @@ public class ParkingServiceImpl implements ParkingService{
         existingParking.setZipCode(parkingRequestDTO.getZipCode());
         existingParking.setLatitude(parkingRequestDTO.getLatitude());
         existingParking.setLongitude(parkingRequestDTO.getLongitude());
-        existingParking.setGarageId(parkingRequestDTO.getGarageId());
         return parkingMapper.parkingToParkingResponseDTO(parkingRepository.save(existingParking));
     }
 
@@ -44,8 +45,8 @@ public class ParkingServiceImpl implements ParkingService{
     }
 
     @Override
-    public List<ParkingResponseDTO> getParkingsByGarage(Long garageId) {
-        return parkingRepository.findAllByGarageId(garageId)
+    public List<ParkingResponseDTO> getParkingsByOwner(Long owner) {
+        return parkingRepository.findAllByParkingOwner(owner)
                 .stream()
                 .map(parking -> parkingMapper.parkingToParkingResponseDTO(parking))
                 .toList();
