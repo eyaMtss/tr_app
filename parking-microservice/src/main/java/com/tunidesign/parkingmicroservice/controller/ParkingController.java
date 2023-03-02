@@ -42,11 +42,6 @@ public class ParkingController {
             throw new ParkingNotFoundException("Parking not found");
         }
     }
-//    @GetMapping("/getAll")
-//    @RolesAllowed({"GARAGISTE"})
-//    public ResponseEntity<List<ParkingResponseDTO>> getParkings() {
-//        return ResponseEntity.ok().body(parkingService.getParkings());
-//    }
     @GetMapping("/getAllByGarage/{garageId}")
     @RolesAllowed({"GARAGISTE"})
     public ResponseEntity<List<ParkingResponseDTO>> getParkingsByGargage(@PathVariable Long garageId) {

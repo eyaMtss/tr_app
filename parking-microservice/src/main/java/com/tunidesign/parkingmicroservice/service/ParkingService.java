@@ -2,7 +2,6 @@ package com.tunidesign.parkingmicroservice.service;
 
 import com.tunidesign.parkingmicroservice.DTO.ParkingRequestDTO;
 import com.tunidesign.parkingmicroservice.DTO.ParkingResponseDTO;
-import com.tunidesign.parkingmicroservice.model.Parking;
 
 import java.util.List;
 
