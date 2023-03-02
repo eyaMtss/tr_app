@@ -1,2 +1,5 @@
-package com.tunidesign.parkingmicroservice.service;public class ParkingService {
+package com.tunidesign.parkingmicroservice.service;
+
+public interface ParkingService {
+
 }
