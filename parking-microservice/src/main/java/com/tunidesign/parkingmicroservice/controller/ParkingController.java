@@ -5,6 +5,7 @@ import com.tunidesign.parkingmicroservice.DTO.ParkingResponseDTO;
 import com.tunidesign.parkingmicroservice.exception.ParkingNotFoundException;
 import com.tunidesign.parkingmicroservice.service.ParkingServiceImpl;
 import jakarta.annotation.security.RolesAllowed;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +26,13 @@ public class ParkingController {
 
     @PostMapping(path = "/addParking")
     //@RolesAllowed({"GARAGISTE"})
-    public ResponseEntity<ParkingResponseDTO> addParking(@Valid @RequestBody ParkingRequestDTO parkingRequestDTO) throws Exception {
-        try {
-            return new ResponseEntity<>(parkingService.addParking(parkingRequestDTO), HttpStatus.CREATED);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public ResponseEntity<ParkingResponseDTO> addParking(@Valid @RequestBody ParkingRequestDTO parkingRequestDTO) {
+        return new ResponseEntity<>(parkingService.addParking(parkingRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/updateParking/{parkingId}")
     //@RolesAllowed({"GARAGISTE"})
-    public ResponseEntity<ParkingResponseDTO> updateParking(@PathVariable Long parkingId, @Valid @RequestBody ParkingRequestDTO parkingRequestDTO) throws Exception {
+    public ResponseEntity<ParkingResponseDTO> updateParking(@PathVariable Long parkingId, @Valid @RequestBody ParkingRequestDTO parkingRequestDTO){
         try {
             return new ResponseEntity<>(parkingService.updateParking(parkingId, parkingRequestDTO), HttpStatus.CREATED);
         } catch (Exception e) {
@@ -43,13 +40,23 @@ public class ParkingController {
         }
     }
     @GetMapping("/getAllByGarage/{garageId}")
-    @RolesAllowed({"GARAGISTE"})
+    //@RolesAllowed({"GARAGISTE"})
     public ResponseEntity<List<ParkingResponseDTO>> getParkingsByGargage(@PathVariable Long garageId) {
         return ResponseEntity.ok().body(parkingService.getParkingsByGarage(garageId));
     }
     @GetMapping("/getById/{parkingId}")
-    @RolesAllowed({"GARAGISTE"})
+    //@RolesAllowed({"GARAGISTE"})
     public ResponseEntity<ParkingResponseDTO> getParkingsById(@PathVariable Long parkingId) {
         return ResponseEntity.ok().body(parkingService.getParkingById(parkingId));
+    }
+    @DeleteMapping("/deleteParking/{parkingId}")
+    //@RolesAllowed({"GARAGISTE"})
+    public ResponseEntity<Object> deleteParking(@PathVariable Long parkingId) {
+        try {
+            parkingService.deleteParking(parkingId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception ex) {
+            throw new EntityNotFoundException("User doesn't exist");
+        }
     }
 }
