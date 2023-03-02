@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Builder
 public class ParkingResponseDTO {
-    private Long id;
+    private Long parkingId;
     private String name;
     private Integer capacity;
     private Integer nbVehicle;

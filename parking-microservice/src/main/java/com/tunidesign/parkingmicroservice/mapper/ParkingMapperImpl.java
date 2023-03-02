@@ -24,7 +24,7 @@ public class ParkingMapperImpl implements ParkingMapper{
     @Override
     public ParkingResponseDTO parkingToParkingResponseDTO(Parking parking) {
         return ParkingResponseDTO.builder()
-                .id(parking.getId())
+                .parkingId(parking.getParkingId())
                 .name(parking.getName())
                 .capacity(parking.getCapacity())
                 .nbVehicle(parking.getNbVehicle())

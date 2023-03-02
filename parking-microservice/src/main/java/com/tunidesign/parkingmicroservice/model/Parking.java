@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long parkingId;
     private String name;
     private Integer capacity;
     private Integer nbVehicle;
