@@ -15,7 +15,7 @@ public class ParkingRequestDTO {
     private String country;
     private String governorate;
     private String city;
-    private String zipCode;
+    private Integer zipCode;
     private Double longitude;
     private Double latitude;
     private Long garageId;
