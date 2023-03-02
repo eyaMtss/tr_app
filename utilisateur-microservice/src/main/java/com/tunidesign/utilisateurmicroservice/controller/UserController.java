@@ -83,7 +83,7 @@ public class UserController {
 //	        return ResponseEntity.ok(userService.validateToken(token));
 //	    }
 	@PostMapping(path = "/AddSuperAdmin")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
 			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.SUPER_ADMIN);
@@ -104,7 +104,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddDriver")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
@@ -116,7 +116,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddTA")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
 			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)), Role.TA);
@@ -127,7 +127,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddCompanyAdmin")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
@@ -139,7 +139,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddExpert")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
@@ -151,7 +151,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddAgencyAdmin")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
 			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
 		try {
@@ -163,7 +163,7 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/AddInsuranceAdmin")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
 			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
@@ -188,6 +188,7 @@ public class UserController {
 
 	/* *********************** update status ********************** */
 	@PutMapping("/UpdateCompanyStatus/{userId}/{status}")
+	@RolesAllowed({"COMPANY_ADMIN", "TA", "DRIVER"})
 	public ResponseEntity<CompanyUserResponseDTO> updateCompanyStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
@@ -197,6 +198,7 @@ public class UserController {
 	}
 
 	@PutMapping("/UpdateAgencyStatus/{userId}/{status}")
+	@RolesAllowed({"AGENCY_ADMIN"})
 	public ResponseEntity<AgencyUserResponseDTO> updateAgencyStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
@@ -206,6 +208,7 @@ public class UserController {
 	}
 
 	@PutMapping("/UpdateInsuranceStatus/{userId}/{status}")
+	@RolesAllowed({"INSURANCE_ADMIN", "EXPERT"})
 	public ResponseEntity<InsuranceUserResponseDTO> updateInsuranceStatus(@PathVariable Long userId,
 			@PathVariable Status status) {
 		if (userService.isExist(userId)) {
@@ -241,52 +244,60 @@ public class UserController {
 //	    }
 	/* *********************** get All ********************** */
 	@GetMapping("/Clients")
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<List<ClientResponseDTO>> getClients() {
 		return ResponseEntity.ok().body(userService.getClients());
 	}
 
 	@GetMapping("/Company/Drivers/{companyId}")
+	@RolesAllowed({"COMPANY_ADMIN", "TA"})
 	public ResponseEntity<List<CompanyUserResponseDTO>> getDrivers(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getDrivers(companyId));
 	}
 
 	@GetMapping("/Company/TA/{companyId}")
+	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<List<CompanyUserResponseDTO>> getTAs(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getTAs(companyId));
 	}
 
 	@GetMapping("/Company/Admin/{companyId}")
-	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyAdminss(@PathVariable Long companyId) {
+	@RolesAllowed({"COMPANY_ADMIN"})
+	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyAdmins(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyAdmins(companyId));
 	}
 
 	@GetMapping("/CompanyEmployees/{companyId}")
+	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
 	}
-	@RolesAllowed({"AGENCY_ADMIN"})
+	@RolesAllowed({"AGENCY_ADMIN", "INSURANCE_ADMIN"})
 	@GetMapping("/Agency/Admin/{agencyId}")
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyAdmins(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyAdmins(agencyId));
 	}
 
 	@GetMapping("/AgencyEmployees/{agencyId}")
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyEmployees(agencyId));
 	}
 
 	@GetMapping("/Insurance/Admin/{insuranceId}")
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancAdmins(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceAdmins(insuranceId));
 	}
 
 	@GetMapping("/Insurance/Expert/{insuranceId}")
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsurancExperts(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getExperts(insuranceId));
 	}
 
 	@GetMapping("/InsuranceEmployees/{insuranceId}")
+	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceEmployees(insuranceId));
 	}
@@ -297,6 +308,8 @@ public class UserController {
 //	}
 	/* *********************** get By Id ********************** */
 	@GetMapping("/{userId}")
+	@RolesAllowed({"CLEINT", "SUPER_ADMIN", "COMPANY_ADMIN", "TA", "DRIVER", "AGENCY_ADMIN", "INSURANCE_ADMIN",
+			"EXPERT", "PRESTATAIRE"})
 	public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long userId) {
 		try {
 			return ResponseEntity.ok().body(userMapper.userToUserResponseDTO(userService.getUser(userId)));
