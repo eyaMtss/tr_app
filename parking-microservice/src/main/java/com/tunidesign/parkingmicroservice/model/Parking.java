@@ -2,6 +2,7 @@ package com.tunidesign.parkingmicroservice.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
