@@ -1,0 +1,26 @@
+
+
+
+<div class="container">
+  <img class="image" src="assets/gps.jpg" >
+<div class="card">
+<div *ngIf="!test">
+<h2 calss="pick-order">Pickup Order</h2>
+<div class="div-style">
+<p class="info"> <b>{{name}} {{surname}} </b></p>
+<div style="display:flex ;">
+<a href="#" style="color:aliceblue"><i class="fa fa-phone phone"></i></a>
+<a href="#" style="color:aliceblue"><i class="fa fa-envelope envelope" ></i></a>
+</div>
+<p class="waiting">{{minutes}} min on the way</p>
+
+</div>
+</div>
+<div *ngIf="test">
+  <mat-spinner [diameter]="70" style="margin-left: 200px;"> hh</mat-spinner>
+  <button type="button"  [disabled]="!test" class="cancel">Cancel Order</button>
+
+</div>
+</div>
+</div>
+

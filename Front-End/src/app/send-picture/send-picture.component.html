@@ -1,0 +1,30 @@
+
+
+  <div  class="container">
+    <div *ngIf="!test">
+    <p class="ask">Please share your accident's picture </p>
+    <div style="display:flex ; margin: 50px 0; ">
+      <div>
+      <i class="fas fa-image gallery-icon"></i>
+      <label for="fullName" class="pic-gallery"><p>From Gallery</p> </label>
+    </div>
+    <div>
+      <i class="fas fa-camera icon-camera"></i>
+      <label for="fullName" class="take-pic"><p>Take a picture</p> </label>
+    </div>
+  </div>
+  <img class="image" src="assets/noir.jpg">
+  <div style="height:100px" class="user-input-box"  >
+    <div class="div-style">
+      <input type="submit" value="Confirm" class="submit" (click)="confirm()">
+   </div>
+</div>
+
+</div>
+<div *ngIf="test">
+  <img class="image-congrats" src="assets/ok.png" >
+  <h2 class="congrats">Congrats!</h2>
+  <h5 class="process">Your Pick Up order is processing...</h5>
+</div>
+  </div>
+
