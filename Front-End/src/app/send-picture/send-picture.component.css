@@ -1,0 +1,120 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body{
+  background-image: url('/assets/background.jpg');
+  background-size:center;
+  background-repeat: no-repeat;
+    overflow: hidden;
+background-size: cover;
+height: 518px;
+  position: center;
+
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.container{
+
+  position: absolute;
+  left: 25%;
+  width: 100%;
+  max-width: 650px;
+  height: 730px;
+  /*background: rgba(0, 0, 0, 0.5);*/
+  padding: 28px;
+  margin: 0 28px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.55rem;
+  background-color: rgba(85, 87, 96, 0.559) !important;
+  zoom: 68.5%;
+    left: 30%;
+
+}
+.user-input-box{
+  padding-left: 50px;
+
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  width: 50%;
+  padding-bottom: 15px;
+}
+.user-input-box input{
+  height: 40px;
+
+  width: 500px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid grey;
+  padding: 0 10px;
+}
+.image-congrats{
+  width: 250px;
+  display: block;
+  margin-left: 150px;
+  margin-right: auto;
+  margin-top: 130px;
+}
+.process{
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+}
+.congrats{
+  text-align: center;
+  color: white;
+}
+.submit{
+  font-size: 30px;
+  margin: 30px 0;
+  background-color: rgb(255, 255, 255);
+  text-size-adjust: 20px;
+  height: 50px;
+}
+.div-style{
+  width:500px;
+  position:absolute;
+  align-content: center;
+  margin-bottom: 10px;
+}
+.image{
+  width: 200px;
+   height: auto;
+   border-radius: 10px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 60% ;
+}
+.take-pic{
+  color:white;
+  font-size: 15px;
+  margin-left: 230px;
+}
+.icon-camera{
+  font-size: 90px;
+  color:white;
+  margin-left: 240px;
+}
+.pic-gallery{
+  color:white;
+  font-size: 15px;
+  margin-left: 40px
+}
+.gallery-icon
+{
+  font-size: 90px;
+  color:white;
+  margin-left: 40px
+}
+.ask{
+  color:white;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 20px;
+}
