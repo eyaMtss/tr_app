@@ -3,8 +3,13 @@ import { config } from "process";
 import { environment } from "src/environments/environment";
 
 export function initializer(keycloak: KeycloakService): () => Promise<any> {
-  const options: KeycloakOptions = {
-    config: environment.keycloak
-  };
-  return (): Promise<any> => keycloak.init(options);
+  return () =>
+  keycloak.init({
+    config: environment.keycloak,
+    initOptions: {
+      onLoad: 'check-sso',
+      enableLogging: true,
+       redirectUri: window.location.origin,   
+    },
+  });
 }
