@@ -9,7 +9,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
     initOptions: {
       onLoad: 'check-sso',
       enableLogging: true,
-      redirectUri: window.location.origin,   
-    },
+      redirectUri: window.location.origin
+    }
   });
 }
