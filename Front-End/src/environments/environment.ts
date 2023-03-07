@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloak: {
+    // Url of the Identity Provider
+    issuer: 'http://localhost:8080/auth/',
+    // Realm
+    realm: 'tunidesign-auth',
+    // The SPA's id. 
+    // The SPA is registerd with this id at the auth-serverß
+    clientId: 'tunidesign-front-end',
+  }
 };
 
 /*
