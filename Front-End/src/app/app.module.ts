@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,9 @@ import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
 import { OrderComponent } from './order/order.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShiftComponent } from './shift/shift.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { AuthService } from './services/authentication/auth.service';
+import { initializer } from './utils/app-init';
 
 
 @NgModule({
@@ -37,9 +40,19 @@ import { ShiftComponent } from './shift/shift.component';
     NgbModule ,
     FormsModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    KeycloakAngularModule
   ],
-  providers: [],
+  providers: [
+    KeycloakService,
+    AuthService,
+    {
+      provide: APP_INITIALIZER, 
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
