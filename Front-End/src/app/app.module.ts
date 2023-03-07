@@ -17,6 +17,7 @@ import { ShiftComponent } from './shift/shift.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AuthService } from './services/authentication/auth.service';
 import { initializer } from './utils/app-init';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { initializer } from './utils/app-init';
     RatingPageComponent,
     PickUpPassComponent,
     OrderComponent,
-    ShiftComponent
+    ShiftComponent,
+    ForgotPasswordComponent
 
   ],
   imports: [
