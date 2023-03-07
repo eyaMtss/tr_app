@@ -9,12 +9,13 @@ import { ShareInformationComponent } from './share-information/share-information
 import { ShiftComponent } from './shift/shift.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserInformationComponent } from './user-information/user-information.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
 
   {path: 'shareInformation', component: ShareInformationComponent},
   {path: 'signUp', component: SignUpComponent},
-  {path: 'login', component: LoginPageComponent},
+  {path: 'login', component: LoginPageComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   {path: 'sendPicture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingPageComponent},
