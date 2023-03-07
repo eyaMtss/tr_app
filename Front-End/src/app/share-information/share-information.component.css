@@ -1,43 +1,82 @@
-*{
-  padding: 0;
-  margin: 0;
+
+* {
   box-sizing: border-box;
-  font-family: sans-serif;
 }
 
-body{
-  background-image: url('/assets/background.jpg');
-  background-size:center;
-  background-repeat: no-repeat;
-    overflow: hidden;
-background-size: cover;
-height: 518px;
-  position: center;
-
-  font-family: 'Raleway', sans-serif;
-
-
-}
-
-.container{
-  position: absolute;
-  left: 25%;
+input[type=text], select, textarea {
   width: 100%;
-  max-width: 650px;
-  height: 880px;
-  /*background: rgba(0, 0, 0, 0.5);*/
-  padding: 28px;
-  margin: 0 28px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: 0.55rem;
-
-  background-color: rgba(85, 87, 96, 0.559) !important;
-  zoom: 64%;
-    left: 30%;
-
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
 }
 
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f215;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+.user-input-box:nth-child(2n){
+  justify-content: end;
+}
+
+.user-input-box{
+  padding-left: 50px;
+
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  width: 50%;
+  padding-bottom: 15px;
+}
+
+.user-input-box label{
+  width: 95%;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 5px 0;
+}
+
+.user-input-box input{
+  height: 40px;
+
+  width: 500px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid grey;
+  padding: 0 10px;
+}
 .form-title{
   font-size: 26px;
   text-align: center;
@@ -202,3 +241,9 @@ height: 518px;
   color: white;
   font-size: 30px;
 }
+.input-group-prepend span{
+  width: 50px;
+  background-color: #ffffff;
+  color: black;
+  border:0 !important;
+  }

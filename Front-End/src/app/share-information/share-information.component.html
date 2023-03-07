@@ -1,69 +1,87 @@
 
 
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
 
-  <div class="container">
-    <h4 class="share"><b>Share your informations</b></h4>
-    <p class="ask">Please share your informations to help you </p>
-    <img class="image" src="assets/gps.jpg" >
+<h2 style="text-align: center; color: white;">Share your informations please</h2>
 
-    <form action="#">
 
-        <div class="user-input-box">
-          <label for="location">Pick Up Location *</label>
-          <div class="input-icons">
-            <i class="fa fa-map-marker icon"></i>
-            <input class="input-field" type="text" id="location" name="location" placeholder="Enter your location " [(ngModel)]="pickUpLocation"/>
-        </div>
-        </div>
-        <div class="user-input-box">
-          <label for="destination">Destination *</label>
-          <div class="input-icons">
-            <i class="fa fa-map-marker icon"></i>
-          <input class="input-field" type="text" id="destination" name="destination"placeholder="Enter your destination" [(ngModel)]="destination"/>
-        </div>
-        </div>
-
-    <div style="display:flex ;">
-        <div class="user-input-box ">
-          <label for="phone">Phone *</label>
-          <div class="input-icons">
-          <i class="fa fa-phone icon"></i>
-          <input class="input-field" type="tel" id="phone" name="phone" style="width: 200px;" placeholder="Write your phone" [(ngModel)]="phone"  />
-        </div>
-        </div>
-
-        <div class="user-input-box" >
-          <label for="poeple">Poeple *</label>
-          <div class="input-icons">
-            <i class="fa fa-users icon"></i>
-          <input class="input-field" style="width: 200px;" type="number" id="poeple" name="poeple" placeholder="How many poeple"  min="1" max="5" [(ngModel)]="people"/>
-        </div>
+<div class="container">
+  <form >
+    <div class="row">
+      <div class="col-25">
+        <label for="location" style="color: white;">PickUp Location *</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="location" name="location" placeholder="Your location .."  [(ngModel)]="pickUpLocation">
+      </div>
     </div>
-
+    <div class="row">
+      <div class="col-25">
+        <label for="destination" style="color: white;">Destination *</label>
       </div>
-      <div class="user-input-box">
-        <label for="typeaccident">What type of situation ? *</label>
+      <div class="col-75">
+        <input type="text" id="destination" name="destination" placeholder="Your destination.." [(ngModel)]="destination">
       </div>
-        <div class="gender-category">
-            <input type="radio" name="accident" id="accident" value="accident" class="radio1" [(ngModel)]="situationType" >
-            <label style="color:white;" for="male" style="">Accident</label>
-            <input type="radio" name="breakdown" id="breakdown" value="breakDown" class="radio2" [(ngModel)]="situationType">
-            <label style="color:white" for="female">BreakDown</label>
-          </div>
-          <div class="user-input-box">
-            <label for="destination">Details *</label>
-            <div class="input-icons">
-              <i class="fa fa-map-marker icon"></i>
-            <input class="input-field" type="text" id="destination" name="destination"placeholder="Enter your destination" [(ngModel)]="destination"/>
-          </div>
-          </div>
-        <div style="height:100px" class="user-input-box"  >
-          <div class="div-style">
-            <input type="submit" value="Confirm" class="submit" (click)="confirm()">
-         </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="phone" style="color: white;">Phone *</label>
       </div>
-      <input id="appt-time" type="time" name="appt-time" value="13:30" [(ngModel)]="time">
-    </form>
-  </div>
-
-
+      <div class="col-75">
+        <input type="text" id="phone" name="phone" placeholder="Your phone.." [(ngModel)]="phone">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="people" style="color: white;">People *</label>
+      </div>
+      <div class="col-75">
+        <input class="input-field" style="width: 200px;" type="number" id="poeple" name="poeple" placeholder="How many poeple"  min="1" max="5" [(ngModel)]="people"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="matricule" style="color: white;">Registration number *</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="matricule" name="matricule" placeholder="Your Registration number .." [(ngModel)]="matricule">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="isloaded"  style="color: white;">Is it a loaded vehicle?*</label>
+      </div>
+      <div class="col-75">
+        <input type="radio" name="yes" id="yes" value="yes"  [(ngModel)]="isLoaded" >
+            <label style="color:white;" for="yes">Yes</label>
+            <input type="radio" name="no" id="no" value="no"  [(ngModel)]="isLoaded">
+            <label style="color:white" for="no">No</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="type"  style="color: white;">What Type of situation*</label>
+      </div>
+      <div class="col-75">
+        <input type="radio" name="accident" id="accident" value="accident"  [(ngModel)]="situationType" >
+            <label style="color:white;" for="male">Accident</label>
+            <input type="radio" name="panne" id="panne" value="panne"  [(ngModel)]="situationType">
+            <label style="color:white" for="panne">Panne</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="details"  style="color: white;">Details *</label>
+      </div>
+      <div class="col-75">
+        <textarea id="details" name="details" placeholder="Write some details please.." style="height:200px"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <input type="submit" value="Submit" (click)="confirm()">
+    </div>
+  </form>
+</div>
