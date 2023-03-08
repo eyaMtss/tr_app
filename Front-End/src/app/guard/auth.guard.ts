@@ -32,8 +32,12 @@ export class AuthGuard extends KeycloakAuthGuard {
         }
       }
 
-      if(granted === false)
+      if(granted === false){
+        // If user doesn't have necessary roles, redirect to error page
+        this.router.navigate(['access-denied']);
         resolve(granted);
+      }
+        
       resolve(granted);
     })
   
