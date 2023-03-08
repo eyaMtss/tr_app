@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
 import { ShareInformationComponent } from './share-information/share-information.component';
 import { SendPictureComponent } from './send-picture/send-picture.component';
 import { UserInformationComponent } from './user-information/user-information.component';
@@ -15,17 +13,16 @@ import { OrderComponent } from './order/order.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShiftComponent } from './shift/shift.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { AuthService } from './services/authentication/auth.service';
-import { initializer } from './utils/app-init';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AuthService } from './services/auth/auth.service';
+import { initializer } from './utils/auth/app-init';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
 
   declarations: [
     AppComponent,
-    LoginPageComponent,
-    SignUpComponent,
     ShareInformationComponent,
     SendPictureComponent,
     UserInformationComponent,
@@ -33,7 +30,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     PickUpPassComponent,
     OrderComponent,
     ShiftComponent,
-    ForgotPasswordComponent
+    AccessDeniedComponent
 
   ],
   imports: [
@@ -43,7 +40,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FormsModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    HttpClientModule
   ],
   providers: [
     KeycloakService,
