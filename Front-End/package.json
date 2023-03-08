@@ -27,7 +27,10 @@
     "bootstrap": "^5.2.3",
     "igniteui-webcomponents": "^4.2.1",
     "ngx": "^2.4.0",
+    "google-libphonenumber": "^3.2.3",
+    "ngx-intl-tel-input": "^3.2.0",
     "rxjs": "~7.5.0",
+    "intl-tel-input": "^17.0.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

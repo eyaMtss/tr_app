@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -14,6 +14,9 @@ import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
 import { OrderComponent } from './order/order.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ShiftComponent } from './shift/shift.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import { ShiftComponent } from './shift/shift.component';
     RatingPageComponent,
     PickUpPassComponent,
     OrderComponent,
-    ShiftComponent
+    ShiftComponent,
+
 
   ],
   imports: [
@@ -36,7 +40,12 @@ import { ShiftComponent } from './shift/shift.component';
     AppRoutingModule,
     NgbModule ,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    HttpClientModule,
+    NgxIntlTelInputModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
