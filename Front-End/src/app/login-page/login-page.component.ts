@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { emailOrUsernameValidator } from '../shared/validator/email-or-username.validator';
 import { AuthService } from '../services/authentication/auth.service';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,9 @@ import { AuthService } from '../services/authentication/auth.service';
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup; //form
   isFailed: boolean = false; // Authentication failed after login (Invalid username or password)
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  fieldTextType: boolean = false; // show or hide password
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService,
+    private keycloakService: KeycloakService) {
     this.loginForm = this.fb.group({
       username: ["", Validators.required],// emailOrUsernameValidator(/[a-zA-Z0-9]{3,}/)],
       password: ["", Validators.required],
@@ -21,6 +24,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 
   onForgotPasswordButton(){
@@ -44,6 +51,25 @@ export class LoginPageComponent implements OnInit {
         this.isFailed = true; // Authentication failed, show error message
       });
   }
+
+  /*async login() {
+    this.keycloakService.getKeycloakInstance().createLoginUrl({
+      username: this.loginForm.controls['username'].value,
+      password: this.loginForm.controls['password'].value,
+    })
+    try {
+      await this.keycloakService.login({
+        username: this.loginForm.controls['username'].value,
+        password: this.loginForm.controls['password'].value,
+      });
+
+      const redirectUri = this.keycloakService.getRedirectUri();
+
+      window.location.href = redirectUri;
+    } catch (error) {
+      console.error('Authentication failed', error);
+    }
+  }*/
 
 }
 
