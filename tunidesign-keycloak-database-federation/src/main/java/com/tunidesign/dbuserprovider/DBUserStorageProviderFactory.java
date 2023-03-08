@@ -14,6 +14,7 @@ import org.keycloak.storage.UserStorageProviderFactory;
 import com.tunidesign.dbuserprovider.persistence.DataSourceProvider;
 import com.tunidesign.dbuserprovider.persistence.RDBMS;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,11 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                                              "            \"lastName\" (optional). Any other parameter can be mapped by aliases to a realm scope";
     private static final String PARAMETER_HELP             = " The %s is passed as query parameter.";
     
-    
+    private final String fields = "id, username, email, role, firstName, lastName, gender, birthdate," +
+            "country, governorate, city, zip_code, home_code, phone_number, picture_byte, matricule_fiscale," +
+            "status, company_id, insurance_company_id, agency_id";
+
+
     private Map<String, ProviderConfig> providerConfigPerInstance = new HashMap<>();
     
     @Override
@@ -87,7 +92,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
     
     @Override
     public String getId() {
-        return "singular-db-user-provider";
+        return "tunidesign-db-user-provider";
     }
     
     @Override
@@ -99,7 +104,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                            .label("JDBC URL")
                                            .helpText("JDBC Connection String")
                                            .type(ProviderConfigProperty.STRING_TYPE)
-                                           .defaultValue("jdbc:jtds:sqlserver://localhost/userservicedb;encrypt=true;trustServerCertificate=true;integratedSecurity=true;")
+                                           .defaultValue("jdbc:jtds:sqlserver://localhost/usersDB;encrypt=true;trustServerCertificate=true;integratedSecurity=true;")
                                            .add()
                                            .property()
                                            .name("user")
@@ -154,12 +159,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                            .label("List All Users SQL query")
                                            .helpText(DEFAULT_HELP_TEXT)
                                            .type(ProviderConfigProperty.STRING_TYPE)
-                                           .defaultValue("select \"id\"," +
-                                                         "            \"username\"," +
-                                                         "            \"email\"," +
-                                                         "            \"firstName\"," +
-                                                         "            \"lastName\"," +
-                                                         "            \"role\" from users ")
+                                           .defaultValue("select " + fields + " from users ")
                                            .add()
         
                                            .property()
@@ -167,12 +167,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                            .label("Find user by id SQL query")
                                            .helpText(DEFAULT_HELP_TEXT + String.format(PARAMETER_HELP, "user id") + PARAMETER_PLACEHOLDER_HELP)
                                            .type(ProviderConfigProperty.STRING_TYPE)
-                                           .defaultValue("select \"id\"," +
-                                                         "            \"username\"," +
-                                                         "            \"email\"," +
-                                                         "            \"firstName\"," +
-                                                         "            \"lastName\"," +
-                                                         "            \"role\" from users where \"id\" = ? ")
+                                           .defaultValue("select " + fields + " from users where \"id\" = ? ")
                                            .add()
         
                                            .property()
@@ -180,12 +175,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                            .label("Find user by username SQL query")
                                            .helpText(DEFAULT_HELP_TEXT + String.format(PARAMETER_HELP, "user username") + PARAMETER_PLACEHOLDER_HELP)
                                            .type(ProviderConfigProperty.STRING_TYPE)
-                                           .defaultValue("select \"id\"," +
-                                                         "            \"username\"," +
-                                                         "            \"email\"," +
-                                                         "            \"firstName\"," +
-                                                         "            \"lastName\"," +
-                                                         "            \"role\" from users where \"username\" = ? ")
+                                           .defaultValue("select " + fields + " from users where \"username\" = ? ")
                                            .add()
         
                                            .property()
@@ -193,12 +183,7 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                            .label("Find user by search term SQL query")
                                            .helpText(DEFAULT_HELP_TEXT + String.format(PARAMETER_HELP, "search term") + PARAMETER_PLACEHOLDER_HELP)
                                            .type(ProviderConfigProperty.STRING_TYPE)
-                                           .defaultValue("select \"id\"," +
-                                                         "            \"username\"," +
-                                                         "            \"email\"," +
-                                                         "            \"firstName\"," +
-                                                         "            \"lastName\"," +
-                                                         "            \"role\" from users where upper(\"username\") like (?)  or upper(\"email\") like (?)")
+                                           .defaultValue("select " + fields + " from users where upper(\"username\") like (?)  or upper(\"email\") like (?)")
                                            .add()
         
                                            .property()
