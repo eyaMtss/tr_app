@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md container-fluid fixed-top bg-light navbar-light">
+    <div class="container-fluid m-2">
+        <a class="navbar-brand" href="\auth">
+            <img style="width: 38px; height: auto;border-radius: 10px;"src="assets/logo.png" alt="Tunidesign logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPaths"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarPaths">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="home()">
+                    <a class="nav-link active" aria-current="page">Home</a>
+                </li>
+                <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="signin()">
+                    <a class="nav-link">Sign in</a>
+                </li>
+              
+                <li class="nav-item border radius-class ms-0 ms-md-3 cursor-pointer-class" (click)="signup()">
+                    <a class="nav-link">Sign up</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
