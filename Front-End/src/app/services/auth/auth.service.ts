@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
-import { KeycloakLoginOptions, KeycloakTokenParsed } from 'keycloak-js';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +22,6 @@ export class AuthService {
       return undefined;
     }
   }
-
-  /*login(username: string, password: string) {
-    const credentials: Keycloak.KeycloakLoginOptions = {
-      cordovaOptions: {username,password}
-    };
-    return this.keycloakService.login(credentials);
-  }*/
 
   async login(){
     this.keycloakService.login();
