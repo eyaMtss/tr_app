@@ -8,16 +8,21 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-  @Input() isLoggedIn!: boolean;
+  @Input() isLoggedIn!: boolean; // 
+  username: string = "";
   constructor(private router: Router, private authService: AuthService) {
     
   }
   ngOnInit(): void {
-    if (this.authService.getIsLoggedIn())
+    if (this.authService.getIsLoggedIn()){
       this.isLoggedIn = true;
+      this.username = this.authService.getUsername();
+    }
+      
     this.isLoggedIn = false;
     localStorage.setItem("isLoggedIn", this.isLoggedIn.toString()); // set isLoggedIn attribute in LocalStorage
 
+    
   }
 
   home() {
@@ -29,10 +34,23 @@ export class NavbarComponent implements OnInit{
   }
 
   signup() {
-    this.authService.logout();
+    this.router.navigate(['/auth/signup']);
   }
 
   logout(){
-    this.router.navigate(['/auth/signup']);
+    this.authService.logout();
+    
+  }
+
+  profile(){
+    
+  }
+
+  orders(){
+    
+  }
+
+  settings(){
+    
   }
 }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md container-fluid fixed-top bg-light navbar-light">
     <div class="container-fluid m-2">
         <a class="navbar-brand" href="\auth">
-            <img style="width: 38px; height: auto;border-radius: 10px;"src="assets/logo.png" alt="Tunidesign logo">
+            <img style="width: 38px; height: auto;border-radius: 10px;" src="assets/logo.png" alt="Tunidesign">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPaths"
@@ -14,12 +14,33 @@
                 <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="home()">
                     <a class="nav-link active" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="signin()">
+
+                <li *ngIf="!isLoggedIn" class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="signin()">
                     <a class="nav-link">Sign in</a>
                 </li>
-              
-                <li class="nav-item border radius-class ms-0 ms-md-3 cursor-pointer-class" (click)="signup()">
+
+                <li *ngIf="!isLoggedIn" class="nav-item border radius-class ms-0 ms-md-3 cursor-pointer-class"
+                    (click)="signup()">
                     <a class="nav-link">Sign up</a>
+                </li>
+
+                <li *ngIf="isLoggedIn" class="nav-item dropdown ms-0 ms-md-3">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        {{username}}
+                    </a>
+                    <ul class="dropdown-menu list-left">
+                        <li><a class="dropdown-item" (click)="profile()">Your profile</a></li>
+                        <li><a class="dropdown-item" (click)="orders()">Your orders</a></li>
+                        <li><a class="dropdown-item" (click)="settings()">Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="logout()">
+                            <a class="nav-link">Sign out</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
 
