@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloak: {
+    realm: 'tunidesign-auth',
+    url: 'http://localhost:8080/',
+    clientId: 'tunidesign-front-end'
+  }
 };
 
 /*
