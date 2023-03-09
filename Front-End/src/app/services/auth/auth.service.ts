@@ -63,5 +63,9 @@ export class AuthService {
   getToken() {
     return this.keycloakService.getToken();
   }
+
+  getUsername(){
+    return this.keycloakService.getUsername();
+  }
 }
 
