@@ -17,6 +17,7 @@ import { AuthService } from './services/auth/auth.service';
 import { initializer } from './utils/auth/app-init';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     PickUpPassComponent,
     OrderComponent,
     ShiftComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    NavbarComponent
 
   ],
   imports: [
