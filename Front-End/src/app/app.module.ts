@@ -16,9 +16,12 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AuthService } from './services/auth/auth.service';
 import { initializer } from './utils/auth/app-init';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ErrorsCatchingInterceptor } from './httpInterceptor/errors-catching.interceptor';
+import { RequestInterceptor } from './httpInterceptor/request.interceptor';
+import {MatMenuModule} from '@angular/material/menu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
 
   declarations: [
@@ -30,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     PickUpPassComponent,
     OrderComponent,
     ShiftComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    NavbarComponent
 
   ],
   imports: [
@@ -41,7 +45,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     KeycloakAngularModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    BrowserAnimationsModule
   ],
   providers: [
     KeycloakService,
@@ -51,7 +57,17 @@ import { HttpClientModule } from '@angular/common/http';
       useFactory: initializer,
       multi: true,
       deps: [KeycloakService]
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorsCatchingInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

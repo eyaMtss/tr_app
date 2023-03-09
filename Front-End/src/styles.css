@@ -30,3 +30,10 @@ height: 518px;
 
 }
 
+.color-text {
+  color: white;
+}
+
+.cursor-pointer-class{
+  cursor: pointer;
+}

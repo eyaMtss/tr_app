@@ -1,0 +1,13 @@
+ul {
+    flex: auto;
+    justify-content: end;
+}
+
+.radius-class {
+    border-radius: 10px;
+}
+
+.list-left {
+    left: auto !important;
+    right: 0 !important;
+}
