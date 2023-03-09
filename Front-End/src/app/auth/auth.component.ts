@@ -32,11 +32,11 @@ export class AuthComponent implements OnInit {
   }
 
   onForgotPasswordButton() {
-    this.router.navigate(['/password_reset']);
+    this.router.navigate(['/auth/password_reset']);
   }
 
   signup(){
-    this.router.navigate(['/auth/signUp']);
+    this.router.navigate(['/auth/signup']);
   }
 
   onSubmit() {
