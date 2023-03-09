@@ -7,7 +7,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 
 const routes: Routes = [
   { path: '', component: AuthComponent },
-  { path: 'signUp', component: SignUpComponent, canActivate: [SignupGuard] },
+  { path: 'signup', component: SignUpComponent, canActivate: [SignupGuard] },
   { path: 'password_reset', component: ForgotPasswordComponent },
 
 ];
