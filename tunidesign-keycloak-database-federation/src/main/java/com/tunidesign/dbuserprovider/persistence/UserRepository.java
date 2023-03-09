@@ -5,6 +5,7 @@ import com.tunidesign.dbuserprovider.model.QueryConfigurations;
 import com.tunidesign.dbuserprovider.util.PagingUtil;
 import lombok.extern.jbosslog.JBossLog;
 import org.apache.commons.lang3.NotImplementedException;
+import org.keycloak.models.UserModel;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -54,7 +55,31 @@ public class UserRepository {
         }
         return null;
     }
-    
+    public void doQuery2(String query, UserModel user) {
+        Optional<DataSource> dataSourceOpt = dataSourceProvider.getDataSource();
+        if (dataSourceOpt.isPresent()) {
+            DataSource dataSource = dataSourceOpt.get();
+            try (Connection c = dataSource.getConnection()) {
+
+                try (PreparedStatement statement = c.prepareStatement(query)) {
+                    Random rand = new Random();
+                    int int_random = rand.nextInt(1000000000);
+
+                    statement.setInt(1, int_random);
+                    statement.setString(2, user.getUsername());
+                    statement.setString(3, user.getAttribute("firstName").toString());
+                    statement.setString(4, user.getAttribute("lastName").toString());
+                    statement.setString(5, user.getAttribute("email").toString());
+                    statement.setString(6, user.getAttribute("password").toString());
+                    statement.setString(7, user.getAttribute("password").toString());
+                    statement.executeUpdate();
+
+                }
+            } catch (SQLException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+    }
     private List<Map<String, String>> readMap(ResultSet rs) {
         try {
             List<Map<String, String>> data         = new ArrayList<>();

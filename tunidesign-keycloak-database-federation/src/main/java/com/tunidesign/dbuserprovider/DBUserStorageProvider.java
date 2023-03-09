@@ -19,10 +19,7 @@ import com.tunidesign.dbuserprovider.persistence.DataSourceProvider;
 import com.tunidesign.dbuserprovider.persistence.UserRepository;
 import com.tunidesign.dbuserprovider.util.PagingUtil;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -266,8 +263,39 @@ public class DBUserStorageProvider implements UserStorageProvider,
     }
     @Override
     public UserModel addUser(RealmModel realm, String username) {
-        // from documentation: "If your provider has a configuration switch to turn off adding a user, returning null from this method will skip the provider and call the next one."
-        return null;
+        UserModel user = session.userLocalStorage().addUser(realm, username);
+        user.setEnabled(true);
+
+
+        log.info("this is the user: " + user);
+//        String gender = user.getFirstAttribute("gender");
+//        String birthdate = user.getFirstAttribute("birthdate");
+//        String country = user.getFirstAttribute("country");
+//        String governorate = user.getFirstAttribute("governorate");
+//        String city = user.getFirstAttribute("city");
+//        Integer zipCode = Integer.valueOf(user.getFirstAttribute("zipCode"));
+//        Integer homeCode = Integer.valueOf(user.getFirstAttribute("homeCode"));
+//        Integer phoneNumber = Integer.valueOf(user.getFirstAttribute("phoneNumber"));
+//        String matriculeFiscale = user.getFirstAttribute("matriculeFiscale");
+//        String status = user.getFirstAttribute("status");
+//        Integer companyId = Integer.valueOf(user.getFirstAttribute("companyId"));
+//        Integer insuranceCompanyId = Integer.valueOf(user.getFirstAttribute("insuranceCompanyId"));
+//        Integer agencyId = Integer.valueOf(user.getFirstAttribute("agencyId"));
+        log.info("add user: " + user);
+        //List values = Arrays.asList(id, username, firstname, lastname, email, password, confirmPassword);
+        String query = "INSERT INTO users (id, username, firstname, lastname, email, password, confirm_password) " +
+                "VALUES (? ,?, ?, ?, ?, ?, ?)";
+
+//        List values = Arrays.asList(id, username, firstname, lastname, email, role, password, confirmPassword,
+//                gender, birthdate, country, governorate, city, zipCode, homeCode, phoneNumber, matriculeFiscale,
+//                status, companyId, insuranceCompanyId, agencyId);
+//        String query = "INSERT INTO users (id, username, firstname, lastname, email, role, password, confirmPassword," +
+//                "gender, birthdate, country, governorate, city, zipCode, homeCode, phoneNumber, matriculeFiscale," +
+//                "status, companyId, insuranceCompanyId, agencyId) " +
+//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        repository.doQuery2(query, user);
+
+        return user;
     }
 
 

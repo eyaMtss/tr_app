@@ -54,7 +54,7 @@ This option can be configured by the following switch:
 ## Limitations
 
     - Do not allow user information update, including password update
-    - Do not supports user roles our groups
+    - Do not support user registration ( not yet)
 
 ## Custom attributes
 
