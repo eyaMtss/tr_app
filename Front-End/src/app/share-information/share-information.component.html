@@ -3,39 +3,67 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 
 <h2 style="text-align: center; color: white;">Share your informations please</h2>
 
+<div class="col-6 offset-3">
 
+</div>
 <div class="container">
+  <div style="margin-left: 300px;">
+  <google-map >
+
+    <map-marker
+    *ngFor="let marker of markers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"
+
+  >
+  </map-marker>
+
+  </google-map>
+</div>
   <form (submit)="saveOrder()" [formGroup]="registerForm">
     <div class="row form-group">
       <div class="col-25">
         <label for="location" style="color: white;">PickUp Location *</label>
       </div>
       <div class="col-75">
-        <input type="text" id="location" name="location" placeholder="Your location .."  [(ngModel)]="order.positionAAtt" class="form-control"
-        [ngClass]="{'is-invalid':submitted && registerForm.controls.location.errors}" formControlName="location" >
-          <div *ngIf="submitted && registerForm.controls.location.errors" class="text-danger">
-            <div *ngIf="submitted && registerForm.controls.location.errors.required">
-              pickUp location is required
+        <input class="form-control"
+        ngx-google-places-autocomplete
+        [options]="options"
+        (onAddressChange)="handleAddressChangeLocation($event)"
+         class="form-control"
+         formControlName="location"  value="{{currentAdress}}">
+          <div *ngIf="messageR!=''" class="text-danger" [ngClass]="{'is-invalid':submitted && registerForm.controls.location.errors }">
+
+              {{messageR}}
             </div>
     </div>
     </div>
-    </div>
+
+
+
     <div class="row">
       <div class="col-25">
         <label for="destination" style="color: white;">Destination *</label>
       </div>
       <div class="col-75">
-        <input type="text" id="destination" name="destination" placeholder="Your destination.." [(ngModel)]="order.positionBAtt" class="form-control"
-        [ngClass]="{'is-invalid':submitted && registerForm.controls.destination.errors}" formControlName="destination"  >
+        <input class="form-control"
+        ngx-google-places-autocomplete
+        [options]="options"
+        (onAddressChange)="handleAddressChangeDestination($event)"
+         class="form-control"
+        [ngClass]="{'is-invalid':submitted && registerForm.controls.destination.errors}" formControlName="destination">
           <div *ngIf="submitted && registerForm.controls.destination.errors" class="text-danger">
             <div *ngIf="submitted && registerForm.controls.destination.errors.required">
               Destination is required
             </div>
-            </div>
+    </div>
       </div>
     </div>
     <div class="row">
@@ -69,7 +97,7 @@
         <label for="people" style="color: white;">People *</label>
       </div>
       <div class="col-75">
-        <input class="input-field" style="width: 200px;" type="number" id="people" name="people" placeholder="How many poeple"  min="1" max="8" [(ngModel)]="order.people" class="form-control"
+        <input class="input-field" style="width: 200px;" type="number" id="people" name="people" placeholder="How many people"  min="1" max="8" [(ngModel)]="order.people" class="form-control"
         [ngClass]="{'is-invalid':submitted && registerForm.controls.people.errors}" formControlName="people"  >
           <div *ngIf="submitted && registerForm.controls.people.errors" class="text-danger">
             <div *ngIf="submitted && registerForm.controls.people.errors.required">
@@ -84,10 +112,24 @@
       </div>
       <div class="col-75">
         <input class="input-field" type="number" id="matricule" name="matricule" placeholder="Your Registration number .." [(ngModel)]="order.idVehicule" class="form-control"
-        [ngClass]="{'is-invalid':submitted && registerForm.controls.matricule.errors}" formControlName="matricule" type="text" >
+        [ngClass]="{'is-invalid':submitted && registerForm.controls.matricule.errors}" formControlName="matricule"  >
           <div *ngIf="submitted && registerForm.controls.matricule.errors" class="text-danger">
             <div *ngIf="submitted && registerForm.controls.matricule.errors.required">
               Registration number is required
+            </div>
+            </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="matricule" style="color: white;">Confirm Registration number *</label>
+      </div>
+      <div class="col-75">
+        <input class="input-field" type="number" id="matricule" name="matricule" placeholder="Your Registration number .." [(ngModel)]="order.idVehicule" class="form-control"
+        [ngClass]="{'is-invalid':submitted && registerForm.controls.matricule.errors}" formControlName="matricule"  >
+          <div *ngIf="submitted && registerForm.controls.matricule.errors" class="text-danger">
+            <div *ngIf="submitted && registerForm.controls.matricule.errors.required">
+               Confirming Registration number is required
             </div>
             </div>
       </div>

@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'share', component: ShareInformationComponent},
   {path: 'signUp', component: SignUpComponent},
   {path: 'login', component: LoginPageComponent},
-  {path: 'sendPicture', component: SendPictureComponent},
+  {path: 'picture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingPageComponent},
   {path: 'pass', component: PickUpPassComponent},

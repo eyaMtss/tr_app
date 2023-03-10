@@ -1,41 +1,17 @@
-*{
-  padding: 0;
-  margin: 0;
+* {
   box-sizing: border-box;
-  font-family: sans-serif;
+}
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f215;
+  padding: 20px;
 }
 
-body{
-  background-image: url('/assets/background.jpg');
-  background-size:center;
-  background-repeat: no-repeat;
-    overflow: hidden;
-background-size: cover;
-height: 518px;
-  position: center;
+@media(max-width: 600px){
+  .container{
+      min-width: 280px;
+  }}
 
-  font-family: 'Raleway', sans-serif;
-
-}
-
-.container{
-
-  position: absolute;
-  left: 25%;
-  width: 100%;
-  max-width: 650px;
-  height: 730px;
-  /*background: rgba(0, 0, 0, 0.5);*/
-  padding: 28px;
-  margin: 0 28px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: 0.55rem;
-  background-color: rgba(85, 87, 96, 0.559) !important;
-  zoom: 68.5%;
-    left: 30%;
-
-}
 .user-input-box{
   padding-left: 50px;
 
@@ -56,9 +32,10 @@ height: 518px;
 .image-congrats{
   width: 250px;
   display: block;
-  margin-left: 150px;
+  margin-left: 400px;
   margin-right: auto;
-  margin-top: 130px;
+  margin-top: 30px;
+  align-content: center;
 }
 .process{
   text-align: center;
@@ -78,6 +55,7 @@ height: 518px;
 }
 .div-style{
   width:500px;
+  margin-left: 150px;
   position:absolute;
   align-content: center;
   margin-bottom: 10px;
@@ -94,17 +72,17 @@ height: 518px;
 .take-pic{
   color:white;
   font-size: 15px;
-  margin-left: 230px;
+  margin-left: 480px;
 }
 .icon-camera{
   font-size: 90px;
   color:white;
-  margin-left: 240px;
+  margin-left: 250px;
 }
 .pic-gallery{
   color:white;
   font-size: 15px;
-  margin-left: 40px
+  margin-left: 25px
 }
 .gallery-icon
 {

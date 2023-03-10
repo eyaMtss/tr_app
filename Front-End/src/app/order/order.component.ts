@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  test=false;
+  test=true;
   name="foulen"
   surname="falten"
   minutes=23;

@@ -17,6 +17,10 @@ import { ShiftComponent } from './shift/shift.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { WebcamModule } from 'ngx-webcam';
+import { GoogleMapsModule } from '@angular/google-maps'
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -39,12 +43,16 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     BrowserModule,
     AppRoutingModule,
     NgbModule ,
+    GooglePlaceModule,
+
     FormsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     NgxIntlTelInputModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    WebcamModule,
+    GoogleMapsModule,
 
   ],
   providers: [],
