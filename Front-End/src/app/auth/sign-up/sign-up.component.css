@@ -1,0 +1,43 @@
+.example-stepper {
+    margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+    margin-top: 16px;
+}
+
+.container {
+    display: grid;
+    place-items: center;
+}
+
+.stepper_btn {
+    color: black;
+    background-color: #a5caf5;
+    width: 100px;
+    margin: 0.7em;
+}
+
+mat-stepper {
+    background-color: rgba(85, 87, 96, 0.559) !important;
+}
+
+.mat-form-field-width {
+    width: 20vw !important;
+}
+
+/*@media (min-width: 760px) {
+    .container{
+        min-width: 20vw;
+    }
+}*/
+
+img {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.add-vehicle-btn{
+    border-radius: 50%;
+    color: white;
+}
