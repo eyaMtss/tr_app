@@ -1,38 +1,117 @@
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <form (ngSubmit)="onRegister()" #f="ngForm" novalidate>
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" class="form-control" name="username" id="username"
-                    [(ngModel)]="username" required autocomplete="off">
+<div class="container sign-up mb-3">
+    <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
+        <mat-step label="Informations">
+            <app-informations (informationsFormEvent)="getInformationsForm($event)"></app-informations>
+            <div class="d-flex justify-content-end">
+                <button mat-button matStepperNext
+                    class="btn stepper_btn">Suivant</button>
+            </div>
+
+        </mat-step>
+
+        <mat-step [stepControl]="addressForm" label="Adresse">
+            <form [formGroup]="addressForm">
+                <div class="row">
+                    <div class="col-12 col-md-4 d-flex flex-column">
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Pays</mat-label>
+                            <mat-select formControlName="country" (selectionChange)="onCountryChange()">
+                                <mat-option *ngFor="let country of countries"
+                                    [value]="country.id">{{country.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Governorat</mat-label>
+                            <mat-select formControlName="governorate" (selectionChange)="onGovernorateChange()">
+                                <mat-option *ngFor="let governorate of governorates"
+                                    [value]="governorate.id">{{governorate.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Cité</mat-label>
+                            <mat-select formControlName="city">
+                                <mat-option *ngFor="let city of cities" [value]="city.id">{{city.value}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Code postal</mat-label>
+                            <input matInput placeholder="Code postal" type="text" formControlName="zipCode">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        map
+                    </div>
+                    <div class="col-12">
+                        <mat-divider></mat-divider>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" name="email" id="email"
-                    [(ngModel)]="email" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="firstName">First Name:</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName"
-                    [(ngModel)]="firstName" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName"
-                    [(ngModel)]="lastName" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" name="password" id="password"
-                    [(ngModel)]="password"  required>
-                </div>
-                
-                <button type="submit" class="btn btn-outline-success btn-block" [disabled]="!f.valid">
-                    <i class="fas fa-plus-circle"></i> Registrarse</button>
-                    <button type="button" class="btn btn-outline-primary btn-block" (click)="volver()">
-                        <i class="far fa-arrow-alt-circle-left"></i> Volver</button>
             </form>
-        </div>
-    </div>
+            <div class="d-flex justify-content-end">
+                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
+                <button [disabled]="!addressForm.valid" mat-button matStepperNext
+                    class="btn stepper_btn">Suivant</button>
+            </div>
+        </mat-step>
+
+        <mat-step *ngIf="currentRole == 1" label="Informations détaillées">
+            <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
+                <div class="d-flex justify-content-end mt-2">
+                    <button *ngIf="currentVehicleNumber > 2" mat-button class="btn border add-vehicle-btn shadow"
+                        mat-raised-button #tooltip="matTooltip" matTooltip="Supprimer" (click)="onDeleteButton(i)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <app-add-vehicle></app-add-vehicle>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="d-flex justify-content-center my-2">
+                <button mat-button class="btn border add-vehicle-btn shadow" mat-raised-button #tooltip="matTooltip"
+                    matTooltip="Ajouter une autre véhicule" (click)="onAddVehicleBtn()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="d-flex justify-content-end">
+                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
+                <button mat-button matStepperNext class="btn stepper_btn">Suivant</button>
+            </div>
+
+
+        </mat-step>
+
+        <mat-step [stepControl]="credentialsForm">
+            <ng-template matStepLabel>Done</ng-template>
+            <form [formGroup]="credentialsForm">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput formControlName="password" placeholder="Password" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <mat-form-field appearance="outline" class="mat-form-field-width">
+                            <mat-label>Confirmer votre password</mat-label>
+                            <input matInput formControlName="confirmPassword" placeholder="confirmer votre password"
+                                required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex justify-content-end">
+                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
+                <button [disabled]="!credentialsForm.valid" mat-button matStepperNext
+                    class="btn stepper_btn">S'inscrire</button>
+            </div>
+
+        </mat-step>
+
+    </mat-stepper>
 </div>

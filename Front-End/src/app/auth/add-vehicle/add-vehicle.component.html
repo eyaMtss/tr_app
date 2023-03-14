@@ -1,0 +1,76 @@
+<form [formGroup]="vehicleForm">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Type d'immatriculation</mat-label>
+                <mat-select formControlName="registrationType" (selectionChange)="onRegistrationTypeChange()">
+                    <mat-option *ngFor="let registrationType of registrationTypes"
+                        [value]="registrationType.id">{{registrationType.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>N° d'immatriculation</mat-label>
+                <input matInput placeholder="N° d'immatriculation" formControlName="registrationNumber">
+            </mat-form-field>
+        </div>
+        <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Confirmer le N° d'immatriculation</mat-label>
+                <input matInput placeholder="Confirmer le N° d'immatriculation"
+                    formControlName="confirmRegistrationNumber">
+            </mat-form-field>
+        </div>
+        <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>N° de châssis</mat-label>
+                <input matInput placeholder="N° de châssis" formControlName="chassisNumber">
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Marque</mat-label>
+                <mat-select formControlName="brand">
+                    <mat-option *ngFor="let brand of brands" [value]="brand.id">{{brand.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Couleur</mat-label>
+                <input matInput placeholder="Couleur" formControlName="color">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>N° de portes</mat-label>
+                <input matInput placeholder="N° de portes" formControlName="doorsNumber">
+            </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Kilométrage</mat-label>
+                <input matInput placeholder="Kilométrage" formControlName="kilometrage">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Puissance</mat-label>
+                <input matInput placeholder="Puissance" formControlName="power">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-4">
+            <mat-form-field appearance="outline" class="mat-form-field-width">
+                <mat-label>Poids</mat-label>
+                <input matInput placeholder="Poids" formControlName="weight">
+            </mat-form-field>
+        </div>
+
+        <div class="col-12">
+            <mat-divider></mat-divider>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+img {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.mat-form-field-width {
+    width: 20vw !important;
+}
+.container {
+    display: grid;
+    place-items: center;
+}
