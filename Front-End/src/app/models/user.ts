@@ -1,26 +1,25 @@
 export class User {
-    email: string;
-    firstName: string;
-    lastName: string;
-    phone: number;
-    birthdate: Date;
-    gender: string;
-    matriculeFiscale: string;
+    email!: string;
+    firstName!: string;
+    lastName!: string;
+    phone!: number;
+    birthdate!: Date;
+    gender!: string;
+    matriculeFiscale!: string;
 
-    companyId: number;
-    insuranceId: number;
+    companyId!: number; // societe remorquage
+    insuranceCompanyId!: number;
     
-    country: string;
-    governorate: string;
-    city: string;
-    zipCode: number;
-    homeCode: number;
+    country!: string;
+    governorate!: string;
+    city!: string;
+    zipCode!: number;
+    homeCode!: number;
 
-    password: string;
-    confirmPassword: string;
+    password!: string;
+    confirmPassword!: string;
 
-
-    constructor(email: string, firstName: string, lastName: string, phone: number, birthdate: Date,
+    /*constructor(email: string, firstName: string, lastName: string, phone: number, birthdate: Date,
         gender: string, matriculeFiscale: string, companyId: number, insuranceId: number,
         country: string, governorate: string, city: string, zipCode: number, homeCode: number,
         password: string, confirmPassword: string) {
@@ -41,5 +40,5 @@ export class User {
         this.homeCode = homeCode;
         this.password = password;
         this.confirmPassword = confirmPassword;
-    }
+    }*/
 }
