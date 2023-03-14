@@ -1,7 +1,7 @@
 <div class="container sign-up mb-3">
     <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
         <mat-step label="Informations">
-            <app-informations></app-informations>
+            <app-informations (informationsFormEvent)="getInformationsForm($event)"></app-informations>
             <div class="d-flex justify-content-end">
                 <button mat-button matStepperNext
                     class="btn stepper_btn">Suivant</button>
@@ -56,7 +56,7 @@
             </div>
         </mat-step>
 
-        <mat-step  label="Informations détaillées"> <!--*ngIf="currentRole == 1"-->
+        <mat-step *ngIf="currentRole == 1" label="Informations détaillées">
             <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
                 <div class="d-flex justify-content-end mt-2">
                     <button *ngIf="currentVehicleNumber > 2" mat-button class="btn border add-vehicle-btn shadow"
