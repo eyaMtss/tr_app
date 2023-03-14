@@ -13,7 +13,8 @@
             </div>
             <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                    [disabled]="isInformationsNextBtnDisabled">
                     2
                 </button>
                 <div class="step-title color-text">
@@ -22,7 +23,8 @@
             </div>
             <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                    [disabled]="isInformationsNextBtnDisabled && isAddressNextBtnDisabled">
                     3
                 </button>
                 <div class="step-title color-text">
@@ -31,7 +33,8 @@
             </div>
             <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                    [disabled]="isInformationsNextBtnDisabled && isAddressNextBtnDisabled">
                     4
                 </button>
                 <div class="step-title color-text">
