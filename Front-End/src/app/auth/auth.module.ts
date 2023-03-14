@@ -15,12 +15,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDividerModule} from '@angular/material/divider';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { InformationsComponent } from './informations/informations.component';
 @NgModule({
   declarations: [
     AuthComponent,
     ForgotPasswordComponent,
     SignUpComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    InformationsComponent
   ],
   imports: [
     CommonModule,
