@@ -12,41 +12,33 @@ import { map } from 'rxjs/operators';
 })
 
 export class SignUpComponent implements OnInit {
-  roles: any[] = [{ id: 1, value: "User" }, { id: 2, value: "Assurance" }, { id: 3, value: "Société de remorquage" }]
   // address
+
+
+  stepperOrientation: Observable<StepperOrientation>; // stepper
+  
+
+  // addressForm
+  addressForm: FormGroup;
   countries = [{ id: 1, value: "Tunisie" }, { id: 2, value: "Algerie" }, { id: 3, value: "Lybia" }];
   governorates: any[] = [];
   cities: any[] = [];
 
-  companyList: any[] = [];
-  
-  maxVehicleNumber: number = 5;
-  currentVehicleNumber: number = 1;
-  stepperOrientation: Observable<StepperOrientation>; // stepper
-  // forms
-  informationForm: FormGroup;
-  addressForm: FormGroup;
-  credentialsForm: FormGroup;
-  // image
-  selectedFile!: File;
-  viewedImage: any = "/assets/auth/user.png"
+  // vehicule section when role = user
+  maxVehicleNumber: number = 5; // 
+  currentVehicleNumber: number = 1; // user must have at least 1 vehicule
+  vehiculeValues: any[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
 
-  vehiculeValues: any[] = []; //lista can have several values, we put them in a list: listaValues
-  currentRole: number = 1;
-  companyLabel: string = "Company";
+  // credentialsForm
+  credentialsForm: FormGroup;
 
   constructor(private _formBuilder: FormBuilder, breakpointObserver: BreakpointObserver) {
-    this.informationForm = this._formBuilder.group({
-      role: [1, Validators.required],
-      firstname: ["", Validators.required],
-      lastname: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      phone: ["", Validators.required],
-      gender: ["", Validators.required],
-      birthdate: ["", Validators.required],
-      company: ["", Validators.required],
-      matriculeFiscale: [""]
-    });
+    // resposive stepper
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+
+    
 
     this.addressForm = this._formBuilder.group({
       country: ["", Validators.required],
@@ -61,42 +53,24 @@ export class SignUpComponent implements OnInit {
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required]
     });
-
-    this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-
   }
+
   ngOnInit(): void {
-    this.informationForm.controls['role'].setValue(1);
-    this.addressForm.controls['country'].setValue(1);
-    this.onCountryChange();
-
-    this.onAddVehicleBtn(); //by default, there is only one input of lista
+    this.addressForm.controls['country'].setValue(1); // country is setted to Tunisia
+    this.onCountryChange(); // get Tunisia's governorates
+    this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
   }
 
-  // Image
-  public onFileChanged(event: any) {  //Gets called when the user selects an image
-    //Select File
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile)
-    var reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = (_event) => {
-      this.viewedImage = reader.result;
-    }
-  }
+  
 
-  onCountryChange() {
-    console.log(this.addressForm.controls['country'].value)
+  onCountryChange() { // get governorates depending on the selected country
     this.getGovernorates(this.addressForm.controls['country'].value);
   }
 
-  onGovernorateChange(){
+  onGovernorateChange() { // get cities depending on the selected country&&governorate
     this.getCities(this.addressForm.controls['country'].value, this.addressForm.controls['governorate'].value);
   }
-  
-  
+
   getGovernorates(country: number) {
     let governorate: string[] = [];
     let id: number = 0;
@@ -125,8 +99,6 @@ export class SignUpComponent implements OnInit {
       }*/
     }
     governorate.forEach(e => this.governorates.push({ id: id + 1, value: e }));
-    
-
   }
 
   getCities(country: number, governorate: number) {
@@ -151,37 +123,21 @@ export class SignUpComponent implements OnInit {
     cities.forEach(e => this.cities.push({ id: id + 1, value: e }));
   }
 
-  onRoleChange(){
-    this.currentRole = this.informationForm.controls['role'].value;
-    this.companyLabel = this.roles.filter(e => e.id == this.currentRole).map(e => e.value)[0];
-    switch(this.currentRole) {
-      case 2 :{ //assurance
-        let assuranceList = [{ id: 1, value: "Comar" }, { id: 2, value: "GAT" }, { id: 3, value: "BH-Assurance" }];
-        this.companyList = assuranceList;
-        break;
-      }
-      case 3: { //société de remorquage
-        let sociéteRemorquageList = [{ id: 1, value: "alla" }, { id: 2, value: "Allo remorquage" }, { id: 3, value: "Service remorquage" }];
-        this.companyList = sociéteRemorquageList;
-        break;
-      }
-    }
-  }
+  
 
-  onAddVehicleBtn(){
-    if (this.vehiculeValues.length < 5){
+  onAddVehicleBtn() { // add a new vehicule
+    if (this.vehiculeValues.length < this.maxVehicleNumber) {
       this.vehiculeValues.push({ value: "" });
       this.currentVehicleNumber += 1;
     }
-    
   }
-  onDeleteButton(i: any): void {  //delete the i input field for lista
+
+  onDeleteButton(i: any): void {  //delete the i input field for vehiculesValues list
     if (this.vehiculeValues.length == 1)   //always keep a field
       this.vehiculeValues[i].value = ""
-    else{
+    else {
       this.vehiculeValues.splice(i, 1);
       this.currentVehicleNumber -= 1;
     }
-      
   }
 }

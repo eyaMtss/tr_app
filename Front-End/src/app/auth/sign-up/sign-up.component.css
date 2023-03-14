@@ -22,9 +22,7 @@ mat-stepper {
     background-color: rgba(85, 87, 96, 0.559) !important;
 }
 
-.mat-form-field-width {
-    width: 20vw !important;
-}
+
 
 /*@media (min-width: 760px) {
     .container{
@@ -32,11 +30,7 @@ mat-stepper {
     }
 }*/
 
-img {
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    padding: 5px;
-}
+
 .add-vehicle-btn{
     border-radius: 50%;
     color: white;

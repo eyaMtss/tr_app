@@ -1,104 +1,9 @@
 <div class="container sign-up mb-3">
     <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
-        <mat-step [stepControl]="informationForm" label="Informations">
-            <form [formGroup]="informationForm">
-                <div class="row">
-
-                    <div class="col-12 col-md-4 d-flex flex-column">
-                        <div class="container mt-3">
-                            <img alt="photo" [src]="viewedImage" width="150" height="150">
-                            <input type="file" class="file-upload" (change)="onFileChanged($event)">
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-8">
-                        <div class="row">
-                            <div class="col-12">
-                                <label class="mt-2 color-text">Vous êtes: </label>
-                                <mat-radio-group formControlName="role" (change)="onRoleChange()">
-                                    <mat-radio-button *ngFor="let role of roles"
-                                        [value]="role.id">{{role.value}}</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Nom</mat-label>
-                                    <input matInput placeholder="Nom" type="text" formControlName="lastname">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Prénom</mat-label>
-                                    <input matInput placeholder="Prénom" type="text" formControlName="firstname">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-12 col-md-6 d-flex flex-column">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Email</mat-label>
-                                    <input matInput placeholder="Email" type="email" formControlName="email">
-                                </mat-form-field>
-                                <div *ngIf="informationForm.get('email')!.invalid 
-                                && informationForm.get('email')!.touched
-                                && informationForm.get('email')?.hasError('email')">
-                                    <p style="color: red;">Tapez une adresse email valide</p>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Téléphone</mat-label>
-                                    <input matInput placeholder="Téléphone" formControlName="phone">
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Date de naissance</mat-label>
-                                    <input matInput placeholder="Date de naissance" formControlName="birthdate"
-                                        [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-12 col-md-6">
-                                <label class="mt-4 color-text">Genre: </label>
-                                <mat-radio-group formControlName="gender" class=" mt-4">
-                                    <mat-radio-button value="auto">Féminin</mat-radio-button>
-                                    <mat-radio-button value="always">Masculin</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-
-                            <div class="col-12 col-md-6" *ngIf="currentRole == 2 || currentRole == 3">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>{{companyLabel}}</mat-label>
-                                    <mat-select formControlName="company">
-                                        <mat-option *ngFor="let company of companyList"
-                                            [value]="company.id">{{company.value}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                            <div class="col-12 col-md-6" *ngIf="currentRole == 2 || currentRole == 3">
-                                <mat-form-field appearance="outline" class="mat-form-field-width">
-                                    <mat-label>Matricule fiscale</mat-label>
-                                    <input matInput placeholder="Matricule fiscale" formControlName="matriculeFiscale">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <mat-divider></mat-divider>
-                    </div>
-                </div>
-            </form>
+        <mat-step label="Informations">
+            <app-informations></app-informations>
             <div class="d-flex justify-content-end">
-                <button [disabled]="!informationForm.valid" mat-button matStepperNext
+                <button mat-button matStepperNext
                     class="btn stepper_btn">Suivant</button>
             </div>
 
@@ -151,7 +56,7 @@
             </div>
         </mat-step>
 
-        <mat-step *ngIf="currentRole == 1" label="Informations détaillées">
+        <mat-step  label="Informations détaillées"> <!--*ngIf="currentRole == 1"-->
             <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
                 <div class="d-flex justify-content-end mt-2">
                     <button *ngIf="currentVehicleNumber > 2" mat-button class="btn border add-vehicle-btn shadow"
