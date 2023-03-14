@@ -1,4 +1,4 @@
-package com.tunidesign.vehiculemicroservice.model;
+package com.tunidesign.vehiculemicroservice.model.entity;
 
 import com.tunidesign.vehiculemicroservice.model.ennumeration.Couleur;
 import com.tunidesign.vehiculemicroservice.model.ennumeration.Marque;
@@ -24,7 +24,7 @@ public class Vehicule {
     private Couleur couleur;
     private int kilométrage;
     private int nbPortes;
-    private int Puissance;
+    private int puissance;
     @Enumerated(EnumType.STRING)
-    private com.tunidesign.vehiculemicroservice.model.ennumeration.Marque Marque;
+    private com.tunidesign.vehiculemicroservice.model.ennumeration.Marque marque;
 }

@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface VehiculeService {
 
-        List<VehiculeResponseDTO> getVehicule();
-        VehiculeResponseDTO getVehicule(String id);
+        List<VehiculeResponseDTO> getVehicles();
+        VehiculeResponseDTO getVehicle(Long id);
         VehiculeResponseDTO save(VehiculeRequestDTO vehiculeRequestDTO);
-        void deleteVehicule( String id);
-        VehiculeResponseDTO update(VehiculeRequestDTO vehiculeRequestDTO);
-        List <VehiculeResponseDTO> getVehiculeByPostId(String id);
+        void deleteVehicle(Long id);
+        VehiculeResponseDTO updateVehicle(VehiculeRequestDTO vehiculeRequestDTO);
+        Boolean isExist(Long id);
 }
