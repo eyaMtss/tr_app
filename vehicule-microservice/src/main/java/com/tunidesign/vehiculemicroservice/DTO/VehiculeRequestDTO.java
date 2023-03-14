@@ -5,6 +5,7 @@ import com.tunidesign.vehiculemicroservice.model.ennumeration.Marque;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -13,16 +14,16 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class VehiculeRequestDTO {
-
-        @Id
-        private int id;
+        private Long id;
         private String numImmat;
         private int poids;
+        @Enumerated(EnumType.STRING)
         private Couleur couleur;
         private int kilométrage;
         private int nbPortes;
-        private int Puissance;
-
-        private Marque Marque;
+        private int puissance;
+        @Enumerated(EnumType.STRING)
+        private Marque marque;
 }

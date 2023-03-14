@@ -53,11 +53,4 @@ public class SocieteRemorquageController {
         if(garage==null) throw new SocieteIntrouvableException("Cette societe est INTROUVABLE. ");
         return garage;
     }
-    @PutMapping("")
-    public ResponseEntity<SocieteRemorquageResponseDTO> updateUser(@Valid @RequestBody SocieteRemorquageRequestDTO societeRemorquageRequestDTO) throws SocieteIntrouvableException {
-        if (societeRemorquageService.isExist(societeRemorquageRequestDTO.getId())) {
-            return ResponseEntity.accepted().body(societeRemorquageService.update(societeRemorquageRequestDTO));
-        } else
-            throw new SocieteIntrouvableException("User doesn't exist");
-    }
 }
