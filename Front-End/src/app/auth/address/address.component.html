@@ -1,1 +1,34 @@
-<p>address works!</p>
+<form [formGroup]="addressForm" (change)="onFormChange()">
+    <div class="row mt-3">
+        <div class="col-12 col-md-4 d-flex flex-column">
+            <div class="mb-3">
+                <label for="country">Pays</label>
+                <select class="form-select" aria-label="Default select example" formControlName="country" id="country">
+                    <option *ngFor="let country of countries" [value]="country.id">{{country.value}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="governorate">Governorat</label>
+                <select class="form-select" aria-label="Default select example" formControlName="governorate" id="governorate">
+                    <option *ngFor="let governorate of governorates" [value]="governorate.id">{{governorate.value}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="city">Cité</label>
+                <select class="form-select" aria-label="Default select example" formControlName="city" id="city">
+                    <option *ngFor="let city of cities" [value]="city.id">{{city.value}}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="zipCode">Code postal</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Code postal" id="zipCode" type="text"
+                        formControlName="zipCode"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8">
+            map
+        </div>
+    </div>
+</form>

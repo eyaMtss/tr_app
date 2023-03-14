@@ -1,76 +1,96 @@
 <form [formGroup]="vehicleForm">
     <div class="row">
-        <div class="col-12 mt-2">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Type d'immatriculation</mat-label>
-                <mat-select formControlName="registrationType" (selectionChange)="onRegistrationTypeChange()">
-                    <mat-option *ngFor="let registrationType of registrationTypes"
-                        [value]="registrationType.id">{{registrationType.value}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+        <div class="col-12 col-md-4 mb-3">
+            <label for="immatriculationType">Type d'immatriculation</label>
+            <select class="form-select" formControlName="registrationType" id="immatriculationType"
+                (change)="onRegistrationTypeChange()">
+                <option *ngFor="let registrationType of registrationTypes" [value]="registrationType.id">
+                    {{registrationType.value}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
+            <label for="registrationNumber">N° d'immatriculation</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="N° d'immatriculation" 
+                    id="registrationNumber" type="text" formControlName="registrationNumber" />
+            </div>
         </div>
         <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>N° d'immatriculation</mat-label>
-                <input matInput placeholder="N° d'immatriculation" formControlName="registrationNumber">
-            </mat-form-field>
+            <label for="confirmRegistrationNumber">Confirmer le N° d'immatriculation</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Confirmer le N° d'immatriculation" 
+                    id="confirmRegistrationNumber" type="text" formControlName="confirmRegistrationNumber" />
+            </div>
         </div>
         <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Confirmer le N° d'immatriculation</mat-label>
-                <input matInput placeholder="Confirmer le N° d'immatriculation"
-                    formControlName="confirmRegistrationNumber">
-            </mat-form-field>
-        </div>
-        <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>N° de châssis</mat-label>
-                <input matInput placeholder="N° de châssis" formControlName="chassisNumber">
-            </mat-form-field>
+            <label for="chassisNumber">N° de châssis</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="N° de châssis" id="chassisNumber" type="text"
+                    formControlName="chassisNumber" />
+            </div>
         </div>
 
         <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Marque</mat-label>
-                <mat-select formControlName="brand">
-                    <mat-option *ngFor="let brand of brands" [value]="brand.id">{{brand.value}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Couleur</mat-label>
-                <input matInput placeholder="Couleur" formControlName="color">
-            </mat-form-field>
-        </div>
-        <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>N° de portes</mat-label>
-                <input matInput placeholder="N° de portes" formControlName="doorsNumber">
-            </mat-form-field>
+            <label for="contractNumber">Numero du contrat</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Numero du contrat" id="contractNumber" type="text"
+                    formControlName="contractNumber" />
+            </div>
         </div>
 
         <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Kilométrage</mat-label>
-                <input matInput placeholder="Kilométrage" formControlName="kilometrage">
-            </mat-form-field>
+            <label for="brand">Marque</label>
+            <select class="form-select" formControlName="brand" id="brand">
+                <option *ngFor="let brand of brands" [value]="brand.id">{{brand.value}}</option>
+            </select>
         </div>
+
         <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Puissance</mat-label>
-                <input matInput placeholder="Puissance" formControlName="power">
-            </mat-form-field>
+            <label for="chassisNumber">Couleur</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Couleur" id="color" type="text" formControlName="color" />
+            </div>
         </div>
-        <div class="col-12 col-md-4">
-            <mat-form-field appearance="outline" class="mat-form-field-width">
-                <mat-label>Poids</mat-label>
-                <input matInput placeholder="Poids" formControlName="weight">
-            </mat-form-field>
+
+        <div class="col-12 col-md-3">
+            <label for="contractNumber">Nombre de portes</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Nombre de portes" id="doorsNumber" type="number"
+                    formControlName="doorsNumber" min="2" max="4"/>
+                    <!--(keypress)="notWritableField()"
+                    (blur)="notWritableField()"-->
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <label for="kilometrage">Kilométrage</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Kilométrage" id="kilometrage" type="number" formControlName="kilometrage" />
+                <span class="input-group-text d-flex justify-content-center">km/h</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <label for="power">Puissance</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Puissance" id="power" type="number" formControlName="power" />
+                <span class="input-group-text d-flex justify-content-center">ch</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <label for="weight">Poids</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Poids" id="weight" type="number" formControlName="weight" />
+                <span class="input-group-text d-flex justify-content-center">Kg</span>
+            </div>
         </div>
 
         <div class="col-12">
-            <mat-divider></mat-divider>
+            <hr>
         </div>
     </div>
 </form>

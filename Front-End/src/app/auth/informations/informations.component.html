@@ -1,6 +1,5 @@
 <form [formGroup]="informationForm" (change)="onFormChange()">
     <div class="row">
-
         <div class="col-12 col-md-4 d-flex flex-column">
             <div class="container mt-3">
                 <img alt="photo" [src]="viewedImage" width="150" height="150">
@@ -10,89 +9,84 @@
 
         <div class="col-12 col-md-8">
             <div class="row">
-                <div class="col-12">
-                    <label class="mt-2 color-text">Vous êtes: </label>
-                    <mat-radio-group formControlName="role" (change)="onRoleChange()">
-                        <mat-radio-button *ngFor="let role of roles"
-                            [value]="role.id">{{role.value}}</mat-radio-button>
-                    </mat-radio-group>
+                <div class="col-12 d-flex justify-content-start">
+                    <label class=" color-text">Vous êtes: &nbsp;</label>
+                    <div class="form-check form-check-inline" *ngFor="let role of roles">
+                        <input class="form-check-input" type="radio" name="role" id="{{role.value}}" [value]="role.id"
+                            formControlName="role" (change)="onRoleChange()">
+                        <label class="form-check-label" for="{{role.value}}">{{role.value}}</label>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Nom</mat-label>
-                        <input matInput placeholder="Nom" type="text" formControlName="lastname">
-                    </mat-form-field>
+                    <label for="nom">Nom</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" placeholder="Nom" id="nom" type="text" formControlName="lastname" />
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Prénom</mat-label>
-                        <input matInput placeholder="Prénom" type="text" formControlName="firstname">
-                    </mat-form-field>
+                    <label for="prenom">Prénom</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" placeholder="Prénom" id="prenom" type="text"
+                            formControlName="firstname" />
+                    </div>
                 </div>
 
-                <div class="col-12 col-md-6 d-flex flex-column">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="Email" type="email" formControlName="email">
-                    </mat-form-field>
+                <div class="col-12 col-md-6">
+                    <label for="email">Email</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text d-flex justify-content-center"><i class="fas fa-envelope"></i></span>
+                        <input class="form-control" placeholder="email" id="email" type="text"
+                            formControlName="email" />
+                    </div>
                     <div *ngIf="informationForm.get('email')!.invalid 
-                    && informationForm.get('email')!.touched
-                    && informationForm.get('email')?.hasError('email')">
+                            && informationForm.get('email')!.touched
+                            && informationForm.get('email')?.hasError('email')">
                         <p style="color: red;">Tapez une adresse email valide</p>
                     </div>
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Téléphone</mat-label>
-                        <input matInput placeholder="Téléphone" formControlName="phone">
-                    </mat-form-field>
+                    <label for="phone">Téléphone</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
+                        <input class="form-control" placeholder="Téléphone" id="phone" type="text"
+                            formControlName="phone"/>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Date de naissance</mat-label>
-                        <input matInput placeholder="Date de naissance" formControlName="birthdate"
-                            [matDatepicker]="picker">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-
-                    </mat-form-field>
+                    <label for="birthdate">Date de naissance</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" id="birthdate" type="date" formControlName="birthdate"/>
+                    </div>
                 </div>
 
-                <div class="col-12 col-md-6">
-                    <label class="mt-3 color-text">Genre: </label>
-                    <mat-radio-group formControlName="gender" class=" mt-3">
-                        <mat-radio-button value="auto">Féminin</mat-radio-button>
-                        <mat-radio-button value="always">Masculin</mat-radio-button>
-                    </mat-radio-group>
+                <div class="col-12 col-md-6 mt-4">
+                    <label class="color-text">Genre: &nbsp;</label>
+                    <div class="form-check form-check-inline" *ngFor="let genre of genreList">
+                        <input class="form-check-input" type="radio" name="gender" id="{{genre.value}}" [value]="genre.id"
+                            formControlName="gender">
+                        <label class="form-check-label" for="{{genre.value}}">{{genre.value}}</label>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6" *ngIf="currentRole == 2 || currentRole == 3">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>{{companyLabel}}</mat-label>
-                        <mat-select formControlName="company">
-                            <mat-option *ngFor="let company of companyList"
-                                [value]="company.id">{{company.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <label for="">{{companyLabel}}</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="company">
+                        <option *ngFor="let company of companyList" [value]="company.id">{{company.name}}</option>
+                    </select>
                 </div>
 
                 <div class="col-12 col-md-6" *ngIf="currentRole == 2 || currentRole == 3">
-                    <mat-form-field appearance="outline" class="mat-form-field-width">
-                        <mat-label>Matricule fiscale</mat-label>
-                        <input matInput placeholder="Matricule fiscale" formControlName="matriculeFiscale">
-                    </mat-form-field>
+                    <label for="matriculeFiscale">Matricule fiscale</label>
+                    <div class="input-group mb-3">
+                        <input class="form-control" placeholder="Matricule fiscale" id="phone" type="text"
+                            formControlName="matriculeFiscale"/>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-12">
-            <mat-divider></mat-divider>
-        </div>
-
-        <button [disabled]="informationForm.invalid" (click)="onClick()">test</button>
     </div>
 </form>

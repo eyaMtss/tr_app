@@ -1,117 +1,126 @@
-<div class="container sign-up mb-3">
-    <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
-        <mat-step label="Informations">
-            <app-informations (informationsFormEvent)="getInformationsForm($event)"></app-informations>
-            <div class="d-flex justify-content-end">
-                <button mat-button matStepperNext
-                    class="btn stepper_btn">Suivant</button>
-            </div>
-
-        </mat-step>
-
-        <mat-step [stepControl]="addressForm" label="Adresse">
-            <form [formGroup]="addressForm">
-                <div class="row">
-                    <div class="col-12 col-md-4 d-flex flex-column">
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Pays</mat-label>
-                            <mat-select formControlName="country" (selectionChange)="onCountryChange()">
-                                <mat-option *ngFor="let country of countries"
-                                    [value]="country.id">{{country.value}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Governorat</mat-label>
-                            <mat-select formControlName="governorate" (selectionChange)="onGovernorateChange()">
-                                <mat-option *ngFor="let governorate of governorates"
-                                    [value]="governorate.id">{{governorate.value}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Cité</mat-label>
-                            <mat-select formControlName="city">
-                                <mat-option *ngFor="let city of cities" [value]="city.id">{{city.value}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Code postal</mat-label>
-                            <input matInput placeholder="Code postal" type="text" formControlName="zipCode">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12 col-md-8">
-                        map
-                    </div>
-                    <div class="col-12">
-                        <mat-divider></mat-divider>
-                    </div>
-                </div>
-            </form>
-            <div class="d-flex justify-content-end">
-                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
-                <button [disabled]="!addressForm.valid" mat-button matStepperNext
-                    class="btn stepper_btn">Suivant</button>
-            </div>
-        </mat-step>
-
-        <mat-step *ngIf="currentRole == 1" label="Informations détaillées">
-            <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
-                <div class="d-flex justify-content-end mt-2">
-                    <button *ngIf="currentVehicleNumber > 2" mat-button class="btn border add-vehicle-btn shadow"
-                        mat-raised-button #tooltip="matTooltip" matTooltip="Supprimer" (click)="onDeleteButton(i)">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <app-add-vehicle></app-add-vehicle>
-            </div>
-
-            <mat-divider></mat-divider>
-            <div class="d-flex justify-content-center my-2">
-                <button mat-button class="btn border add-vehicle-btn shadow" mat-raised-button #tooltip="matTooltip"
-                    matTooltip="Ajouter une autre véhicule" (click)="onAddVehicleBtn()">
-                    <i class="fas fa-plus"></i>
+<div class="container">
+    <div class="accordion" id="accordionSignUp">
+        <div class="steps">
+            <progress id="progress" value=0 max=100></progress>
+            <div class="step-item">
+                <button class="step-button text-center" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    1
                 </button>
+                <div class="step-title color-text">
+                    Informations
+                </div>
             </div>
-            <mat-divider></mat-divider>
-            <div class="d-flex justify-content-end">
-                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
-                <button mat-button matStepperNext class="btn stepper_btn">Suivant</button>
+            <div class="step-item">
+                <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    2
+                </button>
+                <div class="step-title color-text">
+                    Adresse
+                </div>
+            </div>
+            <div class="step-item">
+                <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    3
+                </button>
+                <div class="step-title color-text">
+                    Vehicule
+                </div>
+            </div>
+            <div class="step-item">
+                <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    4
+                </button>
+                <div class="step-title color-text">
+                    Mot de passe
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-background">
+            <div id="headingOne">
             </div>
 
-
-        </mat-step>
-
-        <mat-step [stepControl]="credentialsForm">
-            <ng-template matStepLabel>Done</ng-template>
-            <form [formGroup]="credentialsForm">
-                <div class="row">
-                    <div class="col-12 col-md-4">
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Password</mat-label>
-                            <input matInput formControlName="password" placeholder="Password" required>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <mat-form-field appearance="outline" class="mat-form-field-width">
-                            <mat-label>Confirmer votre password</mat-label>
-                            <input matInput formControlName="confirmPassword" placeholder="confirmer votre password"
-                                required>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-divider></mat-divider>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionSignUp">
+                <div class="card-body">
+                    <app-informations (informationsFormEvent)="getInformationsForm($event)"></app-informations>
+                    <hr>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn stepper_btn" [disabled]="isInformationsNextBtnDisabled"
+                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo">Suivant</button>
                     </div>
                 </div>
-            </form>
-            <div class="d-flex justify-content-end">
-                <button mat-button matStepperPrevious class="btn stepper_btn">Retour</button>
-                <button [disabled]="!credentialsForm.valid" mat-button matStepperNext
-                    class="btn stepper_btn">S'inscrire</button>
             </div>
+        </div>
+        <div class="card card-background">
+            <div id="headingTwo">
 
-        </mat-step>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSignUp">
+                <div class="card-body">
+                    <app-address (addressFormEvent)="getAddressForm($event)"></app-address>
+                    <mat-divider></mat-divider>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn stepper_btn" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo">Retour</button>
+                        <button class="btn stepper_btn" [disabled]="isAddressNextBtnDisabled"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                        aria-expanded="false" aria-controls="collapseThree">Suivant</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-background">
+            <div id="headingThree">
 
-    </mat-stepper>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionSignUp">
+                <div class="card-body">
+                    <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
+                        <div class="d-flex justify-content-end mt-2">
+                            <button *ngIf="currentVehicleNumber > 2" mat-button
+                                class="btn border add-vehicle-btn shadow" mat-raised-button #tooltip="matTooltip"
+                                matTooltip="Supprimer" (click)="onDeleteButton(i)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <app-add-vehicle></app-add-vehicle>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="d-flex justify-content-center my-2">
+                        <button class="btn border add-vehicle-btn shadow" (click)="onAddVehicleBtn()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn stepper_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                        aria-expanded="false" aria-controls="collapseThree">Retour</button>
+                        <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Suivant</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-background">
+            <div id="headingFour">
+
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionSignUp">
+                <div class="card-body">
+                    <app-credentials (credentialsFormEvent)="getCredentialsForm($event)"></app-credentials>
+                    <mat-divider></mat-divider>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Retour</button>
+                        <button class="btn stepper_btn" [disabled]="isCredentialsNextBtnDisabled">S'inscrire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
