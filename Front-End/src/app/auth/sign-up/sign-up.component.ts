@@ -4,6 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,11 +13,11 @@ import { map } from 'rxjs/operators';
 })
 
 export class SignUpComponent implements OnInit {
-  // address
-
-
   stepperOrientation: Observable<StepperOrientation>; // stepper
-  
+  user: User = new User();
+  // informationsForm
+  informationsForm!: FormGroup;
+  currentRole: number = 1; //user is the default user
 
   // addressForm
   addressForm: FormGroup;
@@ -38,7 +39,7 @@ export class SignUpComponent implements OnInit {
       .observe('(min-width: 800px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
-    
+
 
     this.addressForm = this._formBuilder.group({
       country: ["", Validators.required],
@@ -61,7 +62,7 @@ export class SignUpComponent implements OnInit {
     this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
   }
 
-  
+
 
   onCountryChange() { // get governorates depending on the selected country
     this.getGovernorates(this.addressForm.controls['country'].value);
@@ -123,8 +124,6 @@ export class SignUpComponent implements OnInit {
     cities.forEach(e => this.cities.push({ id: id + 1, value: e }));
   }
 
-  
-
   onAddVehicleBtn() { // add a new vehicule
     if (this.vehiculeValues.length < this.maxVehicleNumber) {
       this.vehiculeValues.push({ value: "" });
@@ -138,6 +137,27 @@ export class SignUpComponent implements OnInit {
     else {
       this.vehiculeValues.splice(i, 1);
       this.currentVehicleNumber -= 1;
+    }
+  }
+
+  getInformationsForm(informationsForm: FormGroup) {
+    this.informationsForm = informationsForm;
+    if (this.informationsForm.valid) {
+      this.currentRole = this.informationsForm.controls['role'].value;
+      this.user.firstName = this.informationsForm.controls['firstname'].value;
+      this.user.lastName = this.informationsForm.controls['lastName'].value;
+      this.user.email = this.informationsForm.controls['email'].value;
+      this.user.phone = this.informationsForm.controls['phone'].value;
+      this.user.gender = this.informationsForm.controls['gender'].value;
+      this.user.birthdate = this.informationsForm.controls['birthdate'].value;
+      if(this.currentRole == 2){ // insurance
+        this.user.insuranceCompanyId = this.informationsForm.controls['comapny'].value;
+        this.user.matriculeFiscale = this.informationsForm.controls['matriculeFiscale'].value;
+      }
+      else if(this.currentRole == 3){ // societe remorquage
+        this.user.companyId = this.informationsForm.controls['comapny'].value;
+        this.user.matriculeFiscale = this.informationsForm.controls['matriculeFiscale'].value;
+      }
     }
   }
 }
