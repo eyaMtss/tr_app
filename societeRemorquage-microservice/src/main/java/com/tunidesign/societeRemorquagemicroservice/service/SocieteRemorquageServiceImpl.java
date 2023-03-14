@@ -24,8 +24,8 @@ public class SocieteRemorquageServiceImpl implements SocieteRemorquageService {
     }
 
     @Override
-    public SocieteRemorquageResponseDTO getSocieteById(int id) {
-        return societeRemorquageMapper.societeToSocieteResponseDTO(societeRemorquageRepository.findById(id));
+    public SocieteRemorquageResponseDTO getSocieteById(Long id) {
+        return societeRemorquageMapper.societeToSocieteResponseDTO(societeRemorquageRepository.findById(id).get());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SocieteRemorquageServiceImpl implements SocieteRemorquageService {
     }
 
     @Override
-    public void deleteSociete(int id) {
+    public void deleteSociete(Long id) {
         societeRemorquageRepository.deleteById(id);
 
     }
@@ -42,5 +42,10 @@ public class SocieteRemorquageServiceImpl implements SocieteRemorquageService {
     @Override
     public SocieteRemorquageResponseDTO update(SocieteRemorquageRequestDTO societeRemorquageRequestDTO) {
         return societeRemorquageMapper.societeToSocieteResponseDTO(societeRemorquageRepository.save(societeRemorquageMapper.societeRequestDTOToSociete(societeRemorquageRequestDTO)));
+    }
+
+    @Override
+    public Boolean isExist(Long id) {
+        return societeRemorquageRepository.findById(id).isPresent();
     }
 }

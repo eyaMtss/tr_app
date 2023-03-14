@@ -7,11 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SocieteRemorquageRepository extends JpaRepository<SocieteRemorquage, Integer> {
-    List<SocieteRemorquage> findAll();
-    SocieteRemorquage findById(int id);
-    SocieteRemorquage save(SocieteRemorquage societeRemorquage);
-    SocieteRemorquage deleteById(int id);
-
+public interface SocieteRemorquageRepository extends JpaRepository<SocieteRemorquage, Long> {
 
 }
