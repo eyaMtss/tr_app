@@ -18,7 +18,6 @@ export class InsuranceService {
   getById(id: number): Observable<Company>{
     return this.httpClient.get<Company>(this._URL + "getById/" + id);
   }
-
   
   create(insurance: Company): Observable<Company> {
     return this.httpClient.post<Company>(this._URL + 'add', insurance);
