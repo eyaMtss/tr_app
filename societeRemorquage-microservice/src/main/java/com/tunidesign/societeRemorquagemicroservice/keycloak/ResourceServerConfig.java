@@ -20,12 +20,10 @@ public class ResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/v3/**", "/societeRemorquage/getAll", "/societeRemorquage/getById").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/**").permitAll()
                 .and()
-                //.authorizeRequests()
-                //.anyRequest().authenticated() // OR .access("authenticated AND hasRole('product_read')")
                 .authorizeRequests()
-                .requestMatchers("/societeRemorquage/add").hasRole("SUPER_ADMIN")
+                .anyRequest().authenticated() // OR .access("authenticated AND hasRole('product_read')")
                 .and()
                 .oauth2ResourceServer()
                 .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()));
