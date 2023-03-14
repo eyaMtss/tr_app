@@ -46,10 +46,20 @@ export class AddVehicleComponent {
       power: ["", Validators.required],
       color: ["", Validators.required],
       weight: ["", Validators.required],
+      contractNumber: ["", Validators.required],
     });
   }
   
   onRegistrationTypeChange(){
     this.isRegistrationTypeSelected = true;
+    console.log(this.isRegistrationTypeSelected);
   }
+
+  notWritableField() {
+    // console.log(this.filtroForm.controls['a'].value)
+    this.vehicleForm.controls['doorsNumber'].setValue("")
+    this.vehicleForm.updateValueAndValidity()
+  }
+
+
 }
