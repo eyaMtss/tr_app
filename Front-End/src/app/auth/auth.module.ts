@@ -16,13 +16,15 @@ import {MatDividerModule} from '@angular/material/divider';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InformationsComponent } from './informations/informations.component';
+import { AddressComponent } from './address/address.component';
 @NgModule({
   declarations: [
     AuthComponent,
     ForgotPasswordComponent,
     SignUpComponent,
     AddVehicleComponent,
-    InformationsComponent
+    InformationsComponent,
+    AddressComponent
   ],
   imports: [
     CommonModule,
