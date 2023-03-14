@@ -4,11 +4,14 @@
 
 export const environment = {
   production: false,
+  domain: "http://localhost",
+  port: 8989,
   keycloak: {
     realm: 'tunidesign-auth',
     url: 'http://localhost:8080/',
     clientId: 'tunidesign-front-end'
-  }
+  },
+
 };
 
 /*
