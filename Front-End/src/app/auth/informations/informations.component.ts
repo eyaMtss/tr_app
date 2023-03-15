@@ -19,6 +19,7 @@ export class InformationsComponent implements OnInit {
   companyList: Company[] = []; // company(insurance / société remorquage)
   companyLabel!: string;
 
+  genreList = [{id: 1, value: "Féminin"}, {id: 2, value: "Masculin"}];
   @Output() informationsFormEvent = new EventEmitter<FormGroup>();
   constructor(private _formBuilder: FormBuilder, private societeRemorquageService: SocieteRemorquageService,
     private insuranceService: InsuranceService) {
@@ -38,7 +39,7 @@ export class InformationsComponent implements OnInit {
   ngOnInit(): void {
     this.informationForm.controls['role'].setValue(1); // role is setted to user
 
-    this.getAllSocietesRemorquage() //test
+    //this.getAllSocietesRemorquage() //test
   }
 
   // Image
@@ -56,6 +57,7 @@ export class InformationsComponent implements OnInit {
   onRoleChange() {
 
     this.currentRole = this.informationForm.controls['role'].value;
+    console.log(this.currentRole);
     this.companyLabel = this.roles.filter(e => e.id == this.currentRole).map(e => e.value)[0];
     switch (this.currentRole) {
       case 1: {
@@ -99,13 +101,11 @@ export class InformationsComponent implements OnInit {
   }
 
   onFormChange(){
-    this.informationForm.valueChanges.subscribe(val => {
+    //this.informationForm.valueChanges.subscribe(val => {
       if(this.informationForm.valid){
         this.emitInformationForm(this.informationForm);
       }
-    });
-   
-      
+    //});  
   }
 
   emitInformationForm(value: FormGroup) {

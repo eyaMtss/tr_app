@@ -17,6 +17,7 @@ import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { InformationsComponent } from './informations/informations.component';
 import { AddressComponent } from './address/address.component';
+import { CredentialsComponent } from './credentials/credentials.component';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -24,7 +25,8 @@ import { AddressComponent } from './address/address.component';
     SignUpComponent,
     AddVehicleComponent,
     InformationsComponent,
-    AddressComponent
+    AddressComponent,
+    CredentialsComponent
   ],
   imports: [
     CommonModule,
