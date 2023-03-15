@@ -37,7 +37,6 @@ public class ClientRequestDTO {
 	private Long phoneNumber;
 	
 	// Authentication
-	private String username;
 	private String password;
 	private String confirmPassword;
 
