@@ -1,45 +1,58 @@
 package com.tunidesign.contratmicroservice.web;
 
+import com.tunidesign.contratmicroservice.DTO.VerifyContractRequestDTO;
+import com.tunidesign.contratmicroservice.DTO.VerifyContractResponseDTO;
 import com.tunidesign.contratmicroservice.model.Contrat;
 import com.tunidesign.contratmicroservice.exceptions.ContratIntrouvableException;
 import com.tunidesign.contratmicroservice.repository.ContratRepository;
+import com.tunidesign.contratmicroservice.service.ContratServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
+@RequestMapping("/contrat")
 public class ContratController {
     @Autowired
     private ContratRepository contratRepository;
-    @GetMapping("/Contrats")
+    @Autowired
+    private ContratServiceImpl contratService;
+    @GetMapping("/getAll")
     public List<Contrat> listeContrats()
     {
         return contratRepository.findAll();
     }
 
-    @GetMapping(value = "/Contrats/{id}")
-    public Contrat afficherUneContrat(@PathVariable int id) {
-        Contrat contrat = contratRepository.findById(id);
-        //if(contrat==null) throw new ContratIntrouvableException("Le contrat' avec l'id " + id + "n'existe pas  ");
+    @GetMapping(value = "/getById/{id}")
+    public Contrat afficherUneContrat(@PathVariable Long id) {
+        Contrat contrat = contratRepository.findById(id).get();
         return contrat;
     }
 
-    @PostMapping(value = "/Contrat/CréeUnContrat")
+    @PostMapping(value = "/add")
     public void ajouterUnContrat(@RequestBody Contrat contrat)
     {
         contratRepository.save(contrat);
     }
     @DeleteMapping (value = "/Contrats/SupprimerContrat/{id}")
-    public void supprimerUnContrat(@PathVariable int id)
+    public void supprimerUnContrat(@PathVariable Long id)
     {
-        Contrat contrat = contratRepository.deleteById(id);
-        //if(contrat==null) throw new ContratIntrouvableException("Le contrat avec l'id " + id + " est INTROUVABLE. ");
+        contratRepository.deleteById(id);
     }
-    @PutMapping (value = "/Contrat/ModifierUnContrat")
+    @PutMapping (value = "/update")
     public void modiferUnContrat (@RequestBody Contrat contrat)
     {
         contratRepository.save(contrat);
         if(contrat==null) throw new ContratIntrouvableException("Ce contrat n'existe pas . ");
+    }
+    @GetMapping("/verifyContrat")
+    public ResponseEntity<VerifyContractResponseDTO> verifyContract(@RequestBody VerifyContractRequestDTO verifyContractRequestDTO){
+        return new ResponseEntity<>(VerifyContractResponseDTO.builder()
+                .isExist(contratService.verifyContract(verifyContractRequestDTO))
+                .build(), HttpStatus.OK) ;
     }
 }
