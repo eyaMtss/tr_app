@@ -80,7 +80,7 @@ public class UserController {
 //	        log.info("Trying to validate token {}", token);
 //	        return ResponseEntity.ok(userService.validateToken(token));
 //	    }
-	@PostMapping(path = "/addSuperAdmin")
+	@PostMapping("/addSuperAdmin")
 	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
@@ -100,7 +100,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addDriver")
+	@PostMapping("/addDriver")
 	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
@@ -112,7 +112,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addTA")
+	@PostMapping("/addTA")
 	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
@@ -123,7 +123,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addCompanyAdmin")
+	@PostMapping("/addCompanyAdmin")
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
@@ -134,7 +134,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addExpert")
+	@PostMapping("/addExpert")
 	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
@@ -146,7 +146,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addAgencyAdmin")
+	@PostMapping("/addAgencyAdmin")
 	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
 			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
@@ -158,7 +158,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping(path = "/addInsuranceAdmin")
+	@PostMapping("/addInsuranceAdmin")
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
 			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
@@ -213,7 +213,7 @@ public class UserController {
 	}
 
 	/* ******************* update user ******************* */
-	@PutMapping("")
+	@PutMapping("update")
 	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
 
 		try {
@@ -262,7 +262,7 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.getCompanyAdmins(companyId));
 	}
 
-	@GetMapping("/getAll/companyEmployees/{companyId}")
+	@GetMapping("/getAll/company/employees/{companyId}")
 	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<List<CompanyUserResponseDTO>> getCompanyEmployees(@PathVariable Long companyId) {
 		return ResponseEntity.ok().body(userService.getCompanyEmployees(companyId));
@@ -273,7 +273,7 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.getAgencyAdmins(agencyId));
 	}
 
-	@GetMapping("/getAll/agencyEmployees/{agencyId}")
+	@GetMapping("/getAll/agency/employees/{agencyId}")
 	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<AgencyUserResponseDTO>> getAgencyEmployees(@PathVariable Long agencyId) {
 		return ResponseEntity.ok().body(userService.getAgencyEmployees(agencyId));
@@ -285,13 +285,13 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.getInsuranceAdmins(insuranceId));
 	}
 
-	@GetMapping("/insurance/expert/{insuranceId}")
+	@GetMapping("/getAll/insurance/expert/{insuranceId}")
 	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsuranceExperts(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getExperts(insuranceId));
 	}
 
-	@GetMapping("/getAll/insuranceEmployees/{insuranceId}")
+	@GetMapping("/getAll/insurance/employees/{insuranceId}")
 	@RolesAllowed({"INSURANCE_ADMIN"})
 	public ResponseEntity<List<InsuranceUserResponseDTO>> getInsuranceEmployees(@PathVariable Long insuranceId) {
 		return ResponseEntity.ok().body(userService.getInsuranceEmployees(insuranceId));
