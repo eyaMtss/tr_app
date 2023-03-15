@@ -91,7 +91,7 @@
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
-                        <app-add-vehicle></app-add-vehicle>
+                        <app-add-vehicle (vehicleFormEvent)="getVehicleForm($event, i)"></app-add-vehicle>
                     </div>
                     <mat-divider></mat-divider>
                     <div class="d-flex justify-content-center my-2">
@@ -120,7 +120,8 @@
                     <div class="d-flex justify-content-end">
                         <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Retour</button>
-                        <button class="btn stepper_btn" [disabled]="isCredentialsNextBtnDisabled">S'inscrire</button>
+                        <button class="btn stepper_btn"
+                        (click)="signup()">S'inscrire</button>
                     </div>
                 </div>
             </div>
