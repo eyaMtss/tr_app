@@ -72,6 +72,7 @@ export class InformationsComponent implements OnInit {
         break;
       }
       case 3: { //société de remorquage
+        console.log(this.currentRole);
         this.informationForm.controls['company'].enable();
         this.informationForm.controls['matriculeFiscale'].enable();
         this.getAllSocietesRemorquage();

@@ -6,6 +6,7 @@ import com.tunidesign.contratmicroservice.model.Contrat;
 import com.tunidesign.contratmicroservice.exceptions.ContratIntrouvableException;
 import com.tunidesign.contratmicroservice.repository.ContratRepository;
 import com.tunidesign.contratmicroservice.service.ContratServiceImpl;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

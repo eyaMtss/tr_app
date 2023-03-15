@@ -3,13 +3,15 @@
         <div class="col-12 col-md-4 d-flex flex-column">
             <div class="mb-3">
                 <label for="country">Pays</label>
-                <select class="form-select" aria-label="Default select example" formControlName="country" id="country">
+                <select class="form-select" aria-label="Default select example" formControlName="country"
+                    id="country" (change)="onCountryChange()">
                     <option *ngFor="let country of countries" [value]="country.id">{{country.value}}</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="governorate">Governorat</label>
-                <select class="form-select" aria-label="Default select example" formControlName="governorate" id="governorate">
+                <select class="form-select" aria-label="Default select example" formControlName="governorate"
+                    id="governorate" (change)="onGovernorateChange()">
                     <option *ngFor="let governorate of governorates" [value]="governorate.id">{{governorate.value}}</option>
                 </select>
             </div>

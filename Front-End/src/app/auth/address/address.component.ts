@@ -68,20 +68,14 @@ export class AddressComponent implements OnInit {
   }
 
   getCities(country: number, governorate: number) {
-    console.log(governorate)
     let cities: string[] = [];
     let id: number = 0;
+    console.log(country)
     switch (country) {
       case 1: { // Tunisia
-        switch (governorate) {
-          case 1: { //ariana
-            cities = ["Ariana", "Sokra", "ghazela"]
-            break;
-          }
-          case 1: {
-
-            break;
-          }
+        console.log(governorate)
+        if(governorate == 1){
+          cities = ["Ariana", "Sokra", "ghazela"];
         }
         break;
       }

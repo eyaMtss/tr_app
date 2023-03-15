@@ -13,7 +13,7 @@
                     <label class=" color-text">Vous êtes: &nbsp;</label>
                     <div class="form-check form-check-inline" *ngFor="let role of roles">
                         <input class="form-check-input" type="radio" name="role" id="{{role.value}}" [value]="role.id"
-                            formControlName="role" (change)="onRoleChange()">
+                            formControlName="role" (change)="onRoleChange()"/>
                         <label class="form-check-label" for="{{role.value}}">{{role.value}}</label>
                     </div>
                 </div>
