@@ -49,7 +49,7 @@ public class ContratController {
         contratRepository.save(contrat);
         if(contrat==null) throw new ContratIntrouvableException("Ce contrat n'existe pas . ");
     }
-    @GetMapping("/verifyContrat")
+    @PostMapping("/verifyContrat")
     public ResponseEntity<VerifyContractResponseDTO> verifyContract(@RequestBody VerifyContractRequestDTO verifyContractRequestDTO){
         return new ResponseEntity<>(VerifyContractResponseDTO.builder()
                 .isExist(contratService.verifyContract(verifyContractRequestDTO))
