@@ -21,7 +21,9 @@ public class ResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/v3/**").permitAll()
+                .requestMatchers("/swagger-ui/**", "/v3/**", "/users/addClient", "/users/addCompanyAdmin",
+                        "/users/addInsuranceAdmin")
+                    .permitAll()
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated() // OR .access("authenticated AND hasRole('product_read')")
