@@ -13,10 +13,12 @@ public class VehiculeMapperImpl implements VehiculeMapper {
                 .id(vehicule.getId())
                 .marque(vehicule.getMarque())
                 .puissance(vehicule.getPuissance())
-                .kilométrage(vehicule.getKilométrage())
+                .kilometrage(vehicule.getKilometrage())
                 .poids(vehicule.getPoids())
                 .nbPortes(vehicule.getNbPortes())
+                .typeImmat(vehicule.getTypeImmat())
                 .numImmat(vehicule.getNumImmat())
+                .confirmNumImmat(vehicule.getConfirmNumImmat())
                 .couleur(vehicule.getCouleur())
                 .build();
     }
@@ -27,10 +29,12 @@ public class VehiculeMapperImpl implements VehiculeMapper {
                 .id(vehiculeRequestDTO.getId())
                 .marque(vehiculeRequestDTO.getMarque())
                 .puissance(vehiculeRequestDTO.getPuissance())
-                .kilométrage(vehiculeRequestDTO.getKilométrage())
+                .kilometrage(vehiculeRequestDTO.getKilometrage())
                 .poids(vehiculeRequestDTO.getPoids())
                 .nbPortes(vehiculeRequestDTO.getNbPortes())
+                .typeImmat(vehiculeRequestDTO.getTypeImmat())
                 .numImmat(vehiculeRequestDTO.getNumImmat())
+                .confirmNumImmat(vehiculeRequestDTO.getConfirmNumImmat())
                 .couleur(vehiculeRequestDTO.getCouleur())
                 .build();
     }
