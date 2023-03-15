@@ -43,7 +43,7 @@ public class VehiculeServiceImpl implements VehiculeService {
         existingVehicule.setCouleur(vehiculeRequestDTO.getCouleur());
         existingVehicule.setMarque(vehiculeRequestDTO.getMarque());
         existingVehicule.setPuissance(vehiculeRequestDTO.getPuissance());
-        existingVehicule.setKilométrage(vehiculeRequestDTO.getKilométrage());
+        existingVehicule.setKilometrage(vehiculeRequestDTO.getKilometrage());
         existingVehicule.setNbPortes(vehiculeRequestDTO.getNbPortes());
         return vehiculeMapper.vehiculeToVehiculeDTO(vehiculeRepository.save(existingVehicule));
     }
