@@ -33,6 +33,7 @@ export class ShareInformationComponent implements OnInit {
   time:any;
   isLoaded!: string;
   matricule!: any;
+  matriculeConfirm!:any;
   order: OrderRequest = new OrderRequest();
   order1: OrderRequest = new OrderRequest();
   date: Date= new Date();
@@ -54,6 +55,7 @@ export class ShareInformationComponent implements OnInit {
 
       people:['',[Validators.required]],
       matricule:['',[Validators.required]],
+      matriculeconf:['',[Validators.required]],
     details:['',[Validators.required]],
     loaded:['',[Validators.required]],
 
@@ -148,7 +150,7 @@ this.order.positionCAtt="todo"
 const whitespaceRemoved = this.tel.nationalNumber.replace(/\s/g, '');
 
 this.order.telephone=Number(whitespaceRemoved);
-if(whitespaceRemoved.length==8)
+if(whitespaceRemoved.length==8 && this.order.idVehicule==this.matriculeConfirm)
 {
   this.orderService.createOrder(this.order).subscribe( data =>{
 localStorage.setItem('id',data.id)
@@ -166,7 +168,7 @@ console.log(localStorage.getItem('id'))
 }
 else
 {
-  console.log("le numéro est invalide ")
+  console.log("le numéro est invalide ou matricule non confirmée ")
 }}}
 phoneForm = new FormGroup({
   phone: new FormControl('', [Validators.required])

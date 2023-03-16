@@ -125,10 +125,10 @@
         <label for="matricule" style="color: white;">Confirm Registration number *</label>
       </div>
       <div class="col-75">
-        <input class="input-field" type="number" id="matricule" name="matricule" placeholder="Your Registration number .." [(ngModel)]="order.idVehicule" class="form-control"
-        [ngClass]="{'is-invalid':submitted && registerForm.controls.matricule.errors}" formControlName="matricule"  >
-          <div *ngIf="submitted && registerForm.controls.matricule.errors" class="text-danger">
-            <div *ngIf="submitted && registerForm.controls.matricule.errors.required">
+        <input class="input-field" type="number" id="matriculeconf" name="matriculeconf" placeholder="Confirm your Registration number .." [(ngModel)]="matriculeConfirm" class="form-control"
+        [ngClass]="{'is-invalid':submitted && registerForm.controls.matriculeconf.errors}" formControlName="matriculeconf"  >
+          <div *ngIf="submitted && registerForm.controls.matriculeconf.errors" class="text-danger">
+            <div *ngIf="submitted && registerForm.controls.matriculeconf.errors.required">
                Confirming Registration number is required
             </div>
             </div>

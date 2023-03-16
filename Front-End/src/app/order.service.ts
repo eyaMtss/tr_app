@@ -30,4 +30,8 @@ export class OrderService {
   deleteOrder(id: number): Observable<Object>{
     return this.httpClient.delete("http://localhost:8091/AnnulerUnOrdre/"+`${id}`);
   }
+
+  getOrdre(id: number): Observable<OrderResponse>{
+    return this.httpClient.get<OrderResponse>("http://localhost:8091/Ordres/"+`${id}`);
+  }
 }

@@ -1,0 +1,22 @@
+<div class="container">
+  <table >
+    <tr>
+      <th>Matricule</th>
+      <th>Date Ordre</th>
+      <th>Idchauffeur</th>
+      <th> Id TA</th>
+      <th>Etat</th>
+    </tr>
+    <tr >
+      <td >{{idVehicule}}</td>
+      <td >{{orderTimeRequest}}</td>
+      <td >{{idC}}</td>
+      <td >{{idTA}}</td>
+      <td [ngClass]="test == 0 ? 'attente' : 'valide' " ></td>
+
+
+    </tr>
+
+  </table>
+
+</div>

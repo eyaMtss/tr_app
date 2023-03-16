@@ -8,6 +8,7 @@ import { SendPictureComponent } from './send-picture/send-picture.component';
 import { ShareInformationComponent } from './share-information/share-information.component';
 import { ShiftComponent } from './shift/shift.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 import { UserInformationComponent } from './user-information/user-information.component';
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
   {path: 'shift', component: ShiftComponent},
-
+  {path: 'suivi', component: SuiviOrdreComponent},
 
 
 ];

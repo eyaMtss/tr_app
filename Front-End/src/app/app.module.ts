@@ -21,6 +21,7 @@ import { WebcamModule } from 'ngx-webcam';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { AgmCoreModule } from '@agm/core';
+import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AgmCoreModule } from '@agm/core';
     PickUpPassComponent,
     OrderComponent,
     ShiftComponent,
+    SuiviOrdreComponent,
 
 
   ],
