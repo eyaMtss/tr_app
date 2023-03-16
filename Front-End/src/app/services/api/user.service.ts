@@ -46,7 +46,11 @@ export class UserService {
     return this.httpClient.put<User>(this._URL + "update/", user);
   }
 
-  /*editImage(): Observable<User>{
-    return this.httpClient.put<User>(this._URL + "update/");
-  }*/
+  public uploadImage(uploadImageData: FormData): Observable<any>{
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    return this.httpClient.post(this._URL+ "uploadImage", uploadImageData);
+  }
+  public getImage(profileId: number): Observable<any>{
+    return this.httpClient.get(this._URL + "getImage/" + profileId);
+  }
 }
