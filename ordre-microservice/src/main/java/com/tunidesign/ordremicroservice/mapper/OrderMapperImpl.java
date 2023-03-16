@@ -24,11 +24,15 @@ public class OrderMapperImpl implements OrderMapper {
                 .positionBLong(order.getPositionBLong())
                 .positionCAtt(order.getPositionCAtt())
                 .positionCLong(order.getPositionCLong())
+                .img1(order.getImg1())
+                .img2(order.getImg2())
+                .img3(order.getImg3())
                 .build();
     }
     @Override
     public Order orderRequestDTOToOrder(OrderRequestDTO orderRequestDTO) {
         return Order.builder()
+
                 .people(orderRequestDTO.getPeople())
                 .telephone(orderRequestDTO.getTelephone())
                 .breakdownType(orderRequestDTO.getBreakdownType())
@@ -43,6 +47,11 @@ public class OrderMapperImpl implements OrderMapper {
                 .positionBLong(orderRequestDTO.getPositionBLong())
                 .positionCAtt(orderRequestDTO.getPositionCAtt())
                 .positionCLong(orderRequestDTO.getPositionCLong())
+                .img1(orderRequestDTO.getImg1())
+                .img2(orderRequestDTO.getImg2())
+                .img3(orderRequestDTO.getImg3())
+
                 .build();
+
     }
 }

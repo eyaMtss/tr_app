@@ -4,10 +4,12 @@ import com.tunidesign.ordremicroservice.model.ennumeration.BreakdownType;
 import com.tunidesign.ordremicroservice.model.ennumeration.IsLoaded;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 @Entity
@@ -28,7 +30,7 @@ public class Order {
     private int telephone ;
     @Enumerated(EnumType.STRING)
     private BreakdownType breakdownType;
-    private int breakdownDetails;
+    private String breakdownDetails;
     @Enumerated(EnumType.STRING)
     private IsLoaded isLoaded ;
     private Date orderTimeRequest;
@@ -40,5 +42,14 @@ public class Order {
     private String positionBAtt;
     private String positionCLong;
     private String positionCAtt;
+    @Lob
+    @Column(length=10000000)
+    private byte[] img1;
+    @Lob
+    @Column(length=10000000)
+    private byte[] img2;
+    @Lob
+    @Column(length=10000000)
+    private byte[] img3;
 }
 

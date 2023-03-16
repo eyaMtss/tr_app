@@ -5,6 +5,7 @@ import com.tunidesign.ordremicroservice.model.ennumeration.IsLoaded;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Max;
 import lombok.*;
 
@@ -25,7 +26,7 @@ public class OrderRequestDTO {
         private int telephone ;
         @Enumerated(EnumType.STRING)
         private BreakdownType breakdownType;
-        private int breakdownDetails;
+        private String breakdownDetails;
         @Enumerated(EnumType.STRING)
         private IsLoaded isLoaded ;
         private Date orderTimeRequest;
@@ -36,5 +37,14 @@ public class OrderRequestDTO {
         private String positionBAtt;
         private String positionCLong;
         private String positionCAtt;
+        @Lob
+        @Column(length=10000000, columnDefinition="longblob")
+        private byte[] img1;
+        @Lob
+        @Column(length=10000000, columnDefinition="longblob")
+        private byte[] img2;
+        @Lob
+        @Column(length=10000000, columnDefinition="longblob")
+        private byte[] img3;
 
 }
