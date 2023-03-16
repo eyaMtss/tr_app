@@ -28,6 +28,11 @@ export class SignUpComponent implements OnInit {
   informationsForm!: FormGroup;
   currentRole: number = 1; //user is the default user
   isInformationsNextBtnDisabled: Boolean = true;
+  // image
+  retrievedImage: any;
+  viewedImage: any;
+  temporaryRetrievedImage: any;
+
   // addressForm
   addressForm!: FormGroup;
   isAddressNextBtnDisabled: Boolean = true;
@@ -138,7 +143,7 @@ export class SignUpComponent implements OnInit {
   getCredentialsForm(credentialsForm: FormGroup) {
     this.credentialsForm = credentialsForm;
     if (this.credentialsForm.valid) {
-      //this.isCredentialsNextBtnDisabled = false; // enable next btn
+      this.isCredentialsNextBtnDisabled = false; // enable next btn
       if (this.currentRole == 1) {
         this.client.password = this.credentialsForm.controls['password'].value;
         this.client.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
@@ -153,7 +158,7 @@ export class SignUpComponent implements OnInit {
       }
     }
     else {
-      //this.isCredentialsNextBtnDisabled = true; // disable next btn
+      this.isCredentialsNextBtnDisabled = true; // disable next btn
     }
   }
 
@@ -174,19 +179,37 @@ export class SignUpComponent implements OnInit {
   }
 
   signup() {
-    switch (this.currentRole) {
+    this.vehicleService.create(this.vehiculeValues[0]).subscribe(data => {
+      console.log(data);
+    })
+    /*switch (this.currentRole) {
       case 1: { //client
         this.userService.createClient(this.client).subscribe(res => {
             console.log(res);
-            /*this.vehiculeValues.forEach(vehicle => {
+            this.vehiculeValues.forEach(vehicle => {
               this.vehicleService.create(vehicle).subscribe(data => {
                 console.log(data);
               })
-            })*/
+            })
           });
 
         break;
       }
-    }
+    }*/
   }
+
+  //Gets called when the user clicks on save to upload the image
+  onUpload() {
+    if (this.informationsForm.controls['img'].value != undefined) { // if we change the image
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
+    //uploadImageData.append('profileId', (this.profile.profileId).toString());
+    this.userService.uploadImage(uploadImageData).subscribe(response => { // get api
+      this.viewedImage = this.temporaryRetrievedImage; // view the new image
+    });
+    }
+
+  }
+ 
 }
