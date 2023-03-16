@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddressComponent implements OnInit {
   addressForm: FormGroup;
-  countries = [{ id: 1, value: "Tunisie" }, { id: 2, value: "Algerie" }, { id: 3, value: "Lybia" }];
+  countries = [{ id: "TUN", value: "Tunisie" }, { id: "ALG", value: "Algerie" }, { id: "LYB", value: "Lybia" }];
   governorates: any[] = [];
   cities: any[] = [];
 
@@ -37,18 +37,18 @@ export class AddressComponent implements OnInit {
     this.getCities(this.addressForm.controls['country'].value, this.addressForm.controls['governorate'].value);
   }
 
-  getGovernorates(country: number) {
+  getGovernorates(country: string) {
     let governorate: string[] = [];
     let id: number = 0;
     switch (country) {
-      case 1: {
+      case "TUN": {
         this.governorates.splice(0);
         governorate = ["Ariana", "Béja", "Ben Arous", "Bizerte", "Gabès", "Gafsa", "Jendouba", "Kairouan",
           "Kasserine", "Kebili", "Kef", "Mahdia", "Manouba", "Medenine", "Monastir", "Nabeul", "Sfax",
           "Sidi Bouzid", "Siliana", "Sousse", "Tataouine", "Tozeur", "Tunis", "Zaghouan"];
         break;
       }
-      case 2: {
+      case "ALG": {
         this.governorates.splice(0);
         governorate = ["Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar",
           "Blida", "Bouira", "Tamanrasset", "Tébessa", "Tlemcen", "Tiaret", "Tizi Ouzou", "Alger", "Djelfa",
@@ -58,29 +58,31 @@ export class AddressComponent implements OnInit {
           "Mila", "Aïn Defla", "Naâma", "Aïn Témouchent", "Ghardaïa", "Relizane"];
         break;
       }
-      /*case 3: {
+      /*case "LYB": {
         this.governorates.splice(0);
         governorate = [];
         break;
       }*/
     }
-    governorate.forEach(e => this.governorates.push({ id: id + 1, value: e }));
+    this.governorates = governorate;
+    //governorate.forEach(e => this.governorates.push({ id: id + 1, value: e }));
   }
 
-  getCities(country: number, governorate: number) {
+  getCities(country: string, governorate: string) {
     let cities: string[] = [];
     let id: number = 0;
     console.log(country)
     switch (country) {
-      case 1: { // Tunisia
+      case "TUN": { // Tunisia
         console.log(governorate)
-        if(governorate == 1){
+        if(governorate == "Ariana"){
           cities = ["Ariana", "Sokra", "ghazela"];
         }
         break;
       }
     }
-    cities.forEach(e => this.cities.push({ id: id + 1, value: e }));
+    this.cities = cities;
+    //cities.forEach(e => this.cities.push({ id: id + 1, value: e }));
   }
 
   onFormChange(){
