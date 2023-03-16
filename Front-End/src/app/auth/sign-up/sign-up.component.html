@@ -5,29 +5,29 @@
             <div class="step-item">
                 <button class="step-button text-center" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    1
+                    <span><i class="fas fa-user"></i></span>
                 </button>
-                <div class="step-title color-text">
+                <div class="step-title color-text d-none d-md-block">
                     Informations
                 </div>
             </div>
-            <div class="step-item">
+            <div *ngIf="currentRole == 1" class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                     [disabled]="isInformationsNextBtnDisabled">
-                    2
+                    <span><i class="fas fa-map"></i></span>
                 </button>
-                <div class="step-title color-text">
+                <div class="step-title color-text d-none d-md-block">
                     Adresse
                 </div>
             </div>
             <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
-                    [disabled]="isInformationsNextBtnDisabled && isAddressNextBtnDisabled">
-                    3
+                    [disabled]="isAddressNextBtnDisabled">
+                    <span><i class="fas fa-car"></i></span>
                 </button>
-                <div class="step-title color-text">
+                <div class="step-title color-text d-none d-md-block">
                     Vehicule
                 </div>
             </div>
@@ -35,9 +35,9 @@
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
                     [disabled]="isInformationsNextBtnDisabled && isAddressNextBtnDisabled">
-                    4
+                    <span><i class="fas fa-key"></i></span>
                 </button>
-                <div class="step-title color-text">
+                <div class="step-title color-text d-none d-md-block">
                     Mot de passe
                 </div>
             </div>
@@ -66,10 +66,10 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionSignUp">
                 <div class="card-body">
                     <app-address (addressFormEvent)="getAddressForm($event)"></app-address>
-                    <mat-divider></mat-divider>
+                    <hr/>
                     <div class="d-flex justify-content-end">
-                        <button class="btn stepper_btn" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                        aria-controls="collapseTwo">Retour</button>
+                        <!--button class="btn stepper_btn" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo">Retour</button-->
                         <button class="btn stepper_btn" [disabled]="isAddressNextBtnDisabled"
                         type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
                         aria-expanded="false" aria-controls="collapseThree">Suivant</button>
@@ -85,24 +85,24 @@
                 <div class="card-body">
                     <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column">
                         <div class="d-flex justify-content-end mt-2">
-                            <button *ngIf="currentVehicleNumber > 2" mat-button
-                                class="btn border add-vehicle-btn shadow" mat-raised-button #tooltip="matTooltip"
-                                matTooltip="Supprimer" (click)="onDeleteButton(i)">
+                            <button *ngIf="currentVehicleNumber > 2" class="btn border add-vehicle-btn shadow" 
+                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer" (click)="onDeleteButton(i)">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
                         <app-add-vehicle (vehicleFormEvent)="getVehicleForm($event, i)"></app-add-vehicle>
                     </div>
-                    <mat-divider></mat-divider>
+                    <hr/>
                     <div class="d-flex justify-content-center my-2">
-                        <button class="btn border add-vehicle-btn shadow" (click)="onAddVehicleBtn()">
+                        <button class="btn border add-vehicle-btn shadow" (click)="onAddVehicleBtn()"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter un véhicule">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    <mat-divider></mat-divider>
+                    <hr/>
                     <div class="d-flex justify-content-end">
-                        <button class="btn stepper_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
-                        aria-expanded="false" aria-controls="collapseThree">Retour</button>
+                        <!--button class="btn stepper_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
+                        aria-expanded="false" aria-controls="collapseThree">Retour</button-->
                         <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Suivant</button>
                     </div>
@@ -116,11 +116,11 @@
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionSignUp">
                 <div class="card-body">
                     <app-credentials (credentialsFormEvent)="getCredentialsForm($event)"></app-credentials>
-                    <mat-divider></mat-divider>
+                    <hr/>
                     <div class="d-flex justify-content-end">
-                        <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Retour</button>
-                        <button class="btn stepper_btn"
+                        <!--button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Retour</button-->
+                        <button class="btn stepper_btn" [disabled]="isCredentialsNextBtnDisabled"
                         (click)="signup()">S'inscrire</button>
                     </div>
                 </div>
