@@ -8,6 +8,9 @@ import { User } from 'src/app/models/user';
 import { Client } from 'src/app/models/client';
 import { InsuranceAdmin } from 'src/app/models/insurance-admin';
 import { SocieteRemorquageAdmin } from 'src/app/models/societe-remorquage-admin';
+import { Vehicle } from 'src/app/models/vehicle';
+import { UserService } from 'src/app/services/api/user.service';
+import { VehicleService } from 'src/app/services/api/vehicle.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,18 +28,23 @@ export class SignUpComponent implements OnInit {
   informationsForm!: FormGroup;
   currentRole: number = 1; //user is the default user
   isInformationsNextBtnDisabled: Boolean = true;
+  // image
+  retrievedImage: any;
+  viewedImage: any;
+  temporaryRetrievedImage: any;
+
   // addressForm
   addressForm!: FormGroup;
   isAddressNextBtnDisabled: Boolean = true;
   // vehicule section when role = user
   maxVehicleNumber: number = 5; // 
   currentVehicleNumber: number = 1; // user must have at least 1 vehicule
-  vehiculeValues: any[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
+  vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
 
   // credentialsForm
   credentialsForm!: FormGroup;
   isCredentialsNextBtnDisabled: Boolean = true;
-  constructor(breakpointObserver: BreakpointObserver) {
+  constructor(breakpointObserver: BreakpointObserver, private userService: UserService, private vehicleService: VehicleService) {
     // responsive stepper
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -49,14 +57,15 @@ export class SignUpComponent implements OnInit {
 
   onAddVehicleBtn() { // add a new vehicule
     if (this.vehiculeValues.length < this.maxVehicleNumber) {
-      this.vehiculeValues.push({ value: "" });
+      this.vehiculeValues.push(new Vehicle());
       this.currentVehicleNumber += 1;
+      console.log(this.vehiculeValues);
     }
   }
 
   onDeleteButton(i: any): void {  //delete the i input field for vehiculesValues list
     if (this.vehiculeValues.length == 1)   //always keep a field
-      this.vehiculeValues[i].value = ""
+      this.vehiculeValues[i] = new Vehicle()
     else {
       this.vehiculeValues.splice(i, 1);
       this.currentVehicleNumber -= 1;
@@ -134,7 +143,7 @@ export class SignUpComponent implements OnInit {
   getCredentialsForm(credentialsForm: FormGroup) {
     this.credentialsForm = credentialsForm;
     if (this.credentialsForm.valid) {
-      //this.isCredentialsNextBtnDisabled = false; // enable next btn
+      this.isCredentialsNextBtnDisabled = false; // enable next btn
       if (this.currentRole == 1) {
         this.client.password = this.credentialsForm.controls['password'].value;
         this.client.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
@@ -149,7 +158,58 @@ export class SignUpComponent implements OnInit {
       }
     }
     else {
-      //this.isCredentialsNextBtnDisabled = true; // disable next btn
+      this.isCredentialsNextBtnDisabled = true; // disable next btn
     }
   }
+
+  getVehicleForm(vehicleForm: FormGroup, index: number) {
+    console.log(index);
+    console.log(vehicleForm);
+    this.vehiculeValues[index].typeImmat = vehicleForm.controls['registrationType'].value;
+    this.vehiculeValues[index].numImmat = vehicleForm.controls['registrationNumber'].value;
+    this.vehiculeValues[index].confirmNumImmat = vehicleForm.controls['confirmRegistrationNumber'].value;
+    this.vehiculeValues[index].marque = vehicleForm.controls['brand'].value;
+    this.vehiculeValues[index].numChassis = vehicleForm.controls['chassisNumber'].value;
+    this.vehiculeValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
+    this.vehiculeValues[index].couleur = vehicleForm.controls['color'].value;
+    this.vehiculeValues[index].kilometrage = vehicleForm.controls['kilometrage'].value;
+    this.vehiculeValues[index].puissance = vehicleForm.controls['power'].value;
+    this.vehiculeValues[index].nbPortes = vehicleForm.controls['doorsNumber'].value;
+    this.vehiculeValues[index].poids = vehicleForm.controls['weight'].value;
+  }
+
+  signup() {
+    this.vehicleService.create(this.vehiculeValues[0]).subscribe(data => {
+      console.log(data);
+    })
+    /*switch (this.currentRole) {
+      case 1: { //client
+        this.userService.createClient(this.client).subscribe(res => {
+            console.log(res);
+            this.vehiculeValues.forEach(vehicle => {
+              this.vehicleService.create(vehicle).subscribe(data => {
+                console.log(data);
+              })
+            })
+          });
+
+        break;
+      }
+    }*/
+  }
+
+  //Gets called when the user clicks on save to upload the image
+  onUpload() {
+    if (this.informationsForm.controls['img'].value != undefined) { // if we change the image
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
+    //uploadImageData.append('profileId', (this.profile.profileId).toString());
+    this.userService.uploadImage(uploadImageData).subscribe(response => { // get api
+      this.viewedImage = this.temporaryRetrievedImage; // view the new image
+    });
+    }
+
+  }
+ 
 }

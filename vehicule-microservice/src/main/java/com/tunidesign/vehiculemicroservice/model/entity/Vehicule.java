@@ -18,13 +18,16 @@ public class Vehicule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String typeImmat;
     private String numImmat;
+    private String confirmNumImmat;
+    private Long numChassis;
     private int poids;
     @Enumerated(EnumType.STRING)
     private Couleur couleur;
-    private int kilométrage;
+    private int kilometrage;
     private int nbPortes;
     private int puissance;
     @Enumerated(EnumType.STRING)
-    private com.tunidesign.vehiculemicroservice.model.ennumeration.Marque marque;
+    private Marque marque;
 }

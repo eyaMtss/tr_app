@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurmicroservice.keycloak;
+package com.tunidesign.contratmicroservice.keycloak;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,7 @@ public class ResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/v3/**", "/users/addClient", "/users/addCompanyAdmin",
-                        "/users/addInsuranceAdmin")
+                .requestMatchers("/swagger-ui/**", "/v3/**", "/contrat/verifyContrat", "/contrat/getAll")
                     .permitAll()
                 .and()
                 .authorizeRequests()

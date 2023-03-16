@@ -1,15 +1,18 @@
 package com.tunidesign.vehiculemicroservice.web;
 
+import com.tunidesign.vehiculemicroservice.DTO.ContratRequestDTO;
+import com.tunidesign.vehiculemicroservice.DTO.ContratResponseDTO;
 import com.tunidesign.vehiculemicroservice.DTO.VehiculeRequestDTO;
 import com.tunidesign.vehiculemicroservice.DTO.VehiculeResponseDTO;
+import com.tunidesign.vehiculemicroservice.exceptions.ContractNotFoundException;
 import com.tunidesign.vehiculemicroservice.exceptions.VehiculeIntrouvableException;
 import com.tunidesign.vehiculemicroservice.model.entity.Vehicule;
 import com.tunidesign.vehiculemicroservice.service.VehiculeServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -19,6 +22,8 @@ import java.util.List;
 public class VehiculeController {
     @Autowired
     private VehiculeServiceImpl vehiculeService;
+    @Autowired
+    private RestTemplate restTemplate;
     @GetMapping("/getAll")
     public ResponseEntity<List<VehiculeResponseDTO>> listeVehicules()
     {
@@ -36,12 +41,28 @@ public class VehiculeController {
     @PostMapping("/add")
     public ResponseEntity<VehiculeResponseDTO> ajouterUneVehicule(@RequestBody VehiculeRequestDTO vehiculeRequestDTO)
     {
-        try {
+        ContratResponseDTO contratResponseDTO = verifyContract(ContratRequestDTO.builder()
+                .numContrat(vehiculeRequestDTO.getNumContrat())
+                .numChassis(vehiculeRequestDTO.getNumChassis())
+                .build()).getBody();
+        if (contratResponseDTO.getIsExist()){
             VehiculeResponseDTO savedVehicle = vehiculeService.save(vehiculeRequestDTO);
             return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
-        } catch (Exception e) {
-            throw new VehiculeIntrouvableException(e.getMessage());
         }
+        else {
+            throw new ContractNotFoundException("You don't have a contract");
+        }
+    }
+
+    // verify numContrat if exist
+    private ResponseEntity<ContratResponseDTO> verifyContract(ContratRequestDTO contratRequestDTO) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity(contratRequestDTO, headers);
+        ResponseEntity<ContratResponseDTO> response = restTemplate.postForEntity("http://localhost:5053/contrat/verifyContrat",
+                request, ContratResponseDTO.class);
+        System.out.println("Response: " + response.getBody());
+        return response;
     }
 
     @DeleteMapping("/Delete/{id}")

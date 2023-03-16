@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -33,7 +33,7 @@ export class AddVehicleComponent {
   vehicleForm: FormGroup;
   isRegistrationTypeSelected: boolean = false;
 
-
+  @Output() vehicleFormEvent = new EventEmitter<FormGroup>();
   constructor(private _formBuilder: FormBuilder){
     this.vehicleForm = this._formBuilder.group({
       registrationType: ["", Validators.required],
@@ -61,5 +61,15 @@ export class AddVehicleComponent {
     this.vehicleForm.updateValueAndValidity()
   }
 
+  onFormChange(){
+    //this.informationForm.valueChanges.subscribe(val => {
+      if(this.vehicleForm.valid){
+        this.emitInformationForm(this.vehicleForm);
+      }
+    //});  
+  }
 
+  emitInformationForm(value: FormGroup) {
+    this.vehicleFormEvent.emit(value);
+  }
 }

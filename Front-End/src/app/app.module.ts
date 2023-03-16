@@ -63,11 +63,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       useClass: ErrorsCatchingInterceptor,
       multi: true
     },
-    {
+    /*{
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    },
+    },*/
   ],
   bootstrap: [AppComponent]
 })

@@ -18,8 +18,8 @@ const routes: Routes = [
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingPageComponent},
   {path: 'pass', component: PickUpPassComponent},
-  {path: 'order', component: OrderComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
-  {path: 'shift', component: ShiftComponent},
+  {path: 'order', component: OrderComponent},
+  {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
 
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },

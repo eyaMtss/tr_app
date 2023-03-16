@@ -1,6 +1,5 @@
 package com.tunidesign.apigateway.config;
 
-import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,10 +28,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
-        http
+        http.cors().and()
 
                 .authorizeExchange()
-                    .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll").permitAll()
+                    .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll",
+                            "/users/addClient", "/users/addCompanyAdmin", "/users/addInsuranceAdmin",
+                            "/vehicule/add")
+                        .permitAll()
 
 //                .and()
 //                    .authorizeExchange()

@@ -19,7 +19,7 @@ export class InformationsComponent implements OnInit {
   companyList: Company[] = []; // company(insurance / société remorquage)
   companyLabel!: string;
 
-  genreList = [{id: 1, value: "Féminin"}, {id: 2, value: "Masculin"}];
+  genreList = [{id: "F", value: "Féminin"}, {id: "M", value: "Masculin"}];
   @Output() informationsFormEvent = new EventEmitter<FormGroup>();
   constructor(private _formBuilder: FormBuilder, private societeRemorquageService: SocieteRemorquageService,
     private insuranceService: InsuranceService) {
@@ -32,7 +32,8 @@ export class InformationsComponent implements OnInit {
       gender: ["", Validators.required],
       birthdate: ["", Validators.required],
       company: [{ value: '', disabled: true }, Validators.required],
-      matriculeFiscale: [{ value: '', disabled: true }, Validators.required]
+      matriculeFiscale: [{ value: '', disabled: true }, Validators.required],
+      img: [""]
     });
   }
 
@@ -52,6 +53,7 @@ export class InformationsComponent implements OnInit {
     reader.onload = (_event) => {
       this.viewedImage = reader.result;
     }
+    this.informationForm.controls['img'].setValue(this.selectedUserImage);
   }
 
   onRoleChange() {
@@ -72,6 +74,7 @@ export class InformationsComponent implements OnInit {
         break;
       }
       case 3: { //société de remorquage
+        console.log(this.currentRole);
         this.informationForm.controls['company'].enable();
         this.informationForm.controls['matriculeFiscale'].enable();
         this.getAllSocietesRemorquage();
