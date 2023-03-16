@@ -3,7 +3,11 @@
         <div class="col-12 col-md-4 mb-3">
             <label for="immatriculationType">Type d'immatriculation</label>
             <select class="form-select" formControlName="registrationType" id="immatriculationType"
-                (change)="onRegistrationTypeChange()">
+                (change)="onRegistrationTypeChange()"  [ngClass]="{
+                    'is-invalid':
+                        vehicleForm.get('registrationType')!.touched &&
+                        vehicleForm.controls['registrationType'].errors
+                }">
                 <option *ngFor="let registrationType of registrationTypes" [value]="registrationType.id">
                     {{registrationType.value}}
                 </option>
@@ -15,21 +19,35 @@
             <label for="registrationNumber">N° d'immatriculation</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="N° d'immatriculation" 
-                    id="registrationNumber" type="text" formControlName="registrationNumber" />
+                    id="registrationNumber" type="text" formControlName="registrationNumber" 
+                    [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('registrationNumber')!.touched &&
+                            vehicleForm.controls['registrationNumber'].errors
+                    }"/>
             </div>
         </div>
         <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
             <label for="confirmRegistrationNumber">Confirmer le N° d'immatriculation</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="Confirmer le N° d'immatriculation" 
-                    id="confirmRegistrationNumber" type="text" formControlName="confirmRegistrationNumber" />
+                    id="confirmRegistrationNumber" type="text" formControlName="confirmRegistrationNumber" 
+                    [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('confirmRegistrationNumber')!.touched &&
+                            vehicleForm.controls['confirmRegistrationNumber'].errors
+                    }"/>
             </div>
         </div>
         <div *ngIf="isRegistrationTypeSelected" class="col-12 col-md-4">
             <label for="chassisNumber">N° de châssis</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="N° de châssis" id="chassisNumber" type="text"
-                    formControlName="chassisNumber" />
+                    formControlName="chassisNumber" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('chassisNumber')!.touched &&
+                            vehicleForm.controls['chassisNumber'].errors
+                    }"/>
             </div>
         </div>
 
@@ -37,21 +55,34 @@
             <label for="contractNumber">Numero du contrat</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="Numero du contrat" id="contractNumber" type="text"
-                    formControlName="contractNumber" />
+                    formControlName="contractNumber" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('contractNumber')!.touched &&
+                            vehicleForm.controls['contractNumber'].errors
+                    }"/>
             </div>
         </div>
 
         <div class="col-12 col-md-4">
             <label for="brand">Marque</label>
-            <select class="form-select" formControlName="brand" id="brand">
+            <select class="form-select" formControlName="brand" id="brand"  [ngClass]="{
+                'is-invalid':
+                    vehicleForm.get('brand')!.touched &&
+                    vehicleForm.controls['brand'].errors
+            }">
                 <option *ngFor="let brand of brands" [value]="brand.id">{{brand.value}}</option>
             </select>
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 mt-3 mt-md-0">
             <label for="chassisNumber">Couleur</label>
             <div class="input-group mb-3">
-                <input class="form-control" placeholder="Couleur" id="color" type="text" formControlName="color" />
+                <input class="form-control" placeholder="Couleur" id="color" type="text" 
+                formControlName="color" [ngClass]="{
+                    'is-invalid':
+                        vehicleForm.get('color')!.touched &&
+                        vehicleForm.controls['color'].errors
+                }"/>
             </div>
         </div>
 
@@ -59,7 +90,11 @@
             <label for="contractNumber">Nombre de portes</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="Nombre de portes" id="doorsNumber" type="number"
-                    formControlName="doorsNumber" min="2" max="4"/>
+                    formControlName="doorsNumber" min="2" max="4" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('doorsNumber')!.touched &&
+                            vehicleForm.controls['doorsNumber'].errors
+                    }"/>
                     <!--(keypress)="notWritableField()"
                     (blur)="notWritableField()"-->
             </div>
@@ -68,7 +103,12 @@
         <div class="col-12 col-md-3">
             <label for="kilometrage">Kilométrage</label>
             <div class="input-group mb-3">
-                <input class="form-control" placeholder="Kilométrage" id="kilometrage" type="number" formControlName="kilometrage" />
+                <input class="form-control" placeholder="Kilométrage" id="kilometrage" type="number" 
+                formControlName="kilometrage" [ngClass]="{
+                    'is-invalid':
+                        vehicleForm.get('kilometrage')!.touched &&
+                        vehicleForm.controls['kilometrage'].errors
+                }"/>
                 <span class="input-group-text d-flex justify-content-center">km/h</span>
             </div>
         </div>
@@ -76,7 +116,12 @@
         <div class="col-12 col-md-3">
             <label for="power">Puissance</label>
             <div class="input-group mb-3">
-                <input class="form-control" placeholder="Puissance" id="power" type="number" formControlName="power" />
+                <input class="form-control" placeholder="Puissance" id="power" type="number" 
+                formControlName="power" [ngClass]="{
+                    'is-invalid':
+                        vehicleForm.get('power')!.touched &&
+                        vehicleForm.controls['power'].errors
+                }"/>
                 <span class="input-group-text d-flex justify-content-center">ch</span>
             </div>
         </div>
@@ -84,7 +129,12 @@
         <div class="col-12 col-md-3">
             <label for="weight">Poids</label>
             <div class="input-group mb-3">
-                <input class="form-control" placeholder="Poids" id="weight" type="number" formControlName="weight" />
+                <input class="form-control" placeholder="Poids" id="weight" type="number" 
+                formControlName="weight" [ngClass]="{
+                    'is-invalid':
+                        vehicleForm.get('weight')!.touched &&
+                        vehicleForm.controls['weight'].errors
+                }"/>
                 <span class="input-group-text d-flex justify-content-center">Kg</span>
             </div>
         </div>

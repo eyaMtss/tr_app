@@ -4,28 +4,45 @@
             <div class="mb-3">
                 <label for="country">Pays</label>
                 <select class="form-select" aria-label="Default select example" formControlName="country"
-                    id="country" (change)="onCountryChange()">
+                    id="country" (change)="onCountryChange()" [ngClass]="{
+                        'is-invalid':
+                            addressForm.get('country')!.touched &&
+                            addressForm.controls['country'].errors
+                    }">
                     <option *ngFor="let country of countries" [value]="country.id">{{country.value}}</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="governorate">Governorat</label>
                 <select class="form-select" aria-label="Default select example" formControlName="governorate"
-                    id="governorate" (change)="onGovernorateChange()">
-                    <option *ngFor="let governorate of governorates" [value]="governorate.id">{{governorate.value}}</option>
+                    id="governorate" (change)="onGovernorateChange()" [ngClass]="{
+                        'is-invalid':
+                            addressForm.get('governorate')!.touched &&
+                            addressForm.controls['governorate'].errors
+                    }">
+                    <option *ngFor="let governorate of governorates" [value]="governorate">{{governorate}}</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="city">Cité</label>
-                <select class="form-select" aria-label="Default select example" formControlName="city" id="city">
-                    <option *ngFor="let city of cities" [value]="city.id">{{city.value}}</option>
+                <select class="form-select" aria-label="Default select example" formControlName="city" 
+                id="city" [ngClass]="{
+                    'is-invalid':
+                        addressForm.get('city')!.touched &&
+                        addressForm.controls['city'].errors
+                }">
+                    <option *ngFor="let city of cities" [value]="city">{{city}}</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="zipCode">Code postal</label>
                 <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Code postal" id="zipCode" type="text"
-                        formControlName="zipCode"/>
+                    <input class="form-control" placeholder="Code postal" id="zipCode" type="number"
+                        formControlName="zipCode" [ngClass]="{
+                            'is-invalid':
+                                addressForm.get('zipCode')!.touched &&
+                                addressForm.controls['zipCode'].errors
+                        }"/>
                 </div>
             </div>
         </div>
