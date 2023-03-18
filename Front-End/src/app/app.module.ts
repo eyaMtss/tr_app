@@ -22,6 +22,7 @@ import { ErrorsCatchingInterceptor } from './httpInterceptor/errors-catching.int
 import { RequestInterceptor } from './httpInterceptor/request.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QrCodeComponent } from './qr-code/qr-code.component';
 @NgModule({
 
   declarations: [
@@ -34,7 +35,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrderComponent,
     ShiftComponent,
     AccessDeniedComponent,
-    NavbarComponent
+    NavbarComponent,
+    QrCodeComponent
 
   ],
   imports: [
