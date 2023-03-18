@@ -1,1 +1,34 @@
-<p>qr-code works!</p>
+<div class="modal-header">
+    <h3 class="modal-title">
+        {{currentOrder.id_vehicule}}
+    </h3>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+
+    <div class="row">
+        <div class="col-12">
+            {{currentOrder.order_time_request | date:"EEEE, d MMM yyyy - hh-mm-ss"}}
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <qrcode [qrdata]="currentOrder | json" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+            <p class="p-3">Statut:</p>
+            <div class=""></div>
+            <p class="border p-3 rounded" [ngStyle]="{
+                'background-color':setBackgroundColor('PICKED_UP')
+            }">
+                <span style="color: white;"> Picked up </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer border">
+    <div class="me-1">
+        <button #closeModal type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+            Ok
+        </button>
+    </div>
+</div>
