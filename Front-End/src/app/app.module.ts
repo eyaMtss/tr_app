@@ -23,6 +23,7 @@ import { RequestInterceptor } from './httpInterceptor/request.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrCodeComponent } from './qr-code/qr-code.component';
+import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
 @NgModule({
 
   declarations: [
@@ -36,7 +37,8 @@ import { QrCodeComponent } from './qr-code/qr-code.component';
     ShiftComponent,
     AccessDeniedComponent,
     NavbarComponent,
-    QrCodeComponent
+    QrCodeComponent,
+    QrCodeTestComponent
 
   ],
   imports: [
