@@ -4,9 +4,11 @@ import { OrderRequest } from '../order-request';
 import { OrderService } from '../order.service';
 import {CountryISO,SearchCountryField} from "ngx-intl-tel-input";
 import { FormGroup, FormControl, Validators , FormBuilder} from '@angular/forms';
-import { GoogleMapsModule ,MapMarker, MapInfoWindow } from '@angular/google-maps'
+import { GoogleMapsModule ,MapMarker, MapInfoWindow, MapDirectionsService } from '@angular/google-maps'
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { DOCUMENT } from '@angular/common';
+import { map, Observable } from 'rxjs';
+
 
 
 
@@ -19,6 +21,11 @@ export class ShareInformationComponent implements OnInit {
   isApiLoaded = false;
   markers = []  as  any;
   currentAdress=""
+  public lat = 24.799448;
+public lng = 120.979021;
+
+testRoute=false
+testOrigin=false
   longA!:any
   attA!:any;
   longB!:any
@@ -40,22 +47,52 @@ export class ShareInformationComponent implements OnInit {
   message=""
   messageR=''
   center!: google.maps.LatLngLiteral;
+  center1!: google.maps.LatLngLiteral;
   tel!:any
   SearchCountryField = SearchCountryField;
   CountryISO = CountryISO;
+destinationT1=0
+destinationT2=0
+originT1=0
+originT2=0
+serie!:any
+num!:any
+immatType!:any
+isRegistrationTypeSelected: boolean = false;
+registrationTypes = [{id: 1, value: "Série Normale (TU)"}, {id: 2, value: "Régime Suspensif (RS)"},
+{id: 3, value: "Moto (MOTO)"}, {id: 4, value: "Tracteur (TRAC)"}, {id: 5, value: "Personnel Administratif et Technique (PAT)"},
+{id: 6, value: "Chef de Mission Diplomatique (CMD)"}, {id: 7, value: "Corps Diplomatique (CD)"},
+{id: 8, value: "Misiion Diplomatique (MD)"}, {id: 9, value: "Misiion Consulaire (MC)"},
+{id: 10, value: "Corps Consulaire (CC)"}, {id: 11, value: "Remorque (REM)"},
+{id: 12, value: "Appareil Agricol (AA)"}, {id: 13, value: "Engin Spécial (ES)"}, {id: 14, value: "Propriété de l'Etat (PE)"},
+{id: 15, value: "Immatriculation Temporaire (IT)"}, {id: 16, value: "Immatriculation Etrangère ou Douanière"}]
+
+ directionsResults$!: Observable<google.maps.DirectionsResult|undefined>;
+
   registerForm!:FormGroup
    submitted=false
+
+
+
   constructor(private router: Router ,private orderService: OrderService ,private formBuilder:FormBuilder, @Inject(DOCUMENT) private document: Document,
-  private elementRef: ElementRef) { }
+  private elementRef: ElementRef,private mapDirectionsService: MapDirectionsService) {
+
+
+  }
 
   ngOnInit(): void {
+
+
+
+
+
+
     this.registerForm = this.formBuilder.group({
       location:['',[]],
       destination:['',[Validators.required]],
 
       people:['',[Validators.required]],
-      matricule:['',[Validators.required]],
-      matriculeconf:['',[Validators.required]],
+
     details:['',[Validators.required]],
     loaded:['',[Validators.required]],
 
@@ -66,6 +103,9 @@ export class ShareInformationComponent implements OnInit {
     })
 
     navigator.geolocation.getCurrentPosition((position) => {
+
+    this.testOrigin=false
+
       let geocoder = new google.maps.Geocoder;
       this.center = {
 
@@ -73,9 +113,26 @@ export class ShareInformationComponent implements OnInit {
         lng: position.coords.longitude,
 
       }
+      this.originT1= position.coords.latitude,
+      this.originT2=position.coords.longitude,
+      console.log("originT1",this.originT1)
+      console.log("originT2",this.originT2)
       this.attA=position.coords.latitude;
-      this.longA=position.coords.longitude,
-      this.markers.push({
+      this.longA=position.coords.longitude;
+      if(this.testRoute==false )
+  {
+    this.destinationT1=this.originT1;
+    this.destinationT2=this.originT2;
+  }
+      const request: google.maps.DirectionsRequest = {
+        destination: {lat: this.destinationT1, lng: this.destinationT2},
+        origin: {lat: this.originT1, lng: this.originT2},
+        travelMode: google.maps.TravelMode.DRIVING
+      };
+      this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map(response => response.result));
+
+      this.testOrigin=true
+      this.markers[0]={
         position: {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
@@ -84,9 +141,21 @@ export class ShareInformationComponent implements OnInit {
 
         title: 'Your position ',
         info: 'Your position ',
-        options: { animation: google.maps.Animation.BOUNCE },
+        options: { animation: google.maps.Animation.DROP },
 
-      });
+      }
+   /*   this.markers.push({
+        position: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+
+
+        title: 'Your position ',
+        info: 'Your position ',
+        options: { animation: google.maps.Animation.DROP },
+
+      });*/
         geocoder
         .geocode({ location: this.center })
         .then((response) => {
@@ -106,6 +175,7 @@ export class ShareInformationComponent implements OnInit {
 
 
 
+    this.testOrigin=true
 
 
 
@@ -114,7 +184,13 @@ export class ShareInformationComponent implements OnInit {
   }
 
 
+  onRegistrationTypeChange(e: any){
+    this.isRegistrationTypeSelected = true;
+    this.immatType=e.target.value
+    console.log(this.immatType);
+    console.log(this.registrationTypes[this.immatType-1].value)
 
+  }
   confirm()
 {
  /* console.log(this.pickUpLocation)
@@ -131,9 +207,8 @@ export class ShareInformationComponent implements OnInit {
 }
 saveOrder(){
 
-  this.submitted = true
-  console.log(this.attA);
-  console.log(this.longA)
+
+
 
     if(this.registerForm.invalid || this.currentAdress==''&&this.attA==null&&this.longA==null){
       this.messageR="location required"
@@ -142,6 +217,9 @@ saveOrder(){
 else{
   this.messageR=''
 this.order.positionALong=this.longA;
+this.order.typeImmatriculation=this.registrationTypes[this.immatType-1].value
+
+
 this.order.positionAAtt=this.attA
 this.order.positionBLong=this.longB
 this.order.positionBAtt=this.attB
@@ -150,7 +228,9 @@ this.order.positionCAtt="todo"
 const whitespaceRemoved = this.tel.nationalNumber.replace(/\s/g, '');
 
 this.order.telephone=Number(whitespaceRemoved);
-if(whitespaceRemoved.length==8 && this.order.idVehicule==this.matriculeConfirm)
+console.log(this.order.telephone);
+console.log(this.order.numImmatriculation);
+if(whitespaceRemoved.length==8 )
 {
   this.orderService.createOrder(this.order).subscribe( data =>{
 localStorage.setItem('id',data.id)
@@ -183,12 +263,16 @@ options: any = {
 
 
 handleAddressChangeLocation(address: Address) {
+  this.testOrigin=false
   this.attA=address.geometry.location.lat()
   this.longA=address.geometry.location.lng()
   console.log(address.formatted_address)
   console.log(typeof address.geometry.location.lat())
   console.log(address.geometry.location.lng())
-  this.markers.push({
+  this.originT1= address.geometry.location.lat(),
+  this.originT2=address.geometry.location.lng(),
+
+  this.markers[0]={
     position: {
       lat: address.geometry.location.lat(),
       lng: address.geometry.location.lng(),
@@ -196,17 +280,35 @@ handleAddressChangeLocation(address: Address) {
 
     title: "Your destination " ,
     info: "Your destination ",
-    options: { animation: google.maps.Animation.BOUNCE },
-  });
+    options: { animation: google.maps.Animation.DROP },
+  }
+  if(this.testRoute==false )
+  {
+    this.destinationT1=this.originT1;
+    this.destinationT2=this.originT2;
+  }
+
+  const request: google.maps.DirectionsRequest = {
+    destination: {lat: this.destinationT1, lng: this.destinationT2},
+    origin: {lat: this.originT1, lng: this.originT2},
+    travelMode: google.maps.TravelMode.DRIVING
+  };
+  this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map(response => response.result));
+
+  this.testOrigin=true
 }
 handleAddressChangeDestination(address: Address) {
+  this.testRoute=false
   this.attB=address.geometry.location.lat()
   this.longB=address.geometry.location.lng()
   console.log(address.formatted_address)
+  this.destinationT1= address.geometry.location.lat(),
+  this.destinationT2=address.geometry.location.lng(),
+
 
   console.log(typeof address.geometry.location.lat())
   console.log(address.geometry.location.lng())
-  this.markers.push({
+  this.markers[1]={
     position: {
       lat: address.geometry.location.lat(),
       lng: address.geometry.location.lng(),
@@ -216,8 +318,21 @@ handleAddressChangeDestination(address: Address) {
     ,
     title: "Your destination " ,
     info: "Your destination ",
-    options: { animation: google.maps.Animation.BOUNCE },
-  });
+    options: { animation: google.maps.Animation.DROP },
+  }
+  if(this.testOrigin==false )
+  {
+    this.originT1=this.destinationT1;
+    this.originT2=this.destinationT2;
+  }
+
+  const request: google.maps.DirectionsRequest = {
+    destination: {lat: this.destinationT1, lng: this.destinationT2},
+    origin: {lat: this.originT1, lng: this.originT2},
+    travelMode: google.maps.TravelMode.DRIVING
+  };
+  this.directionsResults$ = this.mapDirectionsService.route(request).pipe(map(response => response.result));
+  this.testRoute=true
 }
 
 
@@ -225,6 +340,10 @@ openInfo(marker: MapMarker, content: string) {
   this.infoContent = content;
   this.info.open(marker)
 }
+
+
+
+
 
 
 

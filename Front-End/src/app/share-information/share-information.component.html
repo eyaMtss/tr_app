@@ -9,31 +9,21 @@
 <h2 style="text-align: center; color: white;">Share your informations please</h2>
 
 <div class="col-6 offset-3">
+<span>
 
+</span>
 </div>
 <div class="container">
-  <div style="margin-left: 300px;">
-  <google-map >
 
-    <map-marker
-    *ngFor="let marker of markers"
-    [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title"
-    [options]="marker.options"
-
-  >
-  </map-marker>
-
-  </google-map>
-</div>
   <form (submit)="saveOrder()" [formGroup]="registerForm">
+    <div style="display:flex ;  margin-left: 60px;
+   ">
     <div class="row form-group">
       <div class="col-25">
-        <label for="location" style="color: white;">PickUp Location *</label>
+        <label for="location" style="color: white;margin-left: 20px;"> Location </label>
       </div>
       <div class="col-75">
-        <input class="form-control"
+        <input class="form-control" style="margin-left: 20px;"
         ngx-google-places-autocomplete
         [options]="options"
         (onAddressChange)="handleAddressChangeLocation($event)"
@@ -50,10 +40,10 @@
 
     <div class="row">
       <div class="col-25">
-        <label for="destination" style="color: white;">Destination *</label>
+        <label for="destination" style="color: white;margin-left: 50px;">Destination </label>
       </div>
       <div class="col-75">
-        <input class="form-control"
+        <input class="form-control"  style="margin-left: 60px;"
         ngx-google-places-autocomplete
         [options]="options"
         (onAddressChange)="handleAddressChangeDestination($event)"
@@ -65,6 +55,26 @@
             </div>
     </div>
       </div>
+    </div>
+  </div>
+
+    <div style="margin-left: 300px;"  >
+      <google-map>
+
+        <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [options]="marker.options"
+
+      >
+      </map-marker>
+     <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
+                               [directions]="directionsResults"></map-directions-renderer>
+
+
+      </google-map>
     </div>
     <div class="row">
       <div class="col-25">
@@ -106,7 +116,7 @@
       </div>
       </div>
     </div>
-    <div class="row">
+ <!--   <div class="row">
       <div class="col-25">
         <label for="matricule" style="color: white;">Registration number *</label>
       </div>
@@ -119,21 +129,455 @@
             </div>
             </div>
       </div>
-    </div>
+    </div>-->
+
+
     <div class="row">
       <div class="col-25">
-        <label for="matricule" style="color: white;">Confirm Registration number *</label>
-      </div>
-      <div class="col-75">
-        <input class="input-field" type="number" id="matriculeconf" name="matriculeconf" placeholder="Confirm your Registration number .." [(ngModel)]="matriculeConfirm" class="form-control"
-        [ngClass]="{'is-invalid':submitted && registerForm.controls.matriculeconf.errors}" formControlName="matriculeconf"  >
-          <div *ngIf="submitted && registerForm.controls.matriculeconf.errors" class="text-danger">
-            <div *ngIf="submitted && registerForm.controls.matriculeconf.errors.required">
-               Confirming Registration number is required
-            </div>
-            </div>
-      </div>
+      <label for="immatriculationType" style="color:white">Type d'immatriculation</label>
     </div>
+    <div class="col-75">
+      <select class="form-select" formControlName="registrationType" id="immatriculationType"
+          (change)="onRegistrationTypeChange($event)"  >
+
+          <option *ngFor="let registrationType of registrationTypes" [value]="registrationType.id" >
+              {{registrationType.value}}
+          </option>
+      </select>
+  </div>
+</div>
+<form>
+<div  class="row" *ngIf="immatType==1" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+
+     <input placeholder="N°" type="number"  [(ngModel)]="this.order.numImmatriculation"  id="numImmatriculation" name="numImmatriculation">
+     <label style="color:white">TU </label>
+     <input placeholder="Série" type="number" [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="N°" type="number">
+      <label style="color:white">TU </label>
+      <input placeholder="Série" type="number">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX"  [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==2" style=" border: 3px rgb(255, 255, 255) groove;" >
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ن ت</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation" >
+     <label style="color:white">RS </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*)</label>
+    <span>
+      <label style="color:white">ن ت</label>
+     <input placeholder="xxxxxx">
+     <label style="color:white">RS </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*)</label>
+    <span>
+      <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==3" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">د ن</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white">MOTO </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*)</label>
+    <span>
+      <label style="color:white">د ن</label>
+     <input placeholder="xxxxxx">
+     <label style="color:white">MOTO </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*)</label>
+    <span>
+      <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+
+</form>
+<form>
+<div class="row" *ngIf="immatType==4" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ج ف</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white">TRAC  </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*)</label>
+    <span>
+      <label style="color:white">ج ف</label>
+     <input placeholder="xxxxxx">
+     <label style="color:white">TRAC  </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*)</label>
+    <span>
+      <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+
+</form>
+<form>
+<div class="row" *ngIf="immatType==5" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white">PAT م أ ف  </label>
+     <input placeholder="XXXX" [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white">PAT م أ ف  </label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+
+<div class="row" *ngIf="immatType==6" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> CMD ر ب د </label>
+     <input placeholder="XXXX" [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white"> CMD ر ب د </label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX"  [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==7" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> CD س د </label>
+     <input placeholder="XXXX" [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white"> CD س د </label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==8" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> MD ب د</label>
+     <input placeholder="XXXX"  [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white">MD ب د</label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==9" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> MC ث ق</label>
+     <input placeholder="XXXX"  [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white">MC ث ق</label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==10" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXX"  [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> CC س ق</label>
+     <input placeholder="XXXX"  [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXX">
+      <label style="color:white">CC س ق</label>
+      <input placeholder="XXXX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+
+<div class="row" *ngIf="immatType==11" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ع م</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white">REM  </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ع م</label>
+      <input placeholder="xxxxxx">
+      <label style="color:white">REM  </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+      <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==12" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">أ ف</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation">
+     <input placeholder="xxxxxx" >
+     <label style="color:white">AA </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">أ ف</label>
+     <input placeholder="xxxxxx">
+     <label style="color:white">AA </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+      <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==13" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">م خ</label>
+     <input placeholder="xxxxxx" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white">ES </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">م خ</label>
+      <input placeholder="xxxxxx">
+      <label style="color:white">ES </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+      <input placeholder="XXXXX"  [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==14" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+     <input placeholder="XXXXXX" [(ngModel)]="this.order.numImmatriculation">
+     <label style="color:white"> -PE</label>
+     <input placeholder="XX" [(ngModel)]="this.order.serie">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <input placeholder="XXXXXX">
+      <label style="color:white">-PE</label>
+      <input placeholder="XX">
+    </span>
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+     <input placeholder="XXXXX" [(ngModel)]="order.numChassis">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==15" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ت م</label>
+     <input placeholder="xxxxx">
+     <label style="color:white">IT </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° d'immatriculation (*):</label>
+    <span>
+      <label style="color:white">ت م</label>
+      <input placeholder="xxxxx">
+      <label style="color:white">IT </label>
+    </span>
+
+  </div>
+  <div>
+    <label style="color:white">Tapez les 5 derniers caractères du N° de châssis (*):</label>
+    <span>
+      <input placeholder="XXXXX">
+    </span>
+  </div>
+</div>
+</form>
+<form>
+<div class="row" *ngIf="immatType==16" style=" border: 3px rgb(255, 255, 255) groove;">
+  <div>
+    <label style="color:white">Indiquer le N° de châssis (*):</label>
+    <span>
+
+     <input >
+     <label style="color:white">N° Châssis </label>
+    </span>
+  </div>
+
+  <div>
+    <label style="color:white">Confirmer le N° de châssis (*) :</label>
+    <span>
+      <input >
+      <label style="color:white">N° Châssis </label>
+    </span>
+
+  </div>
+</div>
+</form>
+
     <div class="row">
       <div class="col-25">
         <label for="isloaded"  style="color: white;">Is it a loaded vehicle?*</label>

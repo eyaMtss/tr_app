@@ -12,5 +12,9 @@ export class OrderResponse {
   positionBAtt!:string
   positionCLong!:string
   positionCAtt!:string
+  numImmatriculation!:number ;
+  numChassis!:number ;
+  typeImmatriculation!:string;
+  serie!:number;
 
 }
