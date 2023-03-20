@@ -32,7 +32,7 @@ public class OrderResponseDTO {
     private IsLoaded isLoaded;
     private Date orderTimeRequest;
     private Date orderTimeAccept;
-    private int idVehicule;
+    private int serie;
     private String positionALong;
     private String positionAAtt;
     private String positionBLong;
@@ -45,4 +45,9 @@ public class OrderResponseDTO {
     private byte[] img2;
     @Lob
     private byte[] img3;
+
+    private String typeImmatriculation;
+    private int numImmatriculation ;
+    private int numChassis ;
+
 }

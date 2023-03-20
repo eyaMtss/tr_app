@@ -30,7 +30,7 @@ public class OrderRequestDTO {
         @Enumerated(EnumType.STRING)
         private IsLoaded isLoaded ;
         private Date orderTimeRequest;
-        private int idVehicule ;
+        private int serie;
         private String positionALong;
         private String positionAAtt;
         private String positionBLong;
@@ -46,5 +46,8 @@ public class OrderRequestDTO {
         @Lob
         @Column(length=10000000, columnDefinition="longblob")
         private byte[] img3;
+        private String typeImmatriculation;
+        private int numImmatriculation ;
+        private int numChassis ;
 
 }

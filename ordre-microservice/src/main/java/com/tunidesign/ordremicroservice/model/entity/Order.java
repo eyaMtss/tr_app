@@ -35,13 +35,17 @@ public class Order {
     private IsLoaded isLoaded ;
     private Date orderTimeRequest;
     private Date orderTimeAccept ;
-    private int idVehicule ;
+    private int numImmatriculation ;
+    private int serie;
+    private int numChassis ;
     private String positionALong;
     private String positionAAtt;
     private String positionBLong;
     private String positionBAtt;
     private String positionCLong;
     private String positionCAtt;
+    private String typeImmatriculation;
+
     @Lob
     @Column(length=10000000)
     private byte[] img1;
