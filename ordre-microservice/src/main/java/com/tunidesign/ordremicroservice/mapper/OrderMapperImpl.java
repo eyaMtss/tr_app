@@ -17,18 +17,24 @@ public class OrderMapperImpl implements OrderMapper {
                 .isLoaded(order.getIsLoaded())
                 .orderTimeRequest(order.getOrderTimeRequest())
                 .orderTimeAccept(order.getOrderTimeAccept())
-                .idVehicule(order.getIdVehicule())
+                .serie(order.getSerie())
+                .numImmatriculation(order.getNumImmatriculation())
+                .typeImmatriculation(order.getTypeImmatriculation())
                 .positionAAtt(order.getPositionAAtt())
                 .positionALong(order.getPositionALong())
                 .positionBAtt(order.getPositionBAtt())
                 .positionBLong(order.getPositionBLong())
                 .positionCAtt(order.getPositionCAtt())
                 .positionCLong(order.getPositionCLong())
+                .img1(order.getImg1())
+                .img2(order.getImg2())
+                .img3(order.getImg3())
                 .build();
     }
     @Override
     public Order orderRequestDTOToOrder(OrderRequestDTO orderRequestDTO) {
         return Order.builder()
+
                 .people(orderRequestDTO.getPeople())
                 .telephone(orderRequestDTO.getTelephone())
                 .breakdownType(orderRequestDTO.getBreakdownType())
@@ -36,13 +42,21 @@ public class OrderMapperImpl implements OrderMapper {
                 .isLoaded(orderRequestDTO.getIsLoaded())
                 .orderTimeRequest(orderRequestDTO.getOrderTimeRequest())
                 .orderTimeAccept(orderRequestDTO.getOrderTimeRequest())
-                .idVehicule(orderRequestDTO.getIdVehicule())
+                .numImmatriculation(orderRequestDTO.getNumImmatriculation())
+                .numChassis(orderRequestDTO.getNumChassis())
+                .typeImmatriculation(orderRequestDTO.getTypeImmatriculation())
                 .positionAAtt(orderRequestDTO.getPositionAAtt())
                 .positionALong(orderRequestDTO.getPositionALong())
                 .positionBAtt(orderRequestDTO.getPositionBAtt())
                 .positionBLong(orderRequestDTO.getPositionBLong())
                 .positionCAtt(orderRequestDTO.getPositionCAtt())
                 .positionCLong(orderRequestDTO.getPositionCLong())
+                .img1(orderRequestDTO.getImg1())
+                .img2(orderRequestDTO.getImg2())
+                .img3(orderRequestDTO.getImg3())
+                .serie(orderRequestDTO.getSerie())
+
                 .build();
+
     }
 }

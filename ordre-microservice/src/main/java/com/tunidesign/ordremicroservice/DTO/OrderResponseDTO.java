@@ -5,6 +5,7 @@ import com.tunidesign.ordremicroservice.model.ennumeration.IsLoaded;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,16 +27,27 @@ public class OrderResponseDTO {
     private int telephone;
     @Enumerated(EnumType.STRING)
     private BreakdownType breakdownType;
-    private int breakdownDetails;
+    private String breakdownDetails;
     @Enumerated(EnumType.STRING)
     private IsLoaded isLoaded;
     private Date orderTimeRequest;
     private Date orderTimeAccept;
-    private int idVehicule;
+    private int serie;
     private String positionALong;
     private String positionAAtt;
     private String positionBLong;
     private String positionBAtt;
     private String positionCLong;
     private String positionCAtt;
+    @Lob
+    private byte[] img1;
+    @Lob
+    private byte[] img2;
+    @Lob
+    private byte[] img3;
+
+    private String typeImmatriculation;
+    private int numImmatriculation ;
+    private int numChassis ;
+
 }
