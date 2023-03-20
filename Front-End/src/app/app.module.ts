@@ -22,6 +22,9 @@ import { ErrorsCatchingInterceptor } from './httpInterceptor/errors-catching.int
 import { RequestInterceptor } from './httpInterceptor/request.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QrCodeComponent } from './qr-code/qr-code.component';
+import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
+import { QRCodeModule } from 'angularx-qrcode';
 @NgModule({
 
   declarations: [
@@ -34,7 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     OrderComponent,
     ShiftComponent,
     AccessDeniedComponent,
-    NavbarComponent
+    NavbarComponent,
+    QrCodeComponent,
+    QrCodeTestComponent
 
   ],
   imports: [
@@ -47,7 +52,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     KeycloakAngularModule,
     HttpClientModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    QRCodeModule
   ],
   providers: [
     KeycloakService,
