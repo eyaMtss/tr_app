@@ -27,8 +27,31 @@ public class UserRepository {
         this.dataSourceProvider  = dataSourceProvider;
         this.queryConfigurations = queryConfigurations;
     }
-    
-    
+
+    private boolean updateQuery(String updateQuery, String username, String password) {
+        //String updateQuery = "UPDATE my_table SET column1 = ?, column2 = ? WHERE id = ?";
+        Optional<DataSource> dataSourceOpt = dataSourceProvider.getDataSource();
+        if (dataSourceOpt.isPresent()) {
+            DataSource dataSource = dataSourceOpt.get();
+            try (Connection c = dataSource.getConnection()) {
+                try (PreparedStatement stmt = c.prepareStatement(updateQuery)) {
+                    stmt.setString(1, password);
+                    stmt.setString(2, password);
+                    stmt.setString(3, username);
+                    int rowsUpdated = stmt.executeUpdate();
+                    log.infov("Updated " + rowsUpdated + " rows");
+                    System.out.println("Updated " + rowsUpdated + " rows");
+                    return true;
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
+    }
     private <T> T doQuery(String query, PagingUtil.Pageable pageable, Function<ResultSet, T> resultTransformer, Object... params) {
         Optional<DataSource> dataSourceOpt = dataSourceProvider.getDataSource();
         if (dataSourceOpt.isPresent()) {
@@ -179,10 +202,30 @@ public class UserRepository {
         }*/
     }
     
-    public boolean updateCredentials(String username, String password) {
-        throw new NotImplementedException("Password update not supported");
+    public boolean updateCredentials(UserModel user, String password) {
+        String username = user.getUsername();
+        // update query
+        String updateQuery = "UPDATE users SET password = ?, confirm_password = ? WHERE username = ?";
+        // Send the new password to the user via email, SMS, etc.
+        //sendNewPasswordToUser(password, user); // Implement your own method to send the new password to the user
+        return updateQuery(updateQuery, username, password);
+        //throw new NotImplementedException("Password update not supported");
     }
-    
+
+    /*public void sendNewPasswordToUser(){
+        try {
+            EmailSenderProvider emailSenderProvider = session.getProvider(EmailSenderProvider.class, "default");
+            String subject = "Password reset request for " + realm.getName();
+            String body = "Dear " + user.getFirstName() + ",\n\n"
+                    + "You have requested to reset your password for your account with " + realm.getName() + ".\n\n"
+                    + "Your new password is: " + user.getGeneratedPassword() + "\n\n"
+                    + "Please use the following link to log in and change your password: " + redirectUri + "\n\n"
+                    + "Thank you,\n" + realm.getName();
+            emailSenderProvider.send(realm.getSmtpConfig(), user.getEmail(), subject, body);
+        } catch (EmailException e) {
+            logger.error("Failed to send password reset email to user " + user.getUsername(), e);
+        }
+    }*/
     public boolean removeUser() {
         return queryConfigurations.getAllowKeycloakDelete();
     }

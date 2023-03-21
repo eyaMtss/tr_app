@@ -53,8 +53,11 @@ This option can be configured by the following switch:
 
 ## Limitations
 
-    - Do not allow user information update, including password update
-    - Do not support user registration ( not yet)
+    - Do not allow user information update (register not yet)
+    
+## Support
+    - support update credentials
+    - support roles
 
 ## Custom attributes
 
