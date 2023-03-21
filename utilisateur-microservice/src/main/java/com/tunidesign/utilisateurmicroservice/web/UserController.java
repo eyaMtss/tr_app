@@ -46,7 +46,6 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-//@CrossOrigin("http://localhost:4200")
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
@@ -175,9 +174,9 @@ public class UserController {
 			@RequestParam("imageFile") MultipartFile file) throws IOException {
 
 		logger.info("Original Image Byte Size - " + file.getBytes().length);
+		logger.info(String.valueOf(userId));
 		// add image
-		PictureRequestDTO pictureRequestDTO = new PictureRequestDTO();
-		PictureRequestDTO.builder().userId(userId).pictureName(file.getOriginalFilename())
+		PictureRequestDTO pictureRequestDTO = PictureRequestDTO.builder().userId(userId).pictureName(file.getOriginalFilename())
 				.pictureType(file.getContentType()).pictureByte(compressBytes(file.getBytes())).build();
 		return new ResponseEntity<>(userMapper.userToUserResponseDTO(userService.uploadPicture(pictureRequestDTO)), HttpStatus.ACCEPTED);
 	}
