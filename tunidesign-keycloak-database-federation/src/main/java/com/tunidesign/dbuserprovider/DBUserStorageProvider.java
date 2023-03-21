@@ -1,15 +1,22 @@
 package com.tunidesign.dbuserprovider;
 
+import com.tunidesign.dbuserprovider.util.PasswordGenerator;
 import lombok.extern.jbosslog.JBossLog;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialInputUpdater;
 import org.keycloak.credential.CredentialInputValidator;
+import org.keycloak.credential.CredentialModel;
 import org.keycloak.models.cache.CachedUserModel;
 import org.keycloak.models.*;
 import org.keycloak.models.credential.PasswordCredentialModel;
+import org.keycloak.representations.idm.AuthenticatorConfigRepresentation;
+import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.UserFederationProviderFactoryRepresentation;
+import org.keycloak.representations.idm.UserFederationProviderRepresentation;
 import org.keycloak.storage.StorageId;
 import org.keycloak.storage.UserStorageProvider;
+import org.keycloak.storage.federated.UserFederatedUserCredentialStore;
 import org.keycloak.storage.user.UserLookupProvider;
 import org.keycloak.storage.user.UserQueryProvider;
 import org.keycloak.storage.user.UserRegistrationProvider;
@@ -19,6 +26,7 @@ import com.tunidesign.dbuserprovider.persistence.DataSourceProvider;
 import com.tunidesign.dbuserprovider.persistence.UserRepository;
 import com.tunidesign.dbuserprovider.util.PagingUtil;
 
+import java.net.Authenticator;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -96,8 +104,30 @@ public class DBUserStorageProvider implements UserStorageProvider,
         }
 
         UserCredentialModel cred = (UserCredentialModel) input;
-        return repository.updateCredentials(user.getUsername(), cred.getChallengeResponse());
+
+        //return repository.updateCredentials(user, newPassword);
+        return repository.updateCredentials(user, cred.getChallengeResponse());
     }
+
+    /*@Override
+    public boolean updateCredentialDirectly(RealmModel realm, UserModel user, CredentialInput input) {
+        if (input.getType().equals(CredentialRepresentation.PASSWORD)) {
+            PasswordGenerator passwordGenerator = new PasswordGenerator();
+
+            // Generate a new password and update the user's credentials
+            String newPassword = passwordGenerator.generatePassword();
+
+            repository.updateCredentials(user, newPassword);
+
+            // Send the new password to the user via email
+            String emailAddress = user.getEmail();
+            sendEmail(emailAddress, "New Password", "Your new password is: " + newPassword);
+
+            return true;
+        }
+
+        return false;
+    }*/
 
     @Override
     public void disableCredentialType(RealmModel realm, UserModel user, String credentialType) {
