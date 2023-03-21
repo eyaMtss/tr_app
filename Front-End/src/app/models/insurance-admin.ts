@@ -1,4 +1,5 @@
 export class InsuranceAdmin {
+    userId!: number;
     email!: string;
     firstName!: string;
     lastName!: string;
