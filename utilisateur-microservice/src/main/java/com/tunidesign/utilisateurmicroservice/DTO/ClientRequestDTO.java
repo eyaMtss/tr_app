@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientRequestDTO {
-	private Long userId;
+	//private Long userId;
 	private String firstName;
 	private String lastName;
 	@Enumerated(EnumType.STRING)
@@ -29,7 +29,7 @@ public class ClientRequestDTO {
 	private String governorate;
 	private String city;
 	private Integer zipCode;
-	private Integer homeCode;
+	//private Integer homeCode;
 
 	// Contact
 	@Email

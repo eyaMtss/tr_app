@@ -23,7 +23,7 @@ import java.util.Optional;
 
 public interface UserService {
 	User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException;
-	User updateRole(User user, Role role);
+	User updateRole(Long userId, Role role);
 	User getUser(Long userId);
 	
 	User uploadPicture(PictureRequestDTO pictureRequestDTO);
