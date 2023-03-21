@@ -12,16 +12,16 @@
         <div class="collapse navbar-collapse" id="navbarPaths">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="home()">
-                    <a class="nav-link active" aria-current="page">Home</a>
+                    <a class="nav-link active" aria-current="page">Acceuil</a>
                 </li>
 
                 <li *ngIf="!isLoggedIn" class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="signin()">
-                    <a class="nav-link">Sign in</a>
+                    <a class="nav-link">Se connecter</a>
                 </li>
 
                 <li *ngIf="!isLoggedIn" class="nav-item border radius-class ms-0 ms-md-3 cursor-pointer-class"
                     (click)="signup()">
-                    <a class="nav-link">Sign up</a>
+                    <a class="nav-link">S'inscrire</a>
                 </li>
 
                 <li *ngIf="isLoggedIn" class="nav-item dropdown ms-0 ms-md-3">
@@ -31,14 +31,14 @@
                         {{username}}
                     </a>
                     <ul class="dropdown-menu list-left">
-                        <li><a class="dropdown-item" (click)="profile()">Your profile</a></li>
-                        <li><a class="dropdown-item" (click)="orders()">Your orders</a></li>
-                        <li><a class="dropdown-item" (click)="settings()">Settings</a></li>
+                        <li><a class="dropdown-item" (click)="profile()">Votre profil</a></li>
+                        <li><a class="dropdown-item" (click)="orders()">Vos ordres</a></li>
+                        <li><a class="dropdown-item" (click)="settings()">Paramètres</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="logout()">
-                            <a class="nav-link">Sign out</a>
+                        <li class="nav-item ms-0 ms-3 cursor-pointer-class" (click)="logout()">
+                            <a class="nav-link">Déconnexion</a>
                         </li>
                     </ul>
                 </li>
