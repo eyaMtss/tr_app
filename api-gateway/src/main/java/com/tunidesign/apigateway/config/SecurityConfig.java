@@ -1,7 +1,11 @@
 package com.tunidesign.apigateway.config;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.gateway.handler.RoutePredicateHandlerMapping;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -13,11 +17,9 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
-
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
-
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .oauth2Login()
@@ -25,27 +27,35 @@ public class SecurityConfig {
                 .baseUri("/login/oauth2/code/keycloak");
 
     }
+    /*@Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*");
+    }*/
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
-        http.cors().and()
-
+        http
+                .csrf().disable()
                 .authorizeExchange()
                     .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll",
                             "/users/addClient", "/users/addCompanyAdmin", "/users/addInsuranceAdmin",
-                            "/vehicule/add")
-                        .permitAll()
+                            "/vehicule/add", "/vehicule/getAll", "/users/getAll/clients")
+                    .permitAll()
 
 //                .and()
 //                    .authorizeExchange()
 //                        .pathMatchers(HttpMethod.GET, "/Users/Clients").hasRole("SUPER_ADMIN")
 //                        .pathMatchers(HttpMethod.GET, "/Users/CompanyEmployees/**").hasRole("COMPANY_ADMIN")
-                    .anyExchange().authenticated()
+                .anyExchange().authenticated()
                 .and()
                     .oauth2Login()
                     .clientRegistrationRepository(clientRegistrationRepository())
                 .and()
                     .logout().logoutSuccessHandler(handler);
+        http.cors();
         return http.build();
     }
 
