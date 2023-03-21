@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 public class ContratResponseDTO {
     @Id
-    private int id ;
+    private Long id ;
     private int type ;
     private float prix ;
 

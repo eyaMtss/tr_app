@@ -1,0 +1,134 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body{
+  background-image: url('/assets/background.jpg');
+  background-size:center;
+  background-repeat: no-repeat;
+    overflow: hidden;
+background-size: cover;
+height: 518px;
+  position: center;
+
+  font-family: 'Raleway', sans-serif;
+
+
+}
+
+.container{
+  position: absolute;
+  left: 25%;
+  width: 100%;
+  max-width: 650px;
+  height: 760px;
+  /*background: rgba(0, 0, 0, 0.5);*/
+  padding: 28px;
+  margin: 0 28px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.55rem;
+
+  background-color: rgba(85, 87, 96, 0.559) !important;
+  zoom: 67%;
+    left: 30%;
+
+}
+.card {
+  position: relative;
+    height: 680px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    background-color: rgb(254, 254, 254);
+    width: 90%;
+    border-radius: 20px;
+  }
+  .pick-orange{
+    font-size:20px;
+    margin-top: 50px;
+    margin-left: 190px;
+    background-color: orange;
+    color: white;
+    border-radius: 10px;
+    width: 220px;
+    height: 40px;
+    text-align: center;
+  }
+  .pick-green{
+    font-size:20px;
+    margin-top: 50px;
+    margin-left: 190px;
+    background-color: rgb(80, 205, 89);
+    color: white;
+    border-radius: 10px;
+    width: 220px;
+    height: 40px;
+    text-align: center;
+  }
+  .blue-sign-right{
+    font-size:20px;
+    margin-top: 50px;
+    margin-left: 140px;
+    background-color: rgb(0, 128, 255);
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+  }
+  .blue-sign-left{
+    font-size:20px;
+    margin-top: 50px;
+    margin-left: 20px;
+    background-color: rgb(0, 128, 255);
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+  }
+  .info{
+    font-size:20px;
+    color:rgb(101, 101, 101);
+    margin-left: 11%;
+    margin-top: 50px;
+  }
+  .pick{
+    width: 30%;
+    margin-left:190px;
+     margin-top: 20px;
+  }
+  .QR{
+    width: 180px;
+    display: block;
+    margin-left: 170px;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  .horizental-ligne{
+    border-bottom: 1px solid rgba(118, 117, 117, 0.559);
+    margin-top: 50px;
+  }
+.dep{
+  color: rgb(86, 86, 86);
+  margin-right: 65%;
+  margin-top: 10px;
+}
+.status{
+  font-size:20px;
+  color:rgb(101, 101, 101);
+  margin-left: 11%;
+  margin-top: 50px;
+}
+.adress{
+  text-align: center;
+  margin-top: 20px;
+}
+.date{
+  margin-right: 27%;
+  margin-top: 10px;
+}

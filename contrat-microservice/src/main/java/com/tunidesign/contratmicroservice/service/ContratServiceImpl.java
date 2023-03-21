@@ -2,7 +2,9 @@ package com.tunidesign.contratmicroservice.service;
 
 import com.tunidesign.contratmicroservice.DTO.ContratRequestDTO;
 import com.tunidesign.contratmicroservice.DTO.ContratResponseDTO;
+import com.tunidesign.contratmicroservice.DTO.VerifyContractRequestDTO;
 import com.tunidesign.contratmicroservice.mapper.ContratMapper;
+import com.tunidesign.contratmicroservice.model.Contrat;
 import com.tunidesign.contratmicroservice.repository.ContratRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class ContratServiceImpl implements ContratService {
     }
 
     @Override
-    public ContratResponseDTO getContrat(String id) {
+    public ContratResponseDTO getContrat(Long id) {
         return null;
     }
 
@@ -31,7 +33,7 @@ public class ContratServiceImpl implements ContratService {
     }
 
     @Override
-    public void deleteContrat(String id) {
+    public void deleteContrat(Long id) {
 
     }
     @Override
@@ -40,7 +42,9 @@ public class ContratServiceImpl implements ContratService {
     }
 
     @Override
-    public List<ContratResponseDTO> getContratByPostId(String id) {
-        return null;
+    public Boolean verifyContract(VerifyContractRequestDTO verifyContractRequestDTO) {
+        Contrat contrat = contratRepository.findByNumContratAndNumChassis(verifyContractRequestDTO.getNumContrat(), verifyContractRequestDTO.getNumChassis());
+        return contrat.equals(null);
     }
+
 }

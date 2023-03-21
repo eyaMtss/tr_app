@@ -92,7 +92,6 @@ public class UserMapperImpl implements UserMapper {
 		clientResponseDTO.setHomeCode(user.getHomeCode());
 		clientResponseDTO.setEmail(user.getEmail());
 		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
-		clientResponseDTO.setPictureName(user.getPictureName());
 		//clientResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return clientResponseDTO;
 	}
@@ -115,7 +114,6 @@ public class UserMapperImpl implements UserMapper {
 		user.setHomeCode(clientRequestDTO.getHomeCode());
 		user.setEmail(clientRequestDTO.getEmail());
 		user.setPhoneNumber(clientRequestDTO.getPhoneNumber());
-		user.setUsername(clientRequestDTO.getUsername());
 		user.setPassword(clientRequestDTO.getPassword());
 		user.setConfirmPassword(clientRequestDTO.getConfirmPassword());
 		return user;

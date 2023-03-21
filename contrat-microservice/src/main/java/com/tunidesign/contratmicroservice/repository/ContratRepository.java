@@ -7,10 +7,7 @@ import com.tunidesign.contratmicroservice.model.Contrat ;
 import java.util.List;
 
 @Repository
-public interface ContratRepository extends JpaRepository <Contrat, Integer>
+public interface ContratRepository extends JpaRepository <Contrat, Long>
 {
-    List<Contrat> findAll();
-    Contrat findById(int id);
-    Contrat save(Contrat  contrat);
-    Contrat deleteById(int id);
+    Contrat findByNumContratAndNumChassis(String numContrat, Long numChassis);
 }
