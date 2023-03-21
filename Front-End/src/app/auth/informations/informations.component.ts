@@ -29,7 +29,7 @@ export class InformationsComponent implements OnInit {
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      phone: ["", Validators.required],
+      phone: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
       gender: ["", Validators.required],
       birthdate: ["", Validators.required],
       company: [{ value: '', disabled: true }, Validators.required],

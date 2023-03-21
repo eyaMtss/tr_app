@@ -21,7 +21,7 @@ export class AddressComponent implements OnInit {
       country: ["", Validators.required],
       governorate: ["", Validators.required],
       city: ["", Validators.required],
-      zipCode: ["", Validators.required],
+      zipCode: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       //homeCode: [{value: "", disabled: true}, Validators.required],
     });
   }

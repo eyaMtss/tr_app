@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-credentials',
@@ -12,10 +12,18 @@ export class CredentialsComponent {
   fieldTextTypeForConfirmPassword: boolean = false; // show or hide confirmPassword
   @Output() credentialsFormEvent = new EventEmitter<FormGroup>();
   constructor(private _formBuilder: FormBuilder){
+  
+
     this.credentialsForm = this._formBuilder.group({
-      password: ["", Validators.required],
-      confirmPassword: ["", Validators.required]
+      password: ["", [Validators.required,  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+      confirmPassword: ["", [Validators.required,  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]]
     });
+    this.credentialsForm.addValidators(
+      matchValidator(
+        this.credentialsForm.get('password')!,
+        this.credentialsForm.get('confirmPassword')!
+      )
+     );
   }
 
   onFormChange(){
@@ -38,4 +46,16 @@ export class CredentialsComponent {
   toggleFieldTextTypeForConfirmPassword(){
     this.fieldTextTypeForConfirmPassword = !this.fieldTextTypeForConfirmPassword;
   }
+}
+
+function matchValidator(
+  control: AbstractControl,
+  controlTwo: AbstractControl
+): ValidatorFn {
+  return () => {
+    if (control.value !== controlTwo.value)
+      return { match_error: 'Passwords does not match' };
+    return null;
+  };
+
 }
