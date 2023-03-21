@@ -9,7 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddressComponent implements OnInit {
   addressForm: FormGroup;
   countries = [{ id: "TUN", value: "Tunisie" }, { id: "ALG", value: "Algerie" }, { id: "LYB", value: "Lybia" }];
+  isCountrySetted: boolean = false;
   governorates: any[] = [];
+  isGovernorateSetted: boolean = false;
   cities: any[] = [];
 
   @Output() addressFormEvent = new EventEmitter<FormGroup>();
@@ -25,15 +27,17 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addressForm.controls['country'].setValue(1); // country is setted to Tunisia
+    this.addressForm.controls['country'].setValue("TUN"); // country is setted to Tunisia
     this.onCountryChange(); // get Tunisia's governorates
   }
 
   onCountryChange() { // get governorates depending on the selected country
+    this.isCountrySetted = true;
     this.getGovernorates(this.addressForm.controls['country'].value);
   }
 
   onGovernorateChange() { // get cities depending on the selected country&&governorate
+    this.isGovernorateSetted = true;
     this.getCities(this.addressForm.controls['country'].value, this.addressForm.controls['governorate'].value);
   }
 
@@ -93,6 +97,7 @@ export class AddressComponent implements OnInit {
   }
 
   emitInformationForm(value: FormGroup) {
+    console.log(value)
     this.addressFormEvent.emit(value);
   }
 }
