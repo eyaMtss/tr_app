@@ -32,7 +32,7 @@ public class ResourceServerConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .requestMatchers("/swagger-ui/**", "/v3/**", "/users/addClient", "/users/addCompanyAdmin",
-                        "/users/addInsuranceAdmin", "/users/getAll/clients")
+                        "/users/addInsuranceAdmin", "/users/getAll/clients", "/users/uploadImage/**")
                     .permitAll()
                 .and()
                 .authorizeRequests()

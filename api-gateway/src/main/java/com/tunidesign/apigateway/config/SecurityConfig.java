@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authorizeExchange()
                     .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll",
                             "/users/addClient", "/users/addCompanyAdmin", "/users/addInsuranceAdmin",
-                            "/vehicule/add", "/vehicule/getAll", "/users/getAll/clients")
+                            "/vehicule/add", "/vehicule/getAll", "/users/getAll/clients", "/users/uploadImage/**")
                     .permitAll()
 
 //                .and()
