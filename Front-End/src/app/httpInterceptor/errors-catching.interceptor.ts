@@ -16,8 +16,7 @@ export class ErrorsCatchingInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     //console.log("Passed through the interceptor in request");
     return next.handle(request)
-      .pipe(retry(3),
-        map(res => {
+      .pipe(map(res => {
           console.log("Passed through the interceptor in response");
           return res
         }),
