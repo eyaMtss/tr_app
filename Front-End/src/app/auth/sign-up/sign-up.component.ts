@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/api/user.service';
 import { VehicleService } from 'src/app/services/api/vehicle.service';
 import { KeycloakService } from 'keycloak-angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { KeycloakLoginOptions } from 'keycloak-js';
 
 @Component({
   selector: 'app-sign-up',
@@ -52,8 +53,8 @@ export class SignUpComponent implements OnInit {
     email: 'eya.mattoussiii@gmail.com',
     password: 'mypassword',
   };
-  constructor(breakpointObserver: BreakpointObserver, private userService: UserService, 
-    private keycloak: AuthService) {
+  constructor(breakpointObserver: BreakpointObserver, private userService: UserService,
+    private authService: AuthService) {
     // responsive stepper
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -81,7 +82,7 @@ export class SignUpComponent implements OnInit {
     }
   }*/
 
-  getCurrentRole(currentRole: number){
+  getCurrentRole(currentRole: number) {
     this.currentRole = currentRole;
   }
 
@@ -177,45 +178,53 @@ export class SignUpComponent implements OnInit {
   signup() {
     switch (this.currentRole) {
       case 1: { //client
-        this.keycloak.register()
-        /*this.userService.createClient(this.client).subscribe(res => {
-            console.log(res);
-           
-          });*/
+        this.userService.createClient(this.client).subscribe(res => {
+          console.log(res);
+          this.onUpload(res.userId);
+
+        });
 
         break;
       }
       case 2: { //insurance admin
         this.userService.createInsuranceAdmin(this.insuranceAdmin).subscribe(res => {
-            console.log(res);
-           
-          });
+          console.log(res);
+          this.onUpload(res.userId);
+        });
 
         break;
       }
       case 3: { //societeRemorquage admin
         this.userService.createSocieteRemorquageAdmin(this.societeRemorquageAdmin).subscribe(res => {
-            console.log(res);
-           
-          });
+          console.log(res);
+          this.onUpload(res.userId);
+        });
 
         break;
       }
     }
+    this.signin();
   }
 
   //Gets called when the user clicks on save to upload the image
-  onUpload() {
+  onUpload(userId: number) {
     if (this.informationsForm.controls['img'].value != undefined) { // if we change the image
-    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
-    //uploadImageData.append('profileId', (this.profile.profileId).toString());
-    this.userService.uploadImage(uploadImageData).subscribe(response => { // get api
-      this.viewedImage = this.temporaryRetrievedImage; // view the new image
-    });
+      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
+      //uploadImageData.append('profileId', (this.profile.profileId).toString());
+      this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
+        this.viewedImage = this.temporaryRetrievedImage; // view the new image
+      });
     }
-
   }
- 
+
+  // redirect to signin interface after inscription
+  signin() {
+    const loginOptions: KeycloakLoginOptions = {
+      redirectUri: window.location.origin + "/order"
+    };
+    this.authService.login(loginOptions);
+  }
+
 }
