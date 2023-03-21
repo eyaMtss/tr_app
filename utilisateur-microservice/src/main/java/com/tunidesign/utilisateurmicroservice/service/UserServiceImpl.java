@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateRole(User user, Role role) {
-		User savedUser = getUser(user.getUserId());
+	public User updateRole(Long userId, Role role) {
+		User savedUser = getUser(userId);
 		savedUser.setRole(role);
 		return userRepository.save(savedUser);
 	}
