@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - POST
+              - OPTIONS
+              - GET
+              - PUT
+              - DELETE
+
