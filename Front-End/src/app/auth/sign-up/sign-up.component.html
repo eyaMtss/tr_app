@@ -11,7 +11,7 @@
                     Informations
                 </div>
             </div>
-            <div *ngIf="currentRole == 1" class="step-item">
+            <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
                     [disabled]="isInformationsNextBtnDisabled">
@@ -21,19 +21,19 @@
                     Adresse
                 </div>
             </div>
-            <div class="step-item">
-                <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
+            <!--div *ngIf="currentRole == 1" class="step-item">
+                <button *ngIf="currentRole == 1" class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
                     [disabled]="isAddressNextBtnDisabled">
                     <span><i class="fas fa-car"></i></span>
                 </button>
-                <div class="step-title color-text d-none d-md-block">
+                <div *ngIf="currentRole == 1" class="step-title color-text d-none d-md-block">
                     Vehicule
                 </div>
-            </div>
+            </div-->
             <div class="step-item">
                 <button class="step-button text-center collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
                     [disabled]="isInformationsNextBtnDisabled && isAddressNextBtnDisabled">
                     <span><i class="fas fa-key"></i></span>
                 </button>
@@ -49,7 +49,8 @@
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionSignUp">
                 <div class="card-body">
-                    <app-informations (informationsFormEvent)="getInformationsForm($event)"></app-informations>
+                    <app-informations (informationsFormEvent)="getInformationsForm($event)" 
+                    (currentRoleEvent)="getCurrentRole($event)"></app-informations>
                     <hr>
                     <div class="d-flex justify-content-end">
                         <button class="btn stepper_btn" [disabled]="isInformationsNextBtnDisabled"
@@ -77,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="card card-background">
+        <!--div *ngIf="currentRole == 1" class="card card-background">
             <div id="headingThree">
 
             </div>
@@ -101,19 +102,18 @@
                     </div>
                     <hr/>
                     <div class="d-flex justify-content-end">
-                        <!--button class="btn stepper_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" 
-                        aria-expanded="false" aria-controls="collapseThree">Retour</button-->
+                        
                         <button class="btn stepper_btn" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Suivant</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
         <div class="card card-background">
-            <div id="headingFour">
+            <div id="headingThree">
 
             </div>
-            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionSignUp">
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionSignUp">
                 <div class="card-body">
                     <app-credentials (credentialsFormEvent)="getCredentialsForm($event)"></app-credentials>
                     <hr/>
