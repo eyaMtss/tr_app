@@ -46,7 +46,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("http://localhost:4200")
 @RequestMapping("/users")
 @Slf4j
 public class UserController {
@@ -84,7 +84,7 @@ public class UserController {
 	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
-			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.SUPER_ADMIN);
+			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)).getUserId(), Role.SUPER_ADMIN);
 			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedClient), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -93,7 +93,8 @@ public class UserController {
 	@PostMapping("/addClient")
 	public ResponseEntity<ClientResponseDTO> addClient(@RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
-			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)), Role.CLEINT);
+			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)).getUserId(), Role.CLEINT);
+			logger.info(String.valueOf(savedClient));
 			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedClient), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -105,7 +106,7 @@ public class UserController {
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
-			User savedDriver = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(driverRequestDTO)), Role.DRIVER);
+			User savedDriver = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(driverRequestDTO)).getUserId(), Role.DRIVER);
 			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedDriver), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -116,7 +117,7 @@ public class UserController {
 	@RolesAllowed({"COMPANY_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
-			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)), Role.TA);
+			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)).getUserId(), Role.TA);
 			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedTa), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -127,7 +128,7 @@ public class UserController {
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
-			User savedCompanyAdmin = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(companyAdminRequestDTO)), Role.COMPANY_ADMIN);
+			User savedCompanyAdmin = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(companyAdminRequestDTO)).getUserId(), Role.COMPANY_ADMIN);
 			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedCompanyAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -139,7 +140,7 @@ public class UserController {
 	public ResponseEntity<InsuranceUserResponseDTO> addExpert(
 			@Valid @RequestBody InsuranceUserRequestDTO expertRequestDTO) {
 		try {
-			User savedExpert = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(expertRequestDTO)), Role.EXPERT);
+			User savedExpert = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(expertRequestDTO)).getUserId(), Role.EXPERT);
 			return new ResponseEntity<>(userMapper.userToInsuranceUserResponseDTO(savedExpert), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -151,7 +152,7 @@ public class UserController {
 	public ResponseEntity<AgencyUserResponseDTO> addAgencyAdmin(
 			@Valid @RequestBody AgencyUserRequestDTO agencyAdminRequestDTO) {
 		try {
-			User savedAgencyAdmin = userService.updateRole(userService.addUser(userMapper.agencyUserRequestDTOToUser(agencyAdminRequestDTO)), Role.AGENCY_ADMIN);
+			User savedAgencyAdmin = userService.updateRole(userService.addUser(userMapper.agencyUserRequestDTOToUser(agencyAdminRequestDTO)).getUserId(), Role.AGENCY_ADMIN);
 			return new ResponseEntity<>(userMapper.userToAgencyUserResponseDTO(savedAgencyAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -162,7 +163,7 @@ public class UserController {
 	public ResponseEntity<InsuranceUserResponseDTO> addInsuranceAdmin(
 			@Valid @RequestBody InsuranceUserRequestDTO insuranceAdminRequestDTO) {
 		try {
-			User savedInsuranceAdmin = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(insuranceAdminRequestDTO)), Role.INSURANCE_ADMIN);
+			User savedInsuranceAdmin = userService.updateRole(userService.addUser(userMapper.insuranceUserRequestDTOToUser(insuranceAdminRequestDTO)).getUserId(), Role.INSURANCE_ADMIN);
 			return new ResponseEntity<>(userMapper.userToInsuranceUserResponseDTO(savedInsuranceAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -239,7 +240,6 @@ public class UserController {
 //	    }
 	/* *********************** get All ********************** */
 	@GetMapping("/getAll/clients")
-	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<List<ClientResponseDTO>> getClients() {
 		return ResponseEntity.ok().body(userService.getClients());
 	}
