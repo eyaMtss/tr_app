@@ -19,8 +19,6 @@ import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
 
 public class UserMapperImpl implements UserMapper {
-
-	// private final Builder webClientBuilder;
 	@Override
 	public UserResponseDTO userToUserResponseDTO(User user) {
 		if (user == null) {
@@ -40,7 +38,6 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		userResponseDTO.setPictureName(user.getPictureName());
-		//userResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		userResponseDTO.setAgencyId(user.getAgencyId());
 		userResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
 		userResponseDTO.setCompanyId(user.getCompanyId());
@@ -92,7 +89,6 @@ public class UserMapperImpl implements UserMapper {
 		clientResponseDTO.setHomeCode(user.getHomeCode());
 		clientResponseDTO.setEmail(user.getEmail());
 		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
-		//clientResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return clientResponseDTO;
 	}
 
@@ -102,7 +98,6 @@ public class UserMapperImpl implements UserMapper {
 			return null;
 		}
 		User user = new User();
-		user.setUserId(clientRequestDTO.getUserId());
 		user.setFirstName(clientRequestDTO.getFirstName());
 		user.setLastName(clientRequestDTO.getLastName());
 		user.setGender(clientRequestDTO.getGender());
@@ -111,7 +106,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setGovernorate(clientRequestDTO.getGovernorate());
 		user.setCity(clientRequestDTO.getCity());
 		user.setZipCode(clientRequestDTO.getZipCode());
-		user.setHomeCode(clientRequestDTO.getHomeCode());
+		//user.setHomeCode(clientRequestDTO.getHomeCode());
 		user.setEmail(clientRequestDTO.getEmail());
 		user.setPhoneNumber(clientRequestDTO.getPhoneNumber());
 		user.setPassword(clientRequestDTO.getPassword());
@@ -141,9 +136,6 @@ public class UserMapperImpl implements UserMapper {
 		companyUsersResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		companyUsersResponseDTO.setStatus(user.getStatus());
 		companyUsersResponseDTO.setCompanyId(user.getCompanyId());
-		
-//		if (user.getPictureByte().equals(null)) companyUsersResponseDTO.setPictureByte(null);
-//		else companyUsersResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		return companyUsersResponseDTO;
 	}
 
@@ -197,7 +189,6 @@ public class UserMapperImpl implements UserMapper {
 		agencyUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		agencyUserResponseDTO.setStatus(user.getStatus());
 		agencyUserResponseDTO.setPictureName(user.getPictureName());
-		//agencyUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		agencyUserResponseDTO.setAgencyId(user.getAgencyId());
 		return agencyUserResponseDTO;
 	}
@@ -249,7 +240,6 @@ public class UserMapperImpl implements UserMapper {
 		insuranceUserResponseDTO.setEmail(user.getEmail());
 		insuranceUserResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		insuranceUserResponseDTO.setPictureName(user.getPictureName());
-		//insuranceUserResponseDTO.setPictureByte(decompressBytes(user.getPictureByte()));
 		insuranceUserResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		insuranceUserResponseDTO.setStatus(user.getStatus());
 		insuranceUserResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());

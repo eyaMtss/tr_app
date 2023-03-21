@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
+import { KeycloakLoginOptions } from 'keycloak-js';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,10 @@ export class AuthService {
     }
   }
 
-  async login(){
-    this.keycloakService.login();
+  async login(loginOptions: KeycloakLoginOptions){
+    this.keycloakService.login(loginOptions);
   }
+
   
   public getIsLogged(): Promise<boolean> {
     return (this.keycloakService.isLoggedIn());
@@ -57,6 +59,10 @@ export class AuthService {
 
   getUsername(){
     return this.keycloakService.getUsername();
+  }
+
+  register(){
+    return this.keycloakService.register();
   }
 }
 

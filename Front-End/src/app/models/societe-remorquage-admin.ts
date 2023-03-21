@@ -1,8 +1,9 @@
 export class SocieteRemorquageAdmin {
+    userId!: number;
     email!: string;
     firstName!: string;
     lastName!: string;
-    phone!: number;
+    phoneNumber!: number;
     birthdate!: Date;
     gender!: string;
     matriculeFiscale!: string;

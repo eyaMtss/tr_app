@@ -21,6 +21,7 @@ export class InformationsComponent implements OnInit {
 
   genreList = [{id: "F", value: "Féminin"}, {id: "M", value: "Masculin"}];
   @Output() informationsFormEvent = new EventEmitter<FormGroup>();
+  @Output() currentRoleEvent = new EventEmitter<number>();
   constructor(private _formBuilder: FormBuilder, private societeRemorquageService: SocieteRemorquageService,
     private insuranceService: InsuranceService) {
     this.informationForm = this._formBuilder.group({
@@ -28,11 +29,10 @@ export class InformationsComponent implements OnInit {
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
-      phone: ["", Validators.required],
+      phone: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
       gender: ["", Validators.required],
       birthdate: ["", Validators.required],
       company: [{ value: '', disabled: true }, Validators.required],
-      matriculeFiscale: [{ value: '', disabled: true }, Validators.required],
       img: [""]
     });
   }
@@ -59,6 +59,7 @@ export class InformationsComponent implements OnInit {
   onRoleChange() {
 
     this.currentRole = this.informationForm.controls['role'].value;
+    this.emitCurrentrole(this.currentRole); // emit current Role to signup component
     console.log(this.currentRole);
     this.companyLabel = this.roles.filter(e => e.id == this.currentRole).map(e => e.value)[0];
     switch (this.currentRole) {
@@ -112,6 +113,11 @@ export class InformationsComponent implements OnInit {
   }
 
   emitInformationForm(value: FormGroup) {
+    console.log(value)
     this.informationsFormEvent.emit(value);
+  }
+
+  emitCurrentrole(value: number){
+    this.currentRoleEvent.emit(value);
   }
 }

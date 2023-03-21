@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { KeycloakLoginOptions } from 'keycloak-js';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -30,7 +31,10 @@ export class NavbarComponent implements OnInit{
   }
 
   signin() {
-    this.router.navigate(['/auth']);
+    const loginOptions: KeycloakLoginOptions = {
+      redirectUri: window.location.origin + "/order"
+    };
+    this.authService.login(loginOptions);
   }
 
   signup() {

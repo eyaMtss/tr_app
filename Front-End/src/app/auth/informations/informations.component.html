@@ -65,7 +65,7 @@
                     <label for="phone">Téléphone</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
-                        <input class="form-control" placeholder="Téléphone" id="phone" type="text"
+                        <input class="form-control" placeholder="Téléphone" id="phone" type="number"
                             formControlName="phone" [ngClass]="{
                                 'is-invalid':
                                     informationForm.get('phone')!.touched &&
@@ -101,17 +101,6 @@
                     </select>
                 </div>
 
-                <div class="col-12 col-md-6" *ngIf="currentRole == 2 || currentRole == 3">
-                    <label for="matriculeFiscale">Matricule fiscale</label>
-                    <div class="input-group mb-3">
-                        <input class="form-control" placeholder="Matricule fiscale" id="phone" type="text"
-                            formControlName="matriculeFiscale" [ngClass]="{
-                                'is-invalid':
-                                    informationForm.get('matriculeFiscale')!.touched &&
-                                    informationForm.controls['matriculeFiscale'].errors
-                            }"/>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

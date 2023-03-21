@@ -30,12 +30,12 @@ export class UserService {
     return this.httpClient.post<Client>(this._URL + "addClient", client);
   }
 
-  createInsuranceAdmin(insuranceAdmin: InsuranceAdmin): Observable<User> {
-    return this.httpClient.post<User>(this._URL + "addInsuranceAdmin", insuranceAdmin);
+  createInsuranceAdmin(insuranceAdmin: InsuranceAdmin): Observable<InsuranceAdmin> {
+    return this.httpClient.post<InsuranceAdmin>(this._URL + "addInsuranceAdmin", insuranceAdmin);
   }
 
-  createSocieteRemorquageAdmin(societeRemorquageAdmin: SocieteRemorquageAdmin): Observable<User> {
-    return this.httpClient.post<User>(this._URL + "addCompany", societeRemorquageAdmin);
+  createSocieteRemorquageAdmin(societeRemorquageAdmin: SocieteRemorquageAdmin): Observable<SocieteRemorquageAdmin> {
+    return this.httpClient.post<SocieteRemorquageAdmin>(this._URL + "addCompany", societeRemorquageAdmin);
   }
 
   deleteUser(id: number){
@@ -46,9 +46,9 @@ export class UserService {
     return this.httpClient.put<User>(this._URL + "update/", user);
   }
 
-  public uploadImage(uploadImageData: FormData): Observable<any>{
+  public uploadImage(userId: number, uploadImageData: FormData): Observable<any>{
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-    return this.httpClient.post(this._URL+ "uploadImage", uploadImageData);
+    return this.httpClient.post(this._URL+ "uploadImage/" + userId, uploadImageData);
   }
   public getImage(profileId: number): Observable<any>{
     return this.httpClient.get(this._URL + "getImage/" + profileId);
