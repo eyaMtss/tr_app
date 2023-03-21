@@ -9,6 +9,7 @@ import { ShiftComponent } from './shift/shift.component';
 import { UserInformationComponent } from './user-information/user-information.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
 
 const routes: Routes = [
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
 
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-
+  { path: 'qrcode', component: QrCodeTestComponent}
 
 ];
 

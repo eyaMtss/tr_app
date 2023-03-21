@@ -37,4 +37,8 @@ export class Order {
         this.positionCLong = myarray[13];
         this.positionCAtt = myarray[14];
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1c46f6470386b01c1d0d414454575f6e4bad8e70
