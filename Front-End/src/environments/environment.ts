@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true
   domain: "http://localhost",
   port: 8989,
   keycloak: {
@@ -11,6 +11,7 @@ export const environment = {
     url: 'http://localhost:8080/',
     clientId: 'tunidesign-front-end'
   },
+
 
 };
 

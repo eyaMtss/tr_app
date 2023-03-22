@@ -247,3 +247,57 @@ input[type=submit]:hover {
   color: black;
   border:0 !important;
   }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #0000006b;
+    color: white;
+
+  }
+  .card {
+  position: relative;
+    height: 440px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    background-color: rgb(254, 254, 254);
+    width: 80%;
+    border-radius: 20px;
+    margin-top: 50px;
+  }
+  .adress{
+    text-align: center;
+    margin-top: 70px;
+    color: white;
+    border: 1px solid black;
+    padding: 13px;
+  }
+  .info-ask{
+    text-align: center;
+     color: white;
+  }
+  .last-ligne{
+    text-align: right ;
+    border-bottom: 1px solid #ffffff;
+  }
+  .valide
+  {
+    background-color: green;
+    border-radius: 23px;
+    text-align: center;
+    content:"valide";
+  }
+  .attente
+  {
+    background-color: orange;
+    border-radius: 23px;
+    text-align: center;
+    content:"En attente";
+
+  }
