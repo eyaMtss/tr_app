@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OrderComponent } from './order/order.component';
 import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
-import { RatingPageComponent } from './rating-page/rating-page.component';
 import { SendPictureComponent } from './send-picture/send-picture.component';
 import { ShareInformationComponent } from './share-information/share-information.component';
 import { ShiftComponent } from './shift/shift.component';
@@ -13,6 +12,8 @@ import { UserInformationComponent } from './user-information/user-information.co
 import { AuthGuard } from './guard/auth.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
+import { RatingComponent } from './rating/rating.component';
+import { ProfilclientComponent } from './profilclient/profilclient.component';
 
 const routes: Routes = [
 
@@ -24,7 +25,7 @@ const routes: Routes = [
 
   {path: 'picture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
-  {path: 'rating', component: RatingPageComponent},
+  {path: 'rating', component: RatingComponent},
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
 
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: '', redirectTo: 'auth', pathMatch: 'full'},
 
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'qrcode', component: QrCodeTestComponent}
+  { path: 'qrcode', component: QrCodeTestComponent},
+  { path: 'profilclient/:id', component: ProfilclientComponent}
 
 ];
 
