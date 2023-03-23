@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true
+  production: true,
   domain: "http://localhost",
   port: 8989,
   keycloak: {

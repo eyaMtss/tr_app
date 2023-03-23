@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+
 import { ShareInformationComponent } from './share-information/share-information.component';
 import { SendPictureComponent } from './send-picture/send-picture.component';
 import { UserInformationComponent } from './user-information/user-information.component';
@@ -27,9 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { HttpClientModule } from '@angular/common/http';
+
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 import { WebcamModule } from 'ngx-webcam';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
@@ -73,7 +72,7 @@ import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
     HttpClientModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    QRCodeModule
+    QRCodeModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     NgxIntlTelInputModule,
