@@ -32,13 +32,13 @@ export class NavbarComponent implements OnInit{
 
   signin() {
     const loginOptions: KeycloakLoginOptions = {
-      redirectUri: window.location.origin + "/order"
+      redirectUri: window.location.origin + "/tunidesign"
     };
     this.authService.login(loginOptions);
   }
 
   signup() {
-    this.router.navigate(['/auth/signup']);
+    this.router.navigate(['/signup']);
   }
 
   logout(){

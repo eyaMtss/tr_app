@@ -1,29 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { StepperOrientation } from '@angular/material/stepper';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from 'src/app/models/user';
-import { Client } from 'src/app/models/client';
-import { InsuranceAdmin } from 'src/app/models/insurance-admin';
-import { SocieteRemorquageAdmin } from 'src/app/models/societe-remorquage-admin';
-import { Vehicle } from 'src/app/models/vehicle';
-import { UserService } from 'src/app/services/api/user.service';
-import { VehicleService } from 'src/app/services/api/vehicle.service';
-import { KeycloakService } from 'keycloak-angular';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { KeycloakLoginOptions } from 'keycloak-js';
+import { Client } from '../models/client';
+import { InsuranceAdmin } from '../models/insurance-admin';
+import { SocieteRemorquageAdmin } from '../models/societe-remorquage-admin';
+import { FormGroup } from '@angular/forms';
+import { UserService } from '../services/api/user.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-
-export class SignUpComponent implements OnInit {
-  stepperOrientation: Observable<StepperOrientation>; // stepper
-
+export class SignupComponent implements OnInit {
   client: Client = new Client();
   insuranceAdmin: InsuranceAdmin = new InsuranceAdmin();
   societeRemorquageAdmin: SocieteRemorquageAdmin = new SocieteRemorquageAdmin();
@@ -53,12 +42,7 @@ export class SignUpComponent implements OnInit {
     email: 'eya.mattoussiii@gmail.com',
     password: 'mypassword',
   };
-  constructor(breakpointObserver: BreakpointObserver, private userService: UserService,
-    private authService: AuthService) {
-    // responsive stepper
-    this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  constructor(private userService: UserService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -226,5 +210,6 @@ export class SignUpComponent implements OnInit {
     };
     this.authService.login(loginOptions);
   }
+
 
 }

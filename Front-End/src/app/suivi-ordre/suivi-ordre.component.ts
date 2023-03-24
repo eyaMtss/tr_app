@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrderResponse } from '../order-response';
-import { OrderService } from '../order.service';
-import { Suivi } from '../suivi';
-import { SuiviService } from '../suivi.service';
+import { OrderResponse } from '../models/order-response';
+import { OrderService } from '../services/api/order.service';
+import { SuiviService } from '../services/api/suivi.service';
 
 @Component({
   selector: 'app-suivi-ordre',
