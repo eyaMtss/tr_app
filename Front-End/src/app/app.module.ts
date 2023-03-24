@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { ShareInformationComponent } from './share-information/share-information.component';
 import { SendPictureComponent } from './send-picture/send-picture.component';
 import { UserInformationComponent } from './user-information/user-information.component';
-import { RatingPageComponent } from './rating-page/rating-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
 import { OrderComponent } from './order/order.component';
@@ -34,6 +33,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
+import { RatingComponent } from './rating/rating.component';
+import { ProfilclientComponent } from './profilclient/profilclient.component';
 
            // @agm/core
 
@@ -46,7 +47,6 @@ import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
     ShareInformationComponent,
     SendPictureComponent,
     UserInformationComponent,
-    RatingPageComponent,
     PickUpPassComponent,
     OrderComponent,
     ShiftComponent,
@@ -56,7 +56,10 @@ import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
     AccessDeniedComponent,
     NavbarComponent,
     QrCodeComponent,
-    QrCodeTestComponent
+    QrCodeTestComponent,
+    RatingComponent,
+    
+    ProfilclientComponent
 
   ],
   imports: [
