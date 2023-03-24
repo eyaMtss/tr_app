@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -20,7 +19,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ErrorsCatchingInterceptor } from './httpInterceptor/errors-catching.interceptor';
 import { RequestInterceptor } from './httpInterceptor/request.interceptor';
-import {MatMenuModule} from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QrCodeComponent } from './qr-code/qr-code.component';
 import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
@@ -29,12 +27,18 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 
 import { WebcamModule } from 'ngx-webcam';
-import { GoogleMapsModule } from '@angular/google-maps'
+
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 import { RatingComponent } from './rating/rating.component';
 import { ProfilclientComponent } from './profilclient/profilclient.component';
+import { AuthGuard } from './guard/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HomeComponent } from './home/home.component';
+import { MultiComponent } from './multi/multi.component';
 
            // @agm/core
 
@@ -51,29 +55,23 @@ import { ProfilclientComponent } from './profilclient/profilclient.component';
     OrderComponent,
     ShiftComponent,
     SuiviOrdreComponent,
-
-    ShiftComponent,
     AccessDeniedComponent,
     NavbarComponent,
     QrCodeComponent,
     QrCodeTestComponent,
-    RatingComponent,
-    
-    ProfilclientComponent
+    RatingComponent,  
+    ProfilclientComponent, HomeComponent, MultiComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule ,
-    GooglePlaceModule,
-
     FormsModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     KeycloakAngularModule,
     HttpClientModule,
-    MatMenuModule,
     BrowserAnimationsModule,
     QRCodeModule,
     MatProgressSpinnerModule,
@@ -83,12 +81,14 @@ import { ProfilclientComponent } from './profilclient/profilclient.component';
     BrowserAnimationsModule,
     WebcamModule,
     GoogleMapsModule,
+    GooglePlaceModule,
 
 
   ],
   providers: [
     KeycloakService,
     AuthService,
+    AuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,
@@ -100,11 +100,11 @@ import { ProfilclientComponent } from './profilclient/profilclient.component';
       useClass: ErrorsCatchingInterceptor,
       multi: true
     },
-    /*{
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
-    },*/
+    },
   ],
   bootstrap: [AppComponent]
 })
