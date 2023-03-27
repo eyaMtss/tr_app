@@ -64,5 +64,9 @@ export class AuthService {
   register(){
     return this.keycloakService.register();
   }
+
+  getCompletedRegistrationAttribute(){
+    return this.keycloakService.loadUserProfile()
+  }
 }
 

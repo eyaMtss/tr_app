@@ -51,5 +51,6 @@ public interface UserService {
 	User getUserByUsernameOrEmail(String identifier);
 	Optional<User> getUserByEmail(String email);
 	Optional<User> getUserByUsername(String login);
+	public User updateCompletedRegistration(String username);
 
 }

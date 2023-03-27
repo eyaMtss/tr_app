@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<CompanyUserResponseDTO> getCompanyEmployees(Long companyId) {
-		return userRepository.findByCompanyId(companyId).stream()
+		return userRepository.findBySocieteRemorquageId(companyId).stream()
 				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
@@ -181,6 +181,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> getUserByUsername(String login) {
 		return Optional.ofNullable(userRepository.findByUsername(login));
+	}
+
+	@Override
+	public User updateCompletedRegistration(String username) {
+		User existingUser = userRepository.findByUsername(username);
+		existingUser.setCompletedRegistration(true);
+		return userRepository.save(existingUser);
 	}
 
 	public User addUserCredentials(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
