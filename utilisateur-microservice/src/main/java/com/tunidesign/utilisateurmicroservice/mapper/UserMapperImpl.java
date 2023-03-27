@@ -38,9 +38,6 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		userResponseDTO.setPictureName(user.getPictureName());
-		userResponseDTO.setAgencyId(user.getAgencyId());
-		userResponseDTO.setInsuranceCompanyId(user.getInsuranceCompanyId());
-		userResponseDTO.setCompanyId(user.getCompanyId());
 		return userResponseDTO;
 	}
 
@@ -49,25 +46,21 @@ public class UserMapperImpl implements UserMapper {
 		if (userRequestDTO == null) {
 			return null;
 		}
-		User user = new User();
-		user.setUserId(userRequestDTO.getUserId());
-		user.setFirstName(userRequestDTO.getFirstName());
-		user.setLastName(userRequestDTO.getLastName());
-		user.setGender(userRequestDTO.getGender());
-		user.setBirthdate(userRequestDTO.getBirthdate());
-		user.setCountry(userRequestDTO.getCountry());
-		user.setGovernorate(userRequestDTO.getGovernorate());
-		user.setCity(userRequestDTO.getCity());
-		user.setZipCode(userRequestDTO.getZipCode());
-		user.setHomeCode(userRequestDTO.getHomeCode());
-		user.setEmail(userRequestDTO.getEmail());
-		user.setPhoneNumber(userRequestDTO.getPhoneNumber());
-		user.setAgencyId(userRequestDTO.getAgencyId());
-		user.setInsuranceCompanyId(userRequestDTO.getInsuranceCompanyId());
-		user.setCompanyId(userRequestDTO.getCompanyId());
-		user.setUsername(userRequestDTO.getUsername());
-		user.setPassword(userRequestDTO.getPassword());
-		user.setConfirmPassword(userRequestDTO.getConfirmPassword());
+		User user = User.builder()
+				.firstName(userRequestDTO.getFirstName())
+				.lastName(userRequestDTO.getLastName())
+				.username(userRequestDTO.getUsername())
+				.email(userRequestDTO.getEmail())
+				.birthdate(userRequestDTO.getBirthdate())
+				.gender(userRequestDTO.getGender())
+				.phoneNumber(userRequestDTO.getPhoneNumber())
+				.password(userRequestDTO.getPassword())
+				.confirmPassword(userRequestDTO.getConfirmPassword())
+				.societeLocationId(userRequestDTO.getSocieteLocationId())
+				.societeRemorquageId(userRequestDTO.getSocieteRemorquageId())
+				.insuranceCompanyId(userRequestDTO.getInsuranceCompanyId())
+				.role(userRequestDTO.getRole())
+				.build();
 		return user;
 	}
 
@@ -89,6 +82,7 @@ public class UserMapperImpl implements UserMapper {
 		clientResponseDTO.setHomeCode(user.getHomeCode());
 		clientResponseDTO.setEmail(user.getEmail());
 		clientResponseDTO.setPhoneNumber(user.getPhoneNumber());
+		clientResponseDTO.setCompletedRegistration(user.getCompletedRegistration());
 		return clientResponseDTO;
 	}
 
@@ -135,7 +129,7 @@ public class UserMapperImpl implements UserMapper {
 		companyUsersResponseDTO.setPictureName(user.getPictureName());
 		companyUsersResponseDTO.setMatriculeFiscale(user.getMatriculeFiscale());
 		companyUsersResponseDTO.setStatus(user.getStatus());
-		companyUsersResponseDTO.setCompanyId(user.getCompanyId());
+		companyUsersResponseDTO.setCompanyId(user.getSocieteRemorquageId());
 		return companyUsersResponseDTO;
 	}
 
@@ -159,7 +153,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setPhoneNumber(companyUserRequestDTO.getPhoneNumber());
 		user.setMatriculeFiscale(companyUserRequestDTO.getMatriculeFiscale());
 		user.setStatus(companyUserRequestDTO.getStatus());
-		user.setCompanyId(companyUserRequestDTO.getCompanyId());
+		user.setSocieteRemorquageId(companyUserRequestDTO.getSocieteRemorquageId());
 		user.setInsuranceCompanyId(null);
 		user.setAgencyId(null);
 		user.setUsername(companyUserRequestDTO.getUsername());
@@ -213,7 +207,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setPhoneNumber(agencyUserRequestDto.getPhoneNumber());
 		user.setMatriculeFiscale(agencyUserRequestDto.getMatriculeFiscale());
 		user.setStatus(agencyUserRequestDto.getStatus());
-		user.setCompanyId(agencyUserRequestDto.getAgencyId());
+		user.setSocieteRemorquageId(agencyUserRequestDto.getAgencyId());
 		user.setUsername(agencyUserRequestDto.getUsername());
 		user.setPassword(agencyUserRequestDto.getPassword());
 		user.setConfirmPassword(agencyUserRequestDto.getConfirmPassword());
@@ -266,7 +260,7 @@ public class UserMapperImpl implements UserMapper {
 		user.setPhoneNumber(insuranceUserRequestDto.getPhoneNumber());
 		user.setMatriculeFiscale(insuranceUserRequestDto.getMatriculeFiscale());
 		user.setStatus(insuranceUserRequestDto.getStatus());
-		user.setCompanyId(insuranceUserRequestDto.getInsuranceCompanyId());
+		user.setSocieteRemorquageId(insuranceUserRequestDto.getInsuranceCompanyId());
 		user.setUsername(insuranceUserRequestDto.getUsername());
 		user.setPassword(insuranceUserRequestDto.getPassword());
 		user.setConfirmPassword(insuranceUserRequestDto.getConfirmPassword());
