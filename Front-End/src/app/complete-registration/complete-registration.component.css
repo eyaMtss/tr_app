@@ -1,0 +1,14 @@
+.container{
+    background-color: rgba(85, 87, 96, 0.559) !important;
+    border-radius: 20px !important;
+}
+@media screen and (min-width: 960px) {
+    .container {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 959px) {
+    .container {
+        width: 100%;
+    }
+}
