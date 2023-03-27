@@ -43,4 +43,5 @@ public class ClientResponseDTO {
 	@Lob
 	//@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
+	private Boolean completedRegistration;
 }
