@@ -39,6 +39,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HomeComponent } from './home/home.component';
 import { MultiComponent } from './multi/multi.component';
+import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
+import { SignupGuard } from './guard/signup.guard';
+import { RegistrationGuard } from './guard/registration.guard';
 
            // @agm/core
 
@@ -60,7 +63,7 @@ import { MultiComponent } from './multi/multi.component';
     QrCodeComponent,
     QrCodeTestComponent,
     RatingComponent,  
-    ProfilclientComponent, HomeComponent, MultiComponent
+    ProfilclientComponent, HomeComponent, MultiComponent, CompleteRegistrationComponent
 
   ],
   imports: [
@@ -89,6 +92,8 @@ import { MultiComponent } from './multi/multi.component';
     KeycloakService,
     AuthService,
     AuthGuard,
+    SignupGuard,
+    RegistrationGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,
