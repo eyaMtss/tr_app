@@ -14,33 +14,33 @@ export class InformationsComponent implements OnInit {
   informationForm: FormGroup;
   selectedUserImage!: File;// image
   viewedImage: any = "/assets/auth/user.png" // default image
-  roles: any[] = [{ id: 1, value: "User" }, { id: 2, value: "Assurance" }, { id: 3, value: "Société de remorquage" }]; //role values
-  currentRole: number = 1; // default role = user
+  roles: any[] = [{id: "CLIENT", value: "Client"}, {id: "INSURANCE_ADMIN", value: "Assurance"}, 
+  {id: "SOCIETE_REMORQUAGE_ADMIN", value: "Société de remorquage" },
+  {id: "GARAGISTE", value: "Garagiste"}, {id: "AGENCE_LOCATION_ADMIN", value: "Agence de location"}, 
+  {id: "LAVAGISTE", value: "Lavagiste"}, {id: "EXPERT", value: "Expert"}]; //role values
+  currentRole: string = "CLIENT"; // default role = user
   companyList: Company[] = []; // company(insurance / société remorquage)
   companyLabel!: string;
 
   genreList = [{id: "F", value: "Féminin"}, {id: "M", value: "Masculin"}];
   @Output() informationsFormEvent = new EventEmitter<FormGroup>();
-  @Output() currentRoleEvent = new EventEmitter<number>();
+  @Output() currentRoleEvent = new EventEmitter<string>();
   constructor(private _formBuilder: FormBuilder, private societeRemorquageService: SocieteRemorquageService,
     private insuranceService: InsuranceService) {
     this.informationForm = this._formBuilder.group({
-      role: [1, Validators.required],
+      role: ["CLIENT", Validators.required],
       firstname: ["", Validators.required],
       lastname: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
+      username: ["", [Validators.required]],
       phone: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(9)]],
       gender: ["", Validators.required],
       birthdate: ["", Validators.required],
       company: [{ value: '', disabled: true }, Validators.required],
-      img: [""]
     });
   }
 
   ngOnInit(): void {
-    this.informationForm.controls['role'].setValue(1); // role is setted to user
-
-    //this.getAllSocietesRemorquage() //test
   }
 
   // Image
@@ -63,22 +63,24 @@ export class InformationsComponent implements OnInit {
     console.log(this.currentRole);
     this.companyLabel = this.roles.filter(e => e.id == this.currentRole).map(e => e.value)[0];
     switch (this.currentRole) {
-      case 1: {
-        this.informationForm.controls['company'].disable();
-        this.informationForm.controls['matriculeFiscale'].disable();
-        break;
-      }
-      case 2: { //assurance
+      case "INSURANCE_ADMIN": { //assurance
         this.informationForm.controls['company'].enable();
-        this.informationForm.controls['matriculeFiscale'].enable();
         this.getAllInsurances();
         break;
       }
-      case 3: { //société de remorquage
+      case "SOCIETE_REMORQUAGE_ADMIN": { //société de remorquage
         console.log(this.currentRole);
         this.informationForm.controls['company'].enable();
-        this.informationForm.controls['matriculeFiscale'].enable();
         this.getAllSocietesRemorquage();
+        break;
+      }
+      case "AGENCE_LOCATION_ADMIN": { // agence de location
+        this.informationForm.controls['company'].enable();
+        //this.getAllAgencesLocation();
+        break;
+      }
+      default:{
+        this.informationForm.controls['company'].disable();
         break;
       }
     }
@@ -117,7 +119,7 @@ export class InformationsComponent implements OnInit {
     this.informationsFormEvent.emit(value);
   }
 
-  emitCurrentrole(value: number){
+  emitCurrentrole(value: string){
     this.currentRoleEvent.emit(value);
   }
 }
