@@ -31,11 +31,8 @@ public class ResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/v3/**", "/users/addClient", "/users/addCompanyAdmin",
-                        "/users/addInsuranceAdmin", "/users/getAll/clients", "/users/uploadImage/**")
+                .requestMatchers("/swagger-ui/**", "/v3/**", "/users/add", "/users/getAll/clients")
                     .permitAll()
-                .and()
-                .authorizeRequests()
                 .anyRequest().authenticated() // OR .access("authenticated AND hasRole('product_read')")
                 .and()
                 .httpBasic()
