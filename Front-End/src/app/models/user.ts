@@ -1,21 +1,15 @@
 export class User {
-    userId!: number;
-    email!: string;
     firstName!: string;
     lastName!: string;
-    phone!: number;
+    email!: string;
+    username!: string;
+    phoneNumber!: number;
     birthdate!: Date;
     gender!: string;
-    matriculeFiscale!: string;
 
-    companyId!: number; // societe remorquage
+    societeRemorquageId!: number; // societe remorquage
     insuranceCompanyId!: number;
-    
-    country!: string;
-    governorate!: string;
-    city!: string;
-    zipCode!: number;
-    homeCode!: number;
+    agenceLocationId!: number;
 
     password!: string;
     confirmPassword!: string;
