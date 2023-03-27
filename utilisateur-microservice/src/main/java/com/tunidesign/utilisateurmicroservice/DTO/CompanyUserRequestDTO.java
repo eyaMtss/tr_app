@@ -43,7 +43,7 @@ public class CompanyUserRequestDTO {
 	private Status status;
 
 	// TA && DRIVER && admin
-	private Long companyId;
+	private Long societeRemorquageId;
 
 	// Authentication
 	private String username;
