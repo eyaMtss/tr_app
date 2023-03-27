@@ -53,32 +53,42 @@ public class UserController {
 	private UserServiceImpl userService;
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
 	private UserMapperImpl userMapper = new UserMapperImpl();
-//	@PostMapping("/authenticate")
-//	public ResponseEntity<AuthenticationResponseDTO> authenticate(@RequestBody CredentialsDTO user) {
-//		return new ResponseEntity<>(userService.getUserByLoginOrEmail(user.getIdentifier(), user.getPassword()),
-//				HttpStatus.OK);
-//	}
 
-	/*@PostMapping("/authenticate")
-	public ResponseEntity<TokenResponseDTO> signIn(@RequestBody CredentialsDTO credentialsDto) {
-		log.info("Trying to login {}", credentialsDto.getIdentifier());
-		AuthenticationResponseDTO user = userService.getUserByLoginOrEmail(credentialsDto.getIdentifier(),
-				credentialsDto.getPassword());
-		if (user == null)
-			throw new UserNotFoundException("User not found");
-		if (userService.isPasswordsMatched(credentialsDto.getPassword(), user.getPassword())) {
-			return new ResponseEntity(
-					new TokenResponseDTO(jwtTokenUtil.generateToken(user.getIdentifier(), user.getRole())),
-					HttpStatus.OK);
-		} else {
-			throw new InvalidPasswordException("Invalid password");
+	/**
+	 * Eya Mattoussi
+	 * this method is user while signup
+	 * No need for role
+	 * @param userRequestDTO
+	 * @return saved user
+	 */
+	@PostMapping("/add")
+	public ResponseEntity<ClientResponseDTO> addUser(@RequestBody UserRequestDTO userRequestDTO) {
+		try {
+
+			userRequestDTO = generateUsername(userRequestDTO);//generate username
+			User savedUser = userService.addUser(userMapper.userRequestDTOToUser(userRequestDTO));
+			logger.info(String.valueOf(savedUser));
+			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedUser), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new CustomException(e.getMessage());
 		}
-	}*/
-//	 @PostMapping("/validateToken")
-//	    public ResponseEntity<AuthenticationResponseDTO> signIn(@RequestParam String token) {
-//	        log.info("Trying to validate token {}", token);
-//	        return ResponseEntity.ok(userService.validateToken(token));
-//	    }
+	}
+
+	/**
+	 * Eya Mattoussi
+	 * generate a username for users depending on their role
+	 * @param userRequestDTO
+	 * @return userRequestDTO with username set
+	 */
+	public UserRequestDTO generateUsername(UserRequestDTO userRequestDTO){
+		String role = String.valueOf(userRequestDTO.getRole());
+		String username = userRequestDTO.getUsername();
+		if (role.equals("SOCIETE_REMORQUAGE_ADMIN")){
+			username = "soc";
+		}
+		userRequestDTO.setUsername(username);
+		return userRequestDTO;
+	}
 	@PostMapping("/addSuperAdmin")
 	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
@@ -213,7 +223,7 @@ public class UserController {
 	}
 
 	/* ******************* update user ******************* */
-	@PutMapping("update")
+	/*@PutMapping("update")
 	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
 
 		try {
@@ -226,17 +236,8 @@ public class UserController {
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
-	}
+	}*/
 
-//	  @GetMapping("/users")
-//	    public ResponseEntity<List<User>> getAllUsers(@AuthenticationPrincipal User user) {
-//	        if (user.getRole() == Role.ADMIN) {
-//	            List<User> users = userService.findAll();
-//	            return ResponseEntity.ok(users);
-//	        } else {
-//	            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//	        }
-//	    }
 	/* *********************** get All ********************** */
 	@GetMapping("/getAll/clients")
 	public ResponseEntity<List<ClientResponseDTO>> getClients() {
@@ -323,6 +324,11 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("updateCompletedRegistration/{username}")
+	@RolesAllowed("CLIENT")
+	public ResponseEntity<?> updateCompletedRegistration(@PathVariable String username){
+		return new ResponseEntity<>(userService.updateCompletedRegistration(username), HttpStatus.OK);
+	}
 	// compress the image bytes before storing it in the database
 	public static byte[] compressBytes(byte[] data) {
 		Deflater deflater = new Deflater();
