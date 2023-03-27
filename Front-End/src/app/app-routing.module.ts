@@ -16,13 +16,17 @@ import { RatingComponent } from './rating/rating.component';
 import { ProfilclientComponent } from './profilclient/profilclient.component';
 import { HomeComponent } from './home/home.component';
 import { MultiComponent } from './multi/multi.component';
+import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
+import { SignupGuard } from './guard/signup.guard';
+import { RegistrationGuard } from './guard/registration.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
+  { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule), canActivate: [SignupGuard] },
   { path: 'access-denied', component: AccessDeniedComponent, canActivate: [AuthGuard] },
-  { path: 'tunidesign', component: MultiComponent },
+  { path: 'tunidesign', component: MultiComponent, canActivate: [AuthGuard, RegistrationGuard] },
+  { path: 'complete-registration', component: CompleteRegistrationComponent },
 
   {path: 'shareInformation', component: ShareInformationComponent},
   {path: 'share', component: ShareInformationComponent},
