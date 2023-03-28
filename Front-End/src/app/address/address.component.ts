@@ -91,13 +91,11 @@ export class AddressComponent implements OnInit {
 
   onFormChange(){
     if(this.addressForm.valid){
-      console.log(this.addressForm.valid)
       this.emitInformationForm(this.addressForm);
     } 
   }
 
   emitInformationForm(value: FormGroup) {
-    console.log(value)
     this.addressFormEvent.emit(value);
   }
 }
