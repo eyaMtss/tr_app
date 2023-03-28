@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class UpdatedUser {
+public class UpdatedUserRequestDTO {
     private String username;
     private String country;
     private String governorate;
