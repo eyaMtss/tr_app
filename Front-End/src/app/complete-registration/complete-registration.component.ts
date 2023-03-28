@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/api/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Vehicle } from '../models/vehicle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-complete-registration',
@@ -25,7 +26,8 @@ export class CompleteRegistrationComponent implements OnInit {
   vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
   // garage 
   garageType: string = "";
-  constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService, private fb: FormBuilder) { 
+  constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
+    private fb: FormBuilder, private router: Router) { 
     this.completedRegistrationForm = this.fb.group({
       img: [''],
       matriculeFiscale: ['', Validators.required],
@@ -36,6 +38,14 @@ export class CompleteRegistrationComponent implements OnInit {
     this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
     console.log(this.currentRole);
     this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
+  }
+
+  onConfirm(){
+    if(this.currentRole == "CLIENT") this.router.navigate(["/share"]);
+    else if(this.currentRole == "GARAGISTE") this.router.navigate(["/garagisteAdmin"]);
+    else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+    else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else this.router.navigate(["/order"]);
   }
 
   onSubmit(): void {
