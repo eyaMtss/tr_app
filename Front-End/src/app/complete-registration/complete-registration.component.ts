@@ -5,6 +5,7 @@ import { UserService } from '../services/api/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Vehicle } from '../models/vehicle';
 import { Router } from '@angular/router';
+import { UpdatedUser } from '../models/updated-user';
 
 @Component({
   selector: 'app-complete-registration',
@@ -12,8 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./complete-registration.component.css']
 })
 export class CompleteRegistrationComponent implements OnInit {
+  user: UpdatedUser = new UpdatedUser();
   completedRegistrationForm: FormGroup;
   currentRole!: string;
+  currentUsername!: string;
   addressForm!: FormGroup; // address form
   // image
   selectedUserImage!: File;// image
@@ -26,6 +29,9 @@ export class CompleteRegistrationComponent implements OnInit {
   vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
   // garage 
   garageType: string = "";
+  garageTypeValue!: string; // ngModel
+
+  matriculeFiscaleValue!: string; // ngModel
   constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
     private fb: FormBuilder, private router: Router) { 
     this.completedRegistrationForm = this.fb.group({
@@ -36,25 +42,45 @@ export class CompleteRegistrationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
+    if(this.currentRole == 'CLIENT'){
+      this.completedRegistrationForm.controls['matriculeFiscale'].disable();
+      this.completedRegistrationForm.controls['garageType'].disable();
+    }
+    else if(this.currentRole == 'GARAGISTE_ADMIN'){
+      this.completedRegistrationForm.controls['matriculeFiscale'].enable();
+      this.completedRegistrationForm.controls['garageType'].enable();
+    }
+    else{
+      this.completedRegistrationForm.controls['matriculeFiscale'].enable();
+      this.completedRegistrationForm.controls['garageType'].disable();
+    }
+    this.currentUsername = this.authService.getUsername(); // get username from token
+    this.user.username = this.currentUsername; // set username
     console.log(this.currentRole);
+    console.log(this.currentUsername);
     this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
   }
 
   onConfirm(){
+    // save user's registration data && mark registration as complete(completed_registration attribute)
+    this.userService.completeRegistration(this.user).subscribe(data => {
+      this.setTokenRegistration();
+      console.log(data);
+    })
+  }
+
+  navigate(){
     if(this.currentRole == "CLIENT") this.router.navigate(["/client"]);
     else if(this.currentRole == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
     else if(this.currentRole == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
     else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
     else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
-    else this.router.navigate(["/order"]);
+    else this.router.navigate(["/access-denied"]);
   }
 
-  onSubmit(): void {
-    // save user's registration data
-    // ...
-
+  setTokenRegistration(): void {
     // mark registration as complete
-    const userDetails = this.keycloakService.getKeycloakInstance().idTokenParsed;
+    const userDetails = this.authService.getUserDetails();
     console.log(userDetails);
     if (userDetails) {
       userDetails['completed_registration'] = 'true';
@@ -62,11 +88,7 @@ export class CompleteRegistrationComponent implements OnInit {
         console.log('User details updated with completed_registration attribute');
         console.log(userDetails.completed_registration)
       });
-      this.userService.updateCompletedRegistration(userDetails["preferred_username"]).subscribe(data => {
-        console.log(data)
-      })
-    }
-    
+    }  
   }
 
    // Image
@@ -99,7 +121,10 @@ export class CompleteRegistrationComponent implements OnInit {
     console.log(addressForm);
     this.addressForm = addressForm;
     if (this.addressForm.valid) {
-      // save to entity !!! depending on role
+      this.user.country = this.addressForm.controls['country'].value;
+      this.user.governorate = this.addressForm.controls['governorate'].value;
+      this.user.city = this.addressForm.controls['city'].value;
+      this.user.zipCode = this.addressForm.controls['zipCode'].value;
     }
   }
 
@@ -147,5 +172,10 @@ export class CompleteRegistrationComponent implements OnInit {
     else if("tire".includes(garageTypeValue)){
       this.garageType = "pneumatique";
     }
+  }
+
+  onMatriculeFiscaleChange(){
+    console.log(this.matriculeFiscaleValue);
+    this.user.matriculeFiscale = this.matriculeFiscaleValue;
   }
 }
