@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/api/user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Vehicle } from '../models/vehicle';
 
 @Component({
@@ -23,14 +23,18 @@ export class CompleteRegistrationComponent implements OnInit {
   maxVehicleNumber: number = 5; // 
   currentVehicleNumber: number = 1; // user must have at least 1 vehicule
   vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
-
+  // garage 
+  garageType: string = "";
   constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService, private fb: FormBuilder) { 
     this.completedRegistrationForm = this.fb.group({
-      img: ['']
+      img: [''],
+      matriculeFiscale: ['', Validators.required],
+      garageType: ['', Validators.required]
     })
   }
   ngOnInit(): void {
     this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
+    console.log(this.currentRole);
     this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
   }
 
@@ -81,6 +85,7 @@ export class CompleteRegistrationComponent implements OnInit {
   }
 
   getAddressForm(addressForm: FormGroup) {
+    console.log(addressForm);
     this.addressForm = addressForm;
     if (this.addressForm.valid) {
       // save to entity !!! depending on role
@@ -118,5 +123,18 @@ export class CompleteRegistrationComponent implements OnInit {
     this.vehiculeValues[index].puissance = vehicleForm.controls['power'].value;
     this.vehiculeValues[index].nbPortes = vehicleForm.controls['doorsNumber'].value;
     this.vehiculeValues[index].poids = vehicleForm.controls['weight'].value;
+  }
+
+  onGarageTypeChange(){
+    let garageTypeValue = this.completedRegistrationForm.controls['garageType'].value;
+    if("wrench".includes(garageTypeValue)){
+      this.garageType = "mecanique";
+    }
+    else if("plug".includes(garageTypeValue)){
+      this.garageType = "electrique";
+    }
+    else if("tire".includes(garageTypeValue)){
+      this.garageType = "pneumatique";
+    }
   }
 }
