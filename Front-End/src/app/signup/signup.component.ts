@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { Client } from '../models/client';
-import { InsuranceAdmin } from '../models/insurance-admin';
-import { SocieteRemorquageAdmin } from '../models/societe-remorquage-admin';
 import { FormGroup } from '@angular/forms';
 import { UserService } from '../services/api/user.service';
 import { AuthService } from '../services/auth/auth.service';
