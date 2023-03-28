@@ -1,5 +1,5 @@
 <div class="container shadow-lg mb-3">
-    <form [formGroup]="completedRegistrationForm" (submit)="onSubmit()">
+    <form [formGroup]="completedRegistrationForm">
         <div class="row">
 
             <div class="col-12 col-md-4">
@@ -40,7 +40,7 @@
                 <label for="matriculeFiscale">Matricule fiscale</label>
                 <div class="input-group mb-3">
                     <input class="form-control" placeholder="Matricule fiscale" id="matriculeFiscale" 
-                    type="text" formControlName="matriculeFiscale" [ngClass]="{
+                    type="text" (change)="onMatriculeFiscaleChange()" formControlName="matriculeFiscale" [ngClass]="{
                         'is-invalid':
                             completedRegistrationForm.get('matriculeFiscale')!.touched &&
                             completedRegistrationForm.controls['matriculeFiscale'].errors
