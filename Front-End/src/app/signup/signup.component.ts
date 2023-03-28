@@ -19,10 +19,6 @@ export class SignupComponent implements OnInit {
   informationsForm!: FormGroup;
   currentRole!: string; //user is the default user
   isInformationsNextBtnDisabled: Boolean = true;
-  // image
-  retrievedImage: any;
-  viewedImage: any;
-  temporaryRetrievedImage: any;
 
   // addressForm
   addressForm!: FormGroup;
@@ -103,20 +99,7 @@ export class SignupComponent implements OnInit {
       this.signin();
     });
   }
-
-  //Gets called when the user clicks on save to upload the image
-  onUpload(userId: number) {
-    if (this.informationsForm.controls['img'].value != undefined) { // if we change the image
-      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-      const uploadImageData = new FormData();
-      uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
-      //uploadImageData.append('profileId', (this.profile.profileId).toString());
-      this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
-        this.viewedImage = this.temporaryRetrievedImage; // view the new image
-      });
-    }
-  }
-
+  
   // redirect to signin interface after inscription
   signin() {
     const loginOptions: KeycloakLoginOptions = {
