@@ -172,10 +172,11 @@ export class CompleteRegistrationComponent implements OnInit {
     else if("tire".includes(garageTypeValue)){
       this.garageType = "pneumatique";
     }
+    console.log(this.garageType);
   }
 
   onMatriculeFiscaleChange(){
-    console.log(this.matriculeFiscaleValue);
-    this.user.matriculeFiscale = this.matriculeFiscaleValue;
+    console.log(this.completedRegistrationForm.controls['matriculeFiscale'].value);
+    this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
   }
 }
