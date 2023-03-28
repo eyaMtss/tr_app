@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   getUsername(){
-    return this.keycloakService.getUsername();
+    return this.getUserDetails()!['preferred_username'];
   }
 
   register(){
