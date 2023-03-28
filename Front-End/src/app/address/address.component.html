@@ -5,7 +5,7 @@
         </div>
         <div class="col-12 col-md-6">
             <label for="country">Pays</label>
-            <select class="form-select" aria-label="Default select example" formControlName="country" id="country"
+            <select class="form-select mb-3" aria-label="Default select example" formControlName="country" id="country"
                 (change)="onCountryChange()" [ngClass]="{
                         'is-invalid':
                             addressForm.get('country')!.touched &&
@@ -19,7 +19,7 @@
         </div>
         <div *ngIf="isCountrySetted" class="col-12 col-md-6">
             <label for="governorate">Governorat</label>
-            <select class="form-select" aria-label="Default select example" formControlName="governorate"
+            <select class="form-select mb-3" aria-label="Default select example" formControlName="governorate"
                 id="governorate" (change)="onGovernorateChange()" [ngClass]="{
                         'is-invalid':
                             addressForm.get('governorate')!.touched &&
@@ -30,7 +30,7 @@
         </div>
         <div *ngIf="isGovernorateSetted" class="col-12 col-md-6">
             <label for="city">Cité</label>
-            <select class="form-select" aria-label="Default select example" formControlName="city" id="city" [ngClass]="{
+            <select class="form-select mb-3" aria-label="Default select example" formControlName="city" id="city" [ngClass]="{
                 'is-invalid':
                     addressForm.get('city')!.touched &&
                     addressForm.controls['city'].errors
