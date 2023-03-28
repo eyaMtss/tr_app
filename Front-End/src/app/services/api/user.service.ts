@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Client } from 'src/app/models/client';
 import { InsuranceAdmin } from 'src/app/models/insurance-admin';
 import { SocieteRemorquageAdmin } from 'src/app/models/societe-remorquage-admin';
+import { UpdatedUser } from 'src/app/models/updated-user';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
 
@@ -14,16 +15,20 @@ export class UserService {
   private _URL = environment.domain + ":" + environment.port + "/users/";
   constructor(private httpClient: HttpClient) { }
 
+  create(user: User): Observable<User> { // signup
+    return this.httpClient.post<User>(this._URL + "add", user);
+  }
+
+  completeRegistration(user: UpdatedUser): Observable<User>{
+    return this.httpClient.put<User>(this._URL + "completeRegistration/", user);
+  }
+  
   getAll(): Observable<User[]> {
     return this.httpClient.get<User[]>(this._URL + "getAll")
   }
 
   getById(id: number): Observable<User>{
     return this.httpClient.get<User>(this._URL + "getById/" + id);
-  }
-
-  create(user: User): Observable<User> {
-    return this.httpClient.post<User>(this._URL + "add", user);
   }
 
   createClient(client: Client): Observable<Client> {
@@ -40,10 +45,6 @@ export class UserService {
 
   deleteUser(id: number){
     return this.httpClient.delete<User>(this._URL + "delete/" + id);
-  }
- 
-  editUser(user: User): Observable<User>{
-    return this.httpClient.put<User>(this._URL + "update/", user);
   }
 
   public uploadImage(userId: number, uploadImageData: FormData): Observable<any>{
