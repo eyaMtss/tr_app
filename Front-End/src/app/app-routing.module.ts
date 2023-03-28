@@ -39,6 +39,10 @@ const routes: Routes = [
   {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   { path: 'qrcode', component: QrCodeTestComponent},
   { path: 'profilclient/:id', component: ProfilclientComponent},
+  { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule) },
+  { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule) },
+  { path: 'agenceLocationAdmin', loadChildren: () => import('./agence-location-admin/agence-location-admin.module').then(m => m.AgenceLocationAdminModule) },
+  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
 
   
 ];
