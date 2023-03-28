@@ -5,17 +5,7 @@ import java.io.IOException;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
-import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.AuthenticationResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.ClientRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.ClientResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.UserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
+import com.tunidesign.utilisateurmicroservice.DTO.*;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
 
 public class UserMapperImpl implements UserMapper {
@@ -46,7 +36,7 @@ public class UserMapperImpl implements UserMapper {
 		if (userRequestDTO == null) {
 			return null;
 		}
-		User user = User.builder()
+		return User.builder()
 				.firstName(userRequestDTO.getFirstName())
 				.lastName(userRequestDTO.getLastName())
 				.username(userRequestDTO.getUsername())
@@ -61,7 +51,24 @@ public class UserMapperImpl implements UserMapper {
 				.insuranceCompanyId(userRequestDTO.getInsuranceCompanyId())
 				.role(userRequestDTO.getRole())
 				.build();
-		return user;
+	}
+
+	/**
+	 * Eya Mattoussi
+	 * 28/03/2023
+	 * while completing registration address && matriculeFiscale if the user is not a CLIENT
+	 * @param updatedUserRequestDTO
+	 * @return
+	 */
+	@Override
+	public User updatedUserRequestDTOToUser(UpdatedUserRequestDTO updatedUserRequestDTO) {
+		return User.builder()
+				.country(updatedUserRequestDTO.getCountry())
+				.governorate(updatedUserRequestDTO.getGovernorate())
+				.city(updatedUserRequestDTO.getCity())
+				.zipCode(updatedUserRequestDTO.getZipCode())
+				.matriculeFiscale(updatedUserRequestDTO.getMatriculeFiscale())
+				.build();
 	}
 
 	@Override
