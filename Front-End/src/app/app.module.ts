@@ -42,11 +42,9 @@ import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
-
-           // @agm/core
-
-
-
+import { AddressComponent } from './address/address.component';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
 @NgModule({
 
   declarations: [
@@ -63,7 +61,12 @@ import { RegistrationGuard } from './guard/registration.guard';
     QrCodeComponent,
     QrCodeTestComponent,
     RatingComponent,  
-    ProfilclientComponent, HomeComponent, MultiComponent, CompleteRegistrationComponent
+    ProfilclientComponent, 
+    HomeComponent, 
+    MultiComponent, 
+    CompleteRegistrationComponent,
+    AddressComponent, 
+    AddVehicleComponent, ImmatriculationComponent
 
   ],
   imports: [
