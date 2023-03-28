@@ -2,11 +2,13 @@
     background-color: rgba(85, 87, 96, 0.559) !important;
     border-radius: 20px !important;
 }
+
 @media screen and (min-width: 960px) {
     .container {
         width: 70%;
     }
 }
+
 @media screen and (max-width: 959px) {
     .container {
         width: 100%;
@@ -19,7 +21,26 @@ img {
     padding: 5px;
 }
 
-
 label, h4{
     color: white;
 }
+
+.container-img{
+    display: grid;
+    place-items: center;
+}
+
+.add-vehicle-btn{
+    border-radius: 50%;
+    color: white;
+}
+
+.confirm_btn{
+    background-color: #a5caf5;
+}
+
+.fa {
+    font-family: 'Lato', 'Font Awesome 5 Free', 'Font Awesome 5 Brands' !important;
+   
+ 
+ }
