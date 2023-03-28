@@ -12,3 +12,14 @@
         width: 100%;
     }
 }
+
+img {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+
+label, h4{
+    color: white;
+}
