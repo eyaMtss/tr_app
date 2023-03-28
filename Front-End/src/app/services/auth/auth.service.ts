@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
 
@@ -6,7 +7,7 @@ import { KeycloakLoginOptions } from 'keycloak-js';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private keycloakService: KeycloakService) { }
+  constructor(private keycloakService: KeycloakService, private router: Router) { }
 
   async getLoggedUser(){
     try {
@@ -39,7 +40,8 @@ export class AuthService {
 
   logout(){
     this.keycloakService.logout(window.location.origin).then(() => {
-      this.keycloakService.clearToken() //clear token from keycloak service
+      this.keycloakService.clearToken(); //clear token from keycloak service
+      this.router.navigate(["/home"]); // navigate to home page
     });
     localStorage.removeItem("Token") // clear token from localStorage
     localStorage.setItem("isLoggedIn", "false"); // change isLoggedIn to false in LocalStorage
@@ -58,11 +60,15 @@ export class AuthService {
   }
 
   getUsername(){
-    return this.keycloakService.getUsername();
+    return this.getUserDetails()!['preferred_username'];
   }
 
   register(){
     return this.keycloakService.register();
+  }
+
+  getUserDetails(){
+    return this.keycloakService.getKeycloakInstance().idTokenParsed;
   }
 }
 

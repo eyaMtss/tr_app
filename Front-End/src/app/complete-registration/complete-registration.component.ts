@@ -1,0 +1,182 @@
+import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
+import { AuthService } from '../services/auth/auth.service';
+import { UserService } from '../services/api/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Vehicle } from '../models/vehicle';
+import { Router } from '@angular/router';
+import { UpdatedUser } from '../models/updated-user';
+
+@Component({
+  selector: 'app-complete-registration',
+  templateUrl: './complete-registration.component.html',
+  styleUrls: ['./complete-registration.component.css']
+})
+export class CompleteRegistrationComponent implements OnInit {
+  user: UpdatedUser = new UpdatedUser();
+  completedRegistrationForm: FormGroup;
+  currentRole!: string;
+  currentUsername!: string;
+  addressForm!: FormGroup; // address form
+  // image
+  selectedUserImage!: File;// image
+  retrievedImage: any;
+  viewedImage: any = "/assets/auth/user.png" // default image
+  temporaryRetrievedImage: any;
+  // vahicule
+  maxVehicleNumber: number = 5; // 
+  currentVehicleNumber: number = 1; // user must have at least 1 vehicule
+  vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
+  // garage 
+  garageType: string = "";
+  garageTypeValue!: string; // ngModel
+
+  matriculeFiscaleValue!: string; // ngModel
+  constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
+    private fb: FormBuilder, private router: Router) { 
+    this.completedRegistrationForm = this.fb.group({
+      img: [''],
+      matriculeFiscale: ['', Validators.required],
+      garageType: ['', Validators.required]
+    })
+  }
+  ngOnInit(): void {
+    this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
+    if(this.currentRole == 'CLIENT'){
+      this.completedRegistrationForm.controls['matriculeFiscale'].disable();
+      this.completedRegistrationForm.controls['garageType'].disable();
+    }
+    else if(this.currentRole == 'GARAGISTE_ADMIN'){
+      this.completedRegistrationForm.controls['matriculeFiscale'].enable();
+      this.completedRegistrationForm.controls['garageType'].enable();
+    }
+    else{
+      this.completedRegistrationForm.controls['matriculeFiscale'].enable();
+      this.completedRegistrationForm.controls['garageType'].disable();
+    }
+    this.currentUsername = this.authService.getUsername(); // get username from token
+    this.user.username = this.currentUsername; // set username
+    console.log(this.currentRole);
+    console.log(this.currentUsername);
+    this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
+  }
+
+  onConfirm(){
+    // save user's registration data && mark registration as complete(completed_registration attribute)
+    this.userService.completeRegistration(this.user).subscribe(data => {
+      this.setTokenRegistration();
+      console.log(data);
+    })
+  }
+
+  navigate(){
+    if(this.currentRole == "CLIENT") this.router.navigate(["/client"]);
+    else if(this.currentRole == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
+    else if(this.currentRole == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
+    else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+    else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else this.router.navigate(["/access-denied"]);
+  }
+
+  setTokenRegistration(): void {
+    // mark registration as complete
+    const userDetails = this.authService.getUserDetails();
+    console.log(userDetails);
+    if (userDetails) {
+      userDetails['completed_registration'] = 'true';
+      this.keycloakService.updateToken(5).then(() => {
+        console.log('User details updated with completed_registration attribute');
+        console.log(userDetails.completed_registration)
+      });
+    }  
+  }
+
+   // Image
+   public onFileChanged(event: any) {  //Gets called when the user selects an image
+    //Select File
+    this.selectedUserImage = event.target.files[0];
+    console.log(this.selectedUserImage)
+    var reader = new FileReader();
+    reader.readAsDataURL(this.selectedUserImage);
+    reader.onload = (_event) => {
+      this.viewedImage = reader.result;
+    }
+    this.completedRegistrationForm.controls['img'].setValue(this.selectedUserImage);
+  }
+
+  //Gets called when the user clicks on save to upload the image
+  onUpload(userId: number) {
+    if (this.completedRegistrationForm.controls['img'].value != undefined) { // if we change the image
+      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', this.completedRegistrationForm.controls['img'].value);
+      //uploadImageData.append('profileId', (this.profile.profileId).toString());
+      this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
+        this.viewedImage = this.temporaryRetrievedImage; // view the new image
+      });
+    }
+  }
+
+  getAddressForm(addressForm: FormGroup) {
+    console.log(addressForm);
+    this.addressForm = addressForm;
+    if (this.addressForm.valid) {
+      this.user.country = this.addressForm.controls['country'].value;
+      this.user.governorate = this.addressForm.controls['governorate'].value;
+      this.user.city = this.addressForm.controls['city'].value;
+      this.user.zipCode = this.addressForm.controls['zipCode'].value;
+    }
+  }
+
+  onAddVehicleBtn() { // add a new vehicule
+    if (this.vehiculeValues.length < this.maxVehicleNumber) {
+      this.vehiculeValues.push(new Vehicle());
+      this.currentVehicleNumber += 1;
+      console.log(this.vehiculeValues);
+    }
+  }
+
+  onDeleteButton(i: any): void {  //delete the i input field for vehiculesValues list
+    if (this.vehiculeValues.length == 1)   //always keep a field
+      this.vehiculeValues[i] = new Vehicle()
+    else {
+      this.vehiculeValues.splice(i, 1);
+      this.currentVehicleNumber -= 1;
+    }
+  }
+
+  getVehicleForm(vehicleForm: FormGroup, index: number) {
+    console.log(index);
+    console.log(vehicleForm);
+    this.vehiculeValues[index].typeImmat = vehicleForm.controls['registrationType'].value;
+    this.vehiculeValues[index].numImmat = vehicleForm.controls['registrationNumber'].value;
+    this.vehiculeValues[index].confirmNumImmat = vehicleForm.controls['confirmRegistrationNumber'].value;
+    this.vehiculeValues[index].marque = vehicleForm.controls['brand'].value;
+    this.vehiculeValues[index].numChassis = vehicleForm.controls['chassisNumber'].value;
+    this.vehiculeValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
+    this.vehiculeValues[index].couleur = vehicleForm.controls['color'].value;
+    this.vehiculeValues[index].kilometrage = vehicleForm.controls['kilometrage'].value;
+    this.vehiculeValues[index].puissance = vehicleForm.controls['power'].value;
+    this.vehiculeValues[index].nbPortes = vehicleForm.controls['doorsNumber'].value;
+    this.vehiculeValues[index].poids = vehicleForm.controls['weight'].value;
+  }
+
+  onGarageTypeChange(){
+    let garageTypeValue = this.completedRegistrationForm.controls['garageType'].value;
+    if("wrench".includes(garageTypeValue)){
+      this.garageType = "mecanique";
+    }
+    else if("plug".includes(garageTypeValue)){
+      this.garageType = "electrique";
+    }
+    else if("tire".includes(garageTypeValue)){
+      this.garageType = "pneumatique";
+    }
+    console.log(this.garageType);
+  }
+
+  onMatriculeFiscaleChange(){
+    console.log(this.completedRegistrationForm.controls['matriculeFiscale'].value);
+    this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
+  }
+}

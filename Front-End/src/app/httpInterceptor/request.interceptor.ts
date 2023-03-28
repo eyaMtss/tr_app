@@ -24,6 +24,7 @@ export class RequestInterceptor implements HttpInterceptor {
           if (!keycloak.authenticated) {
             return next.handle(req);
           }
+
           const modifiedReq = req.clone(
             {
               setHeaders: {

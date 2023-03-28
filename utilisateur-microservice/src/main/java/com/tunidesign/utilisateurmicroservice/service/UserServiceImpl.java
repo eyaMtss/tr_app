@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
 		if (passwordEncoder.matches(CharBuffer.wrap(givenPassword), existedPassword)) 
 			return true;
 		return false;
-		
 	}
 	@Override
 	public User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -50,7 +49,17 @@ public class UserServiceImpl implements UserService {
 		//user = addUserCredentials(user);
 		return userRepository.save(user);
 	}
-
+	@Override
+	public User updateUser(User user) {
+		User existingUser = userRepository.findByUsername(user.getUsername());
+		existingUser.setCountry(user.getCountry());
+		existingUser.setGovernorate(user.getGovernorate());
+		existingUser.setCity(user.getCity());
+		existingUser.setZipCode(user.getZipCode());
+		existingUser.setMatriculeFiscale(existingUser.getMatriculeFiscale());
+		existingUser.setCompletedRegistration(true);
+		return userRepository.save(existingUser);
+	}
 	@Override
 	public User updateRole(Long userId, Role role) {
 		User savedUser = getUser(userId);
@@ -70,12 +79,6 @@ public class UserServiceImpl implements UserService {
 		existingUser.setPictureType(pictureRequestDTO.getPictureType());
 		existingUser.setPictureByte(pictureRequestDTO.getPictureByte());
 		return userRepository.save(existingUser);
-	}
-
-	@Override
-	public User updateUser(User user) {
-		User savedUser = userRepository.save(user);
-		return savedUser;
 	}
 
 	@Override
@@ -101,7 +104,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Boolean isExist(Long userId) {
-		return userRepository.findById(userId).isPresent();
+		return userRepository.existsById(userId);
+	}
+
+	@Override
+	public Boolean isExistByUsername(String username) {
+		return userRepository.existsByUsername(username);
 	}
 
 	@Override
@@ -130,7 +138,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<CompanyUserResponseDTO> getCompanyEmployees(Long companyId) {
-		return userRepository.findByCompanyId(companyId).stream()
+		return userRepository.findBySocieteRemorquageId(companyId).stream()
 				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 
@@ -181,6 +189,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> getUserByUsername(String login) {
 		return Optional.ofNullable(userRepository.findByUsername(login));
+	}
+
+	@Override
+	public User updateCompletedRegistration(String username) {
+		User existingUser = userRepository.findByUsername(username);
+		existingUser.setCompletedRegistration(true);
+		return userRepository.save(existingUser);
 	}
 
 	public User addUserCredentials(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {

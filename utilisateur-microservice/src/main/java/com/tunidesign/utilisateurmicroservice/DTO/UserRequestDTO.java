@@ -3,6 +3,7 @@ package com.tunidesign.utilisateurmicroservice.DTO;
 import java.util.Date;
 
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Gender;
+import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 
 import jakarta.persistence.EnumType;
@@ -18,39 +19,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequestDTO {
-	private Long userId;
 	private String firstName;
 	private String lastName;
+	private String username;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private Date birthdate;
-
-	// Address
-	private String country;
-	private String governorate;
-	private String city;
-	private Integer zipCode;
-	private Integer homeCode;
-
 	// Contact
 	@Email
 	private String email;
 	private Long phoneNumber;
-
-	// employee
-	private String matriculeFiscale;
-	@Enumerated(EnumType.STRING)
-	private Status status;
-
-	// TA && DRIVER && admin
-	private Long companyId;
-	// Insurance && Expert
-	private Long insuranceCompanyId;
-	// Agency
-	private Long agencyId;
-
+	private Long societeRemorquageId; // TA && DRIVER && admin
+	private Long societeLocationId;
+	private Long insuranceCompanyId; // Insurance && Expert
 	// Authentication
-	private String username;
 	private String password;
 	private String confirmPassword;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 }

@@ -1,4 +1,4 @@
-package com.tunidesign.parkingmicroservice.controller;
+package com.tunidesign.parkingmicroservice.web;
 
 import com.tunidesign.parkingmicroservice.DTO.ParkingRequestDTO;
 import com.tunidesign.parkingmicroservice.DTO.ParkingResponseDTO;

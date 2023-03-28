@@ -11,11 +11,14 @@ export class SignupGuard implements CanActivate {
 
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     if (await this.loginService.getIsLogged()) {
-      this.router.navigate(['/order']);
       console.log("false guard")
       return false;
     }
-    return true;
+    else{
+      console.log('true guard')
+      return true;
+    }
+    
   }
   
 }

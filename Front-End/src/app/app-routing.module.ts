@@ -16,13 +16,17 @@ import { RatingComponent } from './rating/rating.component';
 import { ProfilclientComponent } from './profilclient/profilclient.component';
 import { HomeComponent } from './home/home.component';
 import { MultiComponent } from './multi/multi.component';
+import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
+import { SignupGuard } from './guard/signup.guard';
+import { RegistrationGuard } from './guard/registration.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule) },
+  { path: 'signup', loadChildren: () => import('./signup/signup.module').then(m => m.SignupModule), canActivate: [SignupGuard] },
   { path: 'access-denied', component: AccessDeniedComponent, canActivate: [AuthGuard] },
-  { path: 'tunidesign', component: MultiComponent },
+  { path: 'tunidesign', component: MultiComponent, canActivate: [AuthGuard, RegistrationGuard] },
+  { path: 'complete-registration', component: CompleteRegistrationComponent },
 
   {path: 'shareInformation', component: ShareInformationComponent},
   {path: 'share', component: ShareInformationComponent},
@@ -35,6 +39,11 @@ const routes: Routes = [
   {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   { path: 'qrcode', component: QrCodeTestComponent},
   { path: 'profilclient/:id', component: ProfilclientComponent},
+  { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule) },
+  { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule) },
+  { path: 'agenceLocationAdmin', loadChildren: () => import('./agence-location-admin/agence-location-admin.module').then(m => m.AgenceLocationAdminModule) },
+  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
+  { path: 'lavagisteAdmin', loadChildren: () => import('./lavagiste-admin/lavagiste-admin.module').then(m => m.LavagisteAdminModule) },
 
   
 ];

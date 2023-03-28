@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { Client } from '../models/client';
-import { InsuranceAdmin } from '../models/insurance-admin';
-import { SocieteRemorquageAdmin } from '../models/societe-remorquage-admin';
 import { FormGroup } from '@angular/forms';
 import { UserService } from '../services/api/user.service';
 import { AuthService } from '../services/auth/auth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-signup',
@@ -13,17 +11,11 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  client: Client = new Client();
-  insuranceAdmin: InsuranceAdmin = new InsuranceAdmin();
-  societeRemorquageAdmin: SocieteRemorquageAdmin = new SocieteRemorquageAdmin();
+  user: User = new User();
   // informationsForm
   informationsForm!: FormGroup;
-  currentRole: number = 1; //user is the default user
+  currentRole!: string; //user is the default user
   isInformationsNextBtnDisabled: Boolean = true;
-  // image
-  retrievedImage: any;
-  viewedImage: any;
-  temporaryRetrievedImage: any;
 
   // addressForm
   addressForm!: FormGroup;
@@ -37,11 +29,6 @@ export class SignupComponent implements OnInit {
   credentialsForm!: FormGroup;
   isCredentialsNextBtnDisabled: Boolean = true;
 
-  registration = {
-    username: 'myusername',
-    email: 'eya.mattoussiii@gmail.com',
-    password: 'mypassword',
-  };
   constructor(private userService: UserService, private authService: AuthService) {
   }
 
@@ -66,7 +53,7 @@ export class SignupComponent implements OnInit {
     }
   }*/
 
-  getCurrentRole(currentRole: number) {
+  getCurrentRole(currentRole: string) {
     this.currentRole = currentRole;
   }
 
@@ -75,84 +62,28 @@ export class SignupComponent implements OnInit {
     if (this.informationsForm.valid) {
       this.isInformationsNextBtnDisabled = false; // enable next btn
       this.currentRole = this.informationsForm.controls['role'].value;
-      if (this.currentRole == 1) {
-        this.client.firstName = this.informationsForm.controls['firstname'].value;
-        this.client.lastName = this.informationsForm.controls['lastname'].value;
-        this.client.email = this.informationsForm.controls['email'].value;
-        this.client.phoneNumber = this.informationsForm.controls['phone'].value;
-        this.client.gender = this.informationsForm.controls['gender'].value;
-        this.client.birthdate = this.informationsForm.controls['birthdate'].value;
-      }
-      else if (this.currentRole == 2) { // insurance
-        this.insuranceAdmin.firstName = this.informationsForm.controls['firstname'].value;
-        this.insuranceAdmin.lastName = this.informationsForm.controls['lastname'].value;
-        this.insuranceAdmin.email = this.informationsForm.controls['email'].value;
-        this.insuranceAdmin.phoneNumber = this.informationsForm.controls['phone'].value;
-        this.insuranceAdmin.gender = this.informationsForm.controls['gender'].value;
-        this.insuranceAdmin.birthdate = this.informationsForm.controls['birthdate'].value;
-        this.insuranceAdmin.insuranceCompanyId = this.informationsForm.controls['comapny'].value;
-        this.insuranceAdmin.matriculeFiscale = this.informationsForm.controls['matriculeFiscale'].value;
-      }
-      else if (this.currentRole == 3) { // societe remorquage
-        this.societeRemorquageAdmin.firstName = this.informationsForm.controls['firstname'].value;
-        this.societeRemorquageAdmin.lastName = this.informationsForm.controls['lastname'].value;
-        this.societeRemorquageAdmin.email = this.informationsForm.controls['email'].value;
-        this.societeRemorquageAdmin.phoneNumber = this.informationsForm.controls['phone'].value;
-        this.societeRemorquageAdmin.gender = this.informationsForm.controls['gender'].value;
-        this.societeRemorquageAdmin.birthdate = this.informationsForm.controls['birthdate'].value;
-        this.societeRemorquageAdmin.companyId = this.informationsForm.controls['comapny'].value;
-        this.societeRemorquageAdmin.matriculeFiscale = this.informationsForm.controls['matriculeFiscale'].value;
-      }
+
+      this.user.firstName = this.informationsForm.controls['firstname'].value;
+      this.user.lastName = this.informationsForm.controls['lastname'].value;
+      this.user.email = this.informationsForm.controls['email'].value;
+      this.user.phoneNumber = this.informationsForm.controls['phone'].value;
+      this.user.gender = this.informationsForm.controls['gender'].value;
+      this.user.birthdate = this.informationsForm.controls['birthdate'].value;
+    }
+    if (this.currentRole != "CLIENT") { // !!!!!!!!!!!
+      this.user.username = this.informationsForm.controls['username'].value;
 
     }
     else
       this.isInformationsNextBtnDisabled = true; // disable next btn
   }
 
-  getAddressForm(addressForm: FormGroup) {
-    this.addressForm = addressForm;
-    if (this.addressForm.valid) {
-      this.isAddressNextBtnDisabled = false; // enable next btn
-      if (this.currentRole == 1) {
-        this.client.country = this.addressForm.controls['country'].value;
-        this.client.governorate = this.addressForm.controls['governorate'].value;
-        this.client.city = this.addressForm.controls['city'].value;
-        this.client.zipCode = this.addressForm.controls['zipCode'].value;
-      }
-      else if (this.currentRole == 2) { // insurance
-        this.insuranceAdmin.country = this.addressForm.controls['country'].value;
-        this.insuranceAdmin.governorate = this.addressForm.controls['governorate'].value;
-        this.insuranceAdmin.city = this.addressForm.controls['city'].value;
-        this.insuranceAdmin.zipCode = this.addressForm.controls['zipCode'].value;
-      }
-      else if (this.currentRole == 3) { // societe remorquage
-        this.societeRemorquageAdmin.country = this.addressForm.controls['country'].value;
-        this.societeRemorquageAdmin.governorate = this.addressForm.controls['governorate'].value;
-        this.societeRemorquageAdmin.city = this.addressForm.controls['city'].value;
-        this.societeRemorquageAdmin.zipCode = this.addressForm.controls['zipCode'].value;
-      }
-    }
-    else {
-      this.isAddressNextBtnDisabled = true; // disable next btn
-    }
-  }
-
   getCredentialsForm(credentialsForm: FormGroup) {
     this.credentialsForm = credentialsForm;
     if (this.credentialsForm.valid) {
       this.isCredentialsNextBtnDisabled = false; // enable next btn
-      if (this.currentRole == 1) {
-        this.client.password = this.credentialsForm.controls['password'].value;
-        this.client.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
-      }
-      else if (this.currentRole == 2) { // insurance
-        this.insuranceAdmin.password = this.credentialsForm.controls['password'].value;
-        this.insuranceAdmin.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
-      }
-      else if (this.currentRole == 3) { // societe remorquage
-        this.societeRemorquageAdmin.password = this.credentialsForm.controls['password'].value;
-        this.societeRemorquageAdmin.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
-      }
+      this.user.password = this.credentialsForm.controls['password'].value;
+      this.user.confirmPassword = this.credentialsForm.controls['confirmPassword'].value;
     }
     else {
       this.isCredentialsNextBtnDisabled = true; // disable next btn
@@ -160,56 +91,17 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    switch (this.currentRole) {
-      case 1: { //client
-        this.userService.createClient(this.client).subscribe(res => {
-          console.log(res);
-          this.onUpload(res.userId);
-
-        });
-
-        break;
-      }
-      case 2: { //insurance admin
-        this.userService.createInsuranceAdmin(this.insuranceAdmin).subscribe(res => {
-          console.log(res);
-          this.onUpload(res.userId);
-        });
-
-        break;
-      }
-      case 3: { //societeRemorquage admin
-        this.userService.createSocieteRemorquageAdmin(this.societeRemorquageAdmin).subscribe(res => {
-          console.log(res);
-          this.onUpload(res.userId);
-        });
-
-        break;
-      }
-    }
-    this.signin();
+    this.userService.create(this.user).subscribe(res => {
+      console.log(res);
+      this.signin();
+    });
   }
-
-  //Gets called when the user clicks on save to upload the image
-  onUpload(userId: number) {
-    if (this.informationsForm.controls['img'].value != undefined) { // if we change the image
-      //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
-      const uploadImageData = new FormData();
-      uploadImageData.append('imageFile', this.informationsForm.controls['img'].value);
-      //uploadImageData.append('profileId', (this.profile.profileId).toString());
-      this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
-        this.viewedImage = this.temporaryRetrievedImage; // view the new image
-      });
-    }
-  }
-
+  
   // redirect to signin interface after inscription
   signin() {
     const loginOptions: KeycloakLoginOptions = {
-      redirectUri: window.location.origin + "/order"
+      redirectUri: window.location.origin + "/tunidesign"
     };
     this.authService.login(loginOptions);
   }
-
-
 }

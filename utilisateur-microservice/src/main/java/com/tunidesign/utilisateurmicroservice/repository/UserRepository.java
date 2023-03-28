@@ -11,7 +11,7 @@ import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	List<User> findByCompanyId(Long companyId);
+	List<User> findBySocieteRemorquageId(Long companyId);
 	List<User> findByAgencyId(Long companyId);
 	List<User> findByInsuranceCompanyId(Long companyId);
 	
@@ -31,4 +31,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	User findByEmail(String email);
 	
 	User findByUsernameOrEmail(String login, String email);
+
+	Boolean existsByUsername(String username);
 }

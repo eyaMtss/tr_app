@@ -47,9 +47,11 @@ public interface UserService {
 	void deleteUser(Long userId);
 	
 	Boolean isExist(Long userId);
+	Boolean isExistByUsername(String username);
 	
 	User getUserByUsernameOrEmail(String identifier);
 	Optional<User> getUserByEmail(String email);
 	Optional<User> getUserByUsername(String login);
+	public User updateCompletedRegistration(String username);
 
 }

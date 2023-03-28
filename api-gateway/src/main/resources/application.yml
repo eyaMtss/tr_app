@@ -1,16 +1,37 @@
+server:
+  port: 8989
+logging:
+  level:
+    web: DEBUG
 spring:
+  application:
+    name: API_GATEWAY
   cloud:
     gateway:
+      default-filters: TokenRelay
       globalcors:
         add-to-simple-url-handler-mapping: true
-        corsConfigurations:
+        cors-configurations:
           '[/**]':
             allowedOrigins: "http://localhost:4200"
             allowedHeaders: "*"
-            allowedMethods:
-              - POST
-              - OPTIONS
-              - GET
-              - PUT
-              - DELETE
+            allowedMethods: "*"
+            allowCredentials: true
+      routes:
+        - id: USER-SERVICE
+          uri: http://localhost:5050/
+          predicates:
+            - Path=/users/**
+        - id: PARKING-SERVICE
+          uri: http://localhost:5058/
+          predicates:
+              - Path=/parking/**
 
+
+############# EUREKA ##############
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

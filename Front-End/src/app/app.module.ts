@@ -39,11 +39,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HomeComponent } from './home/home.component';
 import { MultiComponent } from './multi/multi.component';
-
-           // @agm/core
-
-
-
+import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
+import { SignupGuard } from './guard/signup.guard';
+import { RegistrationGuard } from './guard/registration.guard';
+import { AddressComponent } from './address/address.component';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
 @NgModule({
 
   declarations: [
@@ -60,7 +61,12 @@ import { MultiComponent } from './multi/multi.component';
     QrCodeComponent,
     QrCodeTestComponent,
     RatingComponent,  
-    ProfilclientComponent, HomeComponent, MultiComponent
+    ProfilclientComponent, 
+    HomeComponent, 
+    MultiComponent, 
+    CompleteRegistrationComponent,
+    AddressComponent, 
+    AddVehicleComponent, ImmatriculationComponent
 
   ],
   imports: [
@@ -89,6 +95,8 @@ import { MultiComponent } from './multi/multi.component';
     KeycloakService,
     AuthService,
     AuthGuard,
+    SignupGuard,
+    RegistrationGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

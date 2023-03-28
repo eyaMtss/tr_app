@@ -66,10 +66,12 @@ public class User {
 	private String matriculeFiscale; // employee
 	@Enumerated(EnumType.STRING)
 	private Status status; // employee
-	private Long companyId;	// TA && DRIVER
+	private Long societeRemorquageId;	// TA && DRIVER
+	private Long societeLocationId;
 	private Long insuranceCompanyId; // Insurance && expert
 	private Long agencyId; // Agency
 	@Enumerated(EnumType.STRING)
     private Role role;
+	private Boolean completedRegistration = false;
 
 }
