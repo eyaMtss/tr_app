@@ -16,8 +16,8 @@ export class InformationsComponent implements OnInit {
   viewedImage: any = "/assets/auth/user.png" // default image
   roles: any[] = [{id: "CLIENT", value: "Client"}, {id: "INSURANCE_ADMIN", value: "Assurance"}, 
   {id: "SOCIETE_REMORQUAGE_ADMIN", value: "Société de remorquage" },
-  {id: "GARAGISTE", value: "Garagiste"}, {id: "AGENCE_LOCATION_ADMIN", value: "Agence de location"}, 
-  {id: "LAVAGISTE", value: "Lavagiste"}, {id: "EXPERT", value: "Expert"}]; //role values
+  {id: "GARAGISTE_ADMIN", value: "Garagiste"}, {id: "AGENCE_LOCATION_ADMIN", value: "Agence de location"}, 
+  {id: "LAVAGISTE_ADMIN", value: "Lavagiste"}, {id: "EXPERT", value: "Expert"}]; //role values
   currentRole: string = "CLIENT"; // default role = user
   companyList: Company[] = []; // company(insurance / société remorquage)
   companyLabel!: string;
