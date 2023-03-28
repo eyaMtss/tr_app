@@ -67,5 +67,8 @@ export class AuthService {
     return this.keycloakService.register();
   }
 
+  getUserDetails(){
+    return this.keycloakService.getKeycloakInstance().idTokenParsed;
+  }
 }
 
