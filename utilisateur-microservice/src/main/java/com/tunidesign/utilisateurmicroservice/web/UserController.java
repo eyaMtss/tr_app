@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.zip.Deflater;
 
+import com.tunidesign.utilisateurmicroservice.DTO.*;
 import com.tunidesign.utilisateurmicroservice.mapper.UserMapperImpl;
 import com.tunidesign.utilisateurmicroservice.model.entity.User;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Role;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,17 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.AgencyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.ClientRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.ClientResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.CompanyUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.InsuranceUserResponseDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.PictureRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.UserRequestDTO;
-import com.tunidesign.utilisateurmicroservice.DTO.UserResponseDTO;
 import com.tunidesign.utilisateurmicroservice.exceptions.CustomException;
 import com.tunidesign.utilisateurmicroservice.model.enumeration.Status;
 import com.tunidesign.utilisateurmicroservice.service.UserServiceImpl;
@@ -53,9 +42,9 @@ public class UserController {
 	private UserServiceImpl userService;
 	static Logger logger = LoggerFactory.getLogger(UserController.class);
 	private UserMapperImpl userMapper = new UserMapperImpl();
-
 	/**
 	 * Eya Mattoussi
+	 * 27/03/2023
 	 * this method is user while signup
 	 * No need for role
 	 * @param userRequestDTO
@@ -73,9 +62,9 @@ public class UserController {
 			throw new CustomException(e.getMessage());
 		}
 	}
-
 	/**
 	 * Eya Mattoussi
+	 * 27/03/2023
 	 * generate a username for users depending on their role
 	 * @param userRequestDTO
 	 * @return userRequestDTO with username set
@@ -89,6 +78,24 @@ public class UserController {
 		userRequestDTO.setUsername(username);
 		return userRequestDTO;
 	}
+	/**
+	 * Eya Mattoussi
+	 * 28/03/2023
+	 * update user while completing the registration, set completed_registration to true
+	 * @param updatedUserRequestDTO
+	 * @return userResponseDTO
+	 */
+	@PutMapping("/completeRegistration")
+	@RolesAllowed({"CLEINT", "SOCIETE_REMORQUAGE_ADMIN", "INSURANCE_ADMIN", "AGENCE_LOCATION_ADMIN",
+	"GARAGISTE_ADMIN", "LAVAGISTE_ADMIN"})
+	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UpdatedUserRequestDTO updatedUserRequestDTO) {
+		if (userService.isExistByUsername(updatedUserRequestDTO.getUsername())) {
+			User savedUser = userService.updateUser(userMapper.updatedUserRequestDTOToUser(updatedUserRequestDTO));
+			return ResponseEntity.accepted().body(userMapper.userToUserResponseDTO(savedUser));
+		} else
+			throw new EntityNotFoundException("User doesn't exist");
+	}
+
 	@PostMapping("/addSuperAdmin")
 	@RolesAllowed({"SUPER_ADMIN"})
 	public ResponseEntity<ClientResponseDTO> addSuperAdmin(@Valid @RequestBody ClientRequestDTO clientRequestDTO) {
@@ -137,7 +144,7 @@ public class UserController {
 	public ResponseEntity<CompanyUserResponseDTO> addCompanyAdmin(
 			@Valid @RequestBody CompanyUserRequestDTO companyAdminRequestDTO) {
 		try {
-			User savedCompanyAdmin = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(companyAdminRequestDTO)).getUserId(), Role.COMPANY_ADMIN);
+			User savedCompanyAdmin = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(companyAdminRequestDTO)).getUserId(), Role.SOCIETE_REMORQUAGE_ADMIN);
 			return new ResponseEntity<>(userMapper.userToCompanyUserResponseDTO(savedCompanyAdmin), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
@@ -221,22 +228,6 @@ public class UserController {
 		} else
 			throw new EntityNotFoundException("User doesn't exist");
 	}
-
-	/* ******************* update user ******************* */
-	/*@PutMapping("update")
-	public ResponseEntity<UserResponseDTO> updateUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-
-		try {
-			if (userService.isExist(userRequestDTO.getUserId())) {
-				User savedUser = userService.updateUser(userMapper.userRequestDTOToUser(userRequestDTO));
-				return ResponseEntity.accepted().body(userMapper.userToUserResponseDTO(savedUser));
-			} else
-				throw new EntityNotFoundException("User doesn't exist");
-
-		} catch (Exception e) {
-			throw new CustomException(e.getMessage());
-		}
-	}*/
 
 	/* *********************** get All ********************** */
 	@GetMapping("/getAll/clients")
@@ -322,12 +313,6 @@ public class UserController {
 		} catch (Exception ex) {
 			throw new EntityNotFoundException("User doesn't exist");
 		}
-	}
-
-	@GetMapping("updateCompletedRegistration/{username}")
-	@RolesAllowed("CLIENT")
-	public ResponseEntity<?> updateCompletedRegistration(@PathVariable String username){
-		return new ResponseEntity<>(userService.updateCompletedRegistration(username), HttpStatus.OK);
 	}
 	// compress the image bytes before storing it in the database
 	public static byte[] compressBytes(byte[] data) {
