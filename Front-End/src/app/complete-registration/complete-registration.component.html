@@ -47,7 +47,7 @@
                     }"/>
                 </div>
             </div>
-            <div *ngIf="currentRole == 'GARAGISTE'" class="col-12 col-md-4">
+            <div *ngIf="currentRole == 'GARAGISTE_ADMIN'" class="col-12 col-md-4">
                 <label for="garageType">Type de garage</label>
                 <select class="form-select fa mb-3" aria-label="GarageType" formControlName="garageType"
                     (change)="onGarageTypeChange()" [ngClass]="{
