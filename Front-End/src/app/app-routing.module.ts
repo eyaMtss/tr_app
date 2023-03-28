@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule) },
   { path: 'agenceLocationAdmin', loadChildren: () => import('./agence-location-admin/agence-location-admin.module').then(m => m.AgenceLocationAdminModule) },
   { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
+  { path: 'lavagisteAdmin', loadChildren: () => import('./lavagiste-admin/lavagiste-admin.module').then(m => m.LavagisteAdminModule) },
 
   
 ];
