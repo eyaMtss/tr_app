@@ -14,7 +14,7 @@ export class CamionService {
   }
 
   updateCamion(camion: Camion): Observable<Object>{
-    return this.httpClient.put("http://localhost:8091/ModifierUnCamion/", camion);
+    return this.httpClient.put("http://localhost:8091/ModifierUnCamion", camion);
   }
 
   deleteCamion(id: number): Observable<Object>{
@@ -23,5 +23,8 @@ export class CamionService {
 
   createCamion(camion: Camion): Observable<Object>{
     return this.httpClient.post("http://localhost:8091/AjouterUnCamion", camion);
+  }
+  getCamionById(id: number): Observable<Camion>{
+    return this.httpClient.get<Camion>("http://localhost:8091/Camions/"+`${id}`);
   }
 }

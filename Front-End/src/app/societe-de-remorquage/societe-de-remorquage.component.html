@@ -68,7 +68,7 @@
                 <td> {{ camion.poids}} </td>
                 <td> {{ camion.modele}} </td>
                 <td>
-                    <button  style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" ><a class = "fas fa-edit" style="font-size: 25px;"></a></button>
+                    <button  style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" ><a class = "fas fa-edit" style="font-size: 25px;"  (click)="updateCamion(camion.id)"></a></button>
                     <button (click) = "deleteCamion(camion.id)" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fa fa-trash" style="margin-left: 20px;font-size: 25px;"></a> </button>
                     <button style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fas fa-question-circle" style="margin-left: 30px;font-size: 25px;" (click)="open(content)"></a></button>
                     <ng-template #content let-c="close" let-d="dismiss">
@@ -118,7 +118,7 @@
             <div class="col-75">
               <select class="form-select"  id="Type"
                   (change)="onTypeChange($event)"  >
-
+                  <option selected="true" disabled="disabled">Choisissez le type de votre camion</option>
                   <option *ngFor="let type of TypeCamions" [value]="type.id" >
                       {{type.value}}
                   </option>
@@ -133,7 +133,7 @@
         <div class="col-75">
           <select class="form-select"  id="Type"
               (change)="onTypePoidsLourdChange($event)"  >
-
+              <option selected="true" disabled="disabled">Choisissez le type de votre camion poids lourd</option>
               <option *ngFor="let type of  TypePoidsLourd" [value]="type.id" >
                   {{type.value}}
               </option>
@@ -150,8 +150,10 @@
             <div class="col-75">
               <select class="form-select"  id="immatriculationType"
                   (change)="onRegistrationTypeChange($event)"  >
+                  <option selected="true" disabled="disabled">Choisissez le type d'immatriculation</option>
 
                   <option *ngFor="let registrationType of registrationTypes" [value]="registrationType.id" >
+
                       {{registrationType.value}}
                   </option>
               </select>
@@ -220,6 +222,7 @@
           <div class="col-75">
             <select class="form-select"  id="immatriculationType"
                 (change)="onNbPorteChange($event)"  >
+                <option selected="true" disabled="disabled">Choisissez le nombre de porte</option>
 
                 <option *ngFor="let nb of registrationTypes" [value]="nb.id" >
                     {{nb.id}}
@@ -243,7 +246,7 @@
             <div class="col-75">
               <select class="form-select"  id="Type"
                   (change)="onModeleChange($event)"  >
-
+                  <option selected="true" disabled="disabled">Choisissez le modele de votre camion</option>
                   <option *ngFor="let model of modeles" [value]="model.id" >
                       {{model.value}}
                   </option>

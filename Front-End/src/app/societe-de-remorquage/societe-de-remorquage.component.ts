@@ -12,6 +12,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 export class SocieteDeRemorquageComponent  implements OnInit{
 
   test=0;
+  modifier=false;
   p:any;
   message=""
   camion=new Camion()
@@ -76,7 +77,8 @@ deleteCamion(id: number){
 saveCamion()
 {
 console.log(this.camion)
-
+if (this.modifier==false)
+{
 if (this. immatType==1)
 {
   this.camion.matricule=this.camion.numImmat+" "+"تونس TU "+" "+ this.camion.serie
@@ -85,19 +87,41 @@ else
 {
   this.camion.matricule="RS "+this.camion.numImmat+" ن ت"
 }
-
     this.camionService.createCamion(this.camion).subscribe( data =>{
-
-
-
 
     },
     error => {
     console.log(error)
 
     });
-   this.button1();
-}
+   this.button1();}
+   else
+   {
+    console.log(this.modifier)
+    if (this. immatType==1)
+    {
+      this.camion.matricule=this.camion.numImmat+" "+"تونس TU "+" "+ this.camion.serie
+    }
+    else
+    {
+      this.camion.matricule="RS "+this.camion.numImmat+" ن ت"
+    }
+        this.camionService.updateCamion(this.camion).subscribe( data =>{
+
+        },
+        error => {
+        console.log(error)
+
+        });
+        this.camion=new Camion()
+        this.modifier=false;
+        console.log(this.modifier)
+       this.button1();
+
+
+      }
+   }
+
 
 
 onRegistrationTypeChange(e: any) {
@@ -144,6 +168,18 @@ onModeleChange(e: any) {
 open(content: any) {
   this.modalService.open(content);
 }
+
+updateCamion(id:number)
+{
+ this.button2()
+ this.camionService.getCamionById(id).subscribe(data => {
+  this.camion = data;
+}, error => console.log(error));
+this.modifier=true;
+console.log(this.modifier)
+this.button2()
+}
+
 
 
 }
