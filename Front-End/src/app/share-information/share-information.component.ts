@@ -144,12 +144,12 @@ export class ShareInformationComponent implements OnInit {
              lat: position.coords.latitude,
              lng: position.coords.longitude,
            },
-   
-   
+
+
            title: 'Your position ',
            info: 'Your position ',
            options: { animation: google.maps.Animation.DROP },
-   
+
          });*/
       geocoder
         .geocode({ location: this.center })
@@ -250,8 +250,14 @@ export class ShareInformationComponent implements OnInit {
 
 
   options: any = {
-    zoom: 1000,
+    center: { lat:  36.1742400, lng:8.7048600},
+    zoom: 7.2,
 
+  }
+
+  mapOptions: google.maps.MapOptions = {
+    center: { lat:  36.1742400, lng:8.7048600},
+    zoom: 5.5,
   }
 
 

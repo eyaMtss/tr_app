@@ -12,8 +12,20 @@ public class CamionRequestDTO {
 
         @Id
         private int id; 
-        private String matricule ; 
-        private int modele ;
+        private String matricule ;
+
+
+        private String type;
+
+        private int porte;
+
+        private String typePoidsLourd;
+        private String modele ;
         private int charge ;
+
+        private String typeImmat;
+        private int serie;
+        private int numImmat;
+        private int numChassis;
         private int poids ;
 }

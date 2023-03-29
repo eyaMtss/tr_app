@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class CamionController {
     @Autowired
     private CamionRepository camionRepository;
@@ -33,8 +34,8 @@ public class CamionController {
     @DeleteMapping (value = "/AnnulerUnCamion/{id}")
     public void supprimerUnCamion(@PathVariable int id)
     {
-        Camion camion = camionRepository.deleteById(id);
-        if(camion==null) throw new CamionIntrouvableException("Le camion  avec l'id " + id + " est INTROUVABLE. ");
+         camionRepository.deleteById(id);
+      //  if(camion==null) throw new CamionIntrouvableException("Le camion  avec l'id " + id + " est INTROUVABLE. ");
 
     }
     @PutMapping (value = "/ModifierUnCamion")

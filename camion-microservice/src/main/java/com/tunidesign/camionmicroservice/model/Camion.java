@@ -1,30 +1,39 @@
 package com.tunidesign.camionmicroservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
+@Data
+@AllArgsConstructor
+@Builder
 public class Camion {
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id; 
-	private String matricule ; 
-	private int modele ;
+	private String matricule ;
+
+	private String type;
+
+	private int porte;
+    private String typeImmat;
+	private String typePoidsLourd;
+
+	private int serie;
+	private int numImmat;
+	private int numChassis;
+	private String modele ;
 	private int charge ;
 	private int poids ;
 	public Camion() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Camion(int id, String matricule, int modele, int charge, int poids) {
-	super();
-	this.id = id;
-	this.matricule = matricule;
-	this.modele = modele;
-	this.charge = charge;
-	this.poids = poids;
-}
+
 public int getId() {
 	return id;
 }
@@ -37,10 +46,10 @@ public String getMatricule() {
 public void setMatricule(String matricule) {
 	this.matricule = matricule;
 }
-public int getModele() {
+public String getModele() {
 	return modele;
 }
-public void setModele(int modele) {
+public void setModele(String modele) {
 	this.modele = modele;
 }
 public int getCharge() {

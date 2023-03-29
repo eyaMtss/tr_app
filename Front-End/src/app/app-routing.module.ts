@@ -19,6 +19,7 @@ import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
+import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'picture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
+   {path: 'societe', component: SocieteDeRemorquageComponent},
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
   {path: 'suivi', component: SuiviOrdreComponent},
@@ -45,7 +47,8 @@ const routes: Routes = [
   { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
   { path: 'lavagisteAdmin', loadChildren: () => import('./lavagiste-admin/lavagiste-admin.module').then(m => m.LavagisteAdminModule) },
 
-  
+
+
 ];
 
 @NgModule({

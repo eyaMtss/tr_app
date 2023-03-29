@@ -1,0 +1,263 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+<div class="main_box">
+  <input type="checkbox" id="check">
+  <div class="btn_one">
+    <label for="check">
+      <i class="fas fa-bars" style="font-size: 40px;"></i>
+    </label>
+  </div>
+  <div class="sidebar_menu">
+    <div class="logo">
+      <a href="#">Menu</a>
+        </div>
+      <div class="btn_two">
+        <label for="check">
+          <i class="fas fa-times"></i>
+        </label>
+      </div>
+    <div class="menu">
+      <ul>
+        <li><i class="fa fa-truck"></i>
+          <button (click)="button1()" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0); font-size: 20px; color: white;"> Liste Des Camions</button>
+        </li>
+        <li>
+          <i class="fa fa-plus"></i>
+          <button (click)="button2()" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0); font-size: 20px; color: white;">Ajouter Un Camion </button>
+        </li>
+        <li>
+          <i class="fas fa-users"></i>
+          <button (click)="button3()" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0); font-size: 20px; color: white;">Liste Du Personel</button>
+        </li>
+        <li>
+          <i class="fa fa-plus"></i>
+          <button (click)="button4()" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0); font-size: 20px; color: white;">Ajouter Un personnel </button>
+        </li>
+        <li>
+          <i class="fas fa-question-circle"></i>
+          <a href="#">About</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div *ngIf="test==0" >
+
+  <h2 style="text-align: center; font-style: italic; color: white; margin-top: 200px;">Bienvenu Sur Votre Page Administration</h2>
+
+    </div>
+    <div *ngIf="test==1" class="container">
+     <p>{{message}}</p>
+      <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th> identifiant </th>
+                <th style="margin-left: 300px;"> Charge</th>
+                <th> Matricule</th>
+                <th> Poids</th>
+                <th> Modele </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let camion of camions |paginate: { itemsPerPage: 9, currentPage: p }" >
+                <td> {{ camion.id }} </td>
+                <td> {{ camion.charge }} </td>
+                <td> {{ camion.matricule }} </td>
+                <td> {{ camion.poids}} </td>
+                <td> {{ camion.modele}} </td>
+                <td>
+                    <button  style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" ><a class = "fas fa-edit" style="font-size: 25px;"></a></button>
+                    <button (click) = "deleteCamion(camion.id)" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fa fa-trash" style="margin-left: 20px;font-size: 25px;"></a> </button>
+                    <button style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fas fa-question-circle" style="margin-left: 30px;font-size: 25px;" (click)="open(content)"></a></button>
+                    <ng-template #content let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Détail du camion série : {{camion.matricule}}</h4>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Numéro de chassis : {{camion.numChassis}} </p>
+                        <p>Poids :  {{camion.poids}} Kg </p>
+                        <p>Nombre de portes : {{camion.porte}} portes</p>
+                        <p>Type de camion : {{camion.type}} </p>
+                        <p>Modele : {{camion.modele}} </p>
+
+
+                      </div>
+                      <div class="modal-footer">
+
+
+                      </div>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+        <pagination-controls
+
+        (pageChange)="p = $event">
+      </pagination-controls>
+    </table>
+        </div>
+
+        <div  class ="container" *ngIf="test==2">
+         <h2 style="text-align: center;">Mettez les informations du camion</h2>
+          <form (submit)="saveCamion()">
+            <div class="row">
+              <div class="col-25">
+                <label for="charge">Charge</label>
+              </div>
+              <div class="col-75">
+                <input type="number" id="charge" name="charge" placeholder="Entrez la charge du camion" [(ngModel)]="camion.charge">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+              <label for="immatriculationType" >Type De Camion</label>
+            </div>
+            <div class="col-75">
+              <select class="form-select"  id="Type"
+                  (change)="onTypeChange($event)"  >
+
+                  <option *ngFor="let type of TypeCamions" [value]="type.id" >
+                      {{type.value}}
+                  </option>
+              </select>
+          </div>
+        </div>
+
+        <div *ngIf="type==1" class="row">
+          <div class="col-25">
+          <label for="typePoids" >Type De Poids Lourd</label>
+        </div>
+        <div class="col-75">
+          <select class="form-select"  id="Type"
+              (change)="onTypePoidsLourdChange($event)"  >
+
+              <option *ngFor="let type of  TypePoidsLourd" [value]="type.id" >
+                  {{type.value}}
+              </option>
+          </select>
+      </div>
+    </div>
+
+
+
+            <div class="row">
+              <div class="col-25">
+              <label for="immatriculationType" >Type d'immatriculation</label>
+            </div>
+            <div class="col-75">
+              <select class="form-select"  id="immatriculationType"
+                  (change)="onRegistrationTypeChange($event)"  >
+
+                  <option *ngFor="let registrationType of registrationTypes" [value]="registrationType.id" >
+                      {{registrationType.value}}
+                  </option>
+              </select>
+          </div>
+        </div>
+        <form>
+          <div  class="row" *ngIf="immatType==1" style=" border: 3px rgb(255, 255, 255) groove;">
+            <div>
+              <label >Indiquer le N° d'immatriculation (*):</label>
+              <span>
+
+               <input placeholder="N°" type="number"  [(ngModel)]="this.camion.numImmat"  id="numImmatriculation" name="numImmatriculation">
+               <label >TU </label>
+               <input placeholder="Série" type="number" [(ngModel)]="this.camion.serie">
+              </span>
+            </div>
+            <div>
+              <label >Confirmer le N° d'immatriculation (*):</label>
+              <span>
+                <input placeholder="N°" type="number">
+                <label >TU </label>
+                <input placeholder="Série" type="number">
+              </span>
+            </div>
+            <div>
+              <label >Tapez les 5 derniers caractères du N° de châssis (*):</label>
+              <span>
+               <input placeholder="XXXXX"  [(ngModel)]="camion.numChassis">
+              </span>
+            </div>
+          </div>
+          </form>
+          <form>
+          <div class="row" *ngIf="immatType==2" style=" border: 3px rgb(255, 255, 255) groove;" >
+            <div>
+              <label>Indiquer le N° d'immatriculation (*):</label>
+              <span>
+                <label >ن ت</label>
+               <input placeholder="xxxxxx" [(ngModel)]="this.camion.numImmat" >
+               <label >RS </label>
+              </span>
+            </div>
+
+            <div>
+              <label >Confirmer le N° d'immatriculation (*)</label>
+              <span>
+                <label >ن ت</label>
+               <input placeholder="xxxxxx">
+               <label>RS </label>
+              </span>
+
+            </div>
+            <div>
+              <label >Tapez les 5 derniers caractères du N° de châssis (*)</label>
+              <span>
+                <input placeholder="XXXXX" [(ngModel)]="camion.numChassis">
+              </span>
+            </div>
+          </div>
+          </form>
+
+          <div class="row">
+            <div class="col-25">
+            <label for="immatriculationType" >Nombre de portes</label>
+          </div>
+          <div class="col-75">
+            <select class="form-select"  id="immatriculationType"
+                (change)="onNbPorteChange($event)"  >
+
+                <option *ngFor="let nb of registrationTypes" [value]="nb.id" >
+                    {{nb.id}}
+                </option>
+            </select>
+        </div>
+      </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="poids">Poids</label>
+              </div>
+              <div class="col-75">
+                <input type="number" id="poids" name="poids" placeholder="entrez le poids du camion " [(ngModel)]="camion.poids">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-25">
+              <label for="Model" >Modele</label>
+            </div>
+            <div class="col-75">
+              <select class="form-select"  id="Type"
+                  (change)="onModeleChange($event)"  >
+
+                  <option *ngFor="let model of modeles" [value]="model.id" >
+                      {{model.value}}
+                  </option>
+              </select>
+          </div>
+        </div>
+
+            <div class="row">
+              <input type="submit" value="Submit">
+            </div>
+          </form>
+        </div>
+
+
+
+  </div>
+
