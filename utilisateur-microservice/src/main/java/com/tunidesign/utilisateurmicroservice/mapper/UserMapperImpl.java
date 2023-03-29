@@ -56,9 +56,9 @@ public class UserMapperImpl implements UserMapper {
 	/**
 	 * Eya Mattoussi
 	 * 28/03/2023
-	 * while completing registration address && matriculeFiscale if the user is not a CLIENT
+	 * while completing registration (address && matriculeFiscale) if the user is not a CLIENT
 	 * @param updatedUserRequestDTO
-	 * @return
+	 * @return user
 	 */
 	@Override
 	public User updatedUserRequestDTOToUser(UpdatedUserRequestDTO updatedUserRequestDTO) {
