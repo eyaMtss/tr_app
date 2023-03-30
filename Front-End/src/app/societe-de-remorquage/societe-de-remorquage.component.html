@@ -82,6 +82,7 @@
                         <p>Nombre de portes : {{camion.porte}} portes</p>
                         <p>Type de camion : {{camion.type}} </p>
                         <p>Modele : {{camion.modele}} </p>
+                        <p>Societe De Remorquage ID : {{camion.companyID}} </p>
 
 
                       </div>
@@ -259,8 +260,377 @@
             </div>
           </form>
         </div>
+        <div *ngIf="test==4" class="container" >
+        <form  [formGroup]="informationForm" (submit)="onFormChange()">
+          <div class="row">
+              <div class="col-12 col-md-6 mb-3">
+                  <label style="color:black"  class=" color-text">Vous êtes: &nbsp;</label>
+                  <select class="form-select" aria-label="Role" (change)="onRoleChange($event)" formControlName="role"
+                  [ngClass]="{
+                      'is-invalid':
+                          informationForm.get('role')!.touched &&
+                          informationForm.controls['role'].errors
+                  }">
+                  <option selected="true" disabled="disabled">Choisissez votre Role</option>
+                      <option *ngFor="let role of roles" value="{{role.id}}">{{role.value}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-6">
+                  <label for="nom" style="color:black">Nom</label>
+                  <div class="input-group mb-3">
+                      <input class="form-control" placeholder="Nom" id="nom" type="text" formControlName="lastname" [ngClass]="{
+                                  'is-invalid':
+                                      informationForm.get('lastname')!.touched &&
+                                      informationForm.controls['lastname'].errors
+                              }" [(ngModel)]="UserRequest.lastName"/>
+                  </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                  <label for="prenom" style="color:black">Prénom</label>
+                  <div class="input-group mb-3">
+                      <input class="form-control" placeholder="Prénom" id="prenom" type="text" formControlName="firstname"
+                          [ngClass]="{
+                                      'is-invalid':
+                                          informationForm.get('firstname')!.touched &&
+                                          informationForm.controls['firstname'].errors
+                                  }" [(ngModel)]="UserRequest.firstName"/>
+                  </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                  <label for="email" style="color:black">Email</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text d-flex justify-content-center"><i class="fas fa-envelope"></i></span>
+                    <input class="form-control"  [(ngModel)]="UserRequest.email" placeholder="Email" id="email" type="email" formControlName="email"
+                        [ngClass]="{
+                                    'is-invalid':
+                                        informationForm.get('email')!.touched &&
+                                        informationForm.controls['email'].errors
+                                }" />
+                </div>
+                  <div *ngIf="informationForm.get('email')!.touched
+                                  && informationForm.get('email')?.hasError('email')" class="invalid-feedback">
+                      <p style="color: red;">Tapez une adresse email valide</p>
+                  </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                  <label for="phone" style="color:black">Téléphone</label>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
+                      <input class="form-control"  [(ngModel)]="UserRequest.phoneNumber" placeholder="Téléphone" id="phone" type="number" formControlName="phone"
+                          [ngClass]="{
+                                      'is-invalid':
+                                          informationForm.get('phone')!.touched &&
+                                          informationForm.controls['phone'].errors
+                                  }" />
+                  </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="phone" style="color:black">Matricule Fiscale</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text d-flex justify-content-center"><i class="fas fa-file-alt"></i></span>
+                    <input class="form-control"  [(ngModel)]="UserRequest.matriculeFiscale" placeholder="matricule Fiscale" id="matriculeFiscale" type="number" formControlName="matriculeFiscale"
+                        [ngClass]="{
+                                    'is-invalid':
+                                        informationForm.get('matriculeFiscale')!.touched &&
+                                        informationForm.controls['matriculeFiscale'].errors
+                                }" />
+                </div>
+            </div>
+
+              <div class="col-12 col-md-6">
+                  <label for="birthdate" style="color:black">Date de naissance</label>
+                  <div class="input-group mb-3">
+                      <input [(ngModel)]="UserRequest.birthdate" class="form-control" id="birthdate" type="date" formControlName="birthdate" [ngClass]="{
+                                  'is-invalid':
+                                      informationForm.get('birthdate')!.touched &&
+                                      informationForm.controls['birthdate'].errors
+                              }" />
+                  </div>
+              </div>
 
 
 
+              <div class="col-12 col-md-6">
+                  <label class="color-text" style="color:black">Genre: &nbsp;</label>
+                  <div class="form-check form-check-inline" *ngFor="let genre of genreList">
+                      <input [(ngModel)]="UserRequest.gender" class="form-check-input" type="radio" name="gender" id="{{genre.value}}" [value]="genre.id"
+                          formControlName="gender" >
+                      <label class="form-check-label" for="{{genre.value}}" style="color:black">{{genre.value}}</label>
+                  </div>
+              </div>
+
+              <input type="submit" value="suivant">
+          </div>
+
+      </form>
+</div>
+
+<div *ngIf="test==5" class="container" >
+  <h4>Adresse Postale</h4>
+  <form  [formGroup]="informationForm"  (submit)="onFormChanger()">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <label for="nom" style="color:black">Pays</label>
+            <div class="input-group mb-3">
+              <select class="form-select"  id="Type"
+              (change)="onPaysChange($event)"  >
+              <option selected="true" disabled="disabled">Choisissez votre pays</option>
+              <option *ngFor="let pay of pays" [value]="pay.id" >
+                  {{pay.value}}
+              </option>
+          </select>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="nom" style="color:black">gouvernorat</label>
+          <div class="input-group mb-3">
+            <select class="form-select"  id="Type"
+            (change)="ongouvChange($event)"  >
+            <option selected="true" disabled="disabled">Choisissez votre gouvernorat</option>
+            <option *ngFor="let gouv of gouvernorats" [value]="gouv.id" >
+                {{gouv.value}}
+            </option>
+        </select>
+          </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <label for="nom" style="color:black">Ville</label>
+        <div class="input-group mb-3">
+            <input [(ngModel)]="UserRequest.city"class="form-control" placeholder="Ville" id="nom" type="text" formControlName="lastname" [ngClass]="{
+                        'is-invalid':
+                            informationForm.get('lastname')!.touched &&
+                            informationForm.controls['lastname'].errors
+                    }" />
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <label for="nom" style="color:black">Code postal</label>
+      <div class="input-group mb-3">
+          <input [(ngModel)]="UserRequest.zipCode" class="form-control" placeholder="Code Postal" id="nom" type="number" formControlName="lastname" [ngClass]="{
+                      'is-invalid':
+                          informationForm.get('lastname')!.touched &&
+                          informationForm.controls['lastname'].errors
+                  }" />
+      </div>
   </div>
+
+  <div class="col-12 col-md-6">
+    <label for="nom" style="color:black">Numero Domicile</label>
+    <div class="input-group mb-3">
+        <input [(ngModel)]="UserRequest.homeCode" class="form-control" placeholder="Numéro Domicile" id="nom" type="number" formControlName="lastname" [ngClass]="{
+                    'is-invalid':
+                        informationForm.get('lastname')!.touched &&
+                        informationForm.controls['lastname'].errors
+                }" />
+    </div>
+</div>
+<input type="submit" value="suivant">
+        </div>
+
+        </form>
+  </div>
+  <div *ngIf="test==6" class="container" >
+    <h4>Identifiants</h4>
+    <form  [formGroup]="informationForm"  (submit)="onSubmit()">
+      <div class="row">
+        <div class="col-12 col-md-6">
+        <label for="username">Nom d'utilisateur</label>
+        <div class="input-group mb-3">
+            <input [(ngModel)]="UserRequest.username" class="form-control" placeholder="Nom d'utilisateur" id="username" type="text"
+                formControlName="username" [ngClass]="{
+                            'is-invalid':
+                                informationForm.get('username')!.touched &&
+                                informationForm.controls['username'].errors
+                        }" />
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text d-flex justify-content-center"><i class="fas fa-key"></i></span>
+          <input [(ngModel)]="UserRequest.password" [type]="fieldTextTypeForPassword ? 'text' : 'password'" class="form-control" id="password"
+            name="password" class="form-control" placeholder="Entrer votre mot de passe" formControlName="password"
+            [ngClass]="{
+                        'is-invalid':
+                            credentialsForm.get('password')!.touched &&
+                            credentialsForm.controls['password'].errors
+                    }" />
+          <span class="input-group-text cursor-pointer-class">
+            <i class="fa" [ngClass]="{
+                          'fa-eye-slash': !fieldTextTypeForPassword,
+                          'fa-eye': fieldTextTypeForPassword
+                        }" (click)="toggleFieldTextTypeForPassword()"></i>
+          </span>
+          <div class="invalid-feedback">
+            <div *ngIf="credentialsForm.get('password')?.getError('required')">
+              Taper votre mot de passe
+            </div>
+            <div *ngIf="credentialsForm.get('password')?.getError('pattern')">
+              Le mot de passe doit contenir au moins un chiffre, une majuscule et une lettre minuscule et au moins 8 caractères.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text d-flex justify-content-center"><i class="fas fa-key"></i></span>
+          <input [type]="fieldTextTypeForConfirmPassword ? 'text' : 'password'" class="form-control" id="confirmPassword"
+            name="confirmPassword" class="form-control" placeholder="Confirmer votre mot de passe"
+            formControlName="confirmPassword" [ngClass]="{
+                        'is-invalid':
+                            credentialsForm.get('confirmPassword')!.touched &&
+                            credentialsForm.controls['confirmPassword'].errors}" />
+          <span class="input-group-text cursor-pointer-class">
+            <i class="fa" [ngClass]="{
+                          'fa-eye-slash': !fieldTextTypeForConfirmPassword,
+                          'fa-eye': fieldTextTypeForConfirmPassword
+                        }" (click)="toggleFieldTextTypeForConfirmPassword()">
+            </i>
+          </span>
+
+          <div class="invalid-feedback">
+            <div *ngIf="credentialsForm.get('confirmPassword')?.getError('required')">
+              Confirmer votre mot de passe
+            </div>
+            <div *ngIf="credentialsForm.get('confirmPassword')?.getError('pattern')">
+              Le mot de passe doit contenir au moins un chiffre, une majuscule et une lettre minuscule et au moins 8 caractères.
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(credentialsForm.get('password')!.dirty || credentialsForm.get('password')!.touched) &&
+        (credentialsForm.get('confirmPassword')!.dirty || credentialsForm.get('confirmPassword')!.touched) &&
+        credentialsForm.getError('match_error') &&
+        credentialsForm.get('password')!.valid && credentialsForm.get('confirmPassword')!.valid" style="color: red;">
+          {{ credentialsForm.getError('match_error') }}
+        </div>
+      </div>
+    </div>
+    <input type="submit" value="suivant">
+       </div>
+
+          </form>
+    </div>
+
+    <div *ngIf="test==3" class="container">
+
+      <button class="btn btn-lg btn-outline-primary" style="margin-left: 170px" (click)="afficherDrivers()"> Afficher Drivers</button>
+      <button class="btn btn-lg btn-outline-primary" style="margin-left: 200px" (click)="confirmer()"> Afficher TA</button>
+      <div *ngIf="afficher==1">
+        <h3>Liste des Drivers</h3>
+        <table class = "table table-striped">
+          <thead>
+              <tr>
+                  <th> identifiant </th>
+                  <th style="margin-left: 300px;"> Nom </th>
+                  <th> Prénom</th>
+                  <th> Date de Naissance</th>
+                  <th> Genre </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let u of Drivers |paginate: { itemsPerPage: 9, currentPage: p }" >
+                  <td> {{ u.userId }} </td>
+                  <td> {{ u. firstName }} </td>
+                  <td> {{ u.lastName }} </td>
+                  <td> {{ u.birthdate| date:'dd-MM-yyyy'}} </td>
+                  <td> {{ u.gender}} </td>
+                  <td>
+                      <button  style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" ><a class = "fas fa-edit" style="font-size: 25px;"  (click)="updateCamion(camion.id)"></a></button>
+                      <button (click) = "deleteCamion(camion.id)" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fa fa-trash" style="margin-left: 20px;font-size: 25px;"></a> </button>
+                      <button style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fas fa-question-circle" style="margin-left: 30px;font-size: 25px;" (click)="open(content)"></a></button>
+                      <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">Détail du driver : {{u.userId}}</h4>
+                          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Numéro Fiscale : {{u.matriculeFiscale}} </p>
+                          <p>Email :  {{u.email}} </p>
+                          <p>Téléphone : {{u.phoneNumber}} </p>
+                          <p>ID societeRemorquage : {{u.societeRemorquageId}} </p>
+                          <p>Pays : {{u.country}} </p>
+                          <p>Gouvernorat : {{u.governorate}} </p>
+                          <p>Ville: {{u.city}} </p>
+                          <p>Code Postale: {{u.zipCode}} </p>
+                          <p>Numéro de Domicile : {{u.homeCode}} </p>
+
+
+                        </div>
+                        <div class="modal-footer">
+
+
+                        </div>
+                      </ng-template>
+                  </td>
+              </tr>
+          </tbody>
+          <pagination-controls
+
+          (pageChange)="p = $event">
+        </pagination-controls>
+      </table>
+      </div>
+      <div *ngIf="afficher==2">
+        <h3>Liste des Drivers</h3>
+        <table class = "table table-striped">
+          <thead>
+              <tr>
+                  <th> identifiant </th>
+                  <th style="margin-left: 300px;"> Nom </th>
+                  <th> Prénom</th>
+                  <th> Date de Naissance</th>
+                  <th> Genre </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor = "let t of TAs |paginate: { itemsPerPage: 9, currentPage: p }" >
+                  <td> {{ t.userId }} </td>
+                  <td> {{ t. firstName }} </td>
+                  <td> {{ t.lastName }} </td>
+                  <td> {{ t.birthdate| date:'dd-MM-yyyy'}} </td>
+                  <td> {{ t.gender}} </td>
+                  <td>
+                      <button  style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);" ><a class = "fas fa-edit" style="font-size: 25px;"  (click)="updateCamion(camion.id)"></a></button>
+                      <button (click) = "deleteCamion(camion.id)" style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fa fa-trash" style="margin-left: 20px;font-size: 25px;"></a> </button>
+                      <button style="background-color: rgba(255, 255, 255, 0); border-color: rgba(255, 255, 255, 0);"><a  class = "fas fa-question-circle" style="margin-left: 30px;font-size: 25px;" (click)="open(content)"></a></button>
+                      <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="modal-basic-title">Détail du TA : {{t.userId}}</h4>
+                          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Numéro Fiscale : {{t.matriculeFiscale}} </p>
+                          <p>Email :  {{t.email}} </p>
+                          <p>Téléphone : {{t.phoneNumber}} </p>
+                          <p>ID societeRemorquage : {{t.societeRemorquageId}} </p>
+                          <p>Pays : {{t.country}} </p>
+                          <p>Gouvernorat : {{t.governorate}} </p>
+                          <p>Ville: {{t.city}} </p>
+                          <p>Code Postale: {{t.zipCode}} </p>
+                          <p>Numéro de Domicile : {{t.homeCode}} </p>
+
+
+                        </div>
+                        <div class="modal-footer">
+
+
+                        </div>
+                      </ng-template>
+                  </td>
+              </tr>
+          </tbody>
+          <pagination-controls
+
+          (pageChange)="p = $event">
+        </pagination-controls>
+      </table>
+      </div>
+    </div>
 

@@ -12,4 +12,5 @@ export class Camion {
    serie!:number;
    numImmat!:number;
   numChassis!:number;
+  companyID!:number
 }
