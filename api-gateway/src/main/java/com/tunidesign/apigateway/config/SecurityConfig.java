@@ -66,9 +66,10 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf().disable()
                 .authorizeExchange()
-                    .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll",
+                    .pathMatchers("/actuator/**","/logout.html", "/login",
+                            "/societeRemorquage/getAll", "/assurance/getAll",
                             "/users/add",
-                            "/vehicule/add", "/vehicule/getAll", "/users/getAll/clients")
+                            "/users/getAll/clients")
                         .permitAll()
                     .anyExchange().authenticated()
                 .and()
