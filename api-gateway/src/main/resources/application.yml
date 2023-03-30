@@ -22,11 +22,46 @@ spring:
           uri: http://localhost:5050/
           predicates:
             - Path=/users/**
+        - id: AGENCE-SERVICE
+          uri: http://localhost:5051/
+          predicates:
+            - Path=/agence/**
+        - id: CAMION-SERVICE
+          uri: http://localhost:5052/
+          predicates:
+            - Path=/camion/**
+        - id: CONTRAT-SERVICE
+          uri: http://localhost:5053/
+          predicates:
+            - Path=/contrat/**
+        - id: FACTURE-SERVICE
+          uri: http://localhost:5054/
+          predicates:
+            - Path=/facture/**
+        - id: RECU-SERVICE
+          uri: http://localhost:5055/
+          predicates:
+            - Path=/recu/**
+        - id: SERVICE-SERVICE
+          uri: http://localhost:5056/
+          predicates:
+            - Path=/service/**
+        - id: VEHICULE-SERVICE
+          uri: http://localhost:5057/
+          predicates:
+            - Path=/vehicule/**
         - id: PARKING-SERVICE
           uri: http://localhost:5058/
           predicates:
               - Path=/parking/**
-
+        - id: SOCIETE-REMORQUAGE-SERVICE
+          uri: http://localhost:5059/
+          predicates:
+            - Path=/societeRemorquage/**
+        - id: ASSURANCE-SERVICE
+          uri: http://localhost:5060/
+          predicates:
+            - Path=/societeRemorquage/**
 
 ############# EUREKA ##############
 eureka:
