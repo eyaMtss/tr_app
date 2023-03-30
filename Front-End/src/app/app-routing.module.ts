@@ -20,6 +20,7 @@ import { CompleteRegistrationComponent } from './complete-registration/complete-
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
+import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'picture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
+  {path: 'societe', component: SocieteDeRemorquageComponent},
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
   {path: 'suivi', component: SuiviOrdreComponent},
@@ -54,7 +56,8 @@ const routes: Routes = [
   { path: 'driver', loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule),
     canActivate:[AuthGuard], data: { roles: ['DRIVER']}},
 
-  
+
+
 ];
 
 @NgModule({

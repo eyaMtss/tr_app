@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +48,12 @@ import { ImmatriculationComponent } from './shared/immatriculation/immatriculati
 import { AddGarageComponent } from './shared/add-garage/add-garage.component';
 import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
+import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
+
+
 @NgModule({
 
   declarations: [
@@ -63,17 +69,20 @@ import { LoginCamionComponent } from './login-camion/login-camion.component';
     NavbarComponent,
     QrCodeComponent,
     QrCodeTestComponent,
-    RatingComponent,  
-    ProfilclientComponent, 
-    HomeComponent, 
-    MultiComponent, 
+    RatingComponent,
+    ProfilclientComponent,
+    HomeComponent,
+    MultiComponent,
     CompleteRegistrationComponent,
     AddressComponent,
     AddVehicleComponent, 
     ImmatriculationComponent, 
     AddGarageComponent, 
-    AddLavageComponent, LoginCamionComponent
-
+    AddLavageComponent, 
+    LoginCamionComponent,
+    AddVehicleComponent, 
+    ImmatriculationComponent, 
+    SocieteDeRemorquageComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,8 +103,7 @@ import { LoginCamionComponent } from './login-camion/login-camion.component';
     WebcamModule,
     GoogleMapsModule,
     GooglePlaceModule,
-
-
+    NgxPaginationModule
   ],
   providers: [
     KeycloakService,
@@ -120,6 +128,7 @@ import { LoginCamionComponent } from './login-camion/login-camion.component';
       multi: true
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }
