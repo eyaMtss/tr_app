@@ -18,11 +18,11 @@ export class User {
     public constructor(firstName: string, lastName: string, email: string, phoneNumber: number,
         birthdate: Date, gender: string);
     public constructor(...myarray: any[]){
-        this.firstName = myarray[1];
-        this.lastName = myarray[2];
-        this.email = myarray[3];
-        this.phoneNumber = myarray[4];
-        this.birthdate = myarray[5];
-        this.gender = myarray[6];
+        this.firstName = myarray[0];
+        this.lastName = myarray[1];
+        this.email = myarray[2];
+        this.phoneNumber = myarray[3];
+        this.birthdate = myarray[4];
+        this.gender = myarray[5];
     }
 }
