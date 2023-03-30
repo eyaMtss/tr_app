@@ -62,21 +62,18 @@ export class CompleteRegistrationComponent implements OnInit {
   }
 
   onConfirm(){
+    
     // save user's registration data && mark registration as complete(completed_registration attribute)
-    this.userService.completeRegistration(this.user).subscribe(data => {
+    /*this.userService.completeRegistration(this.user).subscribe(data => {
       this.setTokenRegistration();
       console.log(data);
-    })
+    })*/
+    this.navigate();
   }
 
-  navigate(){
-    if(this.currentRole == "CLIENT") this.router.navigate(["/client"]);
-    else if(this.currentRole == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
-    else if(this.currentRole == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
-    else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
-    else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
-    else this.router.navigate(["/access-denied"]);
-  }
+  navigate(){ 
+    this.router.navigate(["/tunidesign"]); //path : registrationGUARD
+  } 
 
   setTokenRegistration(): void {
     // mark registration as complete
