@@ -43,8 +43,10 @@ import { CompleteRegistrationComponent } from './complete-registration/complete-
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
 import { AddressComponent } from './address/address.component';
-import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { AddVehicleComponent } from './shared/add-vehicle/add-vehicle.component';
 import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
+import { AddGarageComponent } from './shared/add-garage/add-garage.component';
+import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
 @NgModule({
 
   declarations: [
@@ -66,7 +68,7 @@ import { ImmatriculationComponent } from './shared/immatriculation/immatriculati
     MultiComponent, 
     CompleteRegistrationComponent,
     AddressComponent, 
-    AddVehicleComponent, ImmatriculationComponent
+    AddVehicleComponent, ImmatriculationComponent, AddGarageComponent, AddLavageComponent
 
   ],
   imports: [
