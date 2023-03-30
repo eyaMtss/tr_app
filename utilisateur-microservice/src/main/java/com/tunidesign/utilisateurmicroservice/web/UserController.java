@@ -118,7 +118,7 @@ public class UserController {
 	}
 
 	@PostMapping("/addDriver")
-	@RolesAllowed({"COMPANY_ADMIN"})
+	@RolesAllowed({"SOCIETE_REMORQUAGE_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addDriver(
 			@Valid @RequestBody CompanyUserRequestDTO driverRequestDTO) {
 		try {
@@ -130,7 +130,7 @@ public class UserController {
 	}
 
 	@PostMapping("/addTA")
-	@RolesAllowed({"COMPANY_ADMIN"})
+	@RolesAllowed({"SOCIETE_REMORQUAGE_ADMIN"})
 	public ResponseEntity<CompanyUserResponseDTO> addTA(@Valid @RequestBody CompanyUserRequestDTO taRequestDTO) {
 		try {
 			User savedTa = userService.updateRole(userService.addUser(userMapper.companyUserRequestDTOToUser(taRequestDTO)).getUserId(), Role.TA);
