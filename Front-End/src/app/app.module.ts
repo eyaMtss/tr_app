@@ -68,7 +68,10 @@ import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
     MultiComponent, 
     CompleteRegistrationComponent,
     AddressComponent, 
-    AddVehicleComponent, ImmatriculationComponent, AddGarageComponent, AddLavageComponent
+    AddVehicleComponent, 
+    ImmatriculationComponent, 
+    AddGarageComponent, 
+    AddLavageComponent
 
   ],
   imports: [
