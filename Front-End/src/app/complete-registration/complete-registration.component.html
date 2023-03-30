@@ -15,12 +15,12 @@
                 <hr>
             </div>
             <div *ngIf="currentRole == 'CLIENT'" class="col-12">
-                <div *ngFor="let item of vehiculeValues; let i = index" class="d-flex flex-column ">
+                <div *ngFor="let item of vehicleValues; let i = index" class="d-flex flex-column ">
                     <div class="d-flex justify-content-between mt-2">
                         <h4>Véhicule {{i+1}}</h4>
                         <button *ngIf="currentVehicleNumber > 2" class="btn border add-vehicle-btn shadow"
                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
-                            (click)="onDeleteButton(i)">
+                            (click)="onDeleteVehicleButton(i)">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -33,9 +33,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-4"></div>
-            <div *ngIf="currentRole != 'CLIENT'" class="col-md-6"><h4>Informations</h4></div>
-            <div class="col-md-4"></div>
+            <div *ngIf="currentRole != 'CLIENT'" class="col-12"><h4>Informations</h4></div>
             <div *ngIf="currentRole != 'CLIENT'" class="col-12 col-md-4">
                 <label for="matriculeFiscale">Matricule fiscale</label>
                 <div class="input-group mb-3">
@@ -47,25 +45,51 @@
                     }"/>
                 </div>
             </div>
-            <div *ngIf="currentRole == 'GARAGISTE_ADMIN'" class="col-12 col-md-4">
-                <label for="garageType">Type de garage</label>
-                <select class="form-select fa mb-3" aria-label="GarageType" formControlName="garageType"
-                    (change)="onGarageTypeChange()" [ngClass]="{
-                        'is-invalid':
-                            completedRegistrationForm.get('garageType')!.touched &&
-                            completedRegistrationForm.controls['garageType'].errors
-                    }">
-                    <option value="fa fa-wrench" class="fa">&#xf0ad; Mécanique</option>
-                    <option value="fas fa-plug" class="fa">&#xf1e6;  Electrique</option>
-                    <option value="fas fa-user" class="fa">&#xf007; User</option>
-                    <option value="fa fa-tire" class="fa">&#xf631; Pneumatique</option>
-                </select>
-                  
-            </div>
             
             <div class="col-12">
                 <hr />
             </div>
+
+            <div *ngIf="currentRole == 'GARAGISTE_ADMIN'" class="col-12">
+                <div *ngFor="let garage of garageValues; let i = index" class="d-flex flex-column ">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h4>Garage {{i+1}}</h4>
+                        <button *ngIf="currentGarageNumber > 2" class="btn border add-btn shadow"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
+                            (click)="onDeleteGarageButton(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <app-add-garage (garageFormEvent)="getGarageForm($event, i)"></app-add-garage>
+                </div>
+                <div class="d-flex justify-content-center my-2">
+                    <button class="btn border add-btn shadow" (click)="onAddGarageBtn()"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter un garage">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="currentRole == 'LAVAGISTE_ADMIN'" class="col-12">
+                <div *ngFor="let lavage of lavageValues; let i = index" class="d-flex flex-column ">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h4>Garage {{i+1}}</h4>
+                        <button *ngIf="currentLavageNumber > 2" class="btn border add-btn shadow"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
+                            (click)="onDeleteLavageButton(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <app-add-lavage (lavageFormEvent)="getLavageForm($event, i)"></app-add-lavage>
+                </div>
+                <div class="d-flex justify-content-center my-2">
+                    <button class="btn border add-btn shadow" (click)="onAddLavageBtn()"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter un lavage">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="col-12 d-flex justify-content-end mb-3">
                 <button class="btn confirm_btn" (click)="onConfirm()">Confirmer</button>
             </div>
