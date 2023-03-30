@@ -63,6 +63,7 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
         http
+                .cors().and()
                 .csrf().disable()
                 .authorizeExchange()
                     .pathMatchers("/actuator/**","/logout.html", "/login", "/societeRemorquage/getAll",
