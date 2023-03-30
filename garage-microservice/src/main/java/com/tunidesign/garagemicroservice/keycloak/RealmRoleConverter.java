@@ -1,4 +1,4 @@
-package com.tunidesign.utilisateurmicroservice.keycloak;
+package com.tunidesign.garagemicroservice.keycloak;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
