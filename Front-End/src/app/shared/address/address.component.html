@@ -1,53 +1,67 @@
-<form [formGroup]="addressForm" (change)="onFormChange()">
-    <div class="row">
-        <div class="col-12">
-            <h4>Adresse</h4>
-        </div>
-        <div class="col-12 col-md-6">
-            <label for="country">Pays</label>
-            <select class="form-select mb-3" aria-label="Default select example" formControlName="country" id="country"
-                (change)="onCountryChange()" [ngClass]="{
-                        'is-invalid':
-                            addressForm.get('country')!.touched &&
-                            addressForm.controls['country'].errors
-                    }">
-                <option *ngFor="let country of countries" [value]="country.id" data-image="assets/circle.png">
-
-                    {{country.value}}
-                </option>
-            </select>
-        </div>
-        <div *ngIf="isCountrySetted" class="col-12 col-md-6">
-            <label for="governorate">Governorat</label>
-            <select class="form-select mb-3" aria-label="Default select example" formControlName="governorate"
-                id="governorate" (change)="onGovernorateChange()" [ngClass]="{
-                        'is-invalid':
-                            addressForm.get('governorate')!.touched &&
-                            addressForm.controls['governorate'].errors
-                    }">
-                <option *ngFor="let governorate of governorates" [value]="governorate">{{governorate}}</option>
-            </select>
-        </div>
-        <div *ngIf="isGovernorateSetted" class="col-12 col-md-6">
-            <label for="city">Cité</label>
-            <select class="form-select mb-3" aria-label="Default select example" formControlName="city" id="city" [ngClass]="{
-                'is-invalid':
-                    addressForm.get('city')!.touched &&
-                    addressForm.controls['city'].errors
-            }">
-                <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-            </select>
-        </div>
-        <div class="col-12 col-md-6">
-            <label for="zipCode">Code postal</label>
-            <div class="input-group mb-3">
-                <input class="form-control" placeholder="Code postal" id="zipCode" type="number"
-                    formControlName="zipCode" [ngClass]="{
-                            'is-invalid':
-                                addressForm.get('zipCode')!.touched &&
-                                addressForm.controls['zipCode'].errors
-                        }" />
+<div class="container">
+    <h4>Adresse Postale</h4>
+    <form [formGroup]="addressForm" (change)="onFormChange()">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <label for="nom" style="color:black">Pays</label>
+                <div class="input-group mb-3">
+                    <select class="form-select" id="Type" (change)="onCountryChange($event)">
+                        <option selected="true" disabled="disabled">Choisissez votre pays</option>
+                        <option *ngFor="let country of countries" [value]="country.id">
+                            {{country.value}}
+                        </option>
+                    </select>
+                </div>
             </div>
+            <div class="col-12 col-md-6">
+                <label for="nom" style="color:black">Gouvernorat</label>
+                <div class="input-group mb-3">
+                    <select class="form-select" id="Type" (change)="onGovernorateChange($event)">
+                        <option selected="true" disabled="disabled">Choisissez votre gouvernorat</option>
+                        <option *ngFor="let governorate of governorates" [value]="governorate.id">
+                            {{governorate.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label for="nom" style="color:black">Ville</label>
+                <div class="input-group mb-3">
+                    <select class="form-select" id="Type" (change)="onCityChange($event)">
+                        <option selected="true" disabled="disabled">Choisissez votre ville</option>
+                        <option *ngFor="let city of cities" [value]="city.ville">
+                            {{city.ville}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label for="zipCode" style="color:black">Code postal</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Code Postal" id="zipCode" type="text"
+                        formControlName="zipCode" [ngClass]="{
+                    'is-invalid':
+                      addressForm.get('zipCode')!.touched &&
+                      addressForm.controls['zipCode'].errors
+              }" />
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label for="homeCode" style="color:black">Numero Domicile</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Numéro Domicile" id="homeCode" type="number"
+                        formControlName="homeCode" [ngClass]="{
+                'is-invalid':
+                    addressForm.get('homeCode')!.touched &&
+                    addressForm.controls['homeCode'].errors
+            }" />
+                </div>
+            </div>
+            
         </div>
-    </div>
-</form>
+
+    </form>
+</div>
