@@ -31,16 +31,16 @@ export class CompleteRegistrationComponent implements OnInit {
   vehicleValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehicleValues
   // garage
   maxGarageNumber: number = 5; // 
-  currentGarageNumber: number = 1; // user must have at least 1 vehicule
+  currentGarageNumber: number = 1; // user must have at least 1 garage
   garageValues: Garage[] = []; //user can have several vehicules, we put them in a list: vehicleValues
   // lavage
   maxLavageNumber: number = 5; // 
-  currentLavageNumber: number = 1; // user must have at least 1 vehicule
+  currentLavageNumber: number = 1; // user must have at least 1 lavage
   lavageValues: Lavage[] = []; //user can have several vehicules, we put them in a list: vehicleValues
 
   matriculeFiscaleValue!: string; // ngModel
   constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
-    private fb: FormBuilder, private router: Router) { 
+    private fb: FormBuilder, private router: Router) {
     this.completedRegistrationForm = this.fb.group({
       img: [''],
       matriculeFiscale: ['', Validators.required]
@@ -48,46 +48,43 @@ export class CompleteRegistrationComponent implements OnInit {
   }
   ngOnInit(): void {
     this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
-    if(this.currentRole == 'CLIENT'){
+    if (this.currentRole == 'CLIENT') {
       this.completedRegistrationForm.controls['matriculeFiscale'].disable();
     }
-    else if(this.currentRole == 'GARAGISTE_ADMIN'){
-      this.completedRegistrationForm.controls['matriculeFiscale'].enable();
-    }
-    else{
+    else {
       this.completedRegistrationForm.controls['matriculeFiscale'].enable();
     }
     this.currentUsername = this.authService.getUsername(); // get username from token
     this.user.username = this.currentUsername; // set username
     console.log(this.currentRole);
     console.log(this.currentUsername);
-    if(this.currentRole == "CLIENT"){
-      this.onAddVehicleBtn() 
+    if (this.currentRole == "CLIENT") {
+      this.onAddVehicleBtn()
       //by default, there is only one input of vehicleValues
     }
-    else if(this.currentRole == "GARAGISTE_ADMIN"){
-      this.onAddGarageBtn() 
+    else if (this.currentRole == "GARAGISTE_ADMIN") {
+      this.onAddGarageBtn()
       //by default, there is only one input of garageValues
     }
-    else if(this.currentRole == "LAVAGISTE_ADMIN"){
-      this.onAddLavageBtn() 
-      //by default, there is only one input of garageValues
+    else if (this.currentRole == "LAVAGISTE_ADMIN") {
+      this.onAddLavageBtn()
+      //by default, there is only one input of lavageValues
     }
   }
 
-  onConfirm(){
-    
+  onConfirm() {
+
     // save user's registration data && mark registration as complete(completed_registration attribute)
-    /*this.userService.completeRegistration(this.user).subscribe(data => {
+    this.userService.completeRegistration(this.user).subscribe(data => {
       this.setTokenRegistration();
       console.log(data);
-    })*/
+    })
     this.navigate();
   }
 
-  navigate(){ 
+  navigate() {
     this.router.navigate(["/tunidesign"]); //path : registrationGUARD
-  } 
+  }
 
   setTokenRegistration(): void {
     // mark registration as complete
@@ -99,11 +96,11 @@ export class CompleteRegistrationComponent implements OnInit {
         console.log('User details updated with completed_registration attribute');
         console.log(userDetails.completed_registration)
       });
-    }  
+    }
   }
 
-   // Image
-   public onFileChanged(event: any) {  //Gets called when the user selects an image
+  // Image
+  public onFileChanged(event: any) {  //Gets called when the user selects an image
     //Select File
     this.selectedUserImage = event.target.files[0];
     console.log(this.selectedUserImage)
@@ -139,7 +136,7 @@ export class CompleteRegistrationComponent implements OnInit {
     }
   }
 
-  onAddVehicleBtn(){
+  onAddVehicleBtn() {
     if (this.vehicleValues.length < this.maxVehicleNumber) {
       this.vehicleValues.push(new Vehicle());
       this.currentVehicleNumber += 1;
@@ -147,7 +144,7 @@ export class CompleteRegistrationComponent implements OnInit {
     }
   }
 
-  onAddGarageBtn(){
+  onAddGarageBtn() {
     if (this.garageValues.length < this.maxGarageNumber) {
       this.garageValues.push(new Garage());
       this.currentGarageNumber += 1;
@@ -155,7 +152,7 @@ export class CompleteRegistrationComponent implements OnInit {
     }
   }
 
-  onAddLavageBtn(){
+  onAddLavageBtn() {
     if (this.lavageValues.length < this.maxLavageNumber) {
       this.lavageValues.push(new Lavage());
       this.currentLavageNumber += 1;
@@ -231,7 +228,7 @@ export class CompleteRegistrationComponent implements OnInit {
     this.lavageValues[index].currentNbVehicle = 0; //by default
   }
 
-  onMatriculeFiscaleChange(){
+  onMatriculeFiscaleChange() {
     console.log(this.completedRegistrationForm.controls['matriculeFiscale'].value);
     this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
   }
