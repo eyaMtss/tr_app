@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<CompanyUserResponseDTO> getCompanyAdmins(Long companyId) {
-		return userRepository.findCompanyEmployeesByRole(companyId, Role.COMPANY_ADMIN).stream()
+		return userRepository.findCompanyEmployeesByRole(companyId, Role.SOCIETE_REMORQUAGE_ADMIN).stream()
 				.map(user -> userMapper.userToCompanyUserResponseDTO(user)).toList();
 	}
 

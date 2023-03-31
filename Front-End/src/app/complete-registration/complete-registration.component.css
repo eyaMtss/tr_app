@@ -1,4 +1,4 @@
-.container{
+.container {
     background-color: rgba(85, 87, 96, 0.559) !important;
     border-radius: 20px !important;
 }
@@ -21,26 +21,25 @@ img {
     padding: 5px;
 }
 
-label, h4{
+label,
+h4 {
     color: white;
 }
 
-.container-img{
+.container-img {
     display: grid;
     place-items: center;
 }
 
-.add-vehicle-btn{
+.add-delete-btn {
     border-radius: 50%;
     color: white;
 }
 
-.confirm_btn{
+.confirm_btn {
     background-color: #a5caf5;
 }
 
 .fa {
     font-family: 'Lato', 'Font Awesome 5 Free', 'Font Awesome 5 Brands' !important;
-   
- 
- }
+}

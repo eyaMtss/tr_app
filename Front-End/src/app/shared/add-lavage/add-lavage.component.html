@@ -1,0 +1,72 @@
+<form [formGroup]="lavageForm" (change)="onFormChange()">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="name">Nom du lavage</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Nom du lavage" id="name" type="text" formControlName="name"
+                    [ngClass]="{
+                        'is-invalid':
+                            lavageForm.get('name')!.touched &&
+                            lavageForm.controls['name'].errors
+                    }" />
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="capacity">Capacité</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Capacité" id="chassisNumber" type="number"
+                    formControlName="capacity" [ngClass]="{
+                        'is-invalid':
+                            lavageForm.get('capacity')!.touched &&
+                            lavageForm.controls['capacity'].errors
+                    }" />
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="email">Email</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text d-flex justify-content-center"><i class="fas fa-envelope"></i></span>
+                <input class="form-control" placeholder="email" id="email" type="text" formControlName="email"
+                    [ngClass]="{
+                                'is-invalid':
+                                    lavageForm.get('email')!.touched &&
+                                    lavageForm.controls['email'].errors
+                            }" />
+            </div>
+            <div *ngIf="lavageForm.get('email')!.touched
+                            && lavageForm.get('email')?.hasError('email')" class="invalid-feedback">
+                <p style="color: red;">Tapez une adresse email valide</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="phone">Téléphone</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
+                <input class="form-control" placeholder="Téléphone" id="phone" type="number" formControlName="phone"
+                    [ngClass]="{
+                                'is-invalid':
+                                    lavageForm.get('phone')!.touched &&
+                                    lavageForm.controls['phone'].errors
+                            }" />
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="address">Address</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Address" id="address" type="text"
+                    formControlName="address" [ngClass]="{
+                        'is-invalid':
+                            lavageForm.get('address')!.touched &&
+                            lavageForm.controls['address'].errors
+                    }" />
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+    </div>
+</form>

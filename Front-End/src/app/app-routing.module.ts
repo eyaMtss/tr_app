@@ -19,6 +19,7 @@ import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
+import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 
 const routes: Routes = [
@@ -28,24 +29,32 @@ const routes: Routes = [
   { path: 'access-denied', component: AccessDeniedComponent, canActivate: [AuthGuard] },
   { path: 'tunidesign', component: MultiComponent, canActivate: [AuthGuard, RegistrationGuard] },
   { path: 'complete-registration', component: CompleteRegistrationComponent },
+  { path: 'camion-login', component: LoginCamionComponent },
 
   {path: 'shareInformation', component: ShareInformationComponent},
   {path: 'share', component: ShareInformationComponent},
   {path: 'picture', component: SendPictureComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
-   {path: 'societe', component: SocieteDeRemorquageComponent},
+  {path: 'societe', component: SocieteDeRemorquageComponent},
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
   {path: 'suivi', component: SuiviOrdreComponent},
   {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   { path: 'qrcode', component: QrCodeTestComponent},
   { path: 'profilclient/:id', component: ProfilclientComponent},
-  { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule) },
-  { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule) },
-  { path: 'agenceLocationAdmin', loadChildren: () => import('./agence-location-admin/agence-location-admin.module').then(m => m.AgenceLocationAdminModule) },
-  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule) },
-  { path: 'lavagisteAdmin', loadChildren: () => import('./lavagiste-admin/lavagiste-admin.module').then(m => m.LavagisteAdminModule) },
+  { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule),
+    canActivate:[AuthGuard], data: { roles: ['GARAGISTE_ADMIN']} },
+  { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule), 
+    canActivate:[AuthGuard], data: { roles: ['INSURANCE_ADMIN']} },
+  { path: 'agenceLocationAdmin', loadChildren: () => import('./agence-location-admin/agence-location-admin.module').then(m => m.AgenceLocationAdminModule), 
+    canActivate:[AuthGuard], data: { roles: ['AGENCE_LOCATION_ADMIN']} },
+  { path: 'client', loadChildren: () => import('./client/client.module').then(m => m.ClientModule), 
+    canActivate:[AuthGuard], data: { roles: ['CLIENT']} },
+  { path: 'lavagisteAdmin', loadChildren: () => import('./lavagiste-admin/lavagiste-admin.module').then(m => m.LavagisteAdminModule), 
+    canActivate:[AuthGuard], data: { roles: ['LAVAGISTE_ADMIN']} },
+  { path: 'driver', loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule),
+    canActivate:[AuthGuard], data: { roles: ['DRIVER']}},
 
 
 

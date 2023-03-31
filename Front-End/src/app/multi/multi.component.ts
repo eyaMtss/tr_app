@@ -18,6 +18,7 @@ export class MultiComponent implements OnInit {
     else if(role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
     else if(role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
     else if(role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else if(role == "DRIVER") this.router.navigate(['camion-login']);
     else this.router.navigate(["/order"]);
   }
 

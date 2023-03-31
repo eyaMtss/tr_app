@@ -1,0 +1,22 @@
+[
+    {
+        "id": "1",
+        "name": "Nouveau"
+    },
+    {
+        "id": "2",
+        "name": "Avec kilométrage"
+    },
+    {
+        "id": "3",
+        "name": "Non dédouanné"
+    },
+    {
+        "id": "4",
+        "name": "RS"
+    },
+    {
+        "id": "5",
+        "name": "Pièces manquantes"
+    }
+]

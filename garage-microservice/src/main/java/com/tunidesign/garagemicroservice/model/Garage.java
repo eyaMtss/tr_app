@@ -17,7 +17,9 @@ public class Garage {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
+    private String name;
     private String adresse;
 
     private int capacite;
+    private Long garageOwner;
 }

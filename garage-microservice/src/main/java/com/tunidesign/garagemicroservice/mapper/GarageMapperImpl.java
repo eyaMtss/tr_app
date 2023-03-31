@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class GaragePapperImpl implements GarageMapper{
+public class GarageMapperImpl implements GarageMapper{
     @Override
     public GarageResponseDTO garageToGarageResponseDTO(Garage garage) {
        return  GarageResponseDTO.builder().id(garage.getId())

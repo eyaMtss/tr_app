@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3>Camion</h3>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="camionLoginForm" (ngSubmit)="onSubmit()">
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text d-flex justify-content-center"><i class="fas fa-car"></i></span>
+                        <input  type="text" class="form-control" id="immatCamion" name="immatCamion" class="form-control" 
+                        placeholder="Immatriculation" formControlName="immatCamion"/>
+                        
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn login_btn w-100">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>

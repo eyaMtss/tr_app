@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,11 +42,18 @@ import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
-import { AddressComponent } from './address/address.component';
-import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { AddressComponent } from './shared/address/address.component';
+import { AddVehicleComponent } from './shared/add-vehicle/add-vehicle.component';
 import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
+import { AddGarageComponent } from './shared/add-garage/add-garage.component';
+import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
+import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { UploadFileComponent } from './shared/upload-file/upload-file.component';
+
+
+
 
 @NgModule({
 
@@ -69,8 +76,14 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MultiComponent,
     CompleteRegistrationComponent,
     AddressComponent,
-    AddVehicleComponent, ImmatriculationComponent, SocieteDeRemorquageComponent,
-
+    AddVehicleComponent, 
+    ImmatriculationComponent, 
+    AddGarageComponent, 
+    AddLavageComponent, 
+    LoginCamionComponent,
+    AddVehicleComponent, 
+    ImmatriculationComponent, 
+    SocieteDeRemorquageComponent, UploadFileComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,8 +105,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
     GoogleMapsModule,
     GooglePlaceModule,
     NgxPaginationModule
-
-
   ],
   providers: [
     KeycloakService,
@@ -118,6 +129,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
       multi: true
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

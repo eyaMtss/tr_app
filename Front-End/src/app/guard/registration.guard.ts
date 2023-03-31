@@ -19,14 +19,12 @@ export class RegistrationGuard implements CanActivate {
       return false;
     }
 
-    const hasCompletedRegistration = userDetails.completed_registration === 'true';
-    console.log(userDetails.completed_registration);
+    const hasCompletedRegistration = userDetails.completed_registration == '1';
     console.log(hasCompletedRegistration);
     if (!hasCompletedRegistration) {
       this.router.navigate(['/complete-registration']);
       return false;
     }
-
-    return true;
+      return true;
   }
 }
