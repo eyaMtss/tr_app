@@ -45,8 +45,9 @@ export class AddVehicleComponent implements OnInit {
       kilometrage: ["", Validators.required],
       doorsNumber: ["", Validators.required],
       color: ["", Validators.required],
-      
       contractNumber: ["", Validators.required],
+      contractFile: [""],
+      chassisFile: [""]
     });
   }
   
@@ -59,6 +60,7 @@ export class AddVehicleComponent implements OnInit {
       this.vehicleConditions = data;
     })
   }
+
   getJSON(jsonUrl: string): Observable<any>{
     return this.httpClient.get(jsonUrl);
   }
@@ -75,12 +77,6 @@ export class AddVehicleComponent implements OnInit {
     console.log(this.models)
   }
 
-  notWritableField() {
-    // console.log(this.filtroForm.controls['a'].value)
-    this.vehicleForm.controls['doorsNumber'].setValue("")
-    this.vehicleForm.updateValueAndValidity()
-  }
-
   onFormChange(){
     //this.informationForm.valueChanges.subscribe(val => {
       if(this.vehicleForm.valid){
@@ -91,5 +87,13 @@ export class AddVehicleComponent implements OnInit {
 
   emitInformationForm(value: FormGroup) {
     this.vehicleFormEvent.emit(value);
+  }
+
+  getContractFile(contractFile: File) {
+    this.vehicleForm.controls['contractFile'].setValue(contractFile);
+  }
+
+  getChassisFile(chassisFile: File) {
+    this.vehicleForm.controls['chassisFile'].setValue(chassisFile);
   }
 }

@@ -60,7 +60,7 @@
             </select>
         </div>
 
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 mt-3 mt-md-0">
             <label for="model">Modèle</label>
             <select class="form-select" formControlName="model" id="model" [ngClass]="{
                 'is-invalid':
@@ -71,7 +71,7 @@
             </select>
         </div>
 
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 mt-3 mt-md-0">
             <label for="year">Année</label>
             <div class="input-group mb-3">
                 <input class="form-control" placeholder="Année" id="year" type="number" formControlName="year"
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="vehicleCondition">Etat du véhicule</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="vehicleCondition" id="vehicleCondition" [ngClass]="{
@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="boite">Boite</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="boite" id="boite" [ngClass]="{
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="cylindre">Cylindrée</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="cylindre" id="cylindre" [ngClass]="{
@@ -160,7 +160,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="carburant">Carburant</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="carburant" id="carburant" aria-placeholder="Carburant"
@@ -177,7 +177,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="carrosserieType">Type de carrosserie</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="carrosserieType" id="carrosserieType"
@@ -198,7 +198,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-3 mt-3 mt-md-0">
+        <div class="col-12 col-md-3">
             <label for="color">Couleur</label>
             <div class="input-group mb-3">
                 <select class="form-select" formControlName="color" id="color" aria-placeholder="Couleur" [ngClass]="{
@@ -254,6 +254,30 @@
                 }" />
                 <span class="input-group-text d-flex justify-content-center">ch</span>
             </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <label for="contractNumber">Numero du contrat</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Numero du contrat" id="contractNumber" type="text"
+                    formControlName="contractNumber" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('contractNumber')!.touched &&
+                            vehicleForm.controls['contractNumber'].errors
+                    }"/>
+            </div>
+        </div>
+
+        <div class="col-12 col-9"></div>
+
+        <div class="col-12 col-md-6">
+            <label for="power">Contrat</label>
+            <app-upload-file (fileEvent)="getContractFile($event)"></app-upload-file>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label for="power">Carte grise</label>
+            <app-upload-file (fileEvent)="getChassisFile($event)"></app-upload-file>
         </div>
 
         <div class="col-12">
