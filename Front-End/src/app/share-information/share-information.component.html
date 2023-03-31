@@ -59,7 +59,7 @@
   </div>
 
     <div style="margin-left: 300px;"  >
-      <google-map>
+      <google-map [options]="mapOptions" >
 
         <map-marker
         *ngFor="let marker of markers"
@@ -69,6 +69,7 @@
         [options]="marker.options"
 
       >
+
       </map-marker>
      <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
                                [directions]="directionsResults"></map-directions-renderer>

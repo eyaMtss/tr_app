@@ -45,6 +45,9 @@ import { RegistrationGuard } from './guard/registration.guard';
 import { AddressComponent } from './address/address.component';
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
+import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
 
   declarations: [
@@ -60,13 +63,13 @@ import { ImmatriculationComponent } from './shared/immatriculation/immatriculati
     NavbarComponent,
     QrCodeComponent,
     QrCodeTestComponent,
-    RatingComponent,  
-    ProfilclientComponent, 
-    HomeComponent, 
-    MultiComponent, 
+    RatingComponent,
+    ProfilclientComponent,
+    HomeComponent,
+    MultiComponent,
     CompleteRegistrationComponent,
-    AddressComponent, 
-    AddVehicleComponent, ImmatriculationComponent
+    AddressComponent,
+    AddVehicleComponent, ImmatriculationComponent, SocieteDeRemorquageComponent,
 
   ],
   imports: [
@@ -88,6 +91,7 @@ import { ImmatriculationComponent } from './shared/immatriculation/immatriculati
     WebcamModule,
     GoogleMapsModule,
     GooglePlaceModule,
+    NgxPaginationModule
 
 
   ],
