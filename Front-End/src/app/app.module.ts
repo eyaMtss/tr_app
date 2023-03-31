@@ -50,6 +50,7 @@ import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { UploadFileComponent } from './shared/upload-file/upload-file.component';
 
 
 
@@ -82,7 +83,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginCamionComponent,
     AddVehicleComponent, 
     ImmatriculationComponent, 
-    SocieteDeRemorquageComponent,
+    SocieteDeRemorquageComponent, UploadFileComponent,
   ],
   imports: [
     BrowserModule,
