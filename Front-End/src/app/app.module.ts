@@ -29,7 +29,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 import { RatingComponent } from './rating/rating.component';
-import { ProfilclientComponent } from './client/profilclient/profilclient.component';
+import { ProfilclientComponent } from './profilclient/profilclient.component';
 import { AuthGuard } from './guard/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -77,7 +77,9 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
     LoginCamionComponent,
     AddVehicleComponent, 
     ImmatriculationComponent, 
-    SocieteDeRemorquageComponent, UploadFileComponent,
+    SocieteDeRemorquageComponent, 
+    UploadFileComponent,
+    ProfilclientComponent
   ],
   imports: [
     BrowserModule,

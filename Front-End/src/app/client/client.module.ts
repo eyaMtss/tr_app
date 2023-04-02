@@ -15,7 +15,6 @@ import { WebcamModule } from 'ngx-webcam';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddressComponent } from './address/address.component';
 import { ProfileClientComponent } from './profile-client/profile-client.component';
-import { ProfilclientComponent } from './profilclient/profilclient.component';
 
 
 @NgModule({
@@ -26,8 +25,7 @@ import { ProfilclientComponent } from './profilclient/profilclient.component';
     SendPictureComponent,
     SidebarComponent,
     AddressComponent,
-    ProfileClientComponent,
-    ProfilclientComponent,
+    ProfileClientComponent
   ],
   imports: [
     CommonModule,
