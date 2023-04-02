@@ -2,9 +2,6 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { ShareInformationComponent } from './share-information/share-information.component';
-import { SendPictureComponent } from './send-picture/send-picture.component';
 import { UserInformationComponent } from './user-information/user-information.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
@@ -32,7 +29,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 import { RatingComponent } from './rating/rating.component';
-import { ProfilclientComponent } from './profilclient/profilclient.component';
+import { ProfilclientComponent } from './client/profilclient/profilclient.component';
 import { AuthGuard } from './guard/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -59,8 +56,6 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
 
   declarations: [
     AppComponent,
-    ShareInformationComponent,
-    SendPictureComponent,
     UserInformationComponent,
     PickUpPassComponent,
     OrderComponent,
@@ -71,7 +66,6 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
     QrCodeComponent,
     QrCodeTestComponent,
     RatingComponent,
-    ProfilclientComponent,
     HomeComponent,
     MultiComponent,
     CompleteRegistrationComponent,
@@ -90,11 +84,7 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
     AppRoutingModule,
     NgbModule ,
     FormsModule,
-    MatProgressSpinnerModule,
-    ReactiveFormsModule,
     KeycloakAngularModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     QRCodeModule,
     MatProgressSpinnerModule,
     HttpClientModule,
@@ -130,6 +120,9 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
     },
   ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  exports: [
+    AddressComponent
+  ]
 })
 export class AppModule { }
