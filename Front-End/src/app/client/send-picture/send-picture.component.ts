@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { OrderService } from '../services/api/order.service';
+import { OrderService } from '../../services/api/order.service';
 import { WebcamImage } from 'ngx-webcam';
 @Component({
   selector: 'app-send-picture',
