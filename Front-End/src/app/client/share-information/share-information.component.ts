@@ -4,8 +4,8 @@ import { CountryISO, SearchCountryField } from "ngx-intl-tel-input";
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { DOCUMENT } from '@angular/common';
 import { map, Observable } from 'rxjs';
-import { OrderService } from '../services/api/order.service';
-import { OrderRequest } from '../models/order-request';
+import { OrderService } from '../../services/api/order.service';
+import { OrderRequest } from '../../models/order-request';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
 @Component({
