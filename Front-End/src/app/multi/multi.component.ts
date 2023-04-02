@@ -13,7 +13,7 @@ export class MultiComponent implements OnInit {
   }
   ngOnInit(): void {
     let role = this.authService.getRoles()[0];
-    if(role == "CLIENT") this.router.navigate(["/share"]);
+    if(role == "CLIENT") this.router.navigate(["/client"]);
     else if(role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
     else if(role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
     else if(role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
