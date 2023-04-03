@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h3 class="modal-title">
+        Modifier les informations
+    </h3>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+
+    <app-add-vehicle></app-add-vehicle>
+</div>
+
+<div class="modal-footer border">
+    <div class="me-1">
+        <button #closeModal type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
+            Ok
+        </button>
+    </div>
+</div>
