@@ -29,10 +29,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	// Authentication
-	//@Column(unique = true)
+	@Column(unique = true)
 	private String username;
 	@Email
-	//@Column(unique = true)
+	@Column(unique = true)
 	private String email;
 	//@ValidPassword
 	private byte[] salt;
@@ -53,16 +53,17 @@ public class User {
 	private Integer zipCode;
 	private Integer homeCode;
 	// Contact
-	//@Column(unique = true)
+	@Column(unique = true)
 	private Long phoneNumber;
-
+	private String countryCode;
+	private String dialCode;
 	// Picture
 	private String pictureName;
 	private String pictureType;
 	@Lob
 	@Column(length = 1000000000, columnDefinition = "LONGBLOB")
 	private byte[] pictureByte;
-	//@Column(unique = true)
+	@Column(unique = true)
 	private String matriculeFiscale; // employee
 	@Enumerated(EnumType.STRING)
 	private Status status; // employee
