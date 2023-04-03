@@ -1,0 +1,139 @@
+<div class="row my-3" [formGroup]="vehicleForm">
+    <div class="col-12 d-flex justify-content-between">
+        <div><h3><i class="fas fa-car"></i> Véhicule</h3></div>
+        <div><h4><button class="btn" (click)="openEditVehicleModal($event)"><i class="fas fa-edit"></i></button></h4></div>
+    </div>
+
+
+    <div class="col-12 col-md-3">
+        <b>Type d'immatriculation</b>
+    </div>
+    <div class="col-12 col-md-3">
+        Chef de Mission Diplomatique (CMD)
+    </div>
+
+    <div class="col-12 col-md-3">
+        <label for="registrationNumber"><b>N° d'immatriculation</b></label>
+    </div>
+    <div class="col-12 col-md-3">
+        <p id="registrationNumber">{{vehicleForm.get('registrationNumber')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="chassisNumber"><b>N° de carte grise</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="chassisNumber">{{vehicleForm.get('chassisNumber')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="brand"><b>Marque</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="brand">{{vehicleForm.get('brand')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="model"><b>Modèle</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="model">{{vehicleForm.get('model')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="annee"><b>Année</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="annee">{{vehicleForm.get('annee')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="vehicleCondition"><b>Etat du véhicule</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="vehicleCondition">{{vehicleForm.get('vehicleCondition')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="kilometrage"><b>Kilométrage</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="kilometrage">{{vehicleForm.get('kilometrage')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="boite"><b>Boite</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="boite">{{vehicleForm.get('boite')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="cylindree"><b>Cylindrée</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="cylindree">{{vehicleForm.get('cylindree')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="carburant"><b>Carburant</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="carburant">{{vehicleForm.get('carburant')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="carrosserieType"><b>Type de carrosserie</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="carrosserieType">{{vehicleForm.get('carrosserieType')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="color"><b>Couleur</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="color">{{vehicleForm.get('color')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="doorsNumber"><b>Nombre de portes</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="doorsNumber">{{vehicleForm.get('doorsNumber')?.value}} test</p>
+    </div>
+
+    <div class="col-6 col-md-3">
+        <label for="power"><b>Puissance fiscale</b></label>
+    </div>
+    <div class="col-6 col-md-3">
+        <p id="power">{{vehicleForm.get('power')?.value}} test</p>
+    </div>
+
+    <div class="col-12 mb-3">
+        <label for=""><b>Contrat</b></label>
+        <div class="row border container-fluid contract-container ms-3">
+            <div class="col-12 col-md-3">
+                <label for="contractNumber"><b>Numéro de contrat</b></label>
+            </div>
+            <div class="col-12 col-md-3">
+                <p id="contractNumber">{{vehicleForm.get('contractNumber')?.value}} test</p>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label for="startContract"><b>Date de début</b></label>
+            </div>
+            <div class="col-12 col-md-3">
+                <p id="startContract">{{vehicleForm.get('startContract')?.value}} test</p>
+            </div>
+
+            <div class="col-12 col-md-3">
+                <label for="endContract"><b>Date de fin</b></label>
+            </div>
+            <div class="col-12 col-md-3">
+                <p id="endContract">{{vehicleForm.get('endContract')?.value}} test</p>
+            </div>
+
+        </div>
+    </div>
+</div>
