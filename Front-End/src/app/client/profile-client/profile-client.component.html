@@ -1,0 +1,115 @@
+<div class="row container-fluid">
+    <div class="col-12 col-md-3">
+        <div class="border sidebar-container">
+            <app-sidebar></app-sidebar>
+            <div *ngIf="isProfileViewMode" class="d-flex justify-content-center my-3">
+                <button class="btn border edit-btn" (click)="onProfileEditButton()"><i class="fas fa-edit"></i>Modifier
+                    le profil</button>
+            </div>
+            <div *ngIf="!isProfileViewMode" class="d-flex justify-content-around">
+                <button class="btn ms-2 border" (click)="onProfileConfirmButton()"><i
+                        class="fas fa-check"></i>Confirmer</button>
+                <button class="btn ms-2 border" (click)="onProfileCancelButton()"><i class="fas fa-undo"></i>
+                    Annuler</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12 col-md-9 mt-3 mt-md-0">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-user"></i> Profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-car"></i>Véhicule1</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid profil-information-container bg-light my-3" [formGroup]="profileForm">
+            <div class="row">
+                <div class="col-12 col-md-3 mt-3">
+                    <label for="firstname"><b>Nom</b></label>
+                </div>
+                <div class="col-12 col-md-8 mt-md-3">
+                    <input *ngIf="!isProfileViewMode" class="form-control" id="firstname" type="text"
+                        formControlName="firstname" [ngClass]="{
+                    'is-invalid':
+                        profileForm.get('firstname')!.touched &&
+                        profileForm.controls['firstname'].errors
+                    }" />
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('firstname')?.value}}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label for="lastname"><b>Prénom</b></label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input *ngIf="!isProfileViewMode" class="form-control" id="lastname" type="text"
+                        formControlName="lastname" [ngClass]="{
+                        'is-invalid':
+                            profileForm.get('lastname')!.touched &&
+                            profileForm.controls['lastname'].errors
+                        }" />
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('lastname')?.value}}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label for="birthdate"><b>Date de naissance </b></label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input *ngIf="!isProfileViewMode" class="form-control" id="birthdate" type="date"
+                        formControlName="birthdate" [ngClass]="{
+                        'is-invalid':
+                            profileForm.get('birthdate')!.touched &&
+                            profileForm.controls['birthdate'].errors
+                        }" />
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('birthdate')?.value}}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label for="email"><b>Email</b></label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input *ngIf="!isProfileViewMode" class="form-control" id="email" type="email"
+                        formControlName="email" [ngClass]="{
+                        'is-invalid':
+                            profileForm.get('email')!.touched &&
+                            profileForm.controls['email'].errors
+                        }" />
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('email')?.value}}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label for="phone"><b>Téléphone</b></label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input *ngIf="!isProfileViewMode" class="form-control" id="phone" type="number"
+                        formControlName="phone" [ngClass]="{
+                        'is-invalid':
+                            profileForm.get('phone')!.touched &&
+                            profileForm.controls['phone'].errors
+                        }" />
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('phone')?.value}}</p>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <label><b>Adresse postale</b></label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <div *ngIf="!isProfileViewMode" class="border">
+                        <app-address (addressFormEvent)="getAddressForm($event)"></app-address>
+                    </div>
+                    <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('country')?.value}} -
+                        {{profileForm.get('governorate')?.value}} - {{profileForm.get('city')?.value}} -
+                        {{profileForm.get('zipCode')?.value}} </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid profil-information-container bg-light my-3">
+            <app-view-vehicle></app-view-vehicle>
+        </div>
+    </div>
+</div>
