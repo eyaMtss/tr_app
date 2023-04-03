@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
+  isWhiteBackground!: boolean;
+  backgroundColor!: string;
+
   addressForm: FormGroup;
   country: any
   governorates: any;
@@ -15,9 +18,7 @@ export class AddressComponent implements OnInit {
   cities!: any;
   countries = [{ id: "TUN", value: "Tunisie" }, { id: "LYB", value: "Libye" }, { id: "ALG", value: "Algérie" }, { id: "FR", value: "France" }];
 
-
   @Output() addressFormEvent = new EventEmitter<FormGroup>();
-
 
   constructor(private _formBuilder: FormBuilder, private httpClient: HttpClient) {
     this.addressForm = this._formBuilder.group({
@@ -25,7 +26,6 @@ export class AddressComponent implements OnInit {
       governorate: ["", Validators.required],
       city: ["", Validators.required],
       zipCode: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
-      homeCode: ["", Validators.required],
     });
   }
 
@@ -69,5 +69,11 @@ export class AddressComponent implements OnInit {
 
   emitInformationForm(value: FormGroup) {
     this.addressFormEvent.emit(value);
+  }
+
+  // Set the background color and isWhiteBackground variable based on your requirements
+  setBackground(): void {
+    this.backgroundColor = 'white'; // or any other color
+    this.isWhiteBackground = this.backgroundColor === 'white';
   }
 }
