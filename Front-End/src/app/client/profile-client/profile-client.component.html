@@ -85,12 +85,17 @@
                     <label for="phone"><b>Téléphone</b></label>
                 </div>
                 <div class="col-12 col-md-8">
-                    <input *ngIf="!isProfileViewMode" class="form-control" id="phone" type="number"
-                        formControlName="phone" [ngClass]="{
-                        'is-invalid':
-                            profileForm.get('phone')!.touched &&
-                            profileForm.controls['phone'].errors
-                        }" />
+                    <ngx-intl-tel-input [enablePlaceholder]="true" 
+                        [enableAutoCountrySelect]="true"
+                        [searchCountryFlag]="true" 
+                        [preferredCountries]="[CountryISO.Tunisia]"
+                        [selectedCountryISO]="CountryISO.Tunisia"
+                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                        [phoneValidation]="true"
+                        [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]" 
+                        name="phone"
+                        formControlName="phone">
+                    </ngx-intl-tel-input>
                     <p class="ms-3 ms-md-0" *ngIf="isProfileViewMode">{{profileForm.get('phone')?.value}}</p>
                 </div>
 

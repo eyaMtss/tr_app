@@ -1,17 +1,32 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-add-garage',
   templateUrl: './add-garage.component.html',
   styleUrls: ['./add-garage.component.css']
 })
-export class AddGarageComponent {
+export class AddGarageComponent implements OnInit {
+  CountryISO = CountryISO;
+  SearchCountryField = SearchCountryField;
+
   garageForm: FormGroup;
   // garage 
   garageType: string = "";
   garageTypeValue!: string; // ngModel
   @Output() garageFormEvent = new EventEmitter<FormGroup>();
+  
+  zoom = 12;
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    mapTypeId: 'hybrid',
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
+  };
   constructor(private _formBuilder: FormBuilder){
     this.garageForm = this._formBuilder.group({
       name: ["", Validators.required],
@@ -21,6 +36,14 @@ export class AddGarageComponent {
       phone: ["", Validators.required],
       address: ["", Validators.required],
       garageType: ["", Validators.required]
+    });
+  }
+  ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      };
     });
   }
 

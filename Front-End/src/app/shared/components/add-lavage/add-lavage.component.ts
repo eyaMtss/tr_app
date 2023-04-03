@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-add-lavage',
@@ -7,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-lavage.component.css']
 })
 export class AddLavageComponent {
+  CountryISO = CountryISO;
+  SearchCountryField = SearchCountryField;
+
   lavageForm: FormGroup;
   // lavage 
   lavageType: string = "";

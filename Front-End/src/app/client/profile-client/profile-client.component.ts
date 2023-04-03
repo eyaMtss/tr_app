@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-profile-client',
@@ -7,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./profile-client.component.css']
 })
 export class ProfileClientComponent {
+  CountryISO = CountryISO;
+  SearchCountryField = SearchCountryField;
+  
   isProfileViewMode: boolean = true;
   addressForm!: FormGroup; // address form
   profileForm: FormGroup;

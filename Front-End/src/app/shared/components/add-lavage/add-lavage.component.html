@@ -44,13 +44,17 @@
         <div class="col-12 col-md-4">
             <label for="phone">Téléphone</label>
             <div class="input-group mb-3">
-                <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
-                <input class="form-control" placeholder="Téléphone" id="phone" type="number" formControlName="phone"
-                    [ngClass]="{
-                                'is-invalid':
-                                    lavageForm.get('phone')!.touched &&
-                                    lavageForm.controls['phone'].errors
-                            }" />
+                <ngx-intl-tel-input  
+                    [enablePlaceholder]="true"
+                    [enableAutoCountrySelect]="true"
+                    [searchCountryFlag]="true"
+                    [preferredCountries]="[CountryISO.Tunisia]"
+                    [selectedCountryISO]="CountryISO.Tunisia"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
+                    [phoneValidation]="true"
+                    [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]"
+                    name="phone" formControlName="phone">
+                </ngx-intl-tel-input>
             </div>
         </div>
 
