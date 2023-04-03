@@ -1,9 +1,12 @@
 package com.tunidesign.assurancemicroservice.web;
 
+import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
 import com.tunidesign.assurancemicroservice.exceptions.AssuranceIntrouvableException;
 import com.tunidesign.assurancemicroservice.model.Assurance;
 import com.tunidesign.assurancemicroservice.repository.AssuranceRepository;
+import com.tunidesign.assurancemicroservice.service.AssuranceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,15 +16,16 @@ import java.util.List;
 public class AssuranceController {
     @Autowired
     private AssuranceRepository assuranceRepository;
+    @Autowired
+    private AssuranceServiceImpl assuranceService;
     @GetMapping("/getAll")
-    public List<Assurance> listeAssurances()
-    {
-        return assuranceRepository.findAll();
+    public ResponseEntity<List<AssuranceResponseDTO>> getInsurances() {
+        return ResponseEntity.ok().body(assuranceService.getInsurances());
     }
 
     @GetMapping(value = "/getById/{id}")
-    public Assurance afficherUnAssurance(@PathVariable int id) {
-        Assurance assurance = assuranceRepository.findById(id);
+    public Assurance afficherUnAssurance(@PathVariable Long id) {
+        Assurance assurance = assuranceRepository.findById(id).get();
         if(assurance==null) throw new AssuranceIntrouvableException("L'Assurance' avec l'id " + id + " est INTROUVABLE. ");
         return assurance;
     }
@@ -32,10 +36,9 @@ public class AssuranceController {
         assuranceRepository.save(assurance);
     }
     @DeleteMapping (value = "/delete/{id}")
-    public void supprimerUnAssurance(@PathVariable int id)
+    public void supprimerUnAssurance(@PathVariable Long id)
     {
-        Assurance assurance = assuranceRepository.deleteById(id);
-        if(assurance==null) throw new AssuranceIntrouvableException("L'Assuranceavec l'id " + id + " est INTROUVABLE. ");
+        assuranceRepository.deleteById(id);
 
     }
     @PutMapping (value = "/update")

@@ -6,5 +6,5 @@ import com.tunidesign.assurancemicroservice.model.Assurance;
 
 public interface AssuranceMapper {
     AssuranceResponseDTO assuranceToAssuranceDTO(Assurance assurance);
-    Assurance AssuranceRequestDTOToAssurance(AssuranceRequestDTO assuranceRequestDTO);
+    Assurance assuranceRequestDTOToAssurance(AssuranceRequestDTO assuranceRequestDTO);
 }

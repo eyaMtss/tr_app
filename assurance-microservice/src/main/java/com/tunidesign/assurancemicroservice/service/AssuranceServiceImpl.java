@@ -3,6 +3,7 @@ package com.tunidesign.assurancemicroservice.service;
 import com.tunidesign.assurancemicroservice.DTO.AssuranceRequestDTO;
 import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
 import com.tunidesign.assurancemicroservice.mapper.AssuranceMapper;
+import com.tunidesign.assurancemicroservice.mapper.AssuranceMapperImpl;
 import com.tunidesign.assurancemicroservice.repository.AssuranceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,17 @@ import java.util.List;
 public class AssuranceServiceImpl implements AssuranceService {
     @Autowired
     private AssuranceRepository  assuranceRepository;
-    private AssuranceMapper assuranceMapper;
+    private AssuranceMapper assuranceMapper = new AssuranceMapperImpl();
 
     @Override
-    public List<AssuranceResponseDTO> getAssurance() {
-        return null;
+    public List<AssuranceResponseDTO> getInsurances() {
+        return assuranceRepository.findAll()
+                .stream()
+                .map(assurance -> assuranceMapper.assuranceToAssuranceDTO(assurance)).toList();
     }
 
     @Override
-    public AssuranceResponseDTO getAssurance(String id) {
+    public AssuranceResponseDTO getAssurance(Long id) {
         return null;
     }
 
@@ -31,17 +34,12 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
     @Override
-    public void deleteAssurance(String id) {
+    public void deleteAssurance(Long id) {
 
     }
 
     @Override
     public AssuranceResponseDTO update(AssuranceRequestDTO assuranceRequestDTO) {
-        return null;
-    }
-
-    @Override
-    public List<AssuranceResponseDTO> getAssuranceByPostId(String id) {
         return null;
     }
 }
