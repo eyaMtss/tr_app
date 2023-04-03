@@ -1,9 +1,8 @@
 <div class="container">
-    <h4>Adresse Postale</h4>
     <form [formGroup]="addressForm" (change)="onFormChange()">
         <div class="row">
             <div class="col-12 col-md-6">
-                <label for="nom" style="color:black">Pays</label>
+                <label for="nom" [ngClass]="{'white-text': isWhiteBackground, 'black-text': !isWhiteBackground}" [style.background-color]="backgroundColor">Pays</label>
                 <div class="input-group mb-3">
                     <select class="form-select" id="Type" (change)="onCountryChange($event)">
                         <option selected="true" disabled="disabled">Choisissez votre pays</option>
@@ -14,7 +13,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6">
-                <label for="nom" style="color:black">Gouvernorat</label>
+                <label for="nom" [ngClass]="{'white-text': isWhiteBackground, 'black-text': !isWhiteBackground}" [style.background-color]="backgroundColor">Gouvernorat</label>
                 <div class="input-group mb-3">
                     <select class="form-select" id="Type" (change)="onGovernorateChange($event)">
                         <option selected="true" disabled="disabled">Choisissez votre gouvernorat</option>
@@ -26,7 +25,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-                <label for="nom" style="color:black">Ville</label>
+                <label for="nom" [ngClass]="{'white-text': isWhiteBackground, 'black-text': !isWhiteBackground}" [style.background-color]="backgroundColor">Ville</label>
                 <div class="input-group mb-3">
                     <select class="form-select" id="Type" (change)="onCityChange($event)">
                         <option selected="true" disabled="disabled">Choisissez votre ville</option>
@@ -38,7 +37,7 @@
             </div>
 
             <div class="col-12 col-md-6">
-                <label for="zipCode" style="color:black">Code postal</label>
+                <label for="zipCode" [ngClass]="{'white-text': isWhiteBackground, 'black-text': !isWhiteBackground}" [style.background-color]="backgroundColor">Code postal</label>
                 <div class="input-group mb-3">
                     <input class="form-control" placeholder="Code Postal" id="zipCode" type="text"
                         formControlName="zipCode" [ngClass]="{
@@ -47,21 +46,7 @@
                       addressForm.controls['zipCode'].errors
               }" />
                 </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <label for="homeCode" style="color:black">Numero Domicile</label>
-                <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Numéro Domicile" id="homeCode" type="number"
-                        formControlName="homeCode" [ngClass]="{
-                'is-invalid':
-                    addressForm.get('homeCode')!.touched &&
-                    addressForm.controls['homeCode'].errors
-            }" />
-                </div>
-            </div>
-            
+            </div>     
         </div>
-
     </form>
 </div>
