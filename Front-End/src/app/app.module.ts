@@ -13,7 +13,6 @@ import { AuthService } from './services/auth/auth.service';
 import { initializer } from './utils/auth/app-init';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ErrorsCatchingInterceptor } from './httpInterceptor/errors-catching.interceptor';
 import { RequestInterceptor } from './httpInterceptor/request.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,17 +38,11 @@ import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
 import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
-import { AddressComponent } from './shared/address/address.component';
-import { AddVehicleComponent } from './shared/add-vehicle/add-vehicle.component';
-import { ImmatriculationComponent } from './shared/immatriculation/immatriculation.component';
-import { AddGarageComponent } from './shared/add-garage/add-garage.component';
-import { AddLavageComponent } from './shared/add-lavage/add-lavage.component';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { UploadFileComponent } from './shared/upload-file/upload-file.component';
 
-
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -62,28 +55,20 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
     ShiftComponent,
     SuiviOrdreComponent,
     AccessDeniedComponent,
-    NavbarComponent,
     QrCodeComponent,
     QrCodeTestComponent,
     RatingComponent,
     HomeComponent,
     MultiComponent,
     CompleteRegistrationComponent,
-    AddressComponent,
-    AddVehicleComponent, 
-    ImmatriculationComponent, 
-    AddGarageComponent, 
-    AddLavageComponent, 
     LoginCamionComponent,
-    AddVehicleComponent, 
-    ImmatriculationComponent, 
     SocieteDeRemorquageComponent, 
-    UploadFileComponent,
     ProfilclientComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     NgbModule ,
     FormsModule,
     KeycloakAngularModule,
@@ -123,8 +108,6 @@ import { UploadFileComponent } from './shared/upload-file/upload-file.component'
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  exports: [
-    AddressComponent
-  ]
+  exports: []
 })
 export class AppModule { }
