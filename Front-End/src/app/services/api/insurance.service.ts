@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class InsuranceService {
-  private _URL = environment.domain + ":" + environment.port + "/insurance/";
+  private _URL = environment.domain + ":" + environment.port + "/assurance/";
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<Company[]> {
