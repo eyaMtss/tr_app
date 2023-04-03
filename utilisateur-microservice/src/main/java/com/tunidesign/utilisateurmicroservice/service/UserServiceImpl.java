@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<ClientResponseDTO> getClients() {
-		return userRepository.findByRole(Role.CLEINT).stream().map(user -> userMapper.userToClientResponseDTO(user))
+		return userRepository.findByRole(Role.CLIENT).stream().map(user -> userMapper.userToClientResponseDTO(user))
 				.toList();
 	}
 
