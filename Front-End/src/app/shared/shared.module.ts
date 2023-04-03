@@ -9,9 +9,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
-
-
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { AddOfficeComponent } from './components/add-office/add-office.component';
+import { ContactSectionComponent } from './components/contact-section/contact-section.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 @NgModule({
   declarations: [
     AddGarageComponent,
@@ -20,13 +22,18 @@ import { RouterModule } from '@angular/router';
     AddressComponent,
     ImmatriculationComponent,
     NavbarComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    AddOfficeComponent,
+    ContactSectionComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgxIntlTelInputModule,
+    GoogleMapsModule,
+    GooglePlaceModule,
   ],
   exports: [
     AddGarageComponent,
