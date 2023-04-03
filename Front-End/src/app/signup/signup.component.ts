@@ -16,15 +16,7 @@ export class SignupComponent implements OnInit {
   informationsForm!: FormGroup;
   currentRole!: string; //user is the default user
   isInformationsNextBtnDisabled: Boolean = true;
-
-  // addressForm
-  addressForm!: FormGroup;
-  isAddressNextBtnDisabled: Boolean = true;
-  //vehicule section when role = user
-  //maxVehicleNumber: number = 5; // 
-  //currentVehicleNumber: number = 1; // user must have at least 1 vehicule
-  //vehiculeValues: Vehicle[] = []; //user can have several vehicules, we put them in a list: vehiculeValues
-
+  company!: string;
   // credentialsForm
   credentialsForm!: FormGroup;
   isCredentialsNextBtnDisabled: Boolean = true;
@@ -33,49 +25,47 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.onAddVehicleBtn(); //by default, there is only one input of vehiculeValues
   }
-
-  /*onAddVehicleBtn() { // add a new vehicule
-    if (this.vehiculeValues.length < this.maxVehicleNumber) {
-      this.vehiculeValues.push(new Vehicle());
-      this.currentVehicleNumber += 1;
-      console.log(this.vehiculeValues);
-    }
-  }*/
-
-  /*onDeleteButton(i: any): void {  //delete the i input field for vehiculesValues list
-    if (this.vehiculeValues.length == 1)   //always keep a field
-      this.vehiculeValues[i] = new Vehicle()
-    else {
-      this.vehiculeValues.splice(i, 1);
-      this.currentVehicleNumber -= 1;
-    }
-  }*/
 
   getCurrentRole(currentRole: string) {
     this.currentRole = currentRole;
   }
 
   getInformationsForm(informationsForm: FormGroup) {
+    console.log(informationsForm)
     this.informationsForm = informationsForm;
     if (this.informationsForm.valid) {
+      console.log(this.informationsForm.valid)
+      console.log(this.isInformationsNextBtnDisabled)
       this.isInformationsNextBtnDisabled = false; // enable next btn
       this.currentRole = this.informationsForm.controls['role'].value;
 
+      this.user.role = this.currentRole;
       this.user.firstName = this.informationsForm.controls['firstname'].value;
       this.user.lastName = this.informationsForm.controls['lastname'].value;
       this.user.email = this.informationsForm.controls['email'].value;
-      this.user.phoneNumber = this.informationsForm.controls['phone'].value;
-      this.user.gender = this.informationsForm.controls['gender'].value;
+      this.user.phoneNumber = this.informationsForm.controls['phone'].value['number'];
+      this.user.countryCode = this.informationsForm.controls['phone'].value['countryCode']
+      this.user.dialCode = this.informationsForm.controls['phone'].value['dialCode']
       this.user.birthdate = this.informationsForm.controls['birthdate'].value;
+      this.user.gender = this.informationsForm.controls['gender'].value;
+      this.company = this.informationsForm.controls['company'].value;
+      console.log(this.user.countryCode)
+      if (this.currentRole == "CLIENT" || this.currentRole == "GARAGISTE" || this.currentRole == "LAVAGISTE" ||
+      this.currentRole == "EXPERT") { 
+        this.user.username = this.informationsForm.controls['username'].value;
+      }
+      else {
+        this.user.username = this.generateUsername();
+      }
     }
-    if (this.currentRole != "CLIENT") { // !!!!!!!!!!!
-      this.user.username = this.informationsForm.controls['username'].value;
-
-    }
+    
     else
       this.isInformationsNextBtnDisabled = true; // disable next btn
+  }
+
+  generateUsername(){
+    return this.company + "_" + this.user.firstName + this.user.lastName
   }
 
   getCredentialsForm(credentialsForm: FormGroup) {
@@ -91,6 +81,11 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    if (this.currentRole == "SOCIETE_REMORQUAGE_ADMIN" || this.currentRole == "AGENCE_LOCATION_ADMIN" ||
+      this.currentRole == "INSURANCE_ADMIN"){
+        window.alert("Votre nom d'utilisateur est: " + this.user.username)
+      }
+    
     this.userService.create(this.user).subscribe(res => {
       console.log(res);
       this.signin();
