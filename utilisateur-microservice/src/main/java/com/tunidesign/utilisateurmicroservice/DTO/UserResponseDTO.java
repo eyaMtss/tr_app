@@ -41,6 +41,8 @@ public class UserResponseDTO {
 	@Email
 	private String email;
 	private Long phoneNumber;
+	private String countryCode;
+	private String dialCode;
 
 	// Picture
 	private String pictureName;
