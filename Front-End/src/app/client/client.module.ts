@@ -13,8 +13,10 @@ import { SendPictureComponent } from './send-picture/send-picture.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { WebcamModule } from 'ngx-webcam';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { AddressComponent } from './address/address.component';
 import { ProfileClientComponent } from './profile-client/profile-client.component';
+import { SharedModule } from '../shared/shared.module';
+import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
+import { VehicleModalComponent } from './vehicle-modal/vehicle-modal.component';
 
 
 @NgModule({
@@ -24,12 +26,14 @@ import { ProfileClientComponent } from './profile-client/profile-client.componen
     ShareInformationComponent,
     SendPictureComponent,
     SidebarComponent,
-    AddressComponent,
-    ProfileClientComponent
+    ProfileClientComponent,
+    ViewVehicleComponent,
+    VehicleModalComponent
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     GoogleMapsModule,
@@ -37,6 +41,7 @@ import { ProfileClientComponent } from './profile-client/profile-client.componen
     NgxIntlTelInputModule,
     MatProgressSpinnerModule,
     WebcamModule,
-  ]
+  ],
+  exports: []
 })
 export class ClientModule { }
