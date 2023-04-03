@@ -15,15 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tunidesign.utilisateurmicroservice.exceptions.CustomException;
@@ -53,30 +45,12 @@ public class UserController {
 	@PostMapping("/add")
 	public ResponseEntity<ClientResponseDTO> addUser(@RequestBody UserRequestDTO userRequestDTO) {
 		try {
-
-			userRequestDTO = generateUsername(userRequestDTO);//generate username
 			User savedUser = userService.addUser(userMapper.userRequestDTOToUser(userRequestDTO));
 			logger.info(String.valueOf(savedUser));
 			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedUser), HttpStatus.CREATED);
 		} catch (Exception e) {
 			throw new CustomException(e.getMessage());
 		}
-	}
-	/**
-	 * Eya Mattoussi
-	 * 27/03/2023
-	 * generate a username for users depending on their role
-	 * @param userRequestDTO
-	 * @return userRequestDTO with username set
-	 */
-	public UserRequestDTO generateUsername(UserRequestDTO userRequestDTO){
-		String role = String.valueOf(userRequestDTO.getRole());
-		String username = userRequestDTO.getUsername();
-		if (role.equals("SOCIETE_REMORQUAGE_ADMIN")){
-			username = "soc";
-		}
-		userRequestDTO.setUsername(username);
-		return userRequestDTO;
 	}
 	/**
 	 * Eya Mattoussi
@@ -109,7 +83,7 @@ public class UserController {
 	@PostMapping("/addClient")
 	public ResponseEntity<ClientResponseDTO> addClient(@RequestBody ClientRequestDTO clientRequestDTO) {
 		try {
-			User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)).getUserId(), Role.CLEINT);
+				User savedClient = userService.updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)).getUserId(), Role.CLIENT);
 			logger.info(String.valueOf(savedClient));
 			return new ResponseEntity<>(userMapper.userToClientResponseDTO(savedClient), HttpStatus.CREATED);
 		} catch (Exception e) {
