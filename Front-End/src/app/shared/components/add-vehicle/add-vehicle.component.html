@@ -280,6 +280,16 @@
             <app-upload-file (fileEvent)="getChassisFile($event)"></app-upload-file>
         </div>
 
+        <div class="col-12 col-md-6">
+            <label for="power">Vignette</label>
+            <app-upload-file (fileEvent)="getVignetteFile($event)"></app-upload-file>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <label for="power">Visite technique</label>
+            <app-upload-file (fileEvent)="getTechnicalVisitFile($event)"></app-upload-file>
+        </div>
+
         <div class="col-12">
             <hr>
         </div>

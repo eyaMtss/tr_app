@@ -47,7 +47,9 @@ export class AddVehicleComponent implements OnInit {
       color: ["", Validators.required],
       contractNumber: ["", Validators.required],
       contractFile: [""],
-      chassisFile: [""]
+      chassisFile: [""],
+      technicalVisitFile: [""],
+      vignetteFile: [""]
     });
   }
   
@@ -95,5 +97,13 @@ export class AddVehicleComponent implements OnInit {
 
   getChassisFile(chassisFile: File) {
     this.vehicleForm.controls['chassisFile'].setValue(chassisFile);
+  }
+
+  getTechnicalVisitFile(technicalVisitFile: File) {
+    this.vehicleForm.controls['technicalVisitFile'].setValue(technicalVisitFile);
+  }
+
+  getVignetteFile(vignetteFile: File) {
+    this.vehicleForm.controls['vignetteFile'].setValue(vignetteFile);
   }
 }
