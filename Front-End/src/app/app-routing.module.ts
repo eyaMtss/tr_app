@@ -18,6 +18,7 @@ import { RegistrationGuard } from './guard/registration.guard';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 import { ShiftComponent } from './shift/shift.component';
+import { ProfilclientComponent } from './profilclient/profilclient.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,7 +30,7 @@ const routes: Routes = [
   { path: 'camion-login', component: LoginCamionComponent },
 
  
-  
+  {path: 'profil', component: ProfilclientComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
   {path: 'societe', component: SocieteDeRemorquageComponent},
