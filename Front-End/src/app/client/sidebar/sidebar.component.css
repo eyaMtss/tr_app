@@ -1,0 +1,11 @@
+img {
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.container-img {
+    display: grid;
+    place-items: center;
+}
+
