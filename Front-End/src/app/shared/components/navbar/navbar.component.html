@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md container-fluid fixed-top bg-light navbar-light">
+    <div class="container-fluid m-2">
+        <a class="navbar-brand" (click)="home()">
+            <img style="width: 38px; height: auto;border-radius: 10px;" src="assets/logo.png" alt="Tunidesign">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPaths"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarPaths">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="home()">
+                    <a class="nav-link active" aria-current="page">Acceuil</a>
+                </li>
+
+                <li *ngIf="!isLoggedIn" class="nav-item ms-0 ms-md-3 cursor-pointer-class" (click)="signin()">
+                    <a class="nav-link">Se connecter</a>
+                </li>
+
+                <li *ngIf="!isLoggedIn" class="nav-item border radius-class ms-0 ms-md-3 cursor-pointer-class"
+                    (click)="signup()">
+                    <a class="nav-link">S'inscrire</a>
+                </li>
+
+                <li *ngIf="isLoggedIn" class="nav-item dropdown ms-0 ms-md-3">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        {{username}}
+                    </a>
+                    <ul class="dropdown-menu list-left">
+                        <li><a class="dropdown-item cursor-pointer-class" (click)="profile()">Votre profil</a></li>
+                        <li><a class="dropdown-item cursor-pointer-class" (click)="orders()">Vos ordres</a></li>
+                        <li><a class="dropdown-item cursor-pointer-class" (click)="settings()">Paramètres</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item cursor-pointer-class ms-3 ms-md-2" (click)="logout()">
+                            <a class="nav-link">Déconnexion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<br><br><br><br>

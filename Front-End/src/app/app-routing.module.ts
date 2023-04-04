@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { OrderComponent } from './order/order.component';
 import { PickUpPassComponent } from './pick-up-pass/pick-up-pass.component';
-import { SendPictureComponent } from './send-picture/send-picture.component';
-import { ShareInformationComponent } from './share-information/share-information.component';
-import { ShiftComponent } from './shift/shift.component';
 
 import { SuiviOrdreComponent } from './suivi-ordre/suivi-ordre.component';
 import { UserInformationComponent } from './user-information/user-information.component';
@@ -13,7 +10,6 @@ import { AuthGuard } from './guard/auth.guard';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { QrCodeTestComponent } from './qr-code-test/qr-code-test.component';
 import { RatingComponent } from './rating/rating.component';
-import { ProfilclientComponent } from './profilclient/profilclient.component';
 import { HomeComponent } from './home/home.component';
 import { MultiComponent } from './multi/multi.component';
 import { CompleteRegistrationComponent } from './complete-registration/complete-registration.component';
@@ -21,6 +17,8 @@ import { SignupGuard } from './guard/signup.guard';
 import { RegistrationGuard } from './guard/registration.guard';
 import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
+import { ShiftComponent } from './shift/shift.component';
+import { ProfilclientComponent } from './profilclient/profilclient.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,9 +29,8 @@ const routes: Routes = [
   { path: 'complete-registration', component: CompleteRegistrationComponent },
   { path: 'camion-login', component: LoginCamionComponent },
 
-  {path: 'shareInformation', component: ShareInformationComponent},
-  {path: 'share', component: ShareInformationComponent},
-  {path: 'picture', component: SendPictureComponent},
+ 
+  {path: 'profil', component: ProfilclientComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
   {path: 'societe', component: SocieteDeRemorquageComponent},
@@ -42,7 +39,6 @@ const routes: Routes = [
   {path: 'suivi', component: SuiviOrdreComponent},
   {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
   { path: 'qrcode', component: QrCodeTestComponent},
-  { path: 'profilclient/:id', component: ProfilclientComponent},
   { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule),
     canActivate:[AuthGuard], data: { roles: ['GARAGISTE_ADMIN']} },
   { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule), 

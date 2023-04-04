@@ -29,6 +29,8 @@ public class UserRequestDTO {
 	@Email
 	private String email;
 	private Long phoneNumber;
+	private String countryCode;
+	private String dialCode;
 	private Long societeRemorquageId; // TA && DRIVER && admin
 	private Long societeLocationId;
 	private Long insuranceCompanyId; // Insurance && Expert

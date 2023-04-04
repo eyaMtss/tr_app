@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-12 col-md-6 mb-3">
             <label class=" color-text">Vous êtes: &nbsp;</label>
-            <select class="form-select" aria-label="Role" (change)="onRoleChange()" formControlName="role"
-            [ngClass]="{
+            <select class="form-select" aria-label="Role" (change)="onRoleChange()" formControlName="role" [ngClass]="{
                 'is-invalid':
                     informationForm.get('role')!.touched &&
                     informationForm.controls['role'].errors
@@ -69,13 +68,17 @@
         <div class="col-12 col-md-6">
             <label for="phone">Téléphone</label>
             <div class="input-group mb-3">
-                <span class="input-group-text d-flex justify-content-center"><i class="fas fa-phone"></i></span>
-                <input class="form-control" placeholder="Téléphone" id="phone" type="number" formControlName="phone"
-                    [ngClass]="{
-                                'is-invalid':
-                                    informationForm.get('phone')!.touched &&
-                                    informationForm.controls['phone'].errors
-                            }" />
+                <ngx-intl-tel-input  
+                    [enablePlaceholder]="true"
+                    [enableAutoCountrySelect]="true"
+                    [searchCountryFlag]="true"
+                    [preferredCountries]="[CountryISO.Tunisia]"
+                    [selectedCountryISO]="CountryISO.Tunisia"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
+                    [phoneValidation]="true"
+                    [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]"
+                    name="phone" formControlName="phone">
+                </ngx-intl-tel-input>
             </div>
         </div>
 
@@ -98,13 +101,14 @@
                     informationForm.get('company')!.touched &&
                     informationForm.controls['company'].errors
             }">
+                <option selected="true" disabled="disabled">Choisissez votre {{companyLabel |  lowercase}}</option>
                 <option *ngFor="let company of companyList" [value]="company.id">{{company.name}}</option>
             </select>
         </div>
 
         <div class="col-12 col-md-6">
             <label class="color-text">Genre: &nbsp;</label>
-            <div class="form-check form-check-inline" *ngFor="let genre of genreList">
+            <div class="form-check form-check-inline" *ngFor="let genre of genderList">
                 <input class="form-check-input" type="radio" name="gender" id="{{genre.value}}" [value]="genre.id"
                     formControlName="gender">
                 <label class="form-check-label" for="{{genre.value}}">{{genre.value}}</label>

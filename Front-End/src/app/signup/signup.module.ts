@@ -6,6 +6,7 @@ import { SignupComponent } from './signup.component';
 import { InformationsComponent } from './informations/informations.component';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignupRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxIntlTelInputModule
   ]
 })
 export class SignupModule { }

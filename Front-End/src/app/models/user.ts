@@ -1,9 +1,12 @@
 export class User {
+    role!: string;
     firstName!: string;
     lastName!: string;
     email!: string;
     username!: string;
     phoneNumber!: number;
+    countryCode!: string;
+    dialCode!: string;
     birthdate!: Date;
     gender!: string;
 

@@ -7,10 +7,9 @@ import java.util.List;
 
 public interface AssuranceService {
 
-        List<AssuranceResponseDTO> getAssurance();
-        AssuranceResponseDTO getAssurance(String id);
+        List<AssuranceResponseDTO> getInsurances();
+        AssuranceResponseDTO getAssurance(Long id);
         AssuranceResponseDTO save(AssuranceRequestDTO assuranceRequestDTO);
-        void deleteAssurance( String id);
+        void deleteAssurance(Long id);
         AssuranceResponseDTO update(AssuranceRequestDTO assuranceRequestDTO);
-        List <AssuranceResponseDTO> getAssuranceByPostId(String id);
 }

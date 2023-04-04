@@ -44,6 +44,8 @@ public class UserMapperImpl implements UserMapper {
 				.birthdate(userRequestDTO.getBirthdate())
 				.gender(userRequestDTO.getGender())
 				.phoneNumber(userRequestDTO.getPhoneNumber())
+				.countryCode(userRequestDTO.getCountryCode())
+				.dialCode(userRequestDTO.getDialCode())
 				.password(userRequestDTO.getPassword())
 				.confirmPassword(userRequestDTO.getConfirmPassword())
 				.societeLocationId(userRequestDTO.getSocieteLocationId())

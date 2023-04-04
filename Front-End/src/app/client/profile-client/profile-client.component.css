@@ -1,0 +1,20 @@
+b{
+    margin-left: 10px;
+}
+
+.edit-btn {
+    width:90%;
+    display:block;
+}
+
+input{
+    margin-bottom: 10px;
+}
+
+.sidebar-container, .profil-information-container{
+    border-radius: 20px;
+}
+
+nav{
+    border-radius: 10px;
+}

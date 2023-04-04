@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-12 col-md-4">
+        <label for="email">Email</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text d-flex justify-content-center"><i class="fas fa-envelope"></i></span>
+            <input class="form-control" placeholder="email" id="email" type="text" formControlName="email"
+                [ngClass]="{
+                            'is-invalid':
+                                contactForm.get('email')!.touched &&
+                                contactForm.controls['email'].errors
+                        }" />
+        </div>
+        <div *ngIf="contactForm.get('email')!.touched
+                        && contactForm.get('email')?.hasError('email')" class="invalid-feedback">
+            <p style="color: red;">Tapez une adresse email valide</p>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-4">
+            <label class="d-flex justify-content-between">
+                Téléphone
+                <i class="" (click)="onAddPhoneBtn()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter un garage">
+                    <i class="fas fa-plus"></i>
+                </i>
+            </label>
+        <div class="input-group mb-3 d-flex justify-content-start" *ngFor="let item of phoneValues; let i = index">
+            <ngx-intl-tel-input  
+                [enablePlaceholder]="true"
+                [enableAutoCountrySelect]="true"
+                [searchCountryFlag]="true"
+                [preferredCountries]="[CountryISO.Tunisia]"
+                [selectedCountryISO]="CountryISO.Tunisia"
+                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
+                [phoneValidation]="true"
+                [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]"
+                name="phone" formControlName="phone">
+            </ngx-intl-tel-input>
+            
+            <button *ngIf="currentPhoneNumber > 2" class=" border px-2"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
+                (click)="onDeletePhoneButton(i)">
+                <i class="fas fa-trash"></i>
+            </button>
+            
+        </div>
+    
+    </div>
+    
+</div>
