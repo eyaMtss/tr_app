@@ -62,6 +62,10 @@ spring:
           uri: http://localhost:5060/
           predicates:
             - Path=/assurance/**
+        - id: GARAGE-SERVICE
+          uri: http://localhost:5061/
+          predicates:
+            - Path=/garage/**
 
 ############# EUREKA ##############
 eureka:

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 public class GarageController {
     @Autowired
     private GarageService garageService;
@@ -25,7 +26,7 @@ public class GarageController {
     }
 
     @GetMapping(value = "/garages/{id}")
-    public GarageResponseDTO afficherUnGarage(@PathVariable int id) throws GarageIntrouvableException {
+    public GarageResponseDTO afficherUnGarage(@PathVariable Long id) throws GarageIntrouvableException {
         GarageResponseDTO garage = garageService.getGarageById(id);
         if(garage==null) throw new GarageIntrouvableException("Le garage avec l'id " + id + " est INTROUVABLE. ");
         return garage;
@@ -35,7 +36,7 @@ public class GarageController {
         garageService.save(garageRequestDTO);
     }
     @DeleteMapping (value = "/DeleteGarage/{id}")
-    public void supprimerUnGarage(@PathVariable int id)
+    public void supprimerUnGarage(@PathVariable Long id)
     {
         garageService.deleteGarage(id);
       //  if(order==null) throw new OrderIntrouvableException("L'ordre avec l'id " + id + " est INTROUVABLE. ");
