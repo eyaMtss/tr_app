@@ -23,8 +23,7 @@ public class AgenceMicroserviceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Agence agence1 = new Agence(1L, 1, "agence 1 AMI", 54689587, "agence1", "agence1@ami.com", null, null, null, 2L);
-		agence1 = agenceRepository.save(agence1);
+		Agence agence = agenceRepository.save(new Agence(1L, 1, "agence 1 AMI", 54689587, "agence1", "agence1@ami.com", null, null, null, 2L));
 	}
 
 	@Bean
