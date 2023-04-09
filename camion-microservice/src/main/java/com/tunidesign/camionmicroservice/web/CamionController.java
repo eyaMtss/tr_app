@@ -9,36 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/camion")
 public class CamionController {
     @Autowired
     private CamionRepository camionRepository;
-    @GetMapping("/Camions")
+    @GetMapping("/getAll")
     public List<Camion> listeCamions()
     {
         return camionRepository.findAll();
     }
 
-    @GetMapping(value = "/Camions/{id}")
+    @GetMapping(value = "/getById/{id}")
     public Camion afficherUnCamion(@PathVariable int id) {
         Camion camion = camionRepository.findById(id);
         if(camion==null) throw new CamionIntrouvableException("Le camion avec l'id " + id + " est INTROUVABLE. ");
         return camion;
     }
 
-    @PostMapping(value = "/AjouterUnCamion")
+    @PostMapping(value = "/add")
     public void passerUnCamion(@RequestBody Camion camion)
     {
         camionRepository.save(camion);
     }
-    @DeleteMapping (value = "/AnnulerUnCamion/{id}")
+    @DeleteMapping (value = "/delete/{id}")
     public void supprimerUnCamion(@PathVariable int id)
     {
          camionRepository.deleteById(id);
       //  if(camion==null) throw new CamionIntrouvableException("Le camion  avec l'id " + id + " est INTROUVABLE. ");
 
     }
-    @PutMapping (value = "/ModifierUnCamion")
+    @PutMapping (value = "/update")
     public void modiferUnCamion(@RequestBody Camion camion)
     {
     	camionRepository.save(camion);

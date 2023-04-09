@@ -1,19 +1,19 @@
 package com.tunidesign.camionmicroservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+@Document(collation = "camion")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Camion {
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id; 
 	private String matricule ;
 
@@ -29,45 +29,4 @@ public class Camion {
 	private String modele ;
 	private int charge ;
 	private int poids ;
-	public Camion() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-
-public int getId() {
-	return id;
-}
-public void setId(int id) {
-	this.id = id;
-}
-public String getMatricule() {
-	return matricule;
-}
-public void setMatricule(String matricule) {
-	this.matricule = matricule;
-}
-public String getModele() {
-	return modele;
-}
-public void setModele(String modele) {
-	this.modele = modele;
-}
-public int getCharge() {
-	return charge;
-}
-public void setCharge(int charge) {
-	this.charge = charge;
-}
-public int getPoids() {
-	return poids;
-}
-public void setPoids(int poids) {
-	this.poids = poids;
-}
-@Override
-public String toString() {
-	return "camion [id=" + id + ", matricule=" + matricule + ", modele=" + modele + ", charge=" + charge + ", poids="
-			+ poids + "]";
-}
-
 }
