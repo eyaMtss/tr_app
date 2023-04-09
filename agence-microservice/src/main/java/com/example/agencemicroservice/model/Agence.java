@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class Agence {
     @Id
-    private int id;
+    private Long id;
     private int numero ;
     private String nom ;
     private int telephone ;

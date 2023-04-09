@@ -13,35 +13,32 @@ import java.util.List;
 public class AgenceServiceImpl implements AgenceService {
     @Autowired
     private AgenceRepository agenceRepository;
-    private AgenceMapper orderMapper;
+    @Autowired
+    private AgenceMapper agenceMapper;
 
     @Override
-    public List<AgenceResponseDTO> getOrder() {
-        return null;
+    public List<AgenceResponseDTO> getAgences() {
+        return agenceRepository.findAll().stream().map(agence -> agenceMapper.agenceToAgenceDTO(agence)).toList();
     }
 
     @Override
-    public AgenceResponseDTO getOrder(String id) {
-        return null;
+    public AgenceResponseDTO getAgence(Long id) {
+        return agenceMapper.agenceToAgenceDTO(agenceRepository.findById(id).get());
     }
 
     @Override
     public AgenceResponseDTO save(AgenceRequestDTO agenceRequestDTO) {
-        return null;
+        return agenceMapper.agenceToAgenceDTO(agenceRepository.save(agenceMapper.agenceRequestDTOToAgence(agenceRequestDTO)));
     }
 
     @Override
-    public void deleteOrder(String id) {
-
+    public void deleteAgence(Long id) {
+        agenceRepository.deleteById(id);
     }
 
     @Override
     public AgenceResponseDTO update(AgenceRequestDTO agenceRequestDTO) {
-        return null;
+        return agenceMapper.agenceToAgenceDTO(agenceRepository.save(agenceMapper.agenceRequestDTOToAgence(agenceRequestDTO)));
     }
 
-    @Override
-    public List<AgenceResponseDTO> getAgenceByPostId(String id) {
-        return null;
-    }
 }

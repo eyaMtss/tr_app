@@ -12,7 +12,7 @@ public class AgenceMapperImpl implements AgenceMapper {
         return null;
     }
     @Override
-    public Agence AgenceRequestDTOToAgence(AgenceRequestDTO agenceRequestDTO) {
+    public Agence agenceRequestDTOToAgence(AgenceRequestDTO agenceRequestDTO) {
         return null;
     }
 
