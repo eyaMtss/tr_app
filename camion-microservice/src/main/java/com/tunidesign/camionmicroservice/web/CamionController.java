@@ -35,8 +35,6 @@ public class CamionController {
     public void supprimerUnCamion(@PathVariable int id)
     {
          camionRepository.deleteById(id);
-      //  if(camion==null) throw new CamionIntrouvableException("Le camion  avec l'id " + id + " est INTROUVABLE. ");
-
     }
     @PutMapping (value = "/update")
     public void modiferUnCamion(@RequestBody Camion camion)
