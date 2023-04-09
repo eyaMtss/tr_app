@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Re
 public class FactureController {
     @Autowired
     private FactureRepository factureRepository;

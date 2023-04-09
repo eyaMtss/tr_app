@@ -1,21 +1,19 @@
 package com.tunidesign.facturemicroservice.model;
 
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
-@Document(collection = "facture")
+@Document(collection = "database_sequences")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Facture {
+public class DatabaseSequence {
     @Id
-    private int id;
-    private long numero;
-    private Date date;
-    private Float prix;
+    private String id;
+
+    private long seq;
+
 }
