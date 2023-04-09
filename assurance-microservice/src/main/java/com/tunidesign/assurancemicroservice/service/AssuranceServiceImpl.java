@@ -35,7 +35,7 @@ public class AssuranceServiceImpl implements AssuranceService {
 
     @Override
     public void deleteAssurance(Long id) {
-
+        assuranceRepository.deleteById(id);
     }
 
     @Override
