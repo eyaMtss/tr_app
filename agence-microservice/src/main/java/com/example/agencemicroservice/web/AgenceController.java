@@ -1,47 +1,46 @@
 package com.example.agencemicroservice.web;
 
+import com.example.agencemicroservice.DTO.AgenceRequestDTO;
+import com.example.agencemicroservice.DTO.AgenceResponseDTO;
 import com.example.agencemicroservice.exceptions.AgenceIntrouvableException;
-import com.example.agencemicroservice.model.Agence;
-import com.example.agencemicroservice.repository.AgenceRepository;
+import com.example.agencemicroservice.mapper.AgenceMapperImpl;
+import com.example.agencemicroservice.service.AgenceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/agence")
 public class AgenceController {
     @Autowired
-    private AgenceRepository agenceRepository;
-    @GetMapping("/Agences")
-    public List<Agence> listeAgences()
-    {
-        return agenceRepository.findAll();
+    private AgenceServiceImpl agenceService;
+    @GetMapping("/getAll")
+    public List<AgenceResponseDTO> listeAgences() {
+        return agenceService.getAgences();
     }
 
-    @GetMapping(value = "/Agences/{id}")
-    public Agence afficherUneAgence(@PathVariable int id) {
-        Agence agence = agenceRepository.findById(id);
+    @GetMapping(value = "/getById/{id}")
+    public AgenceResponseDTO afficherUneAgence(@PathVariable Long id) {
+        AgenceResponseDTO agence = agenceService.getAgence(id);
         if(agence==null) throw new AgenceIntrouvableException("L'agence' avec l'id " + id + " est INTROUVABLE. ");
         return agence;
     }
 
-    @PostMapping(value = "/Agences/AjouterUneAgence")
-    public void ajouterUneAgence(@RequestBody Agence agence)
-    {
-        agenceRepository.save(agence);
+    @PostMapping(value = "/add")
+    public AgenceResponseDTO ajouterUneAgence(@RequestBody AgenceRequestDTO agence) {
+        return agenceService.save(agence);
     }
-    @DeleteMapping (value = "/Agences/SupprimerUneAgence/{id}")
-    public void supprimerUneAgence(@PathVariable int id)
-    {
-        Agence agence = agenceRepository.deleteById(id);
-        if(agence==null) throw new AgenceIntrouvableException("L'agence avec l'id " + id + " est INTROUVABLE. ");
+    @DeleteMapping (value = "/delete/{id}")
+    public void supprimerUneAgence(@PathVariable Long id) {
+        agenceService.deleteAgence(id);
 
     }
-    @PutMapping (value = "/Agences/ModifierUneAgence")
-    public void modiferUneAgence (@RequestBody Agence agence)
+    @PutMapping (value = "/update")
+    public AgenceResponseDTO modiferUneAgence (@RequestBody AgenceRequestDTO agenceRequestDTO)
     {
-        agenceRepository.save(agence);
+        AgenceResponseDTO agence = agenceService.update(agenceRequestDTO);
         if(agence==null) throw new AgenceIntrouvableException("Cette agence est INTROUVABLE. ");
-
+        else return agence;
     }
 }

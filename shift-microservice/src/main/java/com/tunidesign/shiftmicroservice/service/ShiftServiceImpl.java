@@ -24,8 +24,8 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public ShiftResponseDTO getShiftById(int id) {
-        return shiftMapper.shiftToShiftResponseDTO(shiftRepository.findById(id));
+    public ShiftResponseDTO getShiftById(Long id) {
+        return shiftMapper.shiftToShiftResponseDTO(shiftRepository.findById(id).get());
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Override
-    public void deleteShift(int id) {
+    public void deleteShift(Long id) {
         shiftRepository.deleteById(id);
 
     }

@@ -12,31 +12,31 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/ordre")
 public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
-    @GetMapping("/Ordres")
+    @GetMapping("/getAll")
     public List<OrderResponseDTO> listeOrdres() {
         return orderService.getOrders();
     }
-    @GetMapping(value = "/Ordres/{id}")
-    public OrderResponseDTO afficherUnOrder(@PathVariable int id) {
+    @GetMapping(value = "/getById/{id}")
+    public OrderResponseDTO afficherUnOrder(@PathVariable Long id) {
         OrderResponseDTO order = orderService.getOrderById(id);
         if(order==null) throw new OrderIntrouvableException("L'ordre avec l'id " + id + " est INTROUVABLE. ");
         return order;
     }
-    @PostMapping(value = "/PasserUnOrdre")
+    @PostMapping(value = "/add")
     public OrderResponseDTO passerUnOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
        return  orderService.save(orderRequestDTO);
     }
-    @DeleteMapping (value = "/AnnulerUnOrdre/{id}")
-    public void supprimerUnOrder(@PathVariable int id)
+    @DeleteMapping (value = "/delete/{id}")
+    public void supprimerUnOrder(@PathVariable Long id)
     {
         orderService.deleteOrder(id);
         //if(order==null) throw new OrderIntrouvableException("L'ordre avec l'id " + id + " est INTROUVABLE. ");
     }
-    @PutMapping (value = "/ModifierUnOrdre")
+    @PutMapping (value = "/update")
     public OrderResponseDTO modiferUnOrder(@RequestBody OrderRequestDTO orderRequestDTO)
     {
         OrderResponseDTO order = orderService.save(orderRequestDTO);
@@ -44,8 +44,8 @@ public class OrderController {
         return order;
     }
 
-    @PutMapping (value = "/update")
-    public OrderResponseDTO ajouterPhotos( @RequestParam MultipartFile img1,@RequestParam MultipartFile img2,@RequestParam MultipartFile img3, int id) throws IOException {
+    @PutMapping (value = "/uploadPhoto")
+    public OrderResponseDTO ajouterPhotos( @RequestParam MultipartFile img1,@RequestParam MultipartFile img2,@RequestParam MultipartFile img3, Long id) throws IOException {
         OrderResponseDTO order = orderService.updatePhotos(img1,img2,img3,id);
         if(order==null) throw new OrderIntrouvableException("Cet ordre est INTROUVABLE. ");
         return order;

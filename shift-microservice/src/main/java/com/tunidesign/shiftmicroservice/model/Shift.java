@@ -5,20 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalTime;
 import java.util.Date;
 
 @Data
 @Builder
-@Entity
-@Table
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "shift")
 public class Shift {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private Long id;
 
      private Date date ;
 

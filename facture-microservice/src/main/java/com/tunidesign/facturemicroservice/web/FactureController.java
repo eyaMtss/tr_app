@@ -9,35 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/facture")
 public class FactureController {
     @Autowired
     private FactureRepository factureRepository;
-    @GetMapping("/Factures")
+    @GetMapping("/getAll")
     public List<Facture> listeFactures()
     {
         return factureRepository.findAll();
     }
 
-    @GetMapping(value = "/Factures/{id}")
+    @GetMapping(value = "/getById/{id}")
     public Facture afficherUneFacture(@PathVariable int id) {
         Facture facture = factureRepository.findById(id);
         if(facture==null) throw new FactureIntrouvableException("La facture avec l'id " + id + " est INTROUVABLE. ");
         return facture;
     }
 
-    @PostMapping(value = "/Factures/AjouterUneFcature")
+    @PostMapping(value = "/add")
     public void ajouterUneFacture(@RequestBody Facture facture)
     {
         factureRepository.save(facture);
     }
-    @DeleteMapping (value = "/Factures/SupprimerUnefacture/{id}")
+    @DeleteMapping (value = "/delete/{id}")
     public void supprimerUnefacture(@PathVariable int id)
     {
         Facture facture = factureRepository.deleteById(id);
         if(facture==null) throw new FactureIntrouvableException("La facture avec l'id " + id + " est INTROUVABLE. ");
 
     }
-    @PutMapping (value = "/Factures/ModifierUneFacture")
+    @PutMapping (value = "/update")
     public void modiferUneFacture (@RequestBody Facture facture)
     {
         factureRepository.save(facture);

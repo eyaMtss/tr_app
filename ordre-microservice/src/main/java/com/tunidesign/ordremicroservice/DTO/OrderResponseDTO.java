@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class OrderResponseDTO {
-    private int id;
+    private Long id;
     @Max(value = 8)
     private int people;
     //@Max(8)

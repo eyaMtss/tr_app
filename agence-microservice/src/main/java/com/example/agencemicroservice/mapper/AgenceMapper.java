@@ -5,5 +5,5 @@ import com.example.agencemicroservice.DTO.AgenceResponseDTO;
 import com.example.agencemicroservice.model.Agence;
 public interface AgenceMapper {
     AgenceResponseDTO agenceToAgenceDTO(Agence agence);
-    Agence AgenceRequestDTOToAgence(AgenceRequestDTO agenceRequestDTO);
+    Agence agenceRequestDTOToAgence(AgenceRequestDTO agenceRequestDTO);
 }

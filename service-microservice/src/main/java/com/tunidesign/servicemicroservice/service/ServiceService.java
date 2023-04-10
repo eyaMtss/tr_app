@@ -9,9 +9,8 @@ import java.util.List;
 public interface ServiceService {
 
         List<ServiceResponseDTO> getService();
-        ServiceResponseDTO getService(String id);
+        ServiceResponseDTO getService(Long id);
         ServiceResponseDTO save(ServiceRequestDTO serviceRequestDTO);
-        void deleteService( String id);
+        void deleteService(Long id);
         ServiceResponseDTO update(ServiceRequestDTO serviceRequestDTO);
-        List<ServiceResponseDTO> getServiceByPostId(String id);
 }

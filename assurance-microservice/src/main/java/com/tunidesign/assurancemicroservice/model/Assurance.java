@@ -6,16 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
 @Builder
+@Document(collection = "assurance")
 public class Assurance {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String name;
     private String adresse;
