@@ -16,8 +16,20 @@ export class UserService {
     return this.httpClient.post<User>(this._URL + "add", user);
   }
 
-  completeRegistration(user: UpdatedUser): Observable<User>{
-    return this.httpClient.put<User>(this._URL + "completeRegistration/", user);
+  completeRegistration(formData: FormData, username: string, country: string, governorate: string,
+    city: string, zipCode: number, matriculeFiscale: string, cin: number): Observable<User>{
+    /*const boundary = Math.random().toString().substr(2);
+    formData.set('Content-Type', `multipart/form-data; boundary=${boundary}`);
+
+    console.log(formData.get('imageFile'));
+    console.log(formData.get('username'));
+    const headers = new HttpHeaders({
+      'Content-Type': `multipart/form-data; boundary=${boundary}`,
+    });
+    const options = { headers, withCredentials: true };*/
+    
+    return this.httpClient.put<User>(this._URL + "completeRegistration/" + username + "/" + country + "/" + 
+    governorate + "/" + city + "/" + zipCode + "/" + matriculeFiscale + "/" + cin, formData);
   }
   
   getAll(): Observable<User[]> {
