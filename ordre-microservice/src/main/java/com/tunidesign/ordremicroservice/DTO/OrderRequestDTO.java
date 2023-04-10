@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class OrderRequestDTO {
-        private int id;
+        private Long id;
         @Max(value=8)
         private int people;
         //@Max(8)
