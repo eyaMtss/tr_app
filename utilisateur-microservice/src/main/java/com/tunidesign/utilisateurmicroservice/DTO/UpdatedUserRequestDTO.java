@@ -14,6 +14,6 @@ public class UpdatedUserRequestDTO {
     private String governorate;
     private String city;
     private Integer zipCode;
-    private Integer homeCode;
     private String matriculeFiscale;
+    private Integer cin;
 }

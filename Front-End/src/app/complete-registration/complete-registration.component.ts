@@ -86,26 +86,50 @@ export class CompleteRegistrationComponent implements OnInit {
   onConfirm() {
     this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
     this.user.cin = this.completedRegistrationForm.controls['cin'].value;
-  
-    console.log(this.user)
-    this.userService.completeRegistration(this.user).subscribe(data => {
+    this.navigate();
+    /*const formData = new FormData();
+
+    if (this.completedRegistrationForm.controls['img'].value != undefined) { // if we change the image
+   
+      formData.append('imageFile', this.completedRegistrationForm.controls['img'].value);
+      //uploadImageData.append('profileId', (this.profile.profileId).toString());
+    }
+    else {
+      formData.append('imageFile', "");
+    }*/
+
+    //formData.append('userAddress', JSON.stringify(this.user));
+
+    /*this.userService.completeRegistration(formData, this.currentUsername, this.user.country, 
+      this.user.governorate, this.user.city, this.user.zipCode, this.user.matriculeFiscale, this.user.cin).
+      subscribe(data => {
       //this.setTokenRegistration();
-      this.onUpload(data.userId);
-      /*if (this.currentRole == "CLIENT"){
+      //this.onUpload(data.userId);
+      if (this.currentRole == "CLIENT"){
         this.vehicleValues.forEach(vehicle => {
           this.vehicleService.create(vehicle).subscribe(data => {
             console.log(data);
           })
         });
         this.navigate();
-      }*/
+      }
       console.log(data);
-    })
+      
+    })*/
     
   }
 
   navigate() {
-    this.router.navigate(["/tunidesign"]); //path : registrationGUARD
+    //this.router.navigate(["/tunidesign"]); //path : registrationGUARD
+
+    let role = this.currentRole;
+    if(role == "CLIENT") this.router.navigate(["/client"]);
+    else if(role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
+    else if(role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
+    else if(role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+    else if(role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else if(role == "DRIVER") this.router.navigate(['camion-login']);
+    else this.router.navigate(["/order"]);
   }
 
   setTokenRegistration(): void {
@@ -113,13 +137,13 @@ export class CompleteRegistrationComponent implements OnInit {
     const userDetails = this.authService.getUserDetails();
     console.log(userDetails);
     if (userDetails) {
-      userDetails['completed_registration'] = 'true';
+      userDetails['completed_registration'] = '1';
       this.keycloakService.updateToken(5).then(() => {
         console.log('User details updated with completed_registration attribute');
         console.log(userDetails.completed_registration)
       });
     }
-    console.log(this.keycloakService.getToken());
+    console.log(userDetails);
   }
 
   // Image
