@@ -26,7 +26,7 @@ public class ShiftController {
     }
 
     @GetMapping(value = "/shifts/{id}")
-    public ShiftResponseDTO afficherUnShift(@PathVariable int id) throws ShiftIntrouvableException {
+    public ShiftResponseDTO afficherUnShift(@PathVariable Long id) throws ShiftIntrouvableException {
         ShiftResponseDTO shift = shiftService.getShiftById(id);
         if(shift==null) throw new ShiftIntrouvableException("Le shift avec l'id " + id + " est INTROUVABLE. ");
         return shift;
@@ -36,7 +36,7 @@ public class ShiftController {
         shiftService.save(shiftRequestDTO);
     }
     @DeleteMapping (value = "/DeleteShift/{id}")
-    public void supprimerUnShift(@PathVariable int id)
+    public void supprimerUnShift(@PathVariable Long id)
     {
         shiftService.deleteShift(id);
     }

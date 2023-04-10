@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ShiftService {
     List<ShiftResponseDTO> getShifts();
-    ShiftResponseDTO getShiftById(int id);
+    ShiftResponseDTO getShiftById(Long id);
     ShiftResponseDTO save(ShiftRequestDTO shiftRequestDTO);
-    void deleteShift(int id);
+    void deleteShift(Long id);
     ShiftResponseDTO update(ShiftRequestDTO shiftRequestDTO);
 }
