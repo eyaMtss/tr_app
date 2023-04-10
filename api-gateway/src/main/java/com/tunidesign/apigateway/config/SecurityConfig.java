@@ -69,7 +69,7 @@ public class SecurityConfig {
                     .pathMatchers("/actuator/**","/logout.html", "/login",
                             "/societeRemorquage/getAll", "/assurance/getAll",
                             "/users/add",
-                            "/users/getAll/clients")
+                            "/users/getAll/clients", "/users/completeRegistration/**")
                         .permitAll()
                     .anyExchange().authenticated()
                 .and()
@@ -95,7 +95,7 @@ public class SecurityConfig {
                 .clientId("tunidesign-user")
                 .clientName("tunidesign-user")
                 .clientSecret("KjGdYhrCW5RLqv7JKRg62BUZs5AMh098")
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.JWT_BEARER) //AUTHORIZATION_CODE
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
                 .scope("openid", "profile", "email", "roles")  //
                 .issuerUri("http://localhost:8080/realms/tunidesign-auth")
@@ -105,6 +105,7 @@ public class SecurityConfig {
                 .jwkSetUri("http://localhost:8080/realms/tunidesign-auth/protocol/openid-connect/certs")
                 .userNameAttributeName("preferred_username")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+
                 .build();
     }
 }
