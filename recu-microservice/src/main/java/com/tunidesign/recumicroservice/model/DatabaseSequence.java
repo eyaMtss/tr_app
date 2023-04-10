@@ -1,21 +1,19 @@
 package com.tunidesign.recumicroservice.model;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "database_sequences")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Document(collection = "recu")
-public class Recu {
+public class DatabaseSequence {
     @Id
-    private Long id ;
-    private String id_services ;
-    private Float prix_total;
+    private String id;
+
+    private long seq;
 
 }
-

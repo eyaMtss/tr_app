@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 public class RecuResponseDTO {
     @Id
-    private int id ;
+    private Long id ;
     private String id_services ;
     private Float prix_total;
 }
