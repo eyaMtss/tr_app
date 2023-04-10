@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ServiceResponseDTO {
     @Id
-    private int id;
+    private Long id;
     private String nom ;
     private Float prix ;
 }

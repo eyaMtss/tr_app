@@ -1,21 +1,19 @@
 package com.tunidesign.servicemicroservice.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "database_sequences")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Document(collection = "service")
-public class Service {
+public class DatabaseSequence {
     @Id
-    private int id;
-    private String nom ;
-    private Float prix ;
+    private String id;
+
+    private long seq;
 
 }
