@@ -2,7 +2,9 @@ package com.tunidesign.vehiculemicroservice.model.entity;
 
 import com.tunidesign.vehiculemicroservice.model.ennumeration.Couleur;
 import com.tunidesign.vehiculemicroservice.model.ennumeration.Marque;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import org.springframework.data.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
