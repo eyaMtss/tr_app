@@ -17,8 +17,8 @@ public class ServiceController {
     }
 
     @GetMapping(value = "/Services/{id}")
-    public Service afficherUnService(@PathVariable int id) {
-        return  serviceRepository.findById(id);
+    public Service afficherUnService(@PathVariable Long id) {
+        return  serviceRepository.findById(id).get();
         //if(service==null) throw new ServiceIntrouvableException("Le service avec l'id " + id + " est INTROUVABLE. ");
        // return service;
     }
@@ -29,7 +29,7 @@ public class ServiceController {
         serviceRepository.save(service);
     }
     @DeleteMapping (value = "/Services/SupprimerUnService/{id}")
-    public void supprimerUnService(@PathVariable int id)
+    public void supprimerUnService(@PathVariable Long id)
     {
         serviceRepository.deleteById(id);
         // if(facture==null) throw new FactureIntrouvableException("La facture avec l'id " + id + " est INTROUVABLE. ");
