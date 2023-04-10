@@ -1,1 +1,43 @@
-<p>add-office works!</p>
+<form [formGroup]="officeForm" (change)="onFormChange()">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <label for="name">Nom du bureau</label>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Nom du lavage" id="name" type="text" formControlName="name"
+                    [ngClass]="{
+                        'is-invalid':
+                            officeForm.get('name')!.touched &&
+                            officeForm.controls['name'].errors
+                    }" />
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="email">Email</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text d-flex justify-content-center"><i class="fas fa-envelope"></i></span>
+                <input class="form-control" placeholder="email" id="email" type="text" formControlName="email"
+                    [ngClass]="{
+                                'is-invalid':
+                                    officeForm.get('email')!.touched &&
+                                    officeForm.controls['email'].errors
+                            }" />
+            </div>
+            <div *ngIf="officeForm.get('email')!.touched
+                            && officeForm.get('email')?.hasError('email')" class="invalid-feedback">
+                <p style="color: red;">Tapez une adresse email valide</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <app-phone (phoneEvent)="getPhone($event)"></app-phone>
+        </div>
+
+        <div class="col-12">
+            <app-address-map (addressMapEvent)="getAddressMap($event)"></app-address-map>
+         </div>
+        <div class="col-12">
+            <hr>
+        </div>
+    </div>
+</form>

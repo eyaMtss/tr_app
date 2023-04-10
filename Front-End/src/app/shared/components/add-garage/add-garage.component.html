@@ -56,40 +56,11 @@
         </div>
 
         <div class="col-12 col-md-4">
-            <label for="phone">Téléphone</label>
-            <div class="input-group mb-3">
-                <ngx-intl-tel-input  
-                    [enablePlaceholder]="true"
-                    [enableAutoCountrySelect]="true"
-                    [searchCountryFlag]="true"
-                    [preferredCountries]="[CountryISO.Tunisia]"
-                    [selectedCountryISO]="CountryISO.Tunisia"
-                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
-                    [phoneValidation]="true"
-                    [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]"
-                    name="phone" formControlName="phone">
-                </ngx-intl-tel-input>
-            </div>
+            <app-phone (phoneEvent)="getPhone($event)"></app-phone>
         </div>
-
-        <div class="col-12 col-md-4">
-            <label for="address">Address</label>
-            <div class="input-group mb-3">
-                <input class="form-control" placeholder="Address" id="address" type="text"
-                    formControlName="address" [ngClass]="{
-                        'is-invalid':
-                            garageForm.get('address')!.touched &&
-                            garageForm.controls['address'].errors
-                    }" />
-            </div>
-        </div>
-
+        
         <div class="col-12">
-            <input #mapSearchField class="my-map-search-field" type="text">
-            <google-map
-            [zoom]="zoom"
-  [center]="center"
-  [options]="options"></google-map>
+           <app-address-map (addressMapEvent)="getAddressMap($event)"></app-address-map>
         </div>
         <div class="col-12">
             <hr>
