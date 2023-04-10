@@ -14,6 +14,8 @@ import { AddOfficeComponent } from './components/add-office/add-office.component
 import { ContactSectionComponent } from './components/contact-section/contact-section.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { AddressMapComponent } from './components/address-map/address-map.component';
+import { PhoneComponent } from './components/phone/phone.component';
 @NgModule({
   declarations: [
     AddGarageComponent,
@@ -24,7 +26,9 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     NavbarComponent,
     UploadFileComponent,
     AddOfficeComponent,
-    ContactSectionComponent
+    ContactSectionComponent,
+    AddressMapComponent,
+    PhoneComponent
   ],
   imports: [
     CommonModule,

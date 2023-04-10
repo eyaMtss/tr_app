@@ -16,6 +16,35 @@
             <div class="col-12">
                 <hr>
             </div>
+            
+            <div class="col-12"><h4>Informations</h4></div>
+            <div *ngIf="currentRole != 'CLIENT'" class="col-12 col-md-4">
+                <label for="matriculeFiscale">Matricule fiscale</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Matricule fiscale" id="matriculeFiscale" 
+                    type="text" (change)="onMatriculeFiscaleChange()" formControlName="matriculeFiscale" [ngClass]="{
+                        'is-invalid':
+                            completedRegistrationForm.get('matriculeFiscale')!.touched &&
+                            completedRegistrationForm.controls['matriculeFiscale'].errors
+                    }"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <label for="cin">CIN</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" placeholder="Numéro de CIN" id="cin" 
+                    type="text" formControlName="cin" [ngClass]="{
+                        'is-invalid':
+                            completedRegistrationForm.get('cin')!.touched &&
+                            completedRegistrationForm.controls['cin'].errors
+                    }"/>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <hr />
+            </div>
+
             <div *ngIf="currentRole == 'CLIENT'" class="col-12">
                 <div *ngFor="let item of vehicleValues; let i = index" class="d-flex flex-column ">
                     <div class="d-flex justify-content-between mt-2">
@@ -34,22 +63,6 @@
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
-            </div>
-            <div *ngIf="currentRole != 'CLIENT'" class="col-12"><h4>Informations</h4></div>
-            <div *ngIf="currentRole != 'CLIENT'" class="col-12 col-md-4">
-                <label for="matriculeFiscale">Matricule fiscale</label>
-                <div class="input-group mb-3">
-                    <input class="form-control" placeholder="Matricule fiscale" id="matriculeFiscale" 
-                    type="text" (change)="onMatriculeFiscaleChange()" formControlName="matriculeFiscale" [ngClass]="{
-                        'is-invalid':
-                            completedRegistrationForm.get('matriculeFiscale')!.touched &&
-                            completedRegistrationForm.controls['matriculeFiscale'].errors
-                    }"/>
-                </div>
-            </div>
-            
-            <div class="col-12">
-                <hr />
             </div>
 
             <div *ngIf="currentRole == 'GARAGISTE_ADMIN'" class="col-12">
@@ -91,6 +104,26 @@
                     </button>
                 </div>
             </div>
+
+            <!--div *ngIf="currentRole == 'EXPERT'" class="col-12">
+                <div *ngFor="let office of officeValues; let i = index" class="d-flex flex-column ">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h4>Bureau {{i+1}}</h4>
+                        <button *ngIf="currentOfficeNumber > 2" class="btn border add-delete-btn shadow"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
+                            (click)="onDeleteOfficeButton(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <app-add-office (officeFormEvent)="getOfficeForm($event, i)"></app-add-office>
+                </div>
+                <div class="d-flex justify-content-center my-2">
+                    <button class="btn border add-delete-btn shadow" (click)="onAddOfficeBtn()"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter un office">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </!div-->
 
             <div class="col-12 d-flex justify-content-end mb-3">
                 <button class="btn confirm_btn" (click)="onConfirm()">Confirmer</button>

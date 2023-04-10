@@ -3,7 +3,7 @@ import { KeycloakLoginOptions } from 'keycloak-js';
 import { FormGroup } from '@angular/forms';
 import { UserService } from '../services/api/user.service';
 import { AuthService } from '../services/auth/auth.service';
-import { User } from '../models/user';
+import { User } from '../models/user/user';
 
 @Component({
   selector: 'app-signup',
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
       this.user.gender = this.informationsForm.controls['gender'].value;
       this.company = this.informationsForm.controls['company'].value;
       console.log(this.user.countryCode)
-      if (this.currentRole == "CLIENT" || this.currentRole == "GARAGISTE" || this.currentRole == "LAVAGISTE" ||
+      if (this.currentRole == "CLIENT" || this.currentRole == "GARAGISTE_ADMIN" || this.currentRole == "LAVAGISTE_ADMIN" ||
       this.currentRole == "EXPERT") { 
         this.user.username = this.informationsForm.controls['username'].value;
       }

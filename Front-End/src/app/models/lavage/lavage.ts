@@ -2,7 +2,7 @@ export class Lavage {
     name!: string;
     capacity!: number;
     currentNbVehicle!: number;
-    lavageOwner!: number;
+    lavageOwner!: string;
     email!: string;
     phone!: number;
     address!: string;

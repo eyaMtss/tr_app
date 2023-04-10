@@ -4,11 +4,12 @@ export class UpdatedUser {
     governorate!: string;
     city!: string;
     zipCode!: string;
-    matriculeFiscale!: string;
+    matriculeFiscale: string = "";
+    cin!: number;
 
     public constructor();
     public constructor(username: string, country: string, governorate: string, city: string, zipCode: number,
-        matriculeFiscale: string);
+        matriculeFiscale: string, cin: number);
     public constructor(...myarray: any[]){
         this.username = myarray[0];
         this.country = myarray[1];
@@ -16,5 +17,6 @@ export class UpdatedUser {
         this.city = myarray[3];
         this.zipCode = myarray[4];
         this.matriculeFiscale = myarray[5];
+        this.cin = myarray[6];
     }
 }

@@ -3,11 +3,13 @@ import { KeycloakService } from 'keycloak-angular';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/api/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Vehicle } from '../models/vehicle';
+import { Vehicle } from '../models/vehicle/vehicle';
 import { Router } from '@angular/router';
-import { UpdatedUser } from '../models/updated-user';
-import { Garage } from '../models/garage';
-import { Lavage } from '../models/lavage';
+import { UpdatedUser } from '../models/user/updated-user';
+import { Garage } from '../models/garage/garage';
+import { Lavage } from '../models/lavage/lavage';
+import { Office } from '../models/office/office';
+import { VehicleService } from '../services/api/vehicle.service';
 
 @Component({
   selector: 'app-complete-registration',
@@ -37,13 +39,18 @@ export class CompleteRegistrationComponent implements OnInit {
   maxLavageNumber: number = 5; // 
   currentLavageNumber: number = 1; // user must have at least 1 lavage
   lavageValues: Lavage[] = []; //user can have several vehicules, we put them in a list: vehicleValues
+  // office
+  maxOfficeNumber: number = 5; // 
+  currentOfficeNumber: number = 1; // user must have at least 1 office
+  officeValues: Office[] = []; //user can have several vehicules, we put them in a list: vehicleValues
 
   matriculeFiscaleValue!: string; // ngModel
   constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
-    private fb: FormBuilder, private router: Router) {
+    private fb: FormBuilder, private router: Router, private vehicleService: VehicleService) {
     this.completedRegistrationForm = this.fb.group({
       img: [''],
-      matriculeFiscale: ['', Validators.required]
+      matriculeFiscale: ['', Validators.required],
+      cin: ['', Validators.required]
     })
   }
   ngOnInit(): void {
@@ -70,16 +77,31 @@ export class CompleteRegistrationComponent implements OnInit {
       this.onAddLavageBtn()
       //by default, there is only one input of lavageValues
     }
+    else if (this.currentRole == "EXPERT") {
+      this.onAddOfficeBtn()
+      //by default, there is only one input of officeValues
+    }
   }
 
   onConfirm() {
-
-    // save user's registration data && mark registration as complete(completed_registration attribute)
+    this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
+    this.user.cin = this.completedRegistrationForm.controls['cin'].value;
+  
+    console.log(this.user)
     this.userService.completeRegistration(this.user).subscribe(data => {
-      this.setTokenRegistration();
+      //this.setTokenRegistration();
+      this.onUpload(data.userId);
+      /*if (this.currentRole == "CLIENT"){
+        this.vehicleValues.forEach(vehicle => {
+          this.vehicleService.create(vehicle).subscribe(data => {
+            console.log(data);
+          })
+        });
+        this.navigate();
+      }*/
       console.log(data);
     })
-    this.navigate();
+    
   }
 
   navigate() {
@@ -97,6 +119,7 @@ export class CompleteRegistrationComponent implements OnInit {
         console.log(userDetails.completed_registration)
       });
     }
+    console.log(this.keycloakService.getToken());
   }
 
   // Image
@@ -107,7 +130,8 @@ export class CompleteRegistrationComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedUserImage);
     reader.onload = (_event) => {
-      this.viewedImage = reader.result;
+      this.temporaryRetrievedImage = reader.result;
+      this.viewedImage = this.temporaryRetrievedImage;
     }
     this.completedRegistrationForm.controls['img'].setValue(this.selectedUserImage);
   }
@@ -121,6 +145,7 @@ export class CompleteRegistrationComponent implements OnInit {
       //uploadImageData.append('profileId', (this.profile.profileId).toString());
       this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
         this.viewedImage = this.temporaryRetrievedImage; // view the new image
+        console.log(response);
       });
     }
   }
@@ -160,6 +185,14 @@ export class CompleteRegistrationComponent implements OnInit {
     }
   }
 
+  onAddOfficeBtn() {
+    if (this.officeValues.length < this.maxOfficeNumber) {
+      this.officeValues.push(new Office());
+      this.currentOfficeNumber += 1;
+      console.log(this.officeValues);
+    }
+  }
+
   onDeleteVehicleButton(i: any): void {  //delete the i input field for vehiculesValues list
     if (this.vehicleValues.length == 1)   //always keep a field
       this.vehicleValues[i] = new Vehicle()
@@ -187,6 +220,15 @@ export class CompleteRegistrationComponent implements OnInit {
     }
   }
 
+  onDeleteOfficeButton(i: any): void {  //delete the i input field for officeValues list
+    if (this.officeValues.length == 1)   //always keep a field
+      this.officeValues[i] = new Office()
+    else {
+      this.officeValues.splice(i, 1);
+      this.currentOfficeNumber -= 1;
+    }
+  }
+
 
   getVehicleForm(vehicleForm: FormGroup, index: number) {
     console.log(index);
@@ -194,14 +236,27 @@ export class CompleteRegistrationComponent implements OnInit {
     this.vehicleValues[index].typeImmat = vehicleForm.controls['registrationType'].value;
     this.vehicleValues[index].numImmat = vehicleForm.controls['registrationNumber'].value;
     this.vehicleValues[index].confirmNumImmat = vehicleForm.controls['confirmRegistrationNumber'].value;
-    this.vehicleValues[index].marque = vehicleForm.controls['brand'].value;
     this.vehicleValues[index].numChassis = vehicleForm.controls['chassisNumber'].value;
-    this.vehicleValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
-    this.vehicleValues[index].couleur = vehicleForm.controls['color'].value;
-    this.vehicleValues[index].kilometrage = vehicleForm.controls['kilometrage'].value;
+    this.vehicleValues[index].marque = vehicleForm.controls['brand'].value;
+    this.vehicleValues[index].modele = vehicleForm.controls['model'].value;
+    this.vehicleValues[index].annee = vehicleForm.controls['year'].value;
+    this.vehicleValues[index].etatVehicule = vehicleForm.controls['vehicleCondition'].value;
+    this.vehicleValues[index].boite = vehicleForm.controls['boite'].value;
+    this.vehicleValues[index].cylindree = vehicleForm.controls['cylindree'].value;
+    this.vehicleValues[index].carburant = vehicleForm.controls['carburant'].value;
+    this.vehicleValues[index].typeCarrosserie = vehicleForm.controls['brand'].value;
     this.vehicleValues[index].puissance = vehicleForm.controls['power'].value;
+    this.vehicleValues[index].kilometrage = vehicleForm.controls['kilometrage'].value;
     this.vehicleValues[index].nbPortes = vehicleForm.controls['doorsNumber'].value;
-    this.vehicleValues[index].poids = vehicleForm.controls['weight'].value;
+    this.vehicleValues[index].couleur = vehicleForm.controls['color'].value;
+  
+    this.vehicleValues[index].idAssurance = vehicleForm.controls['insuranceId'].value;
+    this.vehicleValues[index].idAgence = vehicleForm.controls['agencyId'].value;
+    this.vehicleValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
+    this.vehicleValues[index].dateDebut = vehicleForm.controls['contractStart'].value;
+    this.vehicleValues[index].dateFin = vehicleForm.controls['contractEnd'].value;
+    this.vehicleValues[index].cin = vehicleForm.controls['cin'].value;
+
   }
 
   getGarageForm(garageForm: FormGroup, index: number) {
@@ -213,7 +268,7 @@ export class CompleteRegistrationComponent implements OnInit {
     this.garageValues[index].email = garageForm.controls['email'].value;
     this.garageValues[index].phone = garageForm.controls['phone'].value;
     this.garageValues[index].address = garageForm.controls['address'].value;
-    this.garageValues[index].garageOwner = 125; //from token
+    this.garageValues[index].garageOwner = this.currentUsername; //from token
   }
 
   getLavageForm(garageForm: FormGroup, index: number) {
@@ -224,8 +279,18 @@ export class CompleteRegistrationComponent implements OnInit {
     this.lavageValues[index].email = garageForm.controls['email'].value;
     this.lavageValues[index].phone = garageForm.controls['phone'].value;
     this.lavageValues[index].address = garageForm.controls['address'].value;
-    this.lavageValues[index].lavageOwner = 125; //from token
+    this.lavageValues[index].lavageOwner = this.currentUsername; 
     this.lavageValues[index].currentNbVehicle = 0; //by default
+  }
+
+  getOfficeForm(officeForm: FormGroup, index: number) {
+    console.log(index);
+    console.log(officeForm);
+    this.officeValues[index].name = officeForm.controls['name'].value;
+    this.officeValues[index].email = officeForm.controls['email'].value;
+    this.officeValues[index].phone = officeForm.controls['phone'].value;
+    this.officeValues[index].address = officeForm.controls['address'].value;
+    this.officeValues[index].officeOwner = this.currentUsername; //from token
   }
 
   onMatriculeFiscaleChange() {

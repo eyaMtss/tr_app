@@ -1,14 +1,14 @@
 export class Garage {
     name!: string;
     capacity!: number;
-    garageOwner!: number;
+    garageOwner!: string;
     email!: string;
     phone!: number;
     address!: string;
     garageType!: string;
 
     public constructor();
-    public constructor(name: string, capacity: number, garageOwner: number, email: string, 
+    public constructor(name: string, capacity: number, garageOwner: string, email: string, 
         phone: number, address: string);
     public constructor(...myarray: any[]){
         this.name = myarray[0];
