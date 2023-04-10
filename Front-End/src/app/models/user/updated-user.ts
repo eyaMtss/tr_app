@@ -3,7 +3,7 @@ export class UpdatedUser {
     country!: string;
     governorate!: string;
     city!: string;
-    zipCode!: string;
+    zipCode!: number;
     matriculeFiscale: string = "";
     cin!: number;
 
