@@ -7,16 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Table
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Document(collection = "vehicule")
 public class Vehicule {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String typeImmat;
     private String numImmat;

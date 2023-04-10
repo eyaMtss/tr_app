@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 @Data
@@ -30,4 +29,9 @@ public class VehiculeRequestDTO {
         @Enumerated(EnumType.STRING)
         private Marque marque;
         private String numContrat;
+        private Date dateDebut;
+        private Date dateFin;
+        private Long idAssurance;
+        private Long idAgence;
+        private Integer cin;
 }
