@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+</head>
+
+<body>
+
+
+    <div class="sidebar">
+        <header>Menu</header> 
+        <ul>
+            <a href="/driver"  style="font-size:24px"> <i class="fa fa-home"> Accueil</i></a>
+            <a href="#"  style="font-size:24px"> <i class="fa fa-user" aria-hidden="true">  Profil</i></a>
+            <a href="#"style="font-size:22px"> <i class="fa fa-history" aria-hidden="true"> Historique</i></a>
+            <a href="#"style="font-size:22px"> <i class="fa fa-align-center" aria-hidden="true"> Services</i></a>
+            <a href="#"style="font-size:22px"> <i class="fa" aria-hidden="true"> &#xf095; Contact</i></a>
+            <a href="#"style="font-size:22px"> <i class="fa fa-gear" aria-hidden="true"> A propos </i></a>
+            
+
+        </ul>
+    </div>
+  
+    <div style="margin-left:270px ; ">
+        <google-map height="100px" width="830px" [options]="mapOptions">
+            <map-marker *ngFor="let pos of position" [position]="pos.position" [label]="labelOptions"
+            [options]="{icon: { url:'http://maps.google.com/mapfiles/ms/icons/green-dot.png' }}"></map-marker>
+        </google-map>
+  
+        <div style="margin-top:15px ;margin-right:700px ;"  class="table_container">
+            <table class="boostrap4_table_head_dark_striped_rounded_with_shadow">
+                <thead>
+                    <th>ID</th>
+                    <th>Détails</th>
+                    <th>Accepter</th>
+                    <th>Refuser</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let aff of affectations">
+                  
+                        <td>{{aff.id}}</td>
+                        <td> 
+                            
+                            <ng-template #affect let-c="close" let-d="dismiss">
+                              
+                                <div class="order">
+                                    <header>les détails de l'ordre {{aff.idOrdre}}</header>
+                                    <h5><b>Les informatons de véhicule :</b></h5>
+                                
+                                    <p style="color: rgb(61, 130, 130);font-size:15px ; "><i class="fa">&#xf029;</i> Status : <button
+                                            style="font-size:15px ;color: #fcfafa; background-color: rgb(148, 190, 207); border-radius: 5px;"> En attente  </button></p> <br>
+                                 
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);">Matricule:</p>
+                                        <div class="matricule"
+                                            style="margin-left:70px;   text-align:center;  padding: 18px; color:rgb(14, 14, 14);">
+                                            <h6></h6>
+                                        </div>
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);"><i class="fa fa-automobile"></i>Type de vehicule :</p>
+                                        <div style="margin-left: 100px;">Range Rover</div>
+                            
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            Position actuelle :
+                                        </p>
+                                        <div style="margin-left: 100px;">Ariana</div>
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            Déstination :</p>
+                                        <div style="margin-left: 100px;">Tunis</div>
+                            
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);"><i class="fa fa-user" aria-hidden="true"></i> Nombre
+                                            de personne :</p>
+                                        <div style="margin-left: 100px;">4 personne(s)</div>
+                            
+                                        <p style=" font-size:15px ;color: rgb(61, 130, 130);"><i class="fa">&#xf095; </i> Télephone :</p>
+                                        <div style="margin-left: 100px;">95440219</div>
+                            
+                                        <br>
+                                        <p style="color: rgb(61, 130, 130);font-size:15px ; "><i class="fa">&#xf029;</i> Scanner le code QR :
+                                            <button style="font-size:15px ;color: #000; border-radius: 5px;"> Scanner </button></p> <br>
+                                        <div style="display:flex;margin-top: 5px;">
+                                            <div><button style="margin-left: 10px; border-radius: 10px;"><i style="font-size:20px ; color: green; "
+                                                        class="fa">Appeler le client &#xf095;</i>
+                                                </button></div>
+                                            <div>
+                                                <button style="margin-left: 20px; border-radius: 10px; "><i style="font-size:20px; color: green;"
+                                                        class="fa">Appeler le TA &#xf095;</i>
+                            
+                                                </button>
+                            
+                                            </div>
+                            
+                                        </div>
+                                        <button style="margin-left: 290px;margin-top: 27px; color: red; " (click)="c('Save click')">Fermer</button>
+                                    </div>
+                                  
+                                    </ng-template>
+
+                            
+                            
+                            
+                            <button type="button" class="btn btn-outline-dark"  (click)="afficher(affect,aff.idOrdre)"> Détails
+                            </button></td>
+                        <td><button style="font-size:20px">&#x2705;</button></td>
+                        <td> <button style="color: red;font-size:20px"> &#x2716;</button></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+
+</body>
+
+</html>

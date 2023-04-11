@@ -43,6 +43,8 @@ import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from './shared/shared.module';
+import { TaComponent } from './ta/ta.component';
+import { DrivercamionComponent } from './drivercamion/drivercamion.component';
 
 
 @NgModule({
@@ -63,7 +65,7 @@ import { SharedModule } from './shared/shared.module';
     CompleteRegistrationComponent,
     LoginCamionComponent,
     SocieteDeRemorquageComponent, 
-    ProfilclientComponent
+    ProfilclientComponent, TaComponent, DrivercamionComponent
   ],
   imports: [
     BrowserModule,
