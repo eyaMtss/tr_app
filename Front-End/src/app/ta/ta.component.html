@@ -1,0 +1,186 @@
+
+<div style="display:flex;">
+  <div style="margin-left:40px ;">
+    <google-map height="600px" width="700px" [options]="mapOptions">
+      <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="labelOptions"
+        [options]="{icon: { url:'http://maps.google.com/mapfiles/ms/icons/red-dot.png' }}"></map-marker>
+      <map-marker *ngFor="let marke of marker" [position]="marke.position" [label]="labelOptions"
+        [options]="{icon: { url:'http://maps.google.com/mapfiles/ms/icons/green-dot.png' }}"></map-marker>
+    </google-map>
+  </div>
+  <table class="styled-table" style="margin-left:20px;">
+    <thead>
+      <tr>
+        <th>L'identifant de l'ordre </th>
+        <th>Status </th>
+        <th>Voir les détails </th>
+        <th>Affecter à </th>
+        <th>Voir Historiques </th>
+        <th>Annuler </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of ordres">
+        <td style="font-size:15px;">Id = {{order.id}}</td>
+        <td>
+          <div style="font-size:12px;color:blue;">En cours <i style='font-size:18px' class='fas'>&#xf2f1;</i>
+          </div>
+        </td>
+        <td>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Type de l'ordre : {{order.breakdownType}}</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+              <p style="color:red;">Temps d'attendre :
+              </p>
+              <p>Matricule de vehicule : {{order.numImmatriculation}} </p>
+              <p>Adresse :Amdoun beja </p>
+              <p>Telephone :{{order.telephone}}</p>
+              <p>Nombre de personne : {{order.people}} personne(s)</p>
+              <p>Instant de passage de l'ordre : {{order.orderTimeRequest}} </p>
+              <p>Type de panne </p>
+              <p>Position actuelle </p>
+              <p>Déstination </p>
+              <p>Position de cet ordre :{{pos.get(order.id)}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="afficher(photos)">Voir photos
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #historique let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">L'historique de l'ordre : {{order.id}}</h4>
+            </div>
+            <div class="modal-body">
+              <p style="color:red;">
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Fermer
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #cam let-c="close" let-d="dismiss" style="background-color: aquamarine;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-basic-title" style="color:#009879">Liste des camions disponibles
+
+              </h5>
+            </div>
+            <div class="modal-header">
+              <table class="styled-table">
+                <thead>
+                  <tr>
+                    <th>ID </th>
+                    <th>Status </th>
+                    <th>Détails Camion</th>
+                    <th>Détails chauffeur </th>
+                    <th>Affecter </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor=" let cam of camions ">
+                    <td style="font-size:15px;"> {{cam.id}}</td>
+                    <td>
+                      <div style="font-size:12px;color:green;"> {{pos.get(order.id)}} {{poscamion.get(cam.id)}}
+                      </div>
+                    </td>
+                    <td>
+                      <ng-template #camiondetails let-c="close" let-d="dismiss">
+                        
+                        <div class="modal-header">
+                          <h4 style='margin-left: 100px;' class="modal-title" id="modal-basic-title"
+                            style="color:#009879">Détails :  </h4>
+
+                          <button type="button" class="btn-close" aria-label="Close"
+                            (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Matricule du camion :{{cam.id}} </p>
+                          <p>Position actuelle :Amdoun beja </p>
+
+                          <p>Nombre de personne : {{cam.modele}}</p>
+                          <p>Poids: {{cam.poids}} </p>
+                          <p>Type :{{cam.type}}</p>
+                          <p>Position actuelle </p>
+                          <p>Charge:{{cam.charge}}</p>
+                          <div style="display:flex;" >
+                            <div  style='margin-left: 50px;'><img class="photo" src="assets/camion.png">
+                             </div>
+                          </div>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">
+                            Fermer 
+                          </button>
+                        </div>
+                      </ng-template>
+                      <button style="font-size:12px;" class="btn btn-lg btn-outline-primary"
+                        (click)="voire(camiondetails)">
+                        Camion</button>
+                    </td>
+                    <td><button style="font-size:12px;" class="btn btn-lg btn-outline-primary"
+                        (click)="voire(camiondetails)">
+                        Chauffeur </button></td>
+                    <td><button style='font-size:24px;color: green;'    (click)="affectercamion(cam.id,order.id)"> <i class='far fa-check-circle'></i></button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-header">
+              <button style='margin-left: 370px;font-size:#009879"' type="button" class="btn btn-outline-dark"
+                (click)="c('Save click')">Fermer</button>
+            </div>
+          </ng-template>
+          <ng-template #photos let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Photos : {{order.breakdownType}}</h4>
+            </div>
+            <div class="modal-body">
+              <img class="logo" src="assets/accident.png">
+              <img class="logo" src="assets/accident.png">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Fermer
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #ordre let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Alerte de confirmation :</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                Vous êtes sûr d'annuler cet ordre
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">NON
+              </button>
+              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')"> OUI
+              </button>
+            </div>
+          </ng-template>
+          <button style="font-size:12px;" class="btn btn-lg btn-outline-primary" (click)="open(content)">
+            Détails</button>
+        </td>
+        <td>
+          <button (click)="affecter(cam)" style='font-size:24px;color: green;'> <i
+              class='far fa-check-circle'></i></button>
+        </td>
+        <td>
+          <button style="font-size:12px;color:green" class="btn btn-lg btn-outline-primary" (click)="voir(historique)">
+            Historique </button>
+        </td>
+        <td><button style="font-size:25px;color:red" class="material-icons" (click)="delete(ordre)">clear
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

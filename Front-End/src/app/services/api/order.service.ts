@@ -41,5 +41,8 @@ export class OrderService {
     getOrdre(id: number): Observable<OrderResponse>{
       return this.httpClient.get<OrderResponse>("http://localhost:8091/Ordres/"+`${id}`);
     }
+    getOrdres(): Observable<Order[]>{
+      return this.httpClient.get<Order[]>("http://localhost:5656/Ordres");
+    }
 }
 
