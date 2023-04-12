@@ -201,7 +201,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateCompletedRegistration(String username) {
 		User existingUser = userRepository.findByUsername(username);
-		existingUser.setCompletedRegistration(true);
+		//existingUser.setCompletedRegistration(true);
+        existingUser.setIsRegistrationCompleted(true);
 		return userRepository.save(existingUser);
 	}
 
