@@ -28,6 +28,7 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		userResponseDTO.setPictureName(user.getPictureName());
+		userResponseDTO.setIsRegistrationCompleted(user.getIsRegistrationCompleted());
 		return userResponseDTO;
 	}
 
