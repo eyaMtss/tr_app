@@ -17,6 +17,7 @@ export class User {
 
     password!: string;
     confirmPassword!: string;
+    isRegistrationCompleted!: boolean;
 
     public constructor();
     public constructor(firstName: string, lastName: string, email: string, phoneNumber: number,
