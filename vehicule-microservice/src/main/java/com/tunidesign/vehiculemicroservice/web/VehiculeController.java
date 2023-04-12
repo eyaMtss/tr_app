@@ -6,9 +6,7 @@ import com.tunidesign.vehiculemicroservice.DTO.VehiculeRequestDTO;
 import com.tunidesign.vehiculemicroservice.DTO.VehiculeResponseDTO;
 import com.tunidesign.vehiculemicroservice.exceptions.ContractNotFoundException;
 import com.tunidesign.vehiculemicroservice.exceptions.VehiculeIntrouvableException;
-import com.tunidesign.vehiculemicroservice.model.entity.Vehicule;
 import com.tunidesign.vehiculemicroservice.service.VehiculeServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicule")
-@CrossOrigin("*")
 public class VehiculeController {
     @Autowired
     private VehiculeServiceImpl vehiculeService;
@@ -38,12 +35,24 @@ public class VehiculeController {
         return ResponseEntity.ok().body(vehicule);
     }
 
+    /**
+     * Eya Mattoussi
+     * 05/04/2023
+     * verify the informations provided by the user && add new vehicle
+     * @param vehiculeRequestDTO
+     * @return boolean
+     */
     @PostMapping("/add")
-    public ResponseEntity<VehiculeResponseDTO> ajouterUneVehicule(@RequestBody VehiculeRequestDTO vehiculeRequestDTO)
+    public ResponseEntity<VehiculeResponseDTO> ajouterUnVehicule(@RequestBody VehiculeRequestDTO vehiculeRequestDTO)
     {
         ContratResponseDTO contratResponseDTO = verifyContract(ContratRequestDTO.builder()
                 .numContrat(vehiculeRequestDTO.getNumContrat())
                 .numChassis(vehiculeRequestDTO.getNumChassis())
+                .idAssurance(vehiculeRequestDTO.getIdAssurance())
+                .idAgence(vehiculeRequestDTO.getIdAgence())
+                .dateDebut(vehiculeRequestDTO.getDateDebut())
+                .dateFin(vehiculeRequestDTO.getDateFin())
+                .cin(vehiculeRequestDTO.getCin())
                 .build()).getBody();
         if (contratResponseDTO.getIsExist()){
             VehiculeResponseDTO savedVehicle = vehiculeService.save(vehiculeRequestDTO);
@@ -59,7 +68,7 @@ public class VehiculeController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity(contratRequestDTO, headers);
-        ResponseEntity<ContratResponseDTO> response = restTemplate.postForEntity("http://localhost:5053/contrat/verifyContrat",
+        ResponseEntity<ContratResponseDTO> response = restTemplate.postForEntity("http://localhost:8989/contrat/verifyContrat",
                 request, ContratResponseDTO.class);
         System.out.println("Response: " + response.getBody());
         return response;

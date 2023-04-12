@@ -4,6 +4,7 @@ import com.tunidesign.parkingmicroservice.DTO.ParkingRequestDTO;
 import com.tunidesign.parkingmicroservice.DTO.ParkingResponseDTO;
 import com.tunidesign.parkingmicroservice.exception.ParkingNotFoundException;
 import com.tunidesign.parkingmicroservice.service.ParkingServiceImpl;
+import com.tunidesign.parkingmicroservice.service.SequenceGeneratorService;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -18,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/parking")
 @Slf4j
 public class ParkingController {
     @Autowired
     private ParkingServiceImpl parkingService;
-
+    @Autowired
+    private SequenceGeneratorService service;
     static Logger logger = LoggerFactory.getLogger(ParkingController.class);
 
     @PostMapping(path = "/addParking")
@@ -43,9 +44,13 @@ public class ParkingController {
         }
     }
     @GetMapping("/getAllByOwner/{owner}")
-    @RolesAllowed({"SUPER_ADMIN"})
     public ResponseEntity<List<ParkingResponseDTO>> getParkingsByOwner(@PathVariable Long owner) {
         return ResponseEntity.ok().body(parkingService.getParkingsByOwner(owner));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ParkingResponseDTO>> getParkings() {
+        return ResponseEntity.ok().body(parkingService.getParkings());
     }
     @GetMapping("/getById/{parkingId}")
     @RolesAllowed({"SUPER_ADMIN"})

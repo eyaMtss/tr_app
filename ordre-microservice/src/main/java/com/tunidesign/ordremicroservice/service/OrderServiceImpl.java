@@ -3,7 +3,6 @@ package com.tunidesign.ordremicroservice.service;
 import com.tunidesign.ordremicroservice.DTO.OrderRequestDTO;
 import com.tunidesign.ordremicroservice.DTO.OrderResponseDTO;
 import com.tunidesign.ordremicroservice.mapper.OrderMapper;
-import com.tunidesign.ordremicroservice.mapper.OrderMapperImpl;
 import com.tunidesign.ordremicroservice.model.entity.Order;
 import com.tunidesign.ordremicroservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponseDTO getOrderById(int id) {
-        return orderMapper.orderToOrderResponseDTO(orderRepository.findById(id));
+    public OrderResponseDTO getOrderById(Long id) {
+        return orderMapper.orderToOrderResponseDTO(orderRepository.findById(id).get());
     }
 
     @Override
@@ -39,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(int id) {
+    public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
 
@@ -51,9 +50,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponseDTO updatePhotos(MultipartFile img1, MultipartFile img2, MultipartFile img3,int id ) throws IOException {
+    public OrderResponseDTO updatePhotos(MultipartFile img1, MultipartFile img2, MultipartFile img3,Long id ) throws IOException {
 
-        Order order= orderRepository.findById(id);
+        Order order= orderRepository.findById(id).get();
         order.setImg1(img1.getBytes());
         order.setImg2(img2.getBytes());
         order.setImg3(img3.getBytes());

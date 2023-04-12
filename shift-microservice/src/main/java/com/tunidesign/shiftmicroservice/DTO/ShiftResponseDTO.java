@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShiftResponseDTO {
-    private int id;
+    private Long id;
 
     private Date date ;
 

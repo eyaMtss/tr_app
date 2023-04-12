@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 public class RecuRequestDTO {
 
         @Id
-        private int id ;
+        private Long id ;
         private String id_services ;
         private Float prix_total;
 }

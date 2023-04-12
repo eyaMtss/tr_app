@@ -13,7 +13,7 @@ import java.util.Date;
 public class ServiceRequestDTO {
 
         @Id
-        private int id;
+        private Long id;
         private String nom ;
         private Float prix ;
 }

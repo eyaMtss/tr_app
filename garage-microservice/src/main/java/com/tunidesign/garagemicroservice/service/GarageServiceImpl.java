@@ -23,8 +23,8 @@ public class GarageServiceImpl implements GarageService{
     }
 
     @Override
-    public GarageResponseDTO getGarageById(int id) {
-        return garageMapper.garageToGarageResponseDTO(garageRepository.findById(id));
+    public GarageResponseDTO getGarageById(Long id) {
+        return garageMapper.garageToGarageResponseDTO(garageRepository.findById(id).get());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GarageServiceImpl implements GarageService{
     }
 
     @Override
-    public void deleteGarage(int id) {
+    public void deleteGarage(Long id) {
         garageRepository.deleteById(id);
 
     }

@@ -2,26 +2,27 @@ package com.tunidesign.ordremicroservice.model.entity;
 
 import com.tunidesign.ordremicroservice.model.ennumeration.BreakdownType;
 import com.tunidesign.ordremicroservice.model.ennumeration.IsLoaded;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-@Entity
-@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
+@Document(collection = "ordre")
 public class Order {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Max(value=8)
     private int people;
     //@Max(8)
