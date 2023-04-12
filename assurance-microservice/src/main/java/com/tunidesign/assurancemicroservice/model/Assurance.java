@@ -1,11 +1,13 @@
 package com.tunidesign.assurancemicroservice.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Lob;
+import org.springframework.data.annotation.Id;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
@@ -15,6 +17,8 @@ import org.springframework.data.annotation.Id;
 @Builder
 @Document(collection = "assurance")
 public class Assurance {
+    @Transient
+    public static final String SEQUENCE_NAME = "vehicule_sequence";
     @Id
     private Long id;
     private String name;
