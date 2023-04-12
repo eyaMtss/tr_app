@@ -20,6 +20,11 @@ public class AgenceController {
         return agenceService.getAgences();
     }
 
+    @GetMapping("/getAllByInsurance/{idAssurance}")
+    public List<AgenceResponseDTO> listeAgences(@PathVariable Long idAssurance) {
+        return agenceService.getByInsurance(idAssurance);
+    }
+
     @GetMapping(value = "/getById/{id}")
     public AgenceResponseDTO afficherUneAgence(@PathVariable Long id) {
         AgenceResponseDTO agence = agenceService.getAgence(id);
