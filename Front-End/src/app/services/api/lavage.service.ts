@@ -14,4 +14,8 @@ export class LavageService {
   create(lavage: Lavage): Observable<Lavage> {
     return this.httpClient.post<Lavage>(this._URL + "add", lavage);
   }
+
+  addList(userId: number, lavages: Lavage[]): Observable<Lavage[]> {
+    return this.httpClient.post<Lavage[]>(this._URL + "addAll/" + userId, lavages);
+  }
 }

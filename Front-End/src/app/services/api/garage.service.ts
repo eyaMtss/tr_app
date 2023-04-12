@@ -14,4 +14,8 @@ export class GarageService {
   create(garage: Garage): Observable<Garage> {
     return this.httpClient.post<Garage>(this._URL + "add", garage);
   }
+
+  addList(userId: number, garages: Garage[]): Observable<Garage[]> {
+    return this.httpClient.post<Garage[]>(this._URL + "addAll/" + userId, garages);
+  }
 }
