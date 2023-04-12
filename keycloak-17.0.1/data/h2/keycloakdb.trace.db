@@ -6891,3 +6891,432 @@ insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VA
 org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBB7754534DDB3E1A0445414594A69488A0480701E9C48654E9BD4B2FD2A50BC1022820915EA448EF2025748882F4DE12E95263C0D042282184B3E3F3B... (12757898)"
 Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBB7754534DDB3E1A0445414594A69488A0480701E9C48654E9BD4B2FD2A50BC1022820915EA448EF2025748882F4DE12E95263C0D042282184B3E3F3B... (12757898)"; SQL statement:
 insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 01:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:15:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:15:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:22:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:22:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:22:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:22:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:24:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:24:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:34:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:34:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:49:43 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:49:43 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 02:49:43 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 39": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 04:16:32 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Dépassement du temps lors du vérrouillage de la table 
+Timeout trying to lock table ; SQL statement:
+delete from FED_USER_ATTRIBUTE where USER_ID=? and NAME=? and REALM_ID=? [50200-197]
+2023-04-12 04:54:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 04:54:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 04:57:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 04:57:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"
+Value too long for column "VALUE VARCHAR(2024) SELECTIVITY 36": "'789C9CBA0754534DD73F7AA801441004950E02224DA94A6F4A13E9BD833401458A7448280A8274A44340AAF4DEBB94D0417A6F0162E8103A21FCF179FCBEF7B... (6127448)"; SQL statement:
+insert into FED_USER_ATTRIBUTE (NAME, REALM_ID, STORAGE_PROVIDER_ID, USER_ID, VALUE, ID) values (?, ?, ?, ?, ?, ?) [22001-197]
+2023-04-12 05:38:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Erreur générale: "java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]"
+General error: "java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]"; SQL statement:
+select federatedu0_.ID as id1_22_, federatedu0_.NAME as name2_22_, federatedu0_.REALM_ID as realm_id3_22_, federatedu0_.STORAGE_PROVIDER_ID as storage_4_22_, federatedu0_.USER_ID as user_id5_22_, federatedu0_.VALUE as value6_22_ from FED_USER_ATTRIBUTE federatedu0_ where federatedu0_.USER_ID=? and federatedu0_.REALM_ID=? [50000-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:307)
+	at org.h2.command.Command.executeQuery(Command.java:216)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:114)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:78)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:57)
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2322)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2075)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2037)
+	at org.hibernate.loader.Loader.doQuery(Loader.java:956)
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:357)
+	at org.hibernate.loader.Loader.doList(Loader.java:2868)
+	at org.hibernate.loader.Loader.doList(Loader.java:2850)
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2682)
+	at org.hibernate.loader.Loader.list(Loader.java:2677)
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:540)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:400)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:219)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1454)
+	at org.hibernate.query.internal.AbstractProducedQuery.doList(AbstractProducedQuery.java:1649)
+	at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1617)
+	at org.hibernate.query.Query.getResultList(Query.java:165)
+	at org.keycloak.storage.jpa.JpaUserFederatedStorageProvider.getAttributes(JpaUserFederatedStorageProvider.java:157)
+	at org.keycloak.storage.adapter.AbstractUserAdapterFederatedStorage.getFirstAttribute(AbstractUserAdapterFederatedStorage.java:345)
+	at org.keycloak.models.UserModelDefaultMethods.getEmail(UserModelDefaultMethods.java:50)
+	at com.tunidesign.dbuserprovider.model.UserAdapter.getAttributes(UserAdapter.java:93)
+	at com.tunidesign.dbuserprovider.model.UserAdapter.<init>(UserAdapter.java:32)
+	at com.tunidesign.dbuserprovider.DBUserStorageProvider.lambda$getUserByUsername$1(DBUserStorageProvider.java:164)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at com.tunidesign.dbuserprovider.DBUserStorageProvider.getUserByUsername(DBUserStorageProvider.java:164)
+	at org.keycloak.storage.user.UserLookupProvider.getUserByUsername(UserLookupProvider.java:60)
+	at org.keycloak.storage.UserStorageManager.lambda$getUserByUsername$12(UserStorageManager.java:298)
+	at org.keycloak.utils.ServicesUtils.lambda$timeBoundOne$1(ServicesUtils.java:83)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.SortedOps$RefSortingSink.end(SortedOps.java:400)
+	at java.base/java.util.stream.Sink$ChainedReference.end(Sink.java:258)
+	at java.base/java.util.stream.Sink$ChainedReference.end(Sink.java:258)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:528)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:513)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:647)
+	at org.keycloak.storage.UserStorageManager.getUserByUsername(UserStorageManager.java:298)
+	at org.keycloak.models.cache.infinispan.UserCacheSession.getUserByUsername(UserCacheSession.java:259)
+	at org.keycloak.models.utils.KeycloakModelUtils.findUserByNameOrEmail(KeycloakModelUtils.java:225)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.getUserFromForm(AbstractUsernameFormAuthenticator.java:188)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.getUser(AbstractUsernameFormAuthenticator.java:167)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.validateUserAndPassword(AbstractUsernameFormAuthenticator.java:148)
+	at org.keycloak.authentication.authenticators.browser.UsernamePasswordForm.validateForm(UsernamePasswordForm.java:55)
+	at org.keycloak.authentication.authenticators.browser.UsernamePasswordForm.action(UsernamePasswordForm.java:48)
+	at org.keycloak.authentication.DefaultAuthenticationFlow.processAction(DefaultAuthenticationFlow.java:162)
+	at org.keycloak.authentication.AuthenticationProcessor.authenticationAction(AuthenticationProcessor.java:1002)
+	at org.keycloak.services.resources.LoginActionsService.processFlow(LoginActionsService.java:321)
+	at org.keycloak.services.resources.LoginActionsService.processAuthentication(LoginActionsService.java:292)
+	at org.keycloak.services.resources.LoginActionsService.authenticate(LoginActionsService.java:276)
+	at org.keycloak.services.resources.LoginActionsService.authenticateForm(LoginActionsService.java:349)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:170)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:130)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:660)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:524)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$2(ResourceMethodInvoker.java:474)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:364)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:476)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:434)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invokeOnTargetObject(ResourceLocatorInvoker.java:192)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invoke(ResourceLocatorInvoker.java:141)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invoke(ResourceLocatorInvoker.java:32)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:492)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$4(SynchronousDispatcher.java:261)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:161)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:364)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:164)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:247)
+	at io.quarkus.resteasy.runtime.standalone.RequestDispatcher.service(RequestDispatcher.java:73)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.dispatch(VertxRequestHandler.java:151)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.handle(VertxRequestHandler.java:82)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.handle(VertxRequestHandler.java:42)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at io.quarkus.vertx.http.runtime.StaticResourcesRecorder$2.handle(StaticResourcesRecorder.java:67)
+	at io.quarkus.vertx.http.runtime.StaticResourcesRecorder$2.handle(StaticResourcesRecorder.java:55)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at io.quarkus.vertx.http.runtime.VertxHttpRecorder$5.handle(VertxHttpRecorder.java:380)
+	at io.quarkus.vertx.http.runtime.VertxHttpRecorder$5.handle(VertxHttpRecorder.java:358)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at org.keycloak.quarkus.runtime.integration.web.QuarkusRequestFilter.lambda$createBlockingHandler$1(QuarkusRequestFilter.java:71)
+	at io.vertx.core.impl.ContextImpl.lambda$null$0(ContextImpl.java:159)
+	at io.vertx.core.impl.AbstractContext.dispatch(AbstractContext.java:100)
+	at io.vertx.core.impl.ContextImpl.lambda$executeBlocking$1(ContextImpl.java:157)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$13.runWith(VertxCoreRecorder.java:543)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2449)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1478)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:29)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:29)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:870)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:417)
+	at org.h2.mvstore.FileStore.readFully(FileStore.java:98)
+	at org.h2.mvstore.Page.read(Page.java:181)
+	at org.h2.mvstore.MVStore.readPage(MVStore.java:1936)
+	at org.h2.mvstore.MVMap.readPage(MVMap.java:698)
+	at org.h2.mvstore.Page.getChildPage(Page.java:208)
+	at org.h2.mvstore.Cursor.min(Cursor.java:129)
+	at org.h2.mvstore.Cursor.hasNext(Cursor.java:36)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap$1.fetchNext(TransactionStore.java:1432)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap$1.<init>(TransactionStore.java:1428)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap.keyIterator(TransactionStore.java:1423)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap.keyIterator(TransactionStore.java:1411)
+	at org.h2.mvstore.db.MVSecondaryIndex.find(MVSecondaryIndex.java:313)
+	at org.h2.mvstore.db.MVSecondaryIndex.find(MVSecondaryIndex.java:258)
+	at org.h2.index.BaseIndex.find(BaseIndex.java:130)
+	at org.h2.index.IndexCursor.find(IndexCursor.java:176)
+	at org.h2.table.TableFilter.next(TableFilter.java:471)
+	at org.h2.command.dml.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1452)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:79)
+	at org.h2.result.LazyResult.next(LazyResult.java:59)
+	at org.h2.command.dml.Select.queryFlat(Select.java:527)
+	at org.h2.command.dml.Select.queryWithoutCache(Select.java:633)
+	at org.h2.command.dml.Query.queryWithoutCacheLazyCheck(Query.java:114)
+	at org.h2.command.dml.Query.query(Query.java:371)
+	at org.h2.command.dml.Query.query(Query.java:333)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:114)
+	at org.h2.command.Command.executeQuery(Command.java:202)
+	... 105 more
+Caused by: java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:199)
+	at java.base/sun.nio.ch.FileChannelImpl.endBlocking(FileChannelImpl.java:171)
+	at java.base/sun.nio.ch.FileChannelImpl.readInternal(FileChannelImpl.java:844)
+	at java.base/sun.nio.ch.FileChannelImpl.read(FileChannelImpl.java:821)
+	at org.h2.store.fs.FileNio.read(FilePathNio.java:74)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:403)
+	... 131 more
+2023-04-12 05:38:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Erreur générale: "java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]"
+General error: "java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]"; SQL statement:
+select federatedu0_.ID as id1_22_, federatedu0_.NAME as name2_22_, federatedu0_.REALM_ID as realm_id3_22_, federatedu0_.STORAGE_PROVIDER_ID as storage_4_22_, federatedu0_.USER_ID as user_id5_22_, federatedu0_.VALUE as value6_22_ from FED_USER_ATTRIBUTE federatedu0_ where federatedu0_.USER_ID=? and federatedu0_.REALM_ID=? [50000-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:307)
+	at org.h2.command.Command.executeQuery(Command.java:216)
+	at org.h2.jdbc.JdbcPreparedStatement.executeQuery(JdbcPreparedStatement.java:114)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:78)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:57)
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2322)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2075)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2037)
+	at org.hibernate.loader.Loader.doQuery(Loader.java:956)
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:357)
+	at org.hibernate.loader.Loader.doList(Loader.java:2868)
+	at org.hibernate.loader.Loader.doList(Loader.java:2850)
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2682)
+	at org.hibernate.loader.Loader.list(Loader.java:2677)
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:540)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:400)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:219)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1454)
+	at org.hibernate.query.internal.AbstractProducedQuery.doList(AbstractProducedQuery.java:1649)
+	at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1617)
+	at org.hibernate.query.Query.getResultList(Query.java:165)
+	at org.keycloak.storage.jpa.JpaUserFederatedStorageProvider.getAttributes(JpaUserFederatedStorageProvider.java:157)
+	at org.keycloak.storage.jpa.JpaUserFederatedStorageProvider.getNotBeforeOfUser(JpaUserFederatedStorageProvider.java:424)
+	at org.keycloak.storage.UserStorageManager.getNotBeforeOfUser(UserStorageManager.java:624)
+	at org.keycloak.models.cache.infinispan.UserCacheSession.cacheUser(UserCacheSession.java:322)
+	at org.keycloak.models.cache.infinispan.UserCacheSession.getUserAdapter(UserCacheSession.java:293)
+	at org.keycloak.models.cache.infinispan.UserCacheSession.getUserByUsername(UserCacheSession.java:271)
+	at org.keycloak.models.utils.KeycloakModelUtils.findUserByNameOrEmail(KeycloakModelUtils.java:225)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.getUserFromForm(AbstractUsernameFormAuthenticator.java:188)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.getUser(AbstractUsernameFormAuthenticator.java:167)
+	at org.keycloak.authentication.authenticators.browser.AbstractUsernameFormAuthenticator.validateUserAndPassword(AbstractUsernameFormAuthenticator.java:148)
+	at org.keycloak.authentication.authenticators.browser.UsernamePasswordForm.validateForm(UsernamePasswordForm.java:55)
+	at org.keycloak.authentication.authenticators.browser.UsernamePasswordForm.action(UsernamePasswordForm.java:48)
+	at org.keycloak.authentication.DefaultAuthenticationFlow.processAction(DefaultAuthenticationFlow.java:162)
+	at org.keycloak.authentication.AuthenticationProcessor.authenticationAction(AuthenticationProcessor.java:1002)
+	at org.keycloak.services.resources.LoginActionsService.processFlow(LoginActionsService.java:321)
+	at org.keycloak.services.resources.LoginActionsService.processAuthentication(LoginActionsService.java:292)
+	at org.keycloak.services.resources.LoginActionsService.authenticate(LoginActionsService.java:276)
+	at org.keycloak.services.resources.LoginActionsService.authenticateForm(LoginActionsService.java:349)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:170)
+	at org.jboss.resteasy.core.MethodInjectorImpl.invoke(MethodInjectorImpl.java:130)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.internalInvokeOnTarget(ResourceMethodInvoker.java:660)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTargetAfterFilter(ResourceMethodInvoker.java:524)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.lambda$invokeOnTarget$2(ResourceMethodInvoker.java:474)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:364)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invokeOnTarget(ResourceMethodInvoker.java:476)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:434)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invokeOnTargetObject(ResourceLocatorInvoker.java:192)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invoke(ResourceLocatorInvoker.java:141)
+	at org.jboss.resteasy.core.ResourceLocatorInvoker.invoke(ResourceLocatorInvoker.java:32)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:492)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$invoke$4(SynchronousDispatcher.java:261)
+	at org.jboss.resteasy.core.SynchronousDispatcher.lambda$preprocess$0(SynchronousDispatcher.java:161)
+	at org.jboss.resteasy.core.interception.jaxrs.PreMatchContainerRequestContext.filter(PreMatchContainerRequestContext.java:364)
+	at org.jboss.resteasy.core.SynchronousDispatcher.preprocess(SynchronousDispatcher.java:164)
+	at org.jboss.resteasy.core.SynchronousDispatcher.invoke(SynchronousDispatcher.java:247)
+	at io.quarkus.resteasy.runtime.standalone.RequestDispatcher.service(RequestDispatcher.java:73)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.dispatch(VertxRequestHandler.java:151)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.handle(VertxRequestHandler.java:82)
+	at io.quarkus.resteasy.runtime.standalone.VertxRequestHandler.handle(VertxRequestHandler.java:42)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at io.quarkus.vertx.http.runtime.StaticResourcesRecorder$2.handle(StaticResourcesRecorder.java:67)
+	at io.quarkus.vertx.http.runtime.StaticResourcesRecorder$2.handle(StaticResourcesRecorder.java:55)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at io.quarkus.vertx.http.runtime.VertxHttpRecorder$5.handle(VertxHttpRecorder.java:380)
+	at io.quarkus.vertx.http.runtime.VertxHttpRecorder$5.handle(VertxHttpRecorder.java:358)
+	at io.vertx.ext.web.impl.RouteState.handleContext(RouteState.java:1212)
+	at io.vertx.ext.web.impl.RoutingContextImplBase.iterateNext(RoutingContextImplBase.java:163)
+	at io.vertx.ext.web.impl.RoutingContextImpl.next(RoutingContextImpl.java:141)
+	at org.keycloak.quarkus.runtime.integration.web.QuarkusRequestFilter.lambda$createBlockingHandler$1(QuarkusRequestFilter.java:71)
+	at io.vertx.core.impl.ContextImpl.lambda$null$0(ContextImpl.java:159)
+	at io.vertx.core.impl.AbstractContext.dispatch(AbstractContext.java:100)
+	at io.vertx.core.impl.ContextImpl.lambda$executeBlocking$1(ContextImpl.java:157)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$13.runWith(VertxCoreRecorder.java:543)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2449)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1478)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:29)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:29)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.IllegalStateException: Reading from nio:C:/Users/eyama/Desktop/tunidesign/app/tr_web_app/keycloak-17.0.1/data/h2/keycloakdb.mv.db failed; file length -1 read length 384 at 411173 [1.4.197/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:870)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:417)
+	at org.h2.mvstore.FileStore.readFully(FileStore.java:98)
+	at org.h2.mvstore.Page.read(Page.java:181)
+	at org.h2.mvstore.MVStore.readPage(MVStore.java:1936)
+	at org.h2.mvstore.MVMap.readPage(MVMap.java:698)
+	at org.h2.mvstore.Page.getChildPage(Page.java:208)
+	at org.h2.mvstore.Cursor.min(Cursor.java:129)
+	at org.h2.mvstore.Cursor.hasNext(Cursor.java:36)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap$1.fetchNext(TransactionStore.java:1432)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap$1.<init>(TransactionStore.java:1428)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap.keyIterator(TransactionStore.java:1423)
+	at org.h2.mvstore.db.TransactionStore$TransactionMap.keyIterator(TransactionStore.java:1411)
+	at org.h2.mvstore.db.MVSecondaryIndex.find(MVSecondaryIndex.java:313)
+	at org.h2.mvstore.db.MVSecondaryIndex.find(MVSecondaryIndex.java:258)
+	at org.h2.index.BaseIndex.find(BaseIndex.java:130)
+	at org.h2.index.IndexCursor.find(IndexCursor.java:176)
+	at org.h2.table.TableFilter.next(TableFilter.java:471)
+	at org.h2.command.dml.Select$LazyResultQueryFlat.fetchNextRow(Select.java:1452)
+	at org.h2.result.LazyResult.hasNext(LazyResult.java:79)
+	at org.h2.result.LazyResult.next(LazyResult.java:59)
+	at org.h2.command.dml.Select.queryFlat(Select.java:527)
+	at org.h2.command.dml.Select.queryWithoutCache(Select.java:633)
+	at org.h2.command.dml.Query.queryWithoutCacheLazyCheck(Query.java:114)
+	at org.h2.command.dml.Query.query(Query.java:371)
+	at org.h2.command.dml.Query.query(Query.java:333)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:114)
+	at org.h2.command.Command.executeQuery(Command.java:202)
+	... 86 more
+Caused by: java.nio.channels.ClosedChannelException
+	at java.base/sun.nio.ch.FileChannelImpl.ensureOpen(FileChannelImpl.java:159)
+	at java.base/sun.nio.ch.FileChannelImpl.read(FileChannelImpl.java:814)
+	at org.h2.store.fs.FileNio.read(FilePathNio.java:74)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:403)
+	... 112 more
