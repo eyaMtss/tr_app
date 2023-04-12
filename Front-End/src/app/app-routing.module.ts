@@ -51,6 +51,7 @@ const routes: Routes = [
     canActivate:[AuthGuard], data: { roles: ['LAVAGISTE_ADMIN']} },
   { path: 'driver', loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule),
     canActivate:[AuthGuard], data: { roles: ['DRIVER']}},
+  { path: 'expert', loadChildren: () => import('./expert/expert.module').then(m => m.ExpertModule) },
 
 
 
