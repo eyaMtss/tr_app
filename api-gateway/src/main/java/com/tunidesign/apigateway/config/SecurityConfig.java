@@ -46,7 +46,8 @@ public class SecurityConfig {
                             "/users/getAll/clients", "/users/completeRegistration/**",
                             "/garage/addAll/**",
                             "/contrat/verifyContrat", "/vehicule/add", "/users/getByUsername/**",
-                            "/users/updateCompletedRegistration/**")
+                            "/users/updateCompletedRegistration/**",
+                            "/camion/**")
                         .permitAll()
                     .anyExchange().authenticated()
                 .and()
