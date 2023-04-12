@@ -11,7 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GarageResponseDTO {
     private Long id;
+    private String name;
+    private String email;
+    private Integer phone;
+    private String countryCode;
+    private String dialCode;
     private String adresse;
-
+    private String garageType;
+    private Long garageOwner;
     private int capacite;
 }
