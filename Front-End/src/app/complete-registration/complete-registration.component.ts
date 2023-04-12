@@ -10,6 +10,8 @@ import { Garage } from '../models/garage/garage';
 import { Lavage } from '../models/lavage/lavage';
 import { Office } from '../models/office/office';
 import { VehicleService } from '../services/api/vehicle.service';
+import { GarageService } from '../services/api/garage.service';
+import { LavageService } from '../services/api/lavage.service';
 
 @Component({
   selector: 'app-complete-registration',
@@ -46,7 +48,8 @@ export class CompleteRegistrationComponent implements OnInit {
 
   matriculeFiscaleValue!: string; // ngModel
   constructor(private keycloakService: KeycloakService, private authService: AuthService, private userService: UserService,
-    private fb: FormBuilder, private router: Router, private vehicleService: VehicleService) {
+    private fb: FormBuilder, private router: Router, private vehicleService: VehicleService,
+    private garageService: GarageService, private lavageService: LavageService) {
     this.completedRegistrationForm = this.fb.group({
       img: [''],
       matriculeFiscale: ['', Validators.required],
@@ -84,51 +87,28 @@ export class CompleteRegistrationComponent implements OnInit {
   }
 
   onConfirm() {
-    this.user.matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
-    this.user.cin = this.completedRegistrationForm.controls['cin'].value;
-    this.navigate();
-    /*const formData = new FormData();
-
-    if (this.completedRegistrationForm.controls['img'].value != undefined) { // if we change the image
-   
-      formData.append('imageFile', this.completedRegistrationForm.controls['img'].value);
-      //uploadImageData.append('profileId', (this.profile.profileId).toString());
+    if(this.currentRole == "CLIENT"){
+      this.router.navigate(["/client"])
     }
-    else {
-      formData.append('imageFile', "");
-    }*/
+    else if(this.currentRole == "GARAGISTE_ADMIN"){
+      this.router.navigate(["/garagisteAdmin"])
+    }
+    else if (this.currentRole == "LAVAGISTE_ADMIN"){
+      this.router.navigate(["/lavagisteAdmin"])
+    }
 
-    //formData.append('userAddress', JSON.stringify(this.user));
-
-    /*this.userService.completeRegistration(formData, this.currentUsername, this.user.country, 
-      this.user.governorate, this.user.city, this.user.zipCode, this.user.matriculeFiscale, this.user.cin).
-      subscribe(data => {
-      //this.setTokenRegistration();
-      //this.onUpload(data.userId);
-      if (this.currentRole == "CLIENT"){
-        this.vehicleValues.forEach(vehicle => {
-          this.vehicleService.create(vehicle).subscribe(data => {
-            console.log(data);
-          })
-        });
-        this.navigate();
-      }
-      console.log(data);
-      
-    })*/
-    
   }
 
   navigate() {
     //this.router.navigate(["/tunidesign"]); //path : registrationGUARD
 
     let role = this.currentRole;
-    if(role == "CLIENT") this.router.navigate(["/client"]);
-    else if(role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
-    else if(role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
-    else if(role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
-    else if(role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
-    else if(role == "DRIVER") this.router.navigate(['camion-login']);
+    if (role == "CLIENT") this.router.navigate(["/client"]);
+    else if (role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
+    else if (role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
+    else if (role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+    else if (role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else if (role == "DRIVER") this.router.navigate(['camion-login']);
     else this.router.navigate(["/order"]);
   }
 
@@ -161,13 +141,13 @@ export class CompleteRegistrationComponent implements OnInit {
   }
 
   //Gets called when the user clicks on save to upload the image
-  onUpload(userId: number) {
+  onUpload(username: string) {
     if (this.completedRegistrationForm.controls['img'].value != undefined) { // if we change the image
       //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
       const uploadImageData = new FormData();
       uploadImageData.append('imageFile', this.completedRegistrationForm.controls['img'].value);
       //uploadImageData.append('profileId', (this.profile.profileId).toString());
-      this.userService.uploadImage(userId, uploadImageData).subscribe(response => { // get api
+      this.userService.uploadImage(username, uploadImageData).subscribe(response => { // get api
         this.viewedImage = this.temporaryRetrievedImage; // view the new image
         console.log(response);
       });
@@ -273,26 +253,28 @@ export class CompleteRegistrationComponent implements OnInit {
     this.vehicleValues[index].kilometrage = vehicleForm.controls['kilometrage'].value;
     this.vehicleValues[index].nbPortes = vehicleForm.controls['doorsNumber'].value;
     this.vehicleValues[index].couleur = vehicleForm.controls['color'].value;
-  
-    this.vehicleValues[index].idAssurance = vehicleForm.controls['insuranceId'].value;
-    this.vehicleValues[index].idAgence = vehicleForm.controls['agencyId'].value;
-    this.vehicleValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
-    this.vehicleValues[index].dateDebut = vehicleForm.controls['contractStart'].value;
-    this.vehicleValues[index].dateFin = vehicleForm.controls['contractEnd'].value;
-    this.vehicleValues[index].cin = vehicleForm.controls['cin'].value;
 
+    //this.vehicleValues[index].idAssurance = vehicleForm.controls['insuranceId'].value;
+    //this.vehicleValues[index].idAgence = vehicleForm.controls['agencyId'].value;
+    this.vehicleValues[index].numContrat = vehicleForm.controls['contractNumber'].value;
+    //this.vehicleValues[index].dateDebut = vehicleForm.controls['contractStart'].value;
+    //this.vehicleValues[index].dateFin = vehicleForm.controls['contractEnd'].value;
+    this.vehicleValues[index].cin = vehicleForm.controls['cin'].value;
+    
   }
 
   getGarageForm(garageForm: FormGroup, index: number) {
     console.log(index);
     console.log(garageForm);
     this.garageValues[index].name = garageForm.controls['name'].value;
-    this.garageValues[index].capacity = garageForm.controls['capacity'].value;
+    this.garageValues[index].capacite = garageForm.controls['capacity'].value;
     this.garageValues[index].garageType = garageForm.controls['garageType'].value;
     this.garageValues[index].email = garageForm.controls['email'].value;
-    this.garageValues[index].phone = garageForm.controls['phone'].value;
-    this.garageValues[index].address = garageForm.controls['address'].value;
-    this.garageValues[index].garageOwner = this.currentUsername; //from token
+    this.garageValues[index].phone = garageForm.controls['phone'].value['number'];
+    this.garageValues[index].countryCode = garageForm.controls['phone'].value['countryCode'];
+    this.garageValues[index].dialCode = garageForm.controls['phone'].value['dialCode'];
+    this.garageValues[index].adresse = garageForm.controls['address'].value;
+    //this.garageValues[index].garageOwner = this.currentUsername; //from token
   }
 
   getLavageForm(garageForm: FormGroup, index: number) {
@@ -301,9 +283,11 @@ export class CompleteRegistrationComponent implements OnInit {
     this.lavageValues[index].name = garageForm.controls['name'].value;
     this.lavageValues[index].capacity = garageForm.controls['capacity'].value;
     this.lavageValues[index].email = garageForm.controls['email'].value;
-    this.lavageValues[index].phone = garageForm.controls['phone'].value;
+    this.lavageValues[index].phone = garageForm.controls['phone'].value['number'];
+    this.lavageValues[index].countryCode = garageForm.controls['phone'].value['countryCode'];
+    this.lavageValues[index].dialCode = garageForm.controls['phone'].value['dialCode'];
     this.lavageValues[index].address = garageForm.controls['address'].value;
-    this.lavageValues[index].lavageOwner = this.currentUsername; 
+    //this.lavageValues[index].lavageOwner = this.currentUsername; 
     this.lavageValues[index].currentNbVehicle = 0; //by default
   }
 
@@ -314,7 +298,7 @@ export class CompleteRegistrationComponent implements OnInit {
     this.officeValues[index].email = officeForm.controls['email'].value;
     this.officeValues[index].phone = officeForm.controls['phone'].value;
     this.officeValues[index].address = officeForm.controls['address'].value;
-    this.officeValues[index].officeOwner = this.currentUsername; //from token
+    //this.officeValues[index].officeOwner = this.currentUsername; //from token
   }
 
   onMatriculeFiscaleChange() {
