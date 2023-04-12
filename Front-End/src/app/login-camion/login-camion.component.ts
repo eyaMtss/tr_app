@@ -22,7 +22,7 @@ export class LoginCamionComponent implements OnInit{
 
  
   onSubmit() {
-    this.router.navigate(["/driver"])
+    this.router.navigate(["/drivercamion"])
     //verify if the camion exists
     //if yes: navigate to driver interface
     //if no: logout
