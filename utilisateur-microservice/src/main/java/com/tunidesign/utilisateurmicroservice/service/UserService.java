@@ -25,7 +25,7 @@ public interface UserService {
 	User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException;
 	User updateRole(Long userId, Role role);
 	User getUser(Long userId);
-	
+	User getByUsername(String username);
 	User uploadPicture(PictureRequestDTO pictureRequestDTO);
 	User updateUser(User user);
 	User changeStatus(Long userId, Status status);
@@ -51,7 +51,6 @@ public interface UserService {
 	
 	User getUserByUsernameOrEmail(String identifier);
 	Optional<User> getUserByEmail(String email);
-	Optional<User> getUserByUsername(String login);
+	//Optional<User> getUserByUsername(String login);
 	public User updateCompletedRegistration(String username);
-
 }

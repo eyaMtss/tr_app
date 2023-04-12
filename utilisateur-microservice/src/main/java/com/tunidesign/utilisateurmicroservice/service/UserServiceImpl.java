@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		//user.setPassword(passwordEncoder.encode(user.getPassword()));
 		//user = addUserCredentials(user);
+		user.setCompletedRegistration(false);
+		user.setIsRegistrationCompleted((false));
 		return userRepository.save(user);
 	}
 	@Override
@@ -57,7 +59,8 @@ public class UserServiceImpl implements UserService {
 		existingUser.setCity(user.getCity());
 		existingUser.setZipCode(user.getZipCode());
 		existingUser.setMatriculeFiscale(existingUser.getMatriculeFiscale());
-		existingUser.setCompletedRegistration(true);
+		//existingUser.setCompletedRegistration(true);
+		existingUser.setIsRegistrationCompleted(true);
 		return userRepository.save(existingUser);
 	}
 	@Override
@@ -73,8 +76,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User getByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
 	public User uploadPicture(PictureRequestDTO pictureRequestDTO) {
-		User existingUser = userRepository.findById(pictureRequestDTO.getUserId()).get();
+		User existingUser = userRepository.findByUsername(pictureRequestDTO.getUsername());
 		existingUser.setPictureName(pictureRequestDTO.getPictureName());
 		existingUser.setPictureType(pictureRequestDTO.getPictureType());
 		existingUser.setPictureByte(pictureRequestDTO.getPictureByte());
@@ -186,11 +194,10 @@ public class UserServiceImpl implements UserService {
 		return Optional.ofNullable(userRepository.findByEmail(email));
 	}
 
-	@Override
+	/*@Override
 	public Optional<User> getUserByUsername(String login) {
 		return Optional.ofNullable(userRepository.findByUsername(login));
-	}
-
+	}*/
 	@Override
 	public User updateCompletedRegistration(String username) {
 		User existingUser = userRepository.findByUsername(username);
