@@ -11,18 +11,30 @@ import org.springframework.stereotype.Component;
 public class GarageMapperImpl implements GarageMapper{
     @Override
     public GarageResponseDTO garageToGarageResponseDTO(Garage garage) {
-       return  GarageResponseDTO.builder().id(garage.getId())
-                .capacite(garage.getCapacite())
-                .adresse(garage.getAdresse()).build();
-
+       return  GarageResponseDTO.builder()
+               .id(garage.getId())
+               .name(garage.getName())
+               .email(garage.getEmail())
+               .phone(garage.getPhone())
+               .countryCode(garage.getCountryCode())
+               .dialCode(garage.getDialCode())
+               .garageType(garage.getGarageType())
+               .garageOwner(garage.getGarageOwner())
+               .capacite(garage.getCapacite())
+               .build();
     }
 
     @Override
     public Garage garageRequestDTOToGarage(GarageRequestDTO garageRequestDTO) {
-      return  Garage.builder().id(garageRequestDTO.getId())
-               .capacite(garageRequestDTO.getCapacite())
-               .adresse(garageRequestDTO.getAdresse()).build();
-
-
+      return  Garage.builder()
+              .name(garageRequestDTO.getName())
+              .email(garageRequestDTO.getEmail())
+              .phone(garageRequestDTO.getPhone())
+              .countryCode(garageRequestDTO.getCountryCode())
+              .dialCode(garageRequestDTO.getDialCode())
+              .garageType(garageRequestDTO.getGarageType())
+              .garageOwner(garageRequestDTO.getGarageOwner())
+              .capacite(garageRequestDTO.getCapacite())
+              .build();
     }
 }
