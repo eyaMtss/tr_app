@@ -21,7 +21,7 @@ public class ResourceServerConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/swagger-ui/**", "/v3/**", "/contrat/verifyContrat", "/contrat/getAll")
+                .requestMatchers("/swagger-ui/**", "/v3/**", "/camion/**")
                     .permitAll()
                 .and()
                 .authorizeRequests()
