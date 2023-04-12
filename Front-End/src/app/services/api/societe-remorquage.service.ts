@@ -18,10 +18,6 @@ export class SocieteRemorquageService {
   getById(id: number): Observable<Company>{
     return this.httpClient.get<Company>(this._URL + "getById/" + id);
   }
-
-  addSociete(societe: Company){
-
-  }
   
   create(societe: Company): Observable<Company> {
     return this.httpClient.post<Company>(this._URL + 'add', societe);
