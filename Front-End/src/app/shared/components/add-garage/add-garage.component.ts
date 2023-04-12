@@ -18,7 +18,6 @@ export class AddGarageComponent implements OnInit {
     this.garageForm = this._formBuilder.group({
       name: ["", Validators.required],
       capacity: ["", Validators.required],
-      garageOwner: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       phone: ["", Validators.required],
       address: ["", Validators.required],
@@ -63,6 +62,7 @@ export class AddGarageComponent implements OnInit {
   }
 
   emitInformationForm(value: FormGroup) {
+    console.log(value);
     this.garageFormEvent.emit(value);
   }
   
