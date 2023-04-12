@@ -5,6 +5,8 @@ export class Lavage {
     lavageOwner!: string;
     email!: string;
     phone!: number;
+    countryCode!: string;
+    dialCode!: string;
     address!: string;
 
     public constructor();
