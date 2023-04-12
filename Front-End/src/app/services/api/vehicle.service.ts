@@ -23,6 +23,10 @@ export class VehicleService {
     return this.httpClient.post<Vehicle>(this._URL + 'add', vehicle);
   }
 
+  addList(vehicles: Vehicle[]): Observable<Vehicle[]> {
+    return this.httpClient.post<Vehicle[]>(this._URL + 'addAll', vehicles);
+  }
+
   deleteVehicle(id: number){
     return this.httpClient.delete<Vehicle>(this._URL + "delete/" + id);
   }
