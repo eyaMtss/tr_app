@@ -61,4 +61,5 @@ public class UserResponseDTO {
 	private Long insuranceCompanyId;
 	// Agency
 	private Long agencyId;
+	private Boolean isRegistrationCompleted;
 }
