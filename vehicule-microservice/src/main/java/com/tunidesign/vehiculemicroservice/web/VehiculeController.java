@@ -48,11 +48,11 @@ public class VehiculeController {
         ContratResponseDTO contratResponseDTO = verifyContract(ContratRequestDTO.builder()
                 .numContrat(vehiculeRequestDTO.getNumContrat())
                 .numChassis(vehiculeRequestDTO.getNumChassis())
-                .idAssurance(vehiculeRequestDTO.getIdAssurance())
-                .idAgence(vehiculeRequestDTO.getIdAgence())
-                .dateDebut(vehiculeRequestDTO.getDateDebut())
-                .dateFin(vehiculeRequestDTO.getDateFin())
-                .cin(vehiculeRequestDTO.getCin())
+                //.idAssurance(vehiculeRequestDTO.getIdAssurance())
+                //.idAgence(vehiculeRequestDTO.getIdAgence())
+                //.dateDebut(vehiculeRequestDTO.getDateDebut())
+                //.dateFin(vehiculeRequestDTO.getDateFin())
+                //.cin(vehiculeRequestDTO.getCin())
                 .build()).getBody();
         if (contratResponseDTO.getIsExist()){
             VehiculeResponseDTO savedVehicle = vehiculeService.save(vehiculeRequestDTO);
@@ -62,6 +62,7 @@ public class VehiculeController {
             throw new ContractNotFoundException("You don't have a contract");
         }
     }
+
 
     // verify numContrat if exist
     private ResponseEntity<ContratResponseDTO> verifyContract(ContratRequestDTO contratRequestDTO) {
