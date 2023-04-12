@@ -19,6 +19,8 @@ import { LoginCamionComponent } from './login-camion/login-camion.component';
 import { SocieteDeRemorquageComponent } from './societe-de-remorquage/societe-de-remorquage.component';
 import { ShiftComponent } from './shift/shift.component';
 import { ProfilclientComponent } from './profilclient/profilclient.component';
+import { TaComponent } from './ta/ta.component';
+import { DrivercamionComponent } from './drivercamion/drivercamion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,6 +33,8 @@ const routes: Routes = [
 
  
   {path: 'profil', component: ProfilclientComponent},
+  {path: 'ta', component: TaComponent},
+  {path: 'drivercamion', component: DrivercamionComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
   {path: 'societe', component: SocieteDeRemorquageComponent},
