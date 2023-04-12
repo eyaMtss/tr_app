@@ -30,12 +30,16 @@ export class NavbarComponent implements OnInit, OnChanges{
   home() {
     console.log(this.username)
     console.log(this.currentRole)
-    if(this.currentRole == "CLIENT") this.router.navigate(["/client"]);
-    else if(this.currentRole == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
-    else if(this.currentRole == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
-    else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
-    else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
-    else if(this.currentRole == "DRIVER") this.router.navigate(['camion-login']);
+    if (this.isLoggedIn == true){
+      if(this.currentRole == "CLIENT") this.router.navigate(["/client"]);
+      else if(this.currentRole == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
+      else if(this.currentRole == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
+      else if(this.currentRole == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+      else if(this.currentRole == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+      else if(this.currentRole == "DRIVER") this.router.navigate(['camion-login']);
+    }
+        
+        
     else this.router.navigate(["/"]);
   }
 

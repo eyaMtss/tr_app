@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Company } from 'src/app/models/company';
+import { AgencyService } from 'src/app/services/api/agency.service';
+import { InsuranceService } from 'src/app/services/api/insurance.service';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -9,6 +12,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-vehicle.component.css']
 })
 export class AddVehicleComponent implements OnInit {
+  isWhiteBackground!: boolean;
+  backgroundColor!: string;
+ 
   registrationTypes = [{id: 1, value: "Série Normale (TU)"}, {id: 2, value: "Régime Suspensif (RS)"},
   {id: 3, value: "Moto (MOTO)"}, {id: 4, value: "Tracteur (TRAC)"}, {id: 5, value: "Personnel Administratif et Technique (PAT)"},
   {id: 6, value: "Chef de Mission Diplomatique (CMD)"}, {id: 7, value: "Corps Diplomatique (CD)"},
@@ -24,9 +30,12 @@ export class AddVehicleComponent implements OnInit {
 
   vehicleForm: FormGroup;
   isRegistrationTypeSelected: boolean = false;
-
+  insurances!: Company[];
+  agencies!: Company[];
   @Output() vehicleFormEvent = new EventEmitter<FormGroup>();
-  constructor(private _formBuilder: FormBuilder, private httpClient: HttpClient){
+  private subscription!: Subscription;
+  constructor(private _formBuilder: FormBuilder, private httpClient: HttpClient,
+    private agencyService: AgencyService, private insuranceService: InsuranceService){
     this.vehicleForm = this._formBuilder.group({
       registrationType: ["", Validators.required],
       registrationNumber: ["", Validators.required],
@@ -38,14 +47,18 @@ export class AddVehicleComponent implements OnInit {
       year: ["", [Validators.required, Validators.max(4), Validators.min(4)]],
       vehicleCondition: ["", Validators.required],
       boite: ["", Validators.required],
-      cylindre: ["", Validators.required],
+      cylindree: ["", Validators.required],
       carburant: ["", Validators.required],
       carrosserieType: ["", Validators.required],
       power: ["", Validators.required],
       kilometrage: ["", Validators.required],
       doorsNumber: ["", Validators.required],
       color: ["", Validators.required],
+      insurance: ["", Validators.required],
+      agency: [{value: "", disabled: true}, Validators.required],
       contractNumber: ["", Validators.required],
+      startContract: ["", Validators.required],
+      endContract: ["", Validators.required],
       contractFile: [""],
       chassisFile: [""],
       technicalVisitFile: [""],
@@ -60,7 +73,8 @@ export class AddVehicleComponent implements OnInit {
     });
     this.getJSON("assets/vehicle/vehicle-condition.json").subscribe(data => {
       this.vehicleConditions = data;
-    })
+    });
+    this.getAllInsurances();
   }
 
   getJSON(jsonUrl: string): Observable<any>{
@@ -79,15 +93,37 @@ export class AddVehicleComponent implements OnInit {
     console.log(this.models)
   }
 
+  getAllInsurances() {
+    this.insuranceService.getAll().subscribe(data => {
+      console.log(data);
+      this.insurances = data;
+    })
+  }
+
+  getAllAgencies() {
+    console.log(this.vehicleForm.controls['insurance'].value)
+    this.agencyService.getByInsurance(this.vehicleForm.controls['insurance'].value).subscribe(data => {
+      console.log(data);
+      this.vehicleForm.controls['agency'].enable();
+      this.agencies = data;
+    })
+  }
+
+  onInsuranceValueChange(){
+    this.getAllAgencies();
+  }
+
   onFormChange(){
     //this.informationForm.valueChanges.subscribe(val => {
-      if(this.vehicleForm.valid){
+      //if(this.vehicleForm.valid){
+        console.log(this.vehicleForm)
         this.emitInformationForm(this.vehicleForm);
-      }
+      //}
     //});  
   }
 
   emitInformationForm(value: FormGroup) {
+    console.log(value);
     this.vehicleFormEvent.emit(value);
   }
 
@@ -105,5 +141,17 @@ export class AddVehicleComponent implements OnInit {
 
   getVignetteFile(vignetteFile: File) {
     this.vehicleForm.controls['vignetteFile'].setValue(vignetteFile);
+  }
+
+  // Set the background color and isWhiteBackground variable based on your requirements
+  setBackground(): void {
+    this.backgroundColor = 'white'; // or any other color
+    this.isWhiteBackground = this.backgroundColor === 'white';
+  }
+  
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

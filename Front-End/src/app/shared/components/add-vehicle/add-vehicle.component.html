@@ -125,12 +125,12 @@
         </div>
 
         <div class="col-12 col-md-3">
-            <label for="cylindre">Cylindrée</label>
+            <label for="cylindree">Cylindrée</label>
             <div class="input-group mb-3">
-                <select class="form-select" formControlName="cylindre" id="cylindre" [ngClass]="{
+                <select class="form-select" formControlName="cylindree" id="cylindree" [ngClass]="{
                     'is-invalid':
-                        vehicleForm.get('cylindre')!.touched &&
-                        vehicleForm.controls['cylindre'].errors
+                        vehicleForm.get('cylindree')!.touched &&
+                        vehicleForm.controls['cylindree'].errors
                 }">
                     <option value="<1.0L">&lt;1.0L</option>
                     <option value="1.1L">1.1L</option>
@@ -238,8 +238,6 @@
                             vehicleForm.get('doorsNumber')!.touched &&
                             vehicleForm.controls['doorsNumber'].errors
                     }" />
-                <!--(keypress)="notWritableField()"
-                    (blur)="notWritableField()"-->
             </div>
         </div>
 
@@ -257,6 +255,32 @@
             </div>
         </div>
 
+        <div class="col-12 col-md-3 mb-3">
+            <label for="insurance">Assurance</label>
+            <select class="form-select" aria-label="Default select example" formControlName="insurance" [ngClass]="{
+                'is-invalid':
+                    vehicleForm.get('insurance')!.touched &&
+                    vehicleForm.controls['insurance'].errors
+            }" (change)="onInsuranceValueChange()">
+                <option selected="true" disabled="disabled">Choisissez votre assurance</option>
+                <option *ngFor="let insurance of insurances" [value]="insurance.id">{{insurance.name}}</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-3 mb-3">
+            <label for="agency">Agence</label>
+            <select class="form-select" aria-label="Default select example" formControlName="agency" [ngClass]="{
+                'is-invalid':
+                    vehicleForm.get('agency')!.touched &&
+                    vehicleForm.controls['agency'].errors
+            }">
+                <option selected="true" disabled="disabled">Choisissez votre agence</option>
+                <option *ngFor="let agency of agencies" [value]="agency.id">{{agency.name}}</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-6"></div>
+
         <div class="col-12 col-md-3">
             <label for="contractNumber">Numero du contrat</label>
             <div class="input-group mb-3">
@@ -269,7 +293,29 @@
             </div>
         </div>
 
-        <div class="col-12 col-9"></div>
+        <div class="col-12 col-md-3">
+            <label for="startContract">Date de début</label>
+            <div class="input-group mb-3">
+                <input class="form-control" id="startContract" type="date"
+                    formControlName="startContract" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('startContract')!.touched &&
+                            vehicleForm.controls['startContract'].errors
+                    }"/>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <label for="endContract">Date de fin</label>
+            <div class="input-group mb-3">
+                <input class="form-control" id="endContract" type="date"
+                    formControlName="endContract" [ngClass]="{
+                        'is-invalid':
+                            vehicleForm.get('endContract')!.touched &&
+                            vehicleForm.controls['endContract'].errors
+                    }"/>
+            </div>
+        </div>
 
         <div class="col-12 col-md-6">
             <label for="power">Contrat</label>
