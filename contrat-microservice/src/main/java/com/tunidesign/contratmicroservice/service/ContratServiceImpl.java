@@ -43,8 +43,8 @@ public class ContratServiceImpl implements ContratService {
 
     @Override
     public Boolean verifyContract(VerifyContractRequestDTO verifyContractRequestDTO) {
-        Contrat contrat = contratRepository.findByNumContratAndNumChassis(verifyContractRequestDTO.getNumContrat(), verifyContractRequestDTO.getNumChassis());
-        return contrat.equals(null);
+        Contrat contrat = contratRepository.findByNumContrat(verifyContractRequestDTO.getNumContrat());
+        return !contrat.equals(null);
     }
 
 }
