@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
+import { UserService } from '../api/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private keycloakService: KeycloakService, private router: Router) { }
+  constructor(private keycloakService: KeycloakService, private router: Router,
+    private userService: UserService) { }
 
   async getLoggedUser(){
     try {
@@ -39,12 +41,17 @@ export class AuthService {
   } 
 
   logout(){
+    let username = this.getUsername()
     this.keycloakService.logout(window.location.origin).then(() => {
       this.keycloakService.clearToken(); //clear token from keycloak service
       this.router.navigate(["/home"]); // navigate to home page
     });
+    console.log(username);
     localStorage.removeItem("Token") // clear token from localStorage
     localStorage.setItem("isLoggedIn", "false"); // change isLoggedIn to false in LocalStorage
+    this.userService.updateCompletedRegistration(username).subscribe(data => {
+      console.log(data);
+    })
   }
 
   redirectToProfile(){
