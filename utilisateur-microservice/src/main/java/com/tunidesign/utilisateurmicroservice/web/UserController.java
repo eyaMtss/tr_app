@@ -62,14 +62,14 @@ public class UserController {
 	 * @return userResponseDTO
 	 */
 	@PutMapping(value = "/completeRegistration/{username}/{country}/{governorate}/{city}/{zipCode}/{matriculeFiscale}/{cin}")
-	public ResponseEntity<UserResponseDTO> updateUser(@RequestParam("imageFile") MultipartFile file,
+	public ResponseEntity<UserResponseDTO> completeRegistration(@RequestParam("imageFile") MultipartFile file,
 													  @PathVariable String username, @PathVariable String country,
 													  @PathVariable String governorate, @PathVariable String city,
 													  @PathVariable Integer zipCode, @PathVariable String matriculeFiscale,
 													  @PathVariable Integer cin)
 			throws IOException {
 		System.out.println("Received file: " + file.getOriginalFilename());
-		System.out.println("Received order: " + username);
+		System.out.println("Received username: " + username);
 		// Parse order data from JSON string
 		//UpdatedUserRequestDTO updatedUser = new ObjectMapper().readValue(userAddress, UpdatedUserRequestDTO.class);
 		if (userService.isExistByUsername(username)) {
@@ -88,7 +88,7 @@ public class UserController {
 			if (!file.isEmpty()){
 				// add image
 				PictureRequestDTO pictureRequestDTO = PictureRequestDTO
-						.builder().userId(savedUser.getUserId())
+						.builder().username(savedUser.getUsername())
 						.pictureName(file.getOriginalFilename())
 						.pictureType(file.getContentType())
 						.pictureByte(compressBytes(file.getBytes())).build();
@@ -99,15 +99,32 @@ public class UserController {
 			throw new IOException();
 	}
 	@PostMapping("/uploadImage/{userId}")
-	public ResponseEntity<UserResponseDTO> uplaodImage(@PathVariable Long userId,
+	@RolesAllowed({"GARAGISTE_ADMIN"})
+	public ResponseEntity<UserResponseDTO> uplaodImage(@PathVariable String username,
 													   @RequestParam("imageFile") MultipartFile file) throws IOException {
 
 		logger.info("Original Image Byte Size - " + file.getBytes().length);
-		logger.info(String.valueOf(userId));
+		logger.info(String.valueOf(username));
 		// add image
-		PictureRequestDTO pictureRequestDTO = PictureRequestDTO.builder().userId(userId).pictureName(file.getOriginalFilename())
+		PictureRequestDTO pictureRequestDTO = PictureRequestDTO.builder().username(username).pictureName(file.getOriginalFilename())
 				.pictureType(file.getContentType()).pictureByte(compressBytes(file.getBytes())).build();
 		return new ResponseEntity<>(userMapper.userToUserResponseDTO(userService.uploadPicture(pictureRequestDTO)), HttpStatus.ACCEPTED);
+	}
+	@GetMapping("/getByUsername/{username}")
+	public ResponseEntity<UserResponseDTO> getUserByUsername(@PathVariable String username) {
+		try {
+			return ResponseEntity.ok().body(userMapper.userToUserResponseDTO(userService.getByUsername(username)));
+		} catch (Exception ex) {
+			throw new EntityNotFoundException("User doesn't exist");
+		}
+	}
+	@PutMapping("/updateCompletedRegistration/{username}")
+	public ResponseEntity<UserResponseDTO> updateCompletedRegistration(@PathVariable String username){
+		try{
+			return ResponseEntity.ok().body(userMapper.userToUserResponseDTO(userService.updateCompletedRegistration(username)));
+		} catch (Exception ex) {
+			throw new EntityNotFoundException("User doesn't exist");
+		}
 	}
 	@PostMapping("/addSuperAdmin")
 	@RolesAllowed({"SUPER_ADMIN"})
