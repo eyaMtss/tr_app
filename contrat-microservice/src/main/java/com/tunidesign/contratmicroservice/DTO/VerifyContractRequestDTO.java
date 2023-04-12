@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class VerifyContractRequestDTO {
     private String numContrat;
-    private Long numChassis;
+    private int numChassis;
 }
