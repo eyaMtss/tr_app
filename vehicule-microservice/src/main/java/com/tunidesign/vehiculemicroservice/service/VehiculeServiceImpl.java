@@ -3,6 +3,7 @@ package com.tunidesign.vehiculemicroservice.service;
 import com.tunidesign.vehiculemicroservice.DTO.VehiculeRequestDTO;
 import com.tunidesign.vehiculemicroservice.DTO.VehiculeResponseDTO;
 import com.tunidesign.vehiculemicroservice.mapper.VehiculeMapper;
+import com.tunidesign.vehiculemicroservice.mapper.VehiculeMapperImpl;
 import com.tunidesign.vehiculemicroservice.model.entity.Vehicule;
 import com.tunidesign.vehiculemicroservice.repository.VehiculeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ import java.util.List;
 public class VehiculeServiceImpl implements VehiculeService {
     @Autowired
     private VehiculeRepository vehiculeRepository;
-    private VehiculeMapper vehiculeMapper;
+
+    private VehiculeMapperImpl vehiculeMapper = new VehiculeMapperImpl();
     @Override
     public List<VehiculeResponseDTO> getVehicles() {
         return vehiculeRepository.findAll().stream().map(vehicule -> vehiculeMapper.vehiculeToVehiculeDTO(vehicule)).toList();
