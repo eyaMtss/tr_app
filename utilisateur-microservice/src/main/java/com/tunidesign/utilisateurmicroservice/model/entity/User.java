@@ -75,5 +75,6 @@ public class User {
 	@Enumerated(EnumType.STRING)
     private Role role;
 	private Boolean completedRegistration = false;
+	private Boolean isRegistrationCompleted = false;
 
 }
