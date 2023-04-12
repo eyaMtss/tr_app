@@ -57,6 +57,6 @@ export class UserService {
   }
 
   updateCompletedRegistration(username: string): Observable<any>{
-    return this.httpClient.get(this._URL + "updateCompletedRegistration/"+ username)
+    return this.httpClient.put(this._URL + "updateCompletedRegistration/"+ username, {})
   }
 }
