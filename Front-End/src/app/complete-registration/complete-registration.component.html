@@ -88,7 +88,7 @@
             <div *ngIf="currentRole == 'LAVAGISTE_ADMIN'" class="col-12">
                 <div *ngFor="let lavage of lavageValues; let i = index" class="d-flex flex-column ">
                     <div class="d-flex justify-content-between mt-2">
-                        <h4>Garage {{i+1}}</h4>
+                        <h4>Lavage {{i+1}}</h4>
                         <button *ngIf="currentLavageNumber > 2" class="btn border add-delete-btn shadow"
                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Supprimer"
                             (click)="onDeleteLavageButton(i)">
@@ -123,7 +123,7 @@
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
-            </!div-->
+            </!--div-->
 
             <div class="col-12 d-flex justify-content-end mb-3">
                 <button class="btn confirm_btn" (click)="onConfirm()">Confirmer</button>
