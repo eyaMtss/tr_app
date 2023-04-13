@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-lavage',
@@ -8,14 +8,12 @@ import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input';
   styleUrls: ['./add-lavage.component.css']
 })
 export class AddLavageComponent {
-  CountryISO = CountryISO;
-  SearchCountryField = SearchCountryField;
-
   lavageForm: FormGroup;
   // lavage 
   lavageType: string = "";
   lavageTypeValue!: string; // ngModel
   @Output() lavageFormEvent = new EventEmitter<FormGroup>();
+  private subscription!: Subscription;
   constructor(private _formBuilder: FormBuilder){
     this.lavageForm = this._formBuilder.group({
       name: ["", Validators.required],
@@ -33,7 +31,23 @@ export class AddLavageComponent {
       } 
   }
 
+  getAddressMap(address: string){
+    this.lavageForm.controls['address'].setValue(address);
+    console.log(address);
+  }
+
   emitInformationForm(value: FormGroup) {
     this.lavageFormEvent.emit(value);
+  }
+
+  getPhone(phone: any){
+    this.lavageForm.controls['phone'].setValue(phone);
+    console.log(phone);
+  }
+  
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

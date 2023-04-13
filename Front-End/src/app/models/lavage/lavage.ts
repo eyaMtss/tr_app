@@ -2,9 +2,11 @@ export class Lavage {
     name!: string;
     capacity!: number;
     currentNbVehicle!: number;
-    lavageOwner!: number;
+    lavageOwner!: string;
     email!: string;
     phone!: number;
+    countryCode!: string;
+    dialCode!: string;
     address!: string;
 
     public constructor();

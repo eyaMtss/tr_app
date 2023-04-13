@@ -1,12 +1,12 @@
 package com.tunidesign.apigateway.config;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.web.server.WebFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
+import org.springframework.core.Ordered;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.client.oidc.web.server.logout.OidcClientInitiatedServerLogoutSuccessHandler;
@@ -18,12 +18,12 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.Duration;
+import java.util.Collections;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -34,42 +34,20 @@ public class SecurityConfig {
                 .oauth2Login()
                 .authorizationEndpoint()
                 .baseUri("/login/oauth2/code/keycloak");
-
     }
-
-    /*@Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-        return new CorsWebFilter(corsConfigurationSource());
-    }*/
-    /*@Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*");
-    }*/
-
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ServerLogoutSuccessHandler handler) {
         http
-                .cors().and()
                 .csrf().disable()
                 .authorizeExchange()
                     .pathMatchers("/actuator/**","/logout.html", "/login",
-                            "/societeRemorquage/getAll", "/assurance/getAll",
+                            "/societeRemorquage/getAll", "/assurance/getAll", "/agence/getAllByInsurance/**",
                             "/users/add",
-                            "/users/getAll/clients")
+                            "/users/getAll/clients", "/users/completeRegistration/**",
+                            "/garage/addAll/**",
+                            "/contrat/verifyContrat", "/vehicule/add", "/users/getByUsername/**",
+                            "/users/updateCompletedRegistration/**",
+                            "/camion/**")
                         .permitAll()
                     .anyExchange().authenticated()
                 .and()
@@ -94,10 +72,10 @@ public class SecurityConfig {
         return ClientRegistration.withRegistrationId("keycloak")
                 .clientId("tunidesign-user")
                 .clientName("tunidesign-user")
-                .clientSecret("KjGdYhrCW5RLqv7JKRg62BUZs5AMh098")
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .clientSecret("jAIRyJdEjgxcEwIiOt7fsaCib03QxSZQ")
+                .authorizationGrantType(AuthorizationGrantType.JWT_BEARER) //AUTHORIZATION_CODE
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
-                .scope("openid", "profile", "email", "roles")  //
+                .scope("openid", "profile", "email", "roles", "web-origins")  //
                 .issuerUri("http://localhost:8080/realms/tunidesign-auth")
                 .authorizationUri("http://localhost:8080/realms/tunidesign-auth/protocol/openid-connect/auth")
                 .tokenUri("http://localhost:8080/realms/tunidesign-auth/protocol/openid-connect/token")
@@ -106,5 +84,23 @@ public class SecurityConfig {
                 .userNameAttributeName("preferred_username")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .build();
+    }
+
+    @Bean
+    public FilterRegistrationBean keycloakCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedHeader("Authorization");
+        source.registerCorsConfiguration("/auth/*", config);
+
+        CorsConfigurationSource corsSource = (CorsConfigurationSource)source;
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(corsSource));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
     }
 }

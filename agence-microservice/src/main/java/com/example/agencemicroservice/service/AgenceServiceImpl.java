@@ -41,4 +41,11 @@ public class AgenceServiceImpl implements AgenceService {
         return agenceMapper.agenceToAgenceDTO(agenceRepository.save(agenceMapper.agenceRequestDTOToAgence(agenceRequestDTO)));
     }
 
+    @Override
+    public List<AgenceResponseDTO> getByInsurance(Long idAssurance) {
+        return agenceRepository.findByIdAssurance(idAssurance).stream()
+                .map(agency -> agenceMapper.agenceToAgenceDTO(agency))
+                .toList();
+    }
+
 }

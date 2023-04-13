@@ -8,11 +8,19 @@ export const environment = {
   port: 8989,
   keycloak: {
     realm: 'tunidesign-auth',
-    url: 'http://localhost:8080/',
-    clientId: 'tunidesign-front-end'
+    url: 'http://localhost:8080',
+    clientId: 'tunidesign-front-end',
+     
   },
 
-
+  "realm": "tunidesign-auth",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "external",
+  "resource": "tunidesign-front-end",
+  "public-client": true,
+  "verify-token-audience": true,
+  "use-resource-role-mappings": true,
+  "confidential-port": 0
 };
 
 /*

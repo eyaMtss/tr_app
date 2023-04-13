@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -17,18 +18,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Document(collection = "vehicule")
 public class Vehicule {
+    @Transient
+    public static final String SEQUENCE_NAME = "vehicule_sequence";
     @Id
     private Long id;
     private String typeImmat;
     private String numImmat;
     private String confirmNumImmat;
     private Long numChassis;
+    //@Enumerated(EnumType.STRING)
+    private String marque;
+    private String modele;
+    private String annee;
+    private String etatVehicule;
+    private String boite;
+    private String cylindree;
+    private String carburant;
+    private String typeCarrosserie;
+    private int puissance;
     private int poids;
-    @Enumerated(EnumType.STRING)
-    private Couleur couleur;
     private int kilometrage;
     private int nbPortes;
-    private int puissance;
-    @Enumerated(EnumType.STRING)
-    private Marque marque;
+    //@Enumerated(EnumType.STRING)
+    private String couleur;
+    private String numContrat;
 }

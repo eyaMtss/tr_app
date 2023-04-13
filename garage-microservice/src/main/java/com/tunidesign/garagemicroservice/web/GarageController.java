@@ -4,8 +4,12 @@ package com.tunidesign.garagemicroservice.web;
 import com.tunidesign.garagemicroservice.DTO.GarageRequestDTO;
 import com.tunidesign.garagemicroservice.DTO.GarageResponseDTO;
 import com.tunidesign.garagemicroservice.exceptions.GarageIntrouvableException;
+import com.tunidesign.garagemicroservice.model.Garage;
 import com.tunidesign.garagemicroservice.service.GarageService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,5 +50,16 @@ public class GarageController {
         GarageResponseDTO garage = garageService.save(orderRequestDTO);
         if(garage==null) throw new GarageIntrouvableException("Cet ordre est INTROUVABLE. ");
         return garage;
+    }
+
+    @PostMapping("/addAll/{userId}")
+    public ResponseEntity<List<GarageResponseDTO>> addAll(@PathVariable Long userId, @Valid @RequestBody List<GarageRequestDTO> garagesRequestDTO) throws Exception {
+        try {
+            List<GarageResponseDTO> savedGarages = garageService.addAll(userId, garagesRequestDTO);
+                    //updateRole(userService.addUser(userMapper.clientRequestDTOToUser(clientRequestDTO)).getUserId(), Role.SUPER_ADMIN);
+            return new ResponseEntity<>(savedGarages, HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

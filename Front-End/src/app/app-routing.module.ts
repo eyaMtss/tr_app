@@ -33,16 +33,18 @@ const routes: Routes = [
 
  
   {path: 'profil', component: ProfilclientComponent},
-  {path: 'ta', component: TaComponent},
-  {path: 'drivercamion', component: DrivercamionComponent},
   {path: 'userInformation', component: UserInformationComponent},
   {path: 'rating', component: RatingComponent},
-  {path: 'societe', component: SocieteDeRemorquageComponent},
   {path: 'pass', component: PickUpPassComponent},
   {path: 'order', component: OrderComponent},
   {path: 'suivi', component: SuiviOrdreComponent},
-  {path: 'shift', component: ShiftComponent, canActivate:[AuthGuard], data: { roles: ['AGENCY_ADMIN']}},
+  {path: 'shift', component: ShiftComponent},
   { path: 'qrcode', component: QrCodeTestComponent},
+  
+  {path: 'ta', component: TaComponent, canActivate:[AuthGuard], data: { roles: ['TA']}},
+  {path: 'drivercamion', component: DrivercamionComponent, canActivate:[AuthGuard], data: { roles: ['DRIVER']}},
+  {path: 'societe', component: SocieteDeRemorquageComponent, canActivate:[AuthGuard], data: { roles: ['SOCIETE_REMORQUAGE']}},
+
   { path: 'garagisteAdmin', loadChildren: () => import('./garagiste-admin/garagiste-admin.module').then(m => m.GaragisteAdminModule),
     canActivate:[AuthGuard], data: { roles: ['GARAGISTE_ADMIN']} },
   { path: 'insuranceAdmin', loadChildren: () => import('./insurance-admin/insurance-admin.module').then(m => m.InsuranceAdminModule), 
@@ -55,6 +57,8 @@ const routes: Routes = [
     canActivate:[AuthGuard], data: { roles: ['LAVAGISTE_ADMIN']} },
   { path: 'driver', loadChildren: () => import('./driver/driver.module').then(m => m.DriverModule),
     canActivate:[AuthGuard], data: { roles: ['DRIVER']}},
+  { path: 'expert', loadChildren: () => import('./expert/expert.module').then(m => m.ExpertModule),
+    canActivate:[AuthGuard], data: { roles: ['EXPERT']} },
 
 
 

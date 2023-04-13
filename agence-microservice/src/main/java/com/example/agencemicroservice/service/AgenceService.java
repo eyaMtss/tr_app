@@ -13,4 +13,5 @@ public interface AgenceService {
         AgenceResponseDTO save(AgenceRequestDTO agence);
         void deleteAgence(Long id);
         AgenceResponseDTO update(AgenceRequestDTO agenceRequestDTO);
+        List<AgenceResponseDTO> getByInsurance(Long idAssurance);
 }

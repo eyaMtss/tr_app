@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Vehicle } from 'src/app/models/vehicle';
+import { Vehicle } from 'src/app/models/vehicle/vehicle';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,6 +21,10 @@ export class VehicleService {
 
   create(vehicle: Vehicle): Observable<Vehicle> {
     return this.httpClient.post<Vehicle>(this._URL + 'add', vehicle);
+  }
+
+  addList(vehicles: Vehicle[]): Observable<Vehicle[]> {
+    return this.httpClient.post<Vehicle[]>(this._URL + 'addAll', vehicles);
   }
 
   deleteVehicle(id: number){

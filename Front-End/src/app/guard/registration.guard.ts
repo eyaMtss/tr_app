@@ -3,17 +3,33 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
+import { UserService } from '../services/api/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationGuard implements CanActivate {
-  constructor(private keycloakService: KeycloakService, private router: Router, private authService: AuthService) {
+  constructor(private keycloakService: KeycloakService, private router: Router,
+    private authService: AuthService, private userService: UserService) {
   }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const userDetails = this.keycloakService.getKeycloakInstance().idTokenParsed;
+    let username = this.authService.getUsername();
+    this.userService.getByUsername(username).subscribe(data => {
+      console.log(data);
+      let isRegistrationCompleted = data.isRegistrationCompleted;
+      console.log(isRegistrationCompleted)
+      if(isRegistrationCompleted){
+        return true;
+      }
+      else {
+        this.router.navigate(["/complete-registration"]);
+        return false;
+      }
+    });
+    return false;
+    /*const userDetails = this.keycloakService.getKeycloakInstance().idTokenParsed;
     console.log(userDetails)
     if (!userDetails) {
       return false;
@@ -25,6 +41,7 @@ export class RegistrationGuard implements CanActivate {
       this.router.navigate(['/complete-registration']);
       return false;
     }
-      return true;
+    return true;*/
+  
   }
 }

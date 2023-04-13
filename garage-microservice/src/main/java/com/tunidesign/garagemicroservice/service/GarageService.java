@@ -13,4 +13,6 @@ public interface GarageService {
     GarageResponseDTO save(GarageRequestDTO garageRequestDTO);
     void deleteGarage(Long id);
     GarageResponseDTO update(GarageRequestDTO garageRequestDTO);
+
+    List<GarageResponseDTO> addAll(Long userId, List<GarageRequestDTO> garages);
 }

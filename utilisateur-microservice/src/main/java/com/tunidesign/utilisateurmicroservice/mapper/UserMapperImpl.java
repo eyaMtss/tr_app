@@ -28,6 +28,7 @@ public class UserMapperImpl implements UserMapper {
 		userResponseDTO.setEmail(user.getEmail());
 		userResponseDTO.setPhoneNumber(user.getPhoneNumber());
 		userResponseDTO.setPictureName(user.getPictureName());
+		userResponseDTO.setIsRegistrationCompleted(user.getIsRegistrationCompleted());
 		return userResponseDTO;
 	}
 
@@ -65,11 +66,13 @@ public class UserMapperImpl implements UserMapper {
 	@Override
 	public User updatedUserRequestDTOToUser(UpdatedUserRequestDTO updatedUserRequestDTO) {
 		return User.builder()
+				.username(updatedUserRequestDTO.getUsername())
 				.country(updatedUserRequestDTO.getCountry())
 				.governorate(updatedUserRequestDTO.getGovernorate())
 				.city(updatedUserRequestDTO.getCity())
 				.zipCode(updatedUserRequestDTO.getZipCode())
 				.matriculeFiscale(updatedUserRequestDTO.getMatriculeFiscale())
+				.cin(updatedUserRequestDTO.getCin())
 				.build();
 	}
 

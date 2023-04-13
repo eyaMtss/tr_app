@@ -1,0 +1,20 @@
+
+<label for="address">Adresse</label>
+<div class="input-group mb-3">
+    <input class="form-control" id="address"
+    (keydown.enter)="$event.preventDefault()" 
+    placeholder="Search Location" type="text" #search [(ngModel)]="address"/>
+</div>
+
+<google-map #myGoogleMap 
+    height="500px" 
+    width="100%" 
+    [center]="center" 
+    [options]="options">
+    <map-marker
+    *ngIf="showMarker"
+    [position]="markerPosition"
+    title={{address}}
+    (mapClick)="onMapClick($event)">
+  </map-marker>
+</google-map>

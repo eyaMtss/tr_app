@@ -19,12 +19,20 @@ public class VehiculeResponseDTO {
     private String numImmat;
     private String confirmNumImmat;
     private Long numChassis;
+    //@Enumerated(EnumType.STRING)
+    private String marque;
+    private String modele;
+    private String annee;
+    private String etatVehicule;
+    private String boite;
+    private String cylindree;
+    private String carburant;
+    private String typeCarrosserie;
+    private int puissance;
     private int poids;
-    @Enumerated(EnumType.STRING)
-    private Couleur couleur;
     private int kilometrage;
     private int nbPortes;
-    private int puissance;
-    @Enumerated(EnumType.STRING)
-    private Marque marque;
+    //@Enumerated(EnumType.STRING)
+    private String couleur;
+    private String numContrat;
 }

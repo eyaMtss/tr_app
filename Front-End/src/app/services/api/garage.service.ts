@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Garage } from 'src/app/models/garage';
+import { Garage } from 'src/app/models/garage/garage';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,5 +13,9 @@ export class GarageService {
 
   create(garage: Garage): Observable<Garage> {
     return this.httpClient.post<Garage>(this._URL + "add", garage);
+  }
+
+  addList(userId: number, garages: Garage[]): Observable<Garage[]> {
+    return this.httpClient.post<Garage[]>(this._URL + "addAll/" + userId, garages);
   }
 }

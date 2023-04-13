@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PictureRequestDTO {
-	private Long userId;
+	private String username;
 	// Picture
 	private String pictureName;
 	private String pictureType;

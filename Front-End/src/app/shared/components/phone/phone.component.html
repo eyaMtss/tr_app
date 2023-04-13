@@ -1,0 +1,14 @@
+<label for="phone">Téléphone</label>
+<div class="input-group mb-3">
+    <ngx-intl-tel-input  
+        [enablePlaceholder]="true"
+        [enableAutoCountrySelect]="true"
+        [searchCountryFlag]="true"
+        [preferredCountries]="[CountryISO.Tunisia]"
+        [selectedCountryISO]="CountryISO.Tunisia"
+        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
+        [phoneValidation]="true"
+        [onlyCountries]="[CountryISO.Tunisia, CountryISO.Libya, CountryISO.Algeria]"
+        name="phone" [(ngModel)]="phone" (ngModelChange)="onValueChange()">
+    </ngx-intl-tel-input>
+</div>
