@@ -1,10 +1,11 @@
 export class UpdatedUser {
+    userId!: number;
     username!: string;
     country!: string;
     governorate!: string;
     city!: string;
     zipCode!: number;
-    matriculeFiscale: string = "";
+    matriculeFiscale!: string;
     cin!: number;
 
     public constructor();

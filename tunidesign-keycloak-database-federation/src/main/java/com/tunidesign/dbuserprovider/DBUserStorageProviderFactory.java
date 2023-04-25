@@ -31,10 +31,11 @@ public class DBUserStorageProviderFactory implements UserStorageProviderFactory<
                                                              "            \"lastName\" (optional). Any other parameter can be mapped by aliases to a realm scope";
     private static final String PARAMETER_HELP             = " The %s is passed as query parameter.";
     
-    private final String fields = "id, username, email, role, firstName, lastName, gender, birthdate," +
-            "country, governorate, city, zip_code, home_code, phone_number, picture_byte, matricule_fiscale," +
-            "status, company_id, insurance_company_id, agency_id";
+    //private final String fields = "id, username, email, role, firstName, lastName, gender, birthdate," +
+    //        "country, governorate, city, zip_code, home_code, phone_number, picture_byte, matricule_fiscale," +
+    //        "status, company_id, insurance_company_id, agency_id";
 
+    private final String fields = "id, username, email, role, firstName, lastName, completed_registration";
 
     private Map<String, ProviderConfig> providerConfigPerInstance = new HashMap<>();
     

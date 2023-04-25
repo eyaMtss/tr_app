@@ -45,7 +45,7 @@ public class SecurityConfig {
                             "/users/add",
                             "/users/getAll/clients", "/users/completeRegistration/**",
                             "/garage/addAll/**",
-                            "/contrat/verifyContrat", "/vehicule/add", "/users/getByUsername/**",
+                            "/contrat/verifyContrat", "/vehicule/**", "/users/getByUsername/**",
                             "/users/updateCompletedRegistration/**",
                             "/camion/**")
                         .permitAll()
