@@ -59,8 +59,24 @@ public class UserServiceImpl implements UserService {
 		existingUser.setCity(user.getCity());
 		existingUser.setZipCode(user.getZipCode());
 		existingUser.setMatriculeFiscale(existingUser.getMatriculeFiscale());
+		existingUser.setCin(existingUser.getCin());
 		//existingUser.setCompletedRegistration(true);
+		//existingUser.setIsRegistrationCompleted(true);
+		return userRepository.save(existingUser);
+	}
+	@Override
+	public User updateCompletedRegistration(String username) {
+		User existingUser = userRepository.findByUsername(username);
 		existingUser.setIsRegistrationCompleted(true);
+
+		return userRepository.save(existingUser);
+	}
+	@Override
+	public User uploadPicture(PictureRequestDTO pictureRequestDTO) {
+		User existingUser = userRepository.findByUsername(pictureRequestDTO.getUsername());
+		existingUser.setPictureName(pictureRequestDTO.getPictureName());
+		existingUser.setPictureType(pictureRequestDTO.getPictureType());
+		existingUser.setPictureByte(pictureRequestDTO.getPictureByte());
 		return userRepository.save(existingUser);
 	}
 	@Override
@@ -78,15 +94,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getByUsername(String username) {
 		return userRepository.findByUsername(username);
-	}
-
-	@Override
-	public User uploadPicture(PictureRequestDTO pictureRequestDTO) {
-		User existingUser = userRepository.findByUsername(pictureRequestDTO.getUsername());
-		existingUser.setPictureName(pictureRequestDTO.getPictureName());
-		existingUser.setPictureType(pictureRequestDTO.getPictureType());
-		existingUser.setPictureByte(pictureRequestDTO.getPictureByte());
-		return userRepository.save(existingUser);
 	}
 
 	@Override
@@ -198,13 +205,6 @@ public class UserServiceImpl implements UserService {
 	public Optional<User> getUserByUsername(String login) {
 		return Optional.ofNullable(userRepository.findByUsername(login));
 	}*/
-	@Override
-	public User updateCompletedRegistration(String username) {
-		User existingUser = userRepository.findByUsername(username);
-		//existingUser.setCompletedRegistration(true);
-        existingUser.setIsRegistrationCompleted(true);
-		return userRepository.save(existingUser);
-	}
 
 	public User addUserCredentials(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		// Generate a salt for the password
