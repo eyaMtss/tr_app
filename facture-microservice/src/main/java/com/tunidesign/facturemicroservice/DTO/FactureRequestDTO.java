@@ -1,4 +1,4 @@
-package com.tunidesign.facturemicroservice.DTO;
+package com.tunidesign.facturemicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,10 +10,10 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FactureRequestDTO {
+public class FactureRequestDto {
 
         @Id
-        private int id;
+        private Long id;
         private long numero;
         private Date date;
         private Float prix;

@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Facture {
     @Id
-    private int id;
+    private Long id;
     private long numero;
     private Date date;
     private Float prix;

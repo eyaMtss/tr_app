@@ -7,10 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FactureRepository extends MongoRepository<Facture, Integer>
-{
-    List<Facture > findAll();
-    Facture  findById(int id);
-    Facture  save(Facture  facture);
-    Facture deleteById(int id);
+public interface FactureRepository extends MongoRepository<Facture, Long> {
 }
