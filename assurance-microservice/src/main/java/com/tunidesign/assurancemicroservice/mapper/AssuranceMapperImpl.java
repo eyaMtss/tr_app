@@ -1,15 +1,15 @@
 package com.tunidesign.assurancemicroservice.mapper;
 
-import com.tunidesign.assurancemicroservice.DTO.AssuranceRequestDTO;
-import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
+import com.tunidesign.assurancemicroservice.dto.AssuranceRequestDto;
+import com.tunidesign.assurancemicroservice.dto.AssuranceResponseDto;
 import com.tunidesign.assurancemicroservice.model.Assurance;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AssuranceMapperImpl implements AssuranceMapper {
     @Override
-    public AssuranceResponseDTO assuranceToAssuranceDTO(Assurance assurance) {
-        return AssuranceResponseDTO.builder()
+    public AssuranceResponseDto assuranceToAssuranceDto(Assurance assurance) {
+        return AssuranceResponseDto.builder()
                 .id(assurance.getId())
                 .name(assurance.getName())
                 .adresse(assurance.getAdresse())
@@ -25,15 +25,15 @@ public class AssuranceMapperImpl implements AssuranceMapper {
     }
 
     @Override
-    public Assurance assuranceRequestDTOToAssurance(AssuranceRequestDTO assuranceRequestDTO) {
+    public Assurance assuranceRequestDtoToAssurance(AssuranceRequestDto assuranceRequestDto) {
         return Assurance.builder()
-                .name(assuranceRequestDTO.getName())
-                .adresse(assuranceRequestDTO.getAdresse())
-                .email(assuranceRequestDTO.getEmail())
-                .countryCode(assuranceRequestDTO.getCountryCode())
-                .dialCode(assuranceRequestDTO.getDialCode())
-                .phoneNumber(assuranceRequestDTO.getPhoneNumber())
-                .webSite(assuranceRequestDTO.getWebSite())
+                .name(assuranceRequestDto.getName())
+                .adresse(assuranceRequestDto.getAdresse())
+                .email(assuranceRequestDto.getEmail())
+                .countryCode(assuranceRequestDto.getCountryCode())
+                .dialCode(assuranceRequestDto.getDialCode())
+                .phoneNumber(assuranceRequestDto.getPhoneNumber())
+                .webSite(assuranceRequestDto.getWebSite())
                 .build();
     }
 

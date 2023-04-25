@@ -1,15 +1,15 @@
 package com.tunidesign.assurancemicroservice.service;
 
-import com.tunidesign.assurancemicroservice.DTO.AssuranceRequestDTO;
-import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
+import com.tunidesign.assurancemicroservice.dto.AssuranceRequestDto;
+import com.tunidesign.assurancemicroservice.dto.AssuranceResponseDto;
 
 import java.util.List;
 
 public interface AssuranceService {
 
-        List<AssuranceResponseDTO> getInsurances();
-        AssuranceResponseDTO getAssurance(Long id);
-        AssuranceResponseDTO save(AssuranceRequestDTO assuranceRequestDTO);
+        List<AssuranceResponseDto> getInsurances();
+        AssuranceResponseDto getAssurance(Long id);
+        AssuranceResponseDto save(AssuranceRequestDto assuranceRequestDTO);
         void deleteAssurance(Long id);
-        AssuranceResponseDTO update(AssuranceRequestDTO assuranceRequestDTO);
+        AssuranceResponseDto update(AssuranceRequestDto assuranceRequestDTO);
 }

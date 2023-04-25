@@ -1,7 +1,7 @@
 package com.tunidesign.assurancemicroservice.service;
 
-import com.tunidesign.assurancemicroservice.DTO.AssuranceRequestDTO;
-import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
+import com.tunidesign.assurancemicroservice.dto.AssuranceRequestDto;
+import com.tunidesign.assurancemicroservice.dto.AssuranceResponseDto;
 import com.tunidesign.assurancemicroservice.mapper.AssuranceMapper;
 import com.tunidesign.assurancemicroservice.mapper.AssuranceMapperImpl;
 import com.tunidesign.assurancemicroservice.repository.AssuranceRepository;
@@ -14,22 +14,22 @@ import java.util.List;
 public class AssuranceServiceImpl implements AssuranceService {
     @Autowired
     private AssuranceRepository  assuranceRepository;
-    private AssuranceMapper assuranceMapper = new AssuranceMapperImpl();
+    private final AssuranceMapper assuranceMapper = new AssuranceMapperImpl();
 
     @Override
-    public List<AssuranceResponseDTO> getInsurances() {
+    public List<AssuranceResponseDto> getInsurances() {
         return assuranceRepository.findAll()
                 .stream()
-                .map(assurance -> assuranceMapper.assuranceToAssuranceDTO(assurance)).toList();
+                .map(assurance -> assuranceMapper.assuranceToAssuranceDto(assurance)).toList();
     }
 
     @Override
-    public AssuranceResponseDTO getAssurance(Long id) {
-        return null;
+    public AssuranceResponseDto getAssurance(Long id) {
+        return assuranceRepository.findById(id).isPresent() ? assuranceMapper.assuranceToAssuranceDto(assuranceRepository.findById(id).get()) : null;
     }
 
     @Override
-    public AssuranceResponseDTO save(AssuranceRequestDTO assuranceRequestDTO) {
+    public AssuranceResponseDto save(AssuranceRequestDto assuranceRequestDTO) {
         return null;
     }
 
@@ -39,7 +39,7 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
     @Override
-    public AssuranceResponseDTO update(AssuranceRequestDTO assuranceRequestDTO) {
+    public AssuranceResponseDto update(AssuranceRequestDto assuranceRequestDTO) {
         return null;
     }
 }

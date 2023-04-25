@@ -21,7 +21,7 @@ public class AssuranceMicroserviceApplication {
 
 	@Bean
 	private CommandLineRunner initialData(AssuranceRepository assuranceRepository){
-		return (args) -> {
+		return args -> {
 			assuranceRepository.save(new Assurance(1L, "UPCAR assurances", "R5GJ+3WF, Tunis", "upcar@gmail.com",
 					71335183, "TN", "+216", null, null, null, "http://upcar-assurance.com/"));
 			assuranceRepository.save(new Assurance(2L, "AMI Assurances", "R5W7+FRC, Rue des juges, Ariana/Tunisie 2037",

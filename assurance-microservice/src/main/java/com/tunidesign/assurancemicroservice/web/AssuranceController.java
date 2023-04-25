@@ -1,6 +1,7 @@
 package com.tunidesign.assurancemicroservice.web;
 
-import com.tunidesign.assurancemicroservice.DTO.AssuranceResponseDTO;
+import com.tunidesign.assurancemicroservice.dto.AssuranceRequestDto;
+import com.tunidesign.assurancemicroservice.dto.AssuranceResponseDto;
 import com.tunidesign.assurancemicroservice.exceptions.AssuranceIntrouvableException;
 import com.tunidesign.assurancemicroservice.model.Assurance;
 import com.tunidesign.assurancemicroservice.repository.AssuranceRepository;
@@ -19,7 +20,7 @@ public class AssuranceController {
     @Autowired
     private AssuranceServiceImpl assuranceService;
     @GetMapping("/getAll")
-    public ResponseEntity<List<AssuranceResponseDTO>> getInsurances() {
+    public ResponseEntity<List<AssuranceResponseDto>> getInsurances() {
         return ResponseEntity.ok().body(assuranceService.getInsurances());
     }
 
@@ -31,21 +32,17 @@ public class AssuranceController {
     }
 
     @PostMapping(value = "/add")
-    public void passerUnAssurance(@RequestBody Assurance assurance)
-    {
-        assuranceRepository.save(assurance);
+    public AssuranceResponseDto passerUnAssurance(@RequestBody AssuranceRequestDto assurance) {
+        return assuranceService.save(assurance);
     }
     @DeleteMapping (value = "/delete/{id}")
-    public void supprimerUnAssurance(@PathVariable Long id)
-    {
-        assuranceRepository.deleteById(id);
-
+    public void supprimerUnAssurance(@PathVariable Long id) {
+        assuranceService.deleteAssurance(id);
     }
     @PutMapping (value = "/update")
-    public void modiferUnAssurance(@RequestBody Assurance assurance)
-    {
-        assuranceRepository.save(assurance);
-        if(assurance==null) throw new AssuranceIntrouvableException("Cette assurance est INTROUVABLE. ");
-
+    public AssuranceResponseDto modiferUnAssurance(@RequestBody AssuranceRequestDto assurance) {
+        AssuranceResponseDto updatedInsurance = assuranceService.update(assurance);
+        if(updatedInsurance==null) throw new AssuranceIntrouvableException("Cette assurance est INTROUVABLE. ");
+        else return updatedInsurance;
     }
 }
