@@ -47,8 +47,4 @@ public class FactureServiceImpl implements FactureService {
         else return null;
     }
 
-    @Override
-    public List<FactureResponseDto> getFactureByPostId(String id) {
-        return null;
-    }
 }

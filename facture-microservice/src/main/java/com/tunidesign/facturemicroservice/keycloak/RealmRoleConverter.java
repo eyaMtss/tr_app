@@ -13,8 +13,6 @@ public class RealmRoleConverter  implements Converter<Jwt, Collection<GrantedAut
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         final Map<String, List<String>> realmAccess = new HashMap<>();
         realmAccess.put("role", Arrays.asList(jwt.getClaims().get("role").toString()));
-        //= (Map<String, List<String>>) jwt.getClaims().get("role");
-        System.out.println(realmAccess);
         return realmAccess.get("role")
                 .stream()
                 .map(roleName -> "ROLE_" + roleName) // prefix required by Spring Security for roles.
