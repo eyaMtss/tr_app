@@ -49,9 +49,12 @@ export class AuthService {
     console.log(username);
     localStorage.removeItem("Token") // clear token from localStorage
     localStorage.setItem("isLoggedIn", "false"); // change isLoggedIn to false in LocalStorage
-    this.userService.updateCompletedRegistration(username).subscribe(data => {
-      console.log(data);
-    })
+    /*if (localStorage.getItem("isRegistrationCompleted") == "true"){
+      this.userService.updateCompletedRegistration(username).subscribe(data => {
+        console.log(data);
+      });
+    }*/
+    localStorage.removeItem("isRegistrationCompleted")
   }
 
   redirectToProfile(){

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DriverRoutingModule } from './driver-routing.module';
 import { DriverComponent } from './driver.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { DriverComponent } from './driver.component';
   ],
   imports: [
     CommonModule,
-    DriverRoutingModule
+    DriverRoutingModule,
+    GoogleMapsModule,
+    GooglePlaceModule,
+
   ]
 })
 export class DriverModule { }

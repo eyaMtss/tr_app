@@ -17,7 +17,7 @@ export class UserService {
   }
 
   completeRegistration(formData: FormData, username: string, country: string, governorate: string,
-    city: string, zipCode: number, matriculeFiscale: string, cin: number): Observable<User>{
+    city: string, zipCode: number, matriculeFiscale: string, cin: number): Observable<UpdatedUser>{
     /*const boundary = Math.random().toString().substr(2);
     formData.set('Content-Type', `multipart/form-data; boundary=${boundary}`);
 
@@ -28,7 +28,7 @@ export class UserService {
     });
     const options = { headers, withCredentials: true };*/
     
-    return this.httpClient.put<User>(this._URL + "completeRegistration/" + username + "/" + country + "/" + 
+    return this.httpClient.put<UpdatedUser>(this._URL + "completeRegistration/" + username + "/" + country + "/" + 
     governorate + "/" + city + "/" + zipCode + "/" + matriculeFiscale + "/" + cin, formData);
   }
   

@@ -12,6 +12,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -61,6 +62,31 @@ public class VehiculeController {
         else {
             throw new ContractNotFoundException("You don't have a contract");
         }
+    }
+    @PostMapping("/addAll")
+    public ResponseEntity<List<VehiculeResponseDTO>> addVehicles(@RequestBody List<VehiculeRequestDTO> vehiculesRequestDTO)
+    {
+        List<VehiculeResponseDTO> savedVehicles = new ArrayList<>();
+        for(VehiculeRequestDTO vehiculeRequestDTO: vehiculesRequestDTO){
+            ContratResponseDTO contratResponseDTO = verifyContract(ContratRequestDTO.builder()
+                    .numContrat(vehiculeRequestDTO.getNumContrat())
+                    .numChassis(vehiculeRequestDTO.getNumChassis())
+                    //.idAssurance(vehiculeRequestDTO.getIdAssurance())
+                    //.idAgence(vehiculeRequestDTO.getIdAgence())
+                    //.dateDebut(vehiculeRequestDTO.getDateDebut())
+                    //.dateFin(vehiculeRequestDTO.getDateFin())
+                    //.cin(vehiculeRequestDTO.getCin())
+                    .build()).getBody();
+            if (contratResponseDTO.getIsExist()){
+                VehiculeResponseDTO savedVehicle = vehiculeService.save(vehiculeRequestDTO);
+                savedVehicles.add(savedVehicle);
+            }
+            else {
+                throw new ContractNotFoundException("You don't have a contract for this vehicle" + vehiculeRequestDTO.getNumImmat());
+            }
+        }
+        return new ResponseEntity<>(savedVehicles, HttpStatus.CREATED);
+
     }
 
 

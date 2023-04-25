@@ -19,6 +19,7 @@ import { LavageService } from '../services/api/lavage.service';
   styleUrls: ['./complete-registration.component.css']
 })
 export class CompleteRegistrationComponent implements OnInit {
+  userProfile: any;
   user: UpdatedUser = new UpdatedUser();
   completedRegistrationForm: FormGroup;
   currentRole!: string;
@@ -57,6 +58,7 @@ export class CompleteRegistrationComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+
     this.currentRole = this.authService.getRoles()[0]; // role is CLIENT by default
     if (this.currentRole == 'CLIENT') {
       this.completedRegistrationForm.controls['matriculeFiscale'].disable();
@@ -87,22 +89,61 @@ export class CompleteRegistrationComponent implements OnInit {
   }
 
   onConfirm() {
-    
-    this.navigate();
+    if (this.currentRole == "CLIENT") {
+      this.completedRegistrationForm.controls['matriculeFiscale'].setValue("client");
+    }
+    const uploadImageData = new FormData();
+    if (this.viewedImage != "/assets/auth/user.png") {
+      uploadImageData.append('imageFile', this.completedRegistrationForm.controls['img'].value);
+    }
+    console.log(this.completedRegistrationForm.controls['matriculeFiscale'].value)
+    let matriculeFiscale = this.completedRegistrationForm.controls['matriculeFiscale'].value;
+    let cin = this.completedRegistrationForm.controls['cin'].value
+    this.userService.completeRegistration(uploadImageData, this.currentUsername,
+      this.addressForm.controls['country'].value, this.addressForm.controls['governorate'].value,
+      this.addressForm.controls['city'].value, this.addressForm.controls['zipCode'].value,
+      matriculeFiscale, cin)
+      .subscribe(data => {
+        console.log(data);
+
+        if (this.currentRole == "GARAGISTE_ADMIN") {
+          this.garageService.addList(data.userId, this.garageValues).subscribe(data => {
+            console.log(data);
+            localStorage.setItem("isRegistrationCompleted", "true");
+            // Refresh user data in session
+            this.loadUserProfile();
+            this.router.navigate(["/garagisteAdmin"]);
+          })
+        }
+        else if (this.currentRole == "CLIENT") {
+          this.vehicleValues.forEach(vehicle => {
+            this.vehicleService.create
+          })
+        }
+
+      });
+
+  }
+
+  loadUserProfile() {
+    this.keycloakService.loadUserProfile().then((userProfile) => {
+      this.userProfile = userProfile;
+      console.log(this.userProfile)
+    });
   }
 
   navigate() {
     //this.router.navigate(["/tunidesign"]); //path : registrationGUARD
     let role = this.currentRole;
-    if(role == "CLIENT") this.router.navigate(["/client"]);
-    else if(role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
-    else if(role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
-    else if(role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
-    else if(role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
-    else if(role == "DRIVER") this.router.navigate(['camion-login']);
-    else if(role == "TA") this.router.navigate(["/ta"]);
-    else if(role == "SOCIETE_REMORQUAGE_ADMIN") this.router.navigate(["/societe"]);
-    else if(role == "EXPERT") this.router.navigate(["/expert"]);
+    if (role == "CLIENT") this.router.navigate(["/client"]);
+    else if (role == "GARAGISTE_ADMIN") this.router.navigate(["/garagisteAdmin"]);
+    else if (role == "LAVAGISTE_ADMIN") this.router.navigate(["/lavagisteAdmin"]);
+    else if (role == "INSURANCE_ADMIN") this.router.navigate(["/insuranceAdmin"]);
+    else if (role == "AGENCE_LOCATION_ADMIN") this.router.navigate(["/agenceLocationAdmin"]);
+    else if (role == "DRIVER") this.router.navigate(['camion-login']);
+    else if (role == "TA") this.router.navigate(["/ta"]);
+    else if (role == "SOCIETE_REMORQUAGE_ADMIN") this.router.navigate(["/societe"]);
+    else if (role == "EXPERT") this.router.navigate(["/expert"]);
     else this.router.navigate(["/home"]);
   }
 
@@ -254,7 +295,7 @@ export class CompleteRegistrationComponent implements OnInit {
     //this.vehicleValues[index].dateDebut = vehicleForm.controls['contractStart'].value;
     //this.vehicleValues[index].dateFin = vehicleForm.controls['contractEnd'].value;
     this.vehicleValues[index].cin = vehicleForm.controls['cin'].value;
-    
+
   }
 
   getGarageForm(garageForm: FormGroup, index: number) {

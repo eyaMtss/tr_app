@@ -21,9 +21,11 @@ export class RegistrationGuard implements CanActivate {
       let isRegistrationCompleted = data.isRegistrationCompleted;
       console.log(isRegistrationCompleted)
       if(isRegistrationCompleted){
+        localStorage.setItem("isRegistrationCompleted", "true");
         return true;
       }
       else {
+        localStorage.setItem("isRegistrationCompleted", "false");
         this.router.navigate(["/complete-registration"]);
         return false;
       }

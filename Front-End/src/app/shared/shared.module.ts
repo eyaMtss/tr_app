@@ -43,6 +43,7 @@ import { AddVehicleComponent } from './components/add-vehicle/add-vehicle.compon
     AddGarageComponent,
     AddLavageComponent,
     AddVehicleComponent,
+    AddOfficeComponent,
     AddressComponent,
     ImmatriculationComponent,
     NavbarComponent,

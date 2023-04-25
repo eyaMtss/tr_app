@@ -63,7 +63,12 @@ export class AddGarageComponent implements OnInit {
 
   emitInformationForm(value: FormGroup) {
     console.log(value);
-    this.garageFormEvent.emit(value);
+    if(this.garageForm.valid){
+      this.garageFormEvent.emit(value);
+    } else {
+      console.log("Garage Form is not valid");
+    }
+    
   }
   
   ngOnDestroy() {
