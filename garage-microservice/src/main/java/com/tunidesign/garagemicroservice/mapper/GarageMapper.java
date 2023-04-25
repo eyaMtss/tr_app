@@ -1,11 +1,11 @@
 package com.tunidesign.garagemicroservice.mapper;
 
 
-import com.tunidesign.garagemicroservice.DTO.GarageRequestDTO;
-import com.tunidesign.garagemicroservice.DTO.GarageResponseDTO;
+import com.tunidesign.garagemicroservice.dto.GarageRequestDto;
+import com.tunidesign.garagemicroservice.dto.GarageResponseDto;
 import com.tunidesign.garagemicroservice.model.Garage;
 
 public interface GarageMapper {
-    GarageResponseDTO garageToGarageResponseDTO(Garage garage);
-    Garage garageRequestDTOToGarage(GarageRequestDTO garageRequestDTO);
+    GarageResponseDto garageToGarageResponseDto(Garage garage);
+    Garage garageRequestDtoToGarage(GarageRequestDto garageRequestDto);
 }

@@ -1,8 +1,8 @@
 package com.tunidesign.garagemicroservice.mapper;
 
 
-import com.tunidesign.garagemicroservice.DTO.GarageRequestDTO;
-import com.tunidesign.garagemicroservice.DTO.GarageResponseDTO;
+import com.tunidesign.garagemicroservice.dto.GarageRequestDto;
+import com.tunidesign.garagemicroservice.dto.GarageResponseDto;
 import com.tunidesign.garagemicroservice.model.Garage;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class GarageMapperImpl implements GarageMapper{
     @Override
-    public GarageResponseDTO garageToGarageResponseDTO(Garage garage) {
-       return  GarageResponseDTO.builder()
+    public GarageResponseDto garageToGarageResponseDto(Garage garage) {
+       return  GarageResponseDto.builder()
                .id(garage.getId())
                .name(garage.getName())
                .email(garage.getEmail())
@@ -25,16 +25,16 @@ public class GarageMapperImpl implements GarageMapper{
     }
 
     @Override
-    public Garage garageRequestDTOToGarage(GarageRequestDTO garageRequestDTO) {
+    public Garage garageRequestDtoToGarage(GarageRequestDto garageRequestDto) {
       return  Garage.builder()
-              .name(garageRequestDTO.getName())
-              .email(garageRequestDTO.getEmail())
-              .phone(garageRequestDTO.getPhone())
-              .countryCode(garageRequestDTO.getCountryCode())
-              .dialCode(garageRequestDTO.getDialCode())
-              .garageType(garageRequestDTO.getGarageType())
-              .garageOwner(garageRequestDTO.getGarageOwner())
-              .capacite(garageRequestDTO.getCapacite())
+              .name(garageRequestDto.getName())
+              .email(garageRequestDto.getEmail())
+              .phone(garageRequestDto.getPhone())
+              .countryCode(garageRequestDto.getCountryCode())
+              .dialCode(garageRequestDto.getDialCode())
+              .garageType(garageRequestDto.getGarageType())
+              .garageOwner(garageRequestDto.getGarageOwner())
+              .capacite(garageRequestDto.getCapacite())
               .build();
     }
 }

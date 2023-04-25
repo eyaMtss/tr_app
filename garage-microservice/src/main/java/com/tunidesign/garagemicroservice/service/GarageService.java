@@ -1,18 +1,18 @@
 package com.tunidesign.garagemicroservice.service;
 
 
-import com.tunidesign.garagemicroservice.DTO.GarageRequestDTO;
-import com.tunidesign.garagemicroservice.DTO.GarageResponseDTO;
+import com.tunidesign.garagemicroservice.dto.GarageRequestDto;
+import com.tunidesign.garagemicroservice.dto.GarageResponseDto;
 
 import java.util.List;
 
 
 public interface GarageService {
-    List<GarageResponseDTO> getGarages();
-    GarageResponseDTO getGarageById(Long id);
-    GarageResponseDTO save(GarageRequestDTO garageRequestDTO);
+    List<GarageResponseDto> getGarages();
+    GarageResponseDto getGarageById(Long id);
+    GarageResponseDto save(GarageRequestDto garageRequestDTO);
     void deleteGarage(Long id);
-    GarageResponseDTO update(GarageRequestDTO garageRequestDTO);
+    GarageResponseDto update(GarageRequestDto garageRequestDTO);
 
-    List<GarageResponseDTO> addAll(Long userId, List<GarageRequestDTO> garages);
+    List<GarageResponseDto> addAll(Long userId, List<GarageRequestDto> garages);
 }

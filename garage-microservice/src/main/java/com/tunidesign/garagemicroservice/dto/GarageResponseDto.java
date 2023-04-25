@@ -1,4 +1,4 @@
-package com.tunidesign.garagemicroservice.DTO;
+package com.tunidesign.garagemicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GarageResponseDTO {
+public class GarageResponseDto {
     private Long id;
     private String name;
     private String email;

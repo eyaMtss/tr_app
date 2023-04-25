@@ -1,9 +1,10 @@
 package com.tunidesign.garagemicroservice.service;
 
 
-import com.tunidesign.garagemicroservice.DTO.GarageRequestDTO;
-import com.tunidesign.garagemicroservice.DTO.GarageResponseDTO;
+import com.tunidesign.garagemicroservice.dto.GarageRequestDto;
+import com.tunidesign.garagemicroservice.dto.GarageResponseDto;
 import com.tunidesign.garagemicroservice.mapper.GarageMapper;
+import com.tunidesign.garagemicroservice.mapper.GarageMapperImpl;
 import com.tunidesign.garagemicroservice.model.Garage;
 import com.tunidesign.garagemicroservice.repository.GarageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,24 @@ public class GarageServiceImpl implements GarageService{
     private GarageRepository garageRepository;
 
     @Autowired
-    private GarageMapper garageMapper;
+    private final GarageMapper garageMapper = new GarageMapperImpl();
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
 
     @Override
-    public List<GarageResponseDTO> getGarages() {
-        return garageRepository.findAll().stream().map(garage -> garageMapper.garageToGarageResponseDTO(garage)).toList();
+    public List<GarageResponseDto> getGarages() {
+        return garageRepository.findAll().stream().map(garage -> garageMapper.garageToGarageResponseDto(garage)).toList();
     }
 
     @Override
-    public GarageResponseDTO getGarageById(Long id) {
-        return garageMapper.garageToGarageResponseDTO(garageRepository.findById(id).get());
+    public GarageResponseDto getGarageById(Long id) {
+        return garageRepository.findById(id).isPresent() ? garageMapper.garageToGarageResponseDto(garageRepository.findById(id).get()) : null;
+
     }
 
     @Override
-    public GarageResponseDTO save(GarageRequestDTO garageRequestDTO) {
-       return garageMapper.garageToGarageResponseDTO(garageRepository.save(garageMapper.garageRequestDTOToGarage(garageRequestDTO)));
+    public GarageResponseDto save(GarageRequestDto garageRequestDTO) {
+       return garageMapper.garageToGarageResponseDto(garageRepository.save(garageMapper.garageRequestDtoToGarage(garageRequestDTO)));
     }
 
     @Override
@@ -43,21 +45,21 @@ public class GarageServiceImpl implements GarageService{
     }
 
     @Override
-    public GarageResponseDTO update(GarageRequestDTO garageRequestDTO) {
-        return garageMapper.garageToGarageResponseDTO(garageRepository.save(garageMapper.garageRequestDTOToGarage(garageRequestDTO)));
+    public GarageResponseDto update(GarageRequestDto garageRequestDTO) {
+        return garageMapper.garageToGarageResponseDto(garageRepository.save(garageMapper.garageRequestDtoToGarage(garageRequestDTO)));
     }
 
     @Override
-    public List<GarageResponseDTO> addAll(Long userId, List<GarageRequestDTO> garagesRequestDTO) {
+    public List<GarageResponseDto> addAll(Long userId, List<GarageRequestDto> garagesRequestDTO) {
         List<Garage> garages = garagesRequestDTO.stream()
-                .map(garage -> garageMapper.garageRequestDTOToGarage(garage))
+                .map(garage -> garageMapper.garageRequestDtoToGarage(garage))
                 .toList();
         garages.forEach(garage -> {
             garage.setId(sequenceGeneratorService.generateSequence(Garage.SEQUENCE_NAME));
             garage.setGarageOwner(userId);
         });
         return garageRepository.saveAll(garages).stream()
-                .map(garage -> garageMapper.garageToGarageResponseDTO(garage))
+                .map(garage -> garageMapper.garageToGarageResponseDto(garage))
                 .toList();
     }
 }
