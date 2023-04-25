@@ -1,7 +1,6 @@
 package com.example.agencemicroservice.repository;
 
 import com.example.agencemicroservice.model.Agence;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;

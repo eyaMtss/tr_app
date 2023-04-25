@@ -1,10 +1,9 @@
 package com.example.agencemicroservice.mapper;
 
-import com.example.agencemicroservice.DTO.AgenceRequestDTO;
-import com.example.agencemicroservice.DTO.AgenceResponseDTO;
+import com.example.agencemicroservice.dto.AgenceRequestDto;
+import com.example.agencemicroservice.dto.AgenceResponseDto;
 import com.example.agencemicroservice.model.Agence;
 import com.example.agencemicroservice.service.SequenceGeneratorService;
-import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +12,8 @@ public class AgenceMapperImpl implements AgenceMapper {
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
     @Override
-    public AgenceResponseDTO agenceToAgenceDTO(Agence agence) {
-        return AgenceResponseDTO.builder()
+    public AgenceResponseDto agenceToAgenceDto(Agence agence) {
+        return AgenceResponseDto.builder()
                 .id(agence.getId())
                 .numero(agence.getNumero())
                 .name(agence.getName())
@@ -28,18 +27,18 @@ public class AgenceMapperImpl implements AgenceMapper {
                 .build();
     }
     @Override
-    public Agence agenceRequestDTOToAgence(AgenceRequestDTO agenceRequestDTO) {
+    public Agence agenceRequestDtoToAgence(AgenceRequestDto agenceRequestDto) {
         return Agence.builder()
                 .id(sequenceGeneratorService.generateSequence(Agence.SEQUENCE_NAME))
-                .numero(agenceRequestDTO.getNumero())
-                .name(agenceRequestDTO.getName())
-                .telephone(agenceRequestDTO.getTelephone())
-                .responsable(agenceRequestDTO.getResponsable())
-                .email(agenceRequestDTO.getEmail())
-                .ville(agenceRequestDTO.getVille())
-                .paye(agenceRequestDTO.getPaye())
-                .gouvernerat(agenceRequestDTO.getGouvernerat())
-                .idAssurance(agenceRequestDTO.getIdAssurance())
+                .numero(agenceRequestDto.getNumero())
+                .name(agenceRequestDto.getName())
+                .telephone(agenceRequestDto.getTelephone())
+                .responsable(agenceRequestDto.getResponsable())
+                .email(agenceRequestDto.getEmail())
+                .ville(agenceRequestDto.getVille())
+                .paye(agenceRequestDto.getPaye())
+                .gouvernerat(agenceRequestDto.getGouvernerat())
+                .idAssurance(agenceRequestDto.getIdAssurance())
                 .build();
     }
 

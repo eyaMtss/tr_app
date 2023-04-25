@@ -1,4 +1,4 @@
-package com.example.agencemicroservice.DTO;
+package com.example.agencemicroservice.dto;
 
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -7,12 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AgenceResponseDTO {
+public class AgenceResponseDto {
     @Id
     private Long id;
     private int numero ;
