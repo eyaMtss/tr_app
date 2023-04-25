@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 public class Camion {
 	@Id
-	private int id; 
+	private Long id;
 	private String matricule ;
 
 	private String type;

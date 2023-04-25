@@ -1,8 +1,12 @@
 package com.tunidesign.camionmicroservice.web;
 
+import com.tunidesign.camionmicroservice.dto.CamionRequestDto;
+import com.tunidesign.camionmicroservice.dto.CamionResponseDto;
 import com.tunidesign.camionmicroservice.exceptions.CamionIntrouvableException;
 import com.tunidesign.camionmicroservice.model.Camion;
 import com.tunidesign.camionmicroservice.repository.CamionRepository;
+import com.tunidesign.camionmicroservice.service.CamionService;
+import com.tunidesign.camionmicroservice.service.CamionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,35 +16,32 @@ import java.util.List;
 @RequestMapping("/camion")
 public class CamionController {
     @Autowired
-    private CamionRepository camionRepository;
+    private CamionServiceImpl camionService;
     @GetMapping("/getAll")
-    public List<Camion> listeCamions() {
-        return camionRepository.findAll();
+    public List<CamionResponseDto> listeCamions() {
+        return camionService.getCamions();
     }
 
     @GetMapping(value = "/getById/{id}")
-    public Camion afficherUnCamion(@PathVariable int id) {
-        Camion camion = camionRepository.findById(id);
+    public CamionResponseDto afficherUnCamion(@PathVariable Long id) {
+        CamionResponseDto camion = camionService.getCamion(id);
         if(camion==null) throw new CamionIntrouvableException("Le camion avec l'id " + id + " est INTROUVABLE. ");
         return camion;
     }
 
     @PostMapping(value = "/add")
-    public void passerUnCamion(@RequestBody Camion camion)
-    {
-        camionRepository.save(camion);
+    public CamionResponseDto passerUnCamion(@RequestBody CamionRequestDto camion) {
+        return camionService.save(camion);
     }
     @DeleteMapping (value = "/delete/{id}")
-    public void supprimerUnCamion(@PathVariable int id)
-    {
-         camionRepository.deleteById(id);
+    public void supprimerUnCamion(@PathVariable Long id) {
+         camionService.deleteCamion(id);
     }
     @PutMapping (value = "/update")
-    public void modiferUnCamion(@RequestBody Camion camion)
-    {
-    	camionRepository.save(camion);
+    public CamionResponseDto modiferUnCamion(@RequestBody CamionRequestDto camionRequestDto) {
+    	CamionResponseDto camion = camionService.update(camionRequestDto);
         if(camion==null) throw new CamionIntrouvableException("Ce camion  est INTROUVABLE. ");
-
+        else return camion;
     }
 }
 // methode affecter un camion a un client ?????????

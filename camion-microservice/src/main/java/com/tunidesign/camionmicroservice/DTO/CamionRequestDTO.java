@@ -1,4 +1,4 @@
-package com.tunidesign.camionmicroservice.DTO;
+package com.tunidesign.camionmicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,10 +8,10 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CamionRequestDTO {
+public class CamionRequestDto {
 
         @Id
-        private int id; 
+        private Long id;
         private String matricule ;
 
 
