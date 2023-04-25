@@ -9,7 +9,7 @@ public interface CamionService {
 
         List<CamionResponseDto> getCamions();
         CamionResponseDto getCamion(Long id);
-        CamionResponseDto save(CamionRequestDto camionRequestDTO);
+        CamionResponseDto save(CamionRequestDto camionRequestDto);
         void deleteCamion(Long id);
-        CamionResponseDto update(CamionRequestDto camionRequestDTO);
+        CamionResponseDto update(CamionRequestDto camionRequestDto);
 }

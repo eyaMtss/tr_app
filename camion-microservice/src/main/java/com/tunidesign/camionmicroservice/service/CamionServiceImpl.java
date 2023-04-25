@@ -24,15 +24,14 @@ public class CamionServiceImpl implements CamionService {
 
     @Override
     public CamionResponseDto getCamion(Long id) {
-        if(camionRepository.findById(id).isPresent()){
-            return camionMapper.camionToCamionDto(camionRepository.findById(id).get());
-        }
-        else return null;
+        return camionRepository.findById(id).isPresent() ? camionMapper.camionToCamionDto(camionRepository.findById(id).get()) : null;
+
     }
 
     @Override
-    public CamionResponseDto save(CamionRequestDto camionRequestDTO) {
-        return null;
+    public CamionResponseDto save(CamionRequestDto camionRequestDto) {
+        return camionMapper.camionToCamionDto(camionRepository.save(camionMapper.camionRequestDtoToCamion(camionRequestDto)));
+
     }
 
     @Override
