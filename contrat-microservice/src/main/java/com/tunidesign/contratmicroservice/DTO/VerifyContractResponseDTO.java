@@ -1,4 +1,4 @@
-package com.tunidesign.contratmicroservice.DTO;
+package com.tunidesign.contratmicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class VerifyContractResponseDTO {
+public class VerifyContractResponseDto {
     private Boolean isExist;
 }

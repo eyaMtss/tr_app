@@ -1,4 +1,4 @@
-package com.tunidesign.contratmicroservice.DTO;
+package com.tunidesign.contratmicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContratResponseDTO {
+public class ContratResponseDto {
     @Id
     private Long id ;
     private int type ;
